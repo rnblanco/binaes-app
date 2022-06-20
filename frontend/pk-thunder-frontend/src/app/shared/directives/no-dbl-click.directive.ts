@@ -8,7 +8,7 @@ export class NoDblClickDirective {
     constructor(private _el: ElementRef) { }
   
     @HostListener('click', ['$event'])
-    clickEvent(event) {
+    clickEvent(event: Event) {
         let button = this._el.nativeElement;
         button = button.querySelector('button') === null ? button : button.querySelector('button');
         button.setAttribute('disabled', 'true');

@@ -1,0 +1,8 @@
+<div class="layout-breadcrumb-container p-d-flex p-ai-center p-jc-between">
+    <div class="layout-breadcrumb-left-items p-d-flex p-ai-center">
+        <a href="#" class="menu-button" (click)="appMain.onMenuButtonClick($event)" *ngIf="appMain.isStatic() && !appMain.isMobile()">
+            <i class="pi pi-bars"></i>
+        </a>
+        <p-breadcrumb [model]="items" styleClass="layout-breadcrumb p-py-2"></p-breadcrumb>
+    </div>
+</div>

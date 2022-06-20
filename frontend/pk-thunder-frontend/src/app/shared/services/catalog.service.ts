@@ -10,13 +10,38 @@ const URL = `${environment.api_url}`;
 })
 export class CatalogService extends TemplateService {
 	
-	constructor(protected readonly http: HttpClient) {
+	constructor(protected override readonly http: HttpClient) {
 		super(http);
 	}
 	
-	// Basic http get request
+	getByNameWithParams(url: string, _params?: any) {
+		const _url = `${URL}/${url}`;
+		const httpOptions = { params: _params }
+		return this.getOfURL(_url, httpOptions);
+	}
+	
 	getOneByName(url: string) {
 		const _url = `${URL}/${url}`;
-		return this.get(_url);
+		return this.getWhitoutId(_url);
+	}
+	
+	getAllByName(url: string) {
+		const _url = `${URL}/${url}`;
+		return this.getAll(_url);
+	}
+	
+	override addOfURL(url: string, options?: any) {
+		const _url = `${URL}/${url}`;
+		return super.addOfURL(_url, options);
+	}
+	
+	override updateOfURL(url: string, options?: any) {
+		const _url = `${URL}/${url}`;
+		return super.updateOfURL(_url, options);
+	}
+	
+	override deleteOfURL(url: string, options?: any) {
+		const _url = `${URL}/${url}`;
+		return super.deleteOfURL(_url, options);
 	}
 }

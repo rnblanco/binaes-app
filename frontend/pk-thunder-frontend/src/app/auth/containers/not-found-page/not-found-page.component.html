@@ -1,16 +1,14 @@
-<div class="not-found-bg p-d-flex p-jc-center p-ai-center">
-  <div class="text-center" *ngIf="!loading">
-    <img src="../../assets/layout/images/ux/error-text.png" alt="" />
-    <div>
-      <h3>Lo sentimos mucho</h3>
-      <p>Algo anda mal</p>
-      <p>Estamos teniendo problemas técnicos, lo solucionaremos pronto</p>
-      <p-button
-        label="Reintentar"
-        routerLink="/app/dashboard"
-        NoDblClick
-      ></p-button>
-    </div>
-  </div>
-  <app-loading *ngIf="loading"></app-loading>
+<div class="full-vh p-d-flex p-jc-center p-ai-center">
+	<div *ngIf="!loading" class="p-d-flex p-flex-column p-jc-center p-ai-center">
+		<img class="error-img" src="assets/images/ux/error-text.jpg" alt="" />
+		<h3 [style]="{textAlign: 'left'}">Lo sentimos :(</h3>
+		<p [style]="{textAlign: 'left'}">Algo anda mal. <br> La página que estabas buscando no fue encontrada.</p>
+		<p-button
+			class="p-mt-2"
+			label="Reintentar"
+			routerLink=""
+			NoDblClick
+		></p-button>
+	</div>
+	<app-loading *ngIf="loading"></app-loading>
 </div>

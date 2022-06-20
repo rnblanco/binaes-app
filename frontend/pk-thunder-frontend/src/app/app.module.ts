@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { HttpInterceptorService } from './auth/interceptors/http-interceptor-service';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { HttpInterceptorService } from './auth/interceptors/http-interceptor-ser
     AppRoutingModule,
     HttpClientModule,
     ToastModule,
+    CoreModule
     // CoreModule
     // InputTextModule,
   ],

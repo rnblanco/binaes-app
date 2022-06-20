@@ -16,10 +16,14 @@ import { RippleModule } from 'primeng/ripple';
 import { MessagesModule } from 'primeng/messages';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoadingModule } from '../shared/components/loading/loading.module';
+import { UnauthorizedPageComponent } from './containers/unauthorized-page/unauthorized-page.component';
+import { LoginPageComponent } from './containers/login-page/login-page.component';
 
 @NgModule({
   declarations: [
     NotFoundPageComponent,
+    LoginPageComponent,
+    UnauthorizedPageComponent,
   ],
   imports: [
     CommonModule,

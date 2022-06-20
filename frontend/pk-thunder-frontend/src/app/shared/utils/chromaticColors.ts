@@ -1,5 +1,5 @@
 // Source: https://github.com/Taimoorkhan1122/React-Dashboard
-const calculatePoint = (i, intervalSize, colorRangeInfo) => {
+const calculatePoint = (i: any, intervalSize: any, colorRangeInfo: any) => {
   let { colorStart, colorEnd, useEndAsStart } = colorRangeInfo;
   return useEndAsStart
     ? colorEnd - i * intervalSize
@@ -7,7 +7,7 @@ const calculatePoint = (i, intervalSize, colorRangeInfo) => {
 };
 
 /* Must use an interpolated color scale, which has a range of [0, 1] */
-const interpolateColors = (dataLength, colorScale, colorRangeInfo) => {
+const interpolateColors = (dataLength: any, colorScale: any, colorRangeInfo: any) => {
   const { colorStart, colorEnd } = colorRangeInfo;
   const colorRange = colorEnd - colorStart;
   const intervalSize = colorRange / dataLength;
