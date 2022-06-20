@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html{
+  font-family: 'Open Sans', sans-serif;
+}
+
+@media (max-width: 335px) {
+  .padded {
+    width: 125vw;
+  }
+}
+
+.full-vh {
+  height: 90vh;
+}
+
+.error-img{
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+}
+
+.grey-bg {
+  background-color: #f3f3f3 !important;
+}
+
+.custom-card {
+  border-color: #ebeef2;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: thin;
+  box-shadow: 0px 2px 4px rgba(40, 41, 61, 0.04), 0px 8px 16px rgba(96, 97, 112, 0.16);
+}
+
+.br-6{
+  border-radius: 6px;
+}
+

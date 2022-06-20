@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -163,14 +163,61 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AREAController.cs" />
+    <Compile Include="Controllers\AUTORController.cs" />
+    <Compile Include="Controllers\AUTORxEJEMPLARController.cs" />
+    <Compile Include="Controllers\COLECCIONController.cs" />
+    <Compile Include="Controllers\EDITORIALController.cs" />
+    <Compile Include="Controllers\EJEMPLARController.cs" />
+    <Compile Include="Controllers\ESTADOSController.cs" />
+    <Compile Include="Controllers\ETIQUETASxEJEMPLARController.cs" />
+    <Compile Include="Controllers\EVENTOController.cs" />
+    <Compile Include="Controllers\FORMATOEJEMPLARController.cs" />
+    <Compile Include="Controllers\GENEROCOLECCIONController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TipoColeccionsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\HORARIOxAREAController.cs" />
+    <Compile Include="Controllers\IDIOMAEJEMPLARController.cs" />
+    <Compile Include="Controllers\OBJETIVOSxEVENTOController.cs" />
+    <Compile Include="Controllers\PISOAREAController.cs" />
+    <Compile Include="Controllers\PRESTAMOController.cs" />
+    <Compile Include="Controllers\P_CLAVExEJEMPLARController.cs" />
+    <Compile Include="Controllers\RESERVAController.cs" />
+    <Compile Include="Controllers\ROLUSUARIOController.cs" />
+    <Compile Include="Controllers\TIPOAREAController.cs" />
+    <Compile Include="Controllers\TIPOCOLECCIONController.cs" />
+    <Compile Include="Controllers\TIPOETIQUETAController.cs" />
+    <Compile Include="Controllers\TOKENController.cs" />
+    <Compile Include="Controllers\USUARIOController.cs" />
+    <Compile Include="Controllers\VISITASController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BinaesTestModel.cs" />
-    <Compile Include="Models\TipoColeccion.cs" />
+    <Compile Include="Models\AREA.cs" />
+    <Compile Include="Models\AUTOR.cs" />
+    <Compile Include="Models\AUTORxEJEMPLAR.cs" />
+    <Compile Include="Models\BinaesFullModel.cs" />
+    <Compile Include="Models\COLECCION.cs" />
+    <Compile Include="Models\EDITORIAL.cs" />
+    <Compile Include="Models\EJEMPLAR.cs" />
+    <Compile Include="Models\ESTADOS.cs" />
+    <Compile Include="Models\ETIQUETASxEJEMPLAR.cs" />
+    <Compile Include="Models\EVENTO.cs" />
+    <Compile Include="Models\FORMATOEJEMPLAR.cs" />
+    <Compile Include="Models\GENEROCOLECCION.cs" />
+    <Compile Include="Models\HORARIOxAREA.cs" />
+    <Compile Include="Models\IDIOMAEJEMPLAR.cs" />
+    <Compile Include="Models\OBJETIVOSxEVENTO.cs" />
+    <Compile Include="Models\PISOAREA.cs" />
+    <Compile Include="Models\PRESTAMO.cs" />
+    <Compile Include="Models\P_CLAVExEJEMPLAR.cs" />
+    <Compile Include="Models\RESERVA.cs" />
+    <Compile Include="Models\ROLUSUARIO.cs" />
+    <Compile Include="Models\TIPOAREA.cs" />
+    <Compile Include="Models\TIPOCOLECCION.cs" />
+    <Compile Include="Models\TIPOETIQUETA.cs" />
+    <Compile Include="Models\TOKEN.cs" />
+    <Compile Include="Models\USUARIO.cs" />
+    <Compile Include="Models\VISITAS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
