@@ -8,13 +8,7 @@ namespace backend.Models
 
     [Table("COLECCION")]
     public partial class COLECCION
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public COLECCION()
-        {
-            EJEMPLAR = new HashSet<EJEMPLAR>();
-        }
-
+    {       
         [Key]
         public int id_Coleccion { get; set; }
 
@@ -28,13 +22,27 @@ namespace backend.Models
 
         public int id_areaPertenece { get; set; }
 
+        [ForeignKey("id_areaPertenece")]
         public virtual AREA AREA { get; set; }
 
         public virtual GENEROCOLECCION GENEROCOLECCION { get; set; }
 
         public virtual TIPOCOLECCION TIPOCOLECCION { get; set; }
+    }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EJEMPLAR> EJEMPLAR { get; set; }
+    public partial class COLECCION_A_GC_TC
+    {
+        [Key]
+        public int id_Coleccion { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string nombre { get; set; }
+
+        public virtual AREA_PA_U_TA AREA { get; set; }
+
+        public virtual GENEROCOLECCION GENEROCOLECCION { get; set; }
+
+        public virtual TIPOCOLECCION TIPOCOLECCION { get; set; }
     }
 }

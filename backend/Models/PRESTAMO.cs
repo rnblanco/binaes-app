@@ -9,12 +9,6 @@ namespace backend.Models
     [Table("PRESTAMO")]
     public partial class PRESTAMO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRESTAMO()
-        {
-            RESERVA = new HashSet<RESERVA>();
-        }
-
         [Key]
         public int id_Prestamo { get; set; }
 
@@ -29,14 +23,27 @@ namespace backend.Models
         public string id_usuarioPresta { get; set; }
 
         public int id_Ejemplar { get; set; }
+        
+        public virtual EJEMPLAR EJEMPLAR { get; set; }   
+        
+        public virtual ESTADOS ESTADOS { get; set; }
 
-        public virtual EJEMPLAR EJEMPLAR { get; set; }
+        [ForeignKey("id_usuarioPresta")]
+        public virtual USUARIO USUARIO { get; set; }
+    }
+    public partial class PRESTAMO_E
+    {
+        [Key]
+        public int id_Prestamo { get; set; }
+
+        public DateTime fh_Prestamo { get; set; }
+
+        public DateTime fh_Devolucion { get; set; }
+
+        public virtual EJEMPLAR_E_F_I_C EJEMPLAR { get; set; }
 
         public virtual ESTADOS ESTADOS { get; set; }
 
-        public virtual USUARIO USUARIO { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RESERVA> RESERVA { get; set; }
+        public virtual USUARIO_rU USUARIO { get; set; }
     }
 }

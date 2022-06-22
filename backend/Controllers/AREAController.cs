@@ -18,19 +18,62 @@ namespace backend.Controllers
         private BinaesFullModel db = new BinaesFullModel();
 
         // GET: api/AREA
-        public IQueryable<AREA> GetAREA()
+        public IQueryable<AREA_PA_U_TA> GetAREA()
         {
-            return db.AREA;
+            var areas = db.AREA.ToList();
+            List<AREA_PA_U_TA> areasList = new List<AREA_PA_U_TA>();
+            foreach(var area in areas)
+            {
+                AREA_PA_U_TA aREA = new AREA_PA_U_TA();
+                aREA.id_Area = area.id_Area;
+                aREA.nombre = area.nombre;
+                aREA.descripcion = area.descripcion;
+                aREA.PISOAREA = area.PISOAREA;
+
+                aREA.USUARIO = new USUARIO_rU();
+                aREA.USUARIO.id_Usuario = area.USUARIO.id_Usuario;
+                aREA.USUARIO.nombre = area.USUARIO.nombre;
+                aREA.USUARIO.email = area.USUARIO.email;
+                aREA.USUARIO.telefono = area.USUARIO.telefono;
+                aREA.USUARIO.ocupacion = area.USUARIO.ocupacion;
+                aREA.USUARIO.direccion = area.USUARIO.direccion;
+                aREA.USUARIO.fotografia = area.USUARIO.fotografia;
+                aREA.USUARIO.institucion = area.USUARIO.institucion;
+                aREA.USUARIO.ROLUSUARIO = area.USUARIO.ROLUSUARIO;
+
+                aREA.TIPOAREA = area.TIPOAREA;
+                areasList.Add(aREA);
+            }
+            return areasList.AsQueryable();
         }
 
         // GET: api/AREA/5
-        [ResponseType(typeof(AREA))]
+        [ResponseType(typeof(AREA_PA_U_TA))]
         public async Task<IHttpActionResult> GetAREA(int id)
         {
-            AREA aREA = await db.AREA.FindAsync(id);
-            if (aREA == null)
+            var area = await db.AREA.FindAsync(id);
+            AREA_PA_U_TA aREA = new AREA_PA_U_TA();
+            if (area == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                aREA.id_Area = area.id_Area;
+                aREA.nombre = area.nombre;
+                aREA.descripcion = area.descripcion;
+                aREA.PISOAREA = area.PISOAREA;
+
+                aREA.USUARIO = new USUARIO_rU();
+                aREA.USUARIO.id_Usuario = area.USUARIO.id_Usuario;
+                aREA.USUARIO.nombre = area.USUARIO.nombre;
+                aREA.USUARIO.email = area.USUARIO.email;
+                aREA.USUARIO.telefono = area.USUARIO.telefono;
+                aREA.USUARIO.ocupacion = area.USUARIO.ocupacion;
+                aREA.USUARIO.direccion = area.USUARIO.direccion;
+                aREA.USUARIO.fotografia = area.USUARIO.fotografia;
+                aREA.USUARIO.institucion = area.USUARIO.institucion;
+                aREA.USUARIO.ROLUSUARIO = area.USUARIO.ROLUSUARIO;
             }
 
             return Ok(aREA);

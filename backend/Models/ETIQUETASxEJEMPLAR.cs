@@ -9,18 +9,14 @@ namespace backend.Models
     [Table("ETIQUETASxEJEMPLAR")]
     public partial class ETIQUETASxEJEMPLAR
     {
-        [Key]
-        [Column(Order = 0)]
+        [Key]        
         public int id_etiquetaEjemplar { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id_tipoEtiqueta { get; set; }
-
-        [Key]
-        [Column(Order = 2)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+                
         public int id_Ejemplar { get; set; }
+        public virtual TIPOETIQUETA TIPOETIQUETA { get; set; }
+
+        public virtual EJEMPLAR EJEMPLAR { get; set; }
     }
 }
