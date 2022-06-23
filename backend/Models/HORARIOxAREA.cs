@@ -20,4 +20,16 @@ namespace backend.Models
 
         public virtual AREA AREA { get; set; }
     }
+
+    public partial class HORARIOxAREA_A
+    {
+        [Key]
+        public int id_Horario { get; set; }
+
+        public TimeSpan horaAbierto { get; set; }
+
+        public TimeSpan horaCierre { get; set; }
+
+        public virtual AREA_PA_U_TA AREA { get; set; }
+    }
 }

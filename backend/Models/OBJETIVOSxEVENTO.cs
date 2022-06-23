@@ -20,4 +20,16 @@ namespace backend.Models
 
         public virtual EVENTO EVENTO { get; set; }
     }
+
+    public partial class OBJETIVOSxEVENTO_E
+    {
+        [Key]
+        public int id_Objetivo { get; set; }
+
+        [Column(TypeName = "text")]
+        [Required]
+        public string Objetivo { get; set; }
+
+        public virtual EVENTO_A EVENTO { get; set; }
+    }
 }

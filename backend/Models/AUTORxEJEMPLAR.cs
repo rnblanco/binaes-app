@@ -20,4 +20,13 @@ namespace backend.Models
 
         public virtual EJEMPLAR EJEMPLAR { get; set; }
     }
+    public partial class AUTORxEJEMPLAR_A_E
+    {
+        [Key]
+        public int id_autorEjemplar { get; set; }
+
+        public virtual AUTOR AUTOR { get; set; }
+
+        public virtual EJEMPLAR_E_F_I_C EJEMPLAR { get; set; }
+    }
 }

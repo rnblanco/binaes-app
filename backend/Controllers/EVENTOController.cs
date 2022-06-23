@@ -69,8 +69,8 @@ namespace backend.Controllers
                     DbFunctions.Like(x.capacidad.ToString(), "%" + search + "%") ||
                     DbFunctions.Like(x.AREA.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.aprobado ? "No aprobado" : "Aprobado", "%" + search + "%") ||
-                    DbFunctions.Like(x.fh_Inicio.ToString(), "%" + search + "%") ||
-                    DbFunctions.Like(x.fh_Finalizacion.ToString(), "%" + search + "%"))
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Inicio).ToString(), "%" + search + "%") ||
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Finalizacion).ToString(), "%" + search + "%"))
                 .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
             List<EVENTO_A> eventsList = new List<EVENTO_A>();
             foreach (var e in events)
