@@ -52,16 +52,92 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.19.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.19.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.19.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.19.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.19.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.9\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -78,17 +154,11 @@
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
@@ -177,6 +247,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HORARIOxAREAController.cs" />
     <Compile Include="Controllers\IDIOMAEJEMPLARController.cs" />
+    <Compile Include="Controllers\INICIAR_SESIONController.cs" />
     <Compile Include="Controllers\OBJETIVOSxEVENTOController.cs" />
     <Compile Include="Controllers\PISOAREAController.cs" />
     <Compile Include="Controllers\PRESTAMOController.cs" />
@@ -188,6 +259,7 @@
     <Compile Include="Controllers\TIPOETIQUETAController.cs" />
     <Compile Include="Controllers\TOKENController.cs" />
     <Compile Include="Controllers\USUARIOController.cs" />
+    <Compile Include="Controllers\VALIDAR_TOKEN.cs" />
     <Compile Include="Controllers\VISITASController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,6 +278,7 @@
     <Compile Include="Models\GENEROCOLECCION.cs" />
     <Compile Include="Models\HORARIOxAREA.cs" />
     <Compile Include="Models\IDIOMAEJEMPLAR.cs" />
+    <Compile Include="Models\INICIAR_SESION.cs" />
     <Compile Include="Models\OBJETIVOSxEVENTO.cs" />
     <Compile Include="Models\PISOAREA.cs" />
     <Compile Include="Models\PRESTAMO.cs" />
@@ -250,13 +323,274 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="wwwroot\226.4fcb90cc9bb6109c.js" />
     <Content Include="wwwroot\3rdpartylicenses.txt" />
+    <Content Include="wwwroot\426.94ccd2dca1cecdcc.js" />
+    <Content Include="wwwroot\499.66bfe8af361713e6.js" />
+    <Content Include="wwwroot\709.69539a1f3b3392c6.js" />
+    <Content Include="wwwroot\797.4c20439d65de8642.js" />
+    <Content Include="wwwroot\951.1c2e5e5002c10f04.js" />
+    <Content Include="wwwroot\assets\demo\badges.scss" />
+    <Content Include="wwwroot\assets\demo\documentation.scss" />
+    <Content Include="wwwroot\assets\demo\flags\flags.css" />
+    <Content Include="wwwroot\assets\demo\flags\flags_responsive.png" />
+    <Content Include="wwwroot\assets\demo\flags\flag_placeholder.png" />
+    <Content Include="wwwroot\assets\demo\images\blocks\logos\hyper.svg" />
+    <Content Include="wwwroot\assets\images\ux\binaes-full-width.jpg" />
+    <Content Include="wwwroot\assets\images\ux\binaes.jpg" />
+    <Content Include="wwwroot\assets\images\ux\error-text.jpg" />
+    <Content Include="wwwroot\assets\layout\images\asset-access.svg" />
+    <Content Include="wwwroot\assets\layout\images\asset-error.svg" />
+    <Content Include="wwwroot\assets\layout\images\avatar.png" />
+    <Content Include="wwwroot\assets\layout\images\banner-primeblocks-dark.png" />
+    <Content Include="wwwroot\assets\layout\images\banner-primeblocks.png" />
+    <Content Include="wwwroot\assets\layout\images\enterprise.svg" />
+    <Content Include="wwwroot\assets\layout\images\free.svg" />
+    <Content Include="wwwroot\assets\layout\images\icon.svg" />
+    <Content Include="wwwroot\assets\layout\images\logo-blue.svg" />
+    <Content Include="wwwroot\assets\layout\images\logo-dark.svg" />
+    <Content Include="wwwroot\assets\layout\images\logo-error.svg" />
+    <Content Include="wwwroot\assets\layout\images\logo-orange.svg" />
+    <Content Include="wwwroot\assets\layout\images\logo-white.svg" />
+    <Content Include="wwwroot\assets\layout\images\mockup-desktop.svg" />
+    <Content Include="wwwroot\assets\layout\images\mockup.svg" />
+    <Content Include="wwwroot\assets\layout\images\new-badge.svg" />
+    <Content Include="wwwroot\assets\layout\images\peak-logo.svg" />
+    <Content Include="wwwroot\assets\layout\images\screen-1.png" />
+    <Content Include="wwwroot\assets\layout\images\screen.png" />
+    <Content Include="wwwroot\assets\layout\images\startup.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\arya-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\arya-green.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\arya-orange.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\arya-purple.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-dark-blue.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-dark-purple.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-light-blue.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-light-purple.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\fluent-light.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-indigo.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-purple.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-teal.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-light-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-light-indigo.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-light-purple.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\lara-light-teal.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\luna-amber.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\luna-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\luna-green.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\luna-pink.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\md-dark-deeppurple.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\md-dark-indigo.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\md-light-deeppurple.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\md-light-indigo.svg" />
+    <Content Include="wwwroot\assets\layout\images\themes\saga-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\saga-green.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\saga-orange.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\saga-purple.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\tailwind-light.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\vela-blue.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\vela-green.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\vela-orange.png" />
+    <Content Include="wwwroot\assets\layout\images\themes\vela-purple.png" />
+    <Content Include="wwwroot\assets\layout\images\widgets\user-card.jpg" />
+    <Content Include="wwwroot\assets\sass\layout\_config.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_content.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_footer.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_layout.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_main.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_menu.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_mixins.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_responsive.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_splash.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_topbar.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_typography.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_utils.scss" />
+    <Content Include="wwwroot\assets\sass\layout\_variables.scss" />
+    <Content Include="wwwroot\assets\sass\overrides\_overrides.scss" />
+    <Content Include="wwwroot\assets\styles\main.scss" />
+    <Content Include="wwwroot\assets\theme\arya-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\arya-green\theme.css" />
+    <Content Include="wwwroot\assets\theme\arya-orange\theme.css" />
+    <Content Include="wwwroot\assets\theme\arya-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\bootstrap4-dark-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\bootstrap4-dark-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\bootstrap4-light-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\bootstrap4-light-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\fluent-light\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-dark-teal\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\lara-light-teal\theme.css" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-deeppurple\theme.css" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\md-dark-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-deeppurple\theme.css" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\md-light-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-deeppurple\theme.css" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-dark-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-deeppurple\theme.css" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-500.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-500.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-700.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-700.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\fonts\roboto-v20-latin-ext_latin-regular.woff2" />
+    <Content Include="wwwroot\assets\theme\mdc-light-indigo\theme.css" />
+    <Content Include="wwwroot\assets\theme\saga-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\saga-green\theme.css" />
+    <Content Include="wwwroot\assets\theme\saga-orange\theme.css" />
+    <Content Include="wwwroot\assets\theme\saga-purple\theme.css" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Bold.woff" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Bold.woff2" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Light.woff" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Light.woff2" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Medium.woff" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Medium.woff2" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Regular.woff" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-Regular.woff2" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-SemiBold.woff" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\fonts\Inter-SemiBold.woff2" />
+    <Content Include="wwwroot\assets\theme\tailwind-light\theme.css" />
+    <Content Include="wwwroot\assets\theme\vela-blue\theme.css" />
+    <Content Include="wwwroot\assets\theme\vela-green\theme.css" />
+    <Content Include="wwwroot\assets\theme\vela-orange\theme.css" />
+    <Content Include="wwwroot\assets\theme\vela-purple\theme.css" />
+    <Content Include="wwwroot\color.dae87a04d07ca92b.png" />
+    <Content Include="wwwroot\common.de199061b8c9e071.js" />
     <Content Include="wwwroot\favicon.ico" />
+    <Content Include="wwwroot\hue.8b1818380241e6ac.png" />
     <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\main.41e07632f6b61c18.js" />
-    <Content Include="wwwroot\polyfills.800b117ddad5fec8.js" />
-    <Content Include="wwwroot\runtime.1b7e40c732a99097.js" />
-    <Content Include="wwwroot\styles.ef46db3751d8e999.css" />
+    <Content Include="wwwroot\main.1d4522bea5de12f3.js" />
+    <Content Include="wwwroot\polyfills.4e9af1efa1e2213e.js" />
+    <Content Include="wwwroot\primeicons.76044b1c189cc4d7.svg" />
+    <Content Include="wwwroot\runtime.87d64451f8ddb268.js" />
+    <Content Include="wwwroot\styles.0170966e7d471b64.css" />
     <None Include="Properties\PublishProfiles\binaes-app - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\binaes-app - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -279,6 +613,19 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="wwwroot\Inter-Bold.579e0f95cacfae57.woff2" />
+    <Content Include="wwwroot\Inter-Bold.b1234477a53679d3.woff" />
+    <Content Include="wwwroot\Inter-Light.27083fa6375bb9ef.woff2" />
+    <Content Include="wwwroot\Inter-Light.91dfddd8421c4c01.woff" />
+    <Content Include="wwwroot\Inter-Medium.dc792b508e6f91c7.woff2" />
+    <Content Include="wwwroot\Inter-Medium.ec7dd2d9d89c37d7.woff" />
+    <Content Include="wwwroot\Inter-Regular.f1f0c35b32161446.woff2" />
+    <Content Include="wwwroot\Inter-Regular.f356e84aa04db28f.woff" />
+    <Content Include="wwwroot\Inter-SemiBold.55027e4724a1928b.woff" />
+    <Content Include="wwwroot\Inter-SemiBold.fcb100c7607696fd.woff2" />
+    <Content Include="wwwroot\primeicons.29151a741d66863a.woff" />
+    <Content Include="wwwroot\primeicons.5f5d08cd089b4e5d.ttf" />
+    <Content Include="wwwroot\primeicons.964f445f3ea9db80.eot" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

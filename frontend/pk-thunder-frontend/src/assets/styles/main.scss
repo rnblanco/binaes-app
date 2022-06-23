@@ -2,6 +2,11 @@
 
 html{
   font-family: 'Open Sans', sans-serif;
+  height: 100%;
+}
+
+body{
+  min-height: 98%;
 }
 
 @media (max-width: 335px) {
@@ -34,5 +39,11 @@ html{
 
 .br-6{
   border-radius: 6px;
+}
+
+.p-success{
+  font-size: 18px!important;
+  color: green!important;
+  margin-top: -0.8rem!important;
 }
 

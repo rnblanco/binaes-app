@@ -15,7 +15,7 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
   }
   
   override ngOnInit() {
-      switch(this.user.rol){
+      switch(this.user?.ROLUSUARIO.id_rolUsuario){
         case Roles.SUPER_ADMIN || Roles.ADMIN:
           this.model = [
             {
@@ -34,7 +34,7 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
               routerLink: [this.routeInformation.collectionsPage]
             },
             {
-              label: `Usuarios ${this.user.rol === Roles.SUPER_ADMIN ? 'y Administradores' : ''}`,
+              label: `Usuarios ${this.user?.ROLUSUARIO.id_rolUsuario === Roles.SUPER_ADMIN ? 'y Administradores' : ''}`,
               icon: 'pi pi-fw pi-book',
               routerLink: [this.routeInformation.usersPage]
             },
@@ -60,7 +60,6 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
           ];
         break;
       }
-    
   }
   
   onKeydown(event: KeyboardEvent) {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
-import { Observable } from 'rxjs';
 import { RouteInformation } from 'src/app/shared/constants/route-information';
 import { StorageInformation } from 'src/app/shared/constants/storage-information';
+import { User } from 'src/app/shared/models/user';
 import { CatalogService } from 'src/app/shared/services/catalog.service';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class AuthService {
     return user !== null;
   }
 
-  get storagedUser(): any {
+  get storagedUser(): User {
     return this.storage.retrieve(StorageInformation.user);
   }
   
