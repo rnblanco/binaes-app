@@ -18,22 +18,101 @@ namespace backend.Controllers
         private BinaesFullModel db = new BinaesFullModel();
 
         // GET: api/VISITAS
-        public IQueryable<VISITAS> GetVISITAS()
+        public IQueryable<VISITAS_A_U> GetVISITAS()
         {
-            return db.VISITAS;
+            var visitas = db.VISITAS.ToList();
+            List<VISITAS_A_U> visitsList = new List<VISITAS_A_U>();
+
+            foreach(var visita in visitas)
+            {
+                VISITAS_A_U v = new VISITAS_A_U();
+                v.id_Visita = visita.id_Visita;
+                v.fh_entrada = visita.fh_entrada;
+                v.fh_salida = visita.fh_salida;
+
+                v.USUARIO = new USUARIO_rU();
+                v.USUARIO.id_Usuario = visita.USUARIO.id_Usuario;
+                v.USUARIO.nombre = visita.USUARIO.nombre;
+                v.USUARIO.email = visita.USUARIO.email;
+                v.USUARIO.telefono = visita.USUARIO.telefono;
+                v.USUARIO.ocupacion = visita.USUARIO.ocupacion;
+                v.USUARIO.direccion = visita.USUARIO.direccion;
+                v.USUARIO.fotografia = visita.USUARIO.fotografia;
+                v.USUARIO.institucion = visita.USUARIO.institucion;
+                v.USUARIO.ROLUSUARIO = visita.USUARIO.ROLUSUARIO;
+
+                v.AREA = new AREA_PA_U_TA();
+                v.AREA.id_Area = visita.AREA.id_Area;
+                v.AREA.nombre = visita.AREA.nombre;
+                v.AREA.descripcion = visita.AREA.descripcion;
+                v.AREA.PISOAREA = visita.AREA.PISOAREA;
+
+                v.AREA.USUARIO = new USUARIO_rU();
+                v.AREA.USUARIO.id_Usuario = visita.AREA.USUARIO.id_Usuario;
+                v.AREA.USUARIO.nombre = visita.AREA.USUARIO.nombre;
+                v.AREA.USUARIO.email = visita.AREA.USUARIO.email;
+                v.AREA.USUARIO.telefono = visita.AREA.USUARIO.telefono;
+                v.AREA.USUARIO.ocupacion = visita.AREA.USUARIO.ocupacion;
+                v.AREA.USUARIO.direccion = visita.AREA.USUARIO.direccion;
+                v.AREA.USUARIO.fotografia = visita.AREA.USUARIO.fotografia;
+                v.AREA.USUARIO.institucion = visita.AREA.USUARIO.institucion;
+                v.AREA.USUARIO.ROLUSUARIO = visita.AREA.USUARIO.ROLUSUARIO;
+
+                v.AREA.TIPOAREA = visita.AREA.TIPOAREA;
+
+                visitsList.Add(v);
+            }
+            return visitsList.AsQueryable();
         }
 
         // GET: api/VISITAS/5
-        [ResponseType(typeof(VISITAS))]
+        [ResponseType(typeof(VISITAS_A_U))]
         public async Task<IHttpActionResult> GetVISITAS(int id)
         {
-            VISITAS vISITAS = await db.VISITAS.FindAsync(id);
-            if (vISITAS == null)
+            var visita = await db.VISITAS.FindAsync(id);
+            VISITAS_A_U v = new VISITAS_A_U();
+            if (visita == null)
             {
                 return NotFound();
             }
+            else
+            {
+                v.id_Visita = visita.id_Visita;
+                v.fh_entrada = visita.fh_entrada;
+                v.fh_salida = visita.fh_salida;
 
-            return Ok(vISITAS);
+                v.USUARIO = new USUARIO_rU();
+                v.USUARIO.id_Usuario = visita.USUARIO.id_Usuario;
+                v.USUARIO.nombre = visita.USUARIO.nombre;
+                v.USUARIO.email = visita.USUARIO.email;
+                v.USUARIO.telefono = visita.USUARIO.telefono;
+                v.USUARIO.ocupacion = visita.USUARIO.ocupacion;
+                v.USUARIO.direccion = visita.USUARIO.direccion;
+                v.USUARIO.fotografia = visita.USUARIO.fotografia;
+                v.USUARIO.institucion = visita.USUARIO.institucion;
+                v.USUARIO.ROLUSUARIO = visita.USUARIO.ROLUSUARIO;
+
+                v.AREA = new AREA_PA_U_TA();
+                v.AREA.id_Area = visita.AREA.id_Area;
+                v.AREA.nombre = visita.AREA.nombre;
+                v.AREA.descripcion = visita.AREA.descripcion;
+                v.AREA.PISOAREA = visita.AREA.PISOAREA;
+
+                v.AREA.USUARIO = new USUARIO_rU();
+                v.AREA.USUARIO.id_Usuario = visita.AREA.USUARIO.id_Usuario;
+                v.AREA.USUARIO.nombre = visita.AREA.USUARIO.nombre;
+                v.AREA.USUARIO.email = visita.AREA.USUARIO.email;
+                v.AREA.USUARIO.telefono = visita.AREA.USUARIO.telefono;
+                v.AREA.USUARIO.ocupacion = visita.AREA.USUARIO.ocupacion;
+                v.AREA.USUARIO.direccion = visita.AREA.USUARIO.direccion;
+                v.AREA.USUARIO.fotografia = visita.AREA.USUARIO.fotografia;
+                v.AREA.USUARIO.institucion = visita.AREA.USUARIO.institucion;
+                v.AREA.USUARIO.ROLUSUARIO = visita.AREA.USUARIO.ROLUSUARIO;
+
+                v.AREA.TIPOAREA = visita.AREA.TIPOAREA;
+            }
+
+            return Ok(v);
         }
 
         // PUT: api/VISITAS/5

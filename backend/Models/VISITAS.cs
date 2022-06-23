@@ -25,4 +25,17 @@ namespace backend.Models
 
         public virtual USUARIO USUARIO { get; set; }
     }
+    public partial class VISITAS_A_U
+    {
+        [Key]
+        public int id_Visita { get; set; }
+
+        public DateTime fh_entrada { get; set; }
+
+        public DateTime fh_salida { get; set; }
+
+        public virtual AREA_PA_U_TA AREA { get; set; }
+
+        public virtual USUARIO_rU USUARIO { get; set; }
+    }
 }
