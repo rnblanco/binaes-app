@@ -6,7 +6,6 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -22,6 +21,8 @@
       "es2020",
       "dom"
     ],
+    "strictPropertyInitialization": false,
+    "noImplicitOverride": false,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },

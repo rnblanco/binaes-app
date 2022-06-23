@@ -1,4 +1,5 @@
 export const StorageInformation = {
+  token: 'Token',
   user: 'User',
-  lastPage: 'lastPage',
+  lastPage: 'LastPage',
 };

@@ -13,7 +13,7 @@ export interface Borrow {
 	fh_Devolucion: Date,
 	estado: string,
 	usuario: string, // usuario -> nombre
-	ejemplar: number
+	ejemplar: string // prestamo -> ejemplar -> nombre
 }
 
 export interface rawBooking {
@@ -25,5 +25,5 @@ export interface rawBooking {
 export interface Booking {
 	id_Reserva: number,
 	fh_Reserva: Date,
-	ejemplar: number // prestamo -> ejemplar -> nombre
+	ejemplar: string // prestamo -> ejemplar -> nombre
 }

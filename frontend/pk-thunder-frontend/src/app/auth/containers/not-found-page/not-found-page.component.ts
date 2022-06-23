@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouteInformation } from 'src/app/shared/constants/route-information';
 
 @Component({
   selector: 'app-not-found-page',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundPageComponent implements OnInit {
   loading = true;
-
+  routeInformation = RouteInformation;
+  
   constructor() {}
 
   ngOnInit(): void {

@@ -18,6 +18,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { UnauthorizedPageComponent } from './containers/unauthorized-page/unauthorized-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [
@@ -25,23 +26,24 @@ import { LoginPageComponent } from './containers/login-page/login-page.component
     LoginPageComponent,
     UnauthorizedPageComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    AuthRoutingModule,
-    FormsModule,
-    ButtonModule,
-    InputTextModule,
-    InputTextareaModule,
-    ConfirmPopupModule,
-    CheckboxModule,
-    DividerModule,
-    SelectButtonModule,
-    RippleModule,
-    MessagesModule,
-    ProgressSpinnerModule,
-    LoadingModule,
-  ],
+	imports: [
+		CommonModule,
+		SharedModule,
+		ReactiveFormsModule,
+		AuthRoutingModule,
+		FormsModule,
+		ButtonModule,
+		InputTextModule,
+		InputTextareaModule,
+		ConfirmPopupModule,
+		CheckboxModule,
+		DividerModule,
+		SelectButtonModule,
+		RippleModule,
+		MessagesModule,
+		ProgressSpinnerModule,
+		LoadingModule,
+		PasswordModule
+	]
 })
 export class AuthModule {}

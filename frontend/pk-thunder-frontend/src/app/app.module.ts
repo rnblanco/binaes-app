@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
@@ -7,9 +7,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpInterceptorService } from './auth/interceptors/http-interceptor-service';
 import { CoreModule } from './core/core.module';
+import { AppBreadcrumbService } from './core/containers/app-main-page/app.breadcrumb.service';
+import { AuthService } from './auth/services/auth.service';
+import { MenuService } from './core/services/app.menu.service';
+import { AppInjector } from './app-injector.service';
 
 
 @NgModule({
@@ -18,7 +22,7 @@ import { CoreModule } from './core/core.module';
   ],
   imports: [
     NgxWebstorageModule.forRoot({
-      prefix: 'graph',
+      prefix: 'binaes',
       separator: '.',
       caseSensitive: true,
     }),
@@ -28,17 +32,23 @@ import { CoreModule } from './core/core.module';
     HttpClientModule,
     ToastModule,
     CoreModule
-    // CoreModule
-    // InputTextModule,
   ],
   providers: [
+    MenuService,
+    AppBreadcrumbService,
+    AuthService,
     MessageService,
+    ConfirmationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(injector: Injector) {
+    AppInjector.injector = injector;
+  }
+}

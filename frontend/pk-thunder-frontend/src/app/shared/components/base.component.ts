@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AppInjector } from 'src/app/app-injector.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -17,9 +17,11 @@ import { Params, Router } from '@angular/router';
 import packageJson from 'package.json';
 import { trigger } from '@angular/animations';
 import { definitions } from 'src/app/shared/utils/animations/animate';
+import { User } from '../models/user';
 const { InAndOut, InAndOutFast, InAndOutFaster } = definitions;
 
 @Component({
+  selector: 'root',
   template: '',
   animations: [
     trigger('InAndOut', InAndOut),
@@ -36,27 +38,27 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   env: any;
   version: any;
   router: Router;
-  user: any;
+  user: User;
   authService: AuthService;
-  subscription: Subscription;
   catalogService: CatalogService;
   validatorService: ValidatorService;
   storageService: LocalStorageService;
   messageService: GlobalMessageService;
   breadcrumbService: AppBreadcrumbService;
   confirmationService: ConfirmationService;
+  subscription: Subscription;
   routeInformation = RouteInformation;
   // Requests
   loading = false;
   buttonLoading = false;
   httpParams: HttpParams = new HttpParams();
-  routeParams: Params | undefined;
+  routeParams: Params;
   // Reactive Forms
-  form: FormGroup | undefined;
-  formBuilder: FormBuilder | undefined;
+  form: FormGroup;
+  formBuilder: FormBuilder;
   // Show modal
-  formSelected: FormItem | undefined;
-
+  formSelected: FormItem;
+  
   protected constructor() {
     this.confirmationService = AppInjector.injector.get(ConfirmationService);
     this.catalogService = AppInjector.injector.get(CatalogService);
@@ -66,11 +68,18 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     this.breadcrumbService = AppInjector.injector.get(AppBreadcrumbService);
     this.router = AppInjector.injector.get(Router);
     this.authService = AppInjector.injector.get(AuthService);
+    this.user = this.authService.storagedUser as User;
     this.formBuilder = new FormBuilder();
     this.subscription = new Subscription();
-    this.user = this.authService.storagedUser;
     this.version = packageJson.version;
     this.env = environment;
+  }
+  
+  async encode(message: string) {
+    const msgUint8 = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
   capitalize(text: string): string {
