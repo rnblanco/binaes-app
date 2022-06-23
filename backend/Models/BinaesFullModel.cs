@@ -52,7 +52,7 @@ namespace backend.Models
                 .Property(e => e.responsable)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AREA>()
+            /*modelBuilder.Entity<AREA>()
                 .HasMany(e => e.COLECCION)
                 .WithRequired(e => e.AREA)
                 .HasForeignKey(e => e.id_areaPertenece)
@@ -66,25 +66,25 @@ namespace backend.Models
             modelBuilder.Entity<AREA>()
                 .HasMany(e => e.VISITAS)
                 .WithRequired(e => e.AREA)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<AUTOR>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<AUTOR>()
+            /*modelBuilder.Entity<AUTOR>()
                 .HasMany(e => e.AUTORxEJEMPLAR)
                 .WithRequired(e => e.AUTOR)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<COLECCION>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<COLECCION>()
+            /*modelBuilder.Entity<COLECCION>()
                 .HasMany(e => e.EJEMPLAR)
                 .WithRequired(e => e.COLECCION)
-                .HasForeignKey(e => e.id_coleccionPertenece);
+                .HasForeignKey(e => e.id_coleccionPertenece);*/
 
             modelBuilder.Entity<EDITORIAL>()
                 .Property(e => e.editorial1)
@@ -94,15 +94,15 @@ namespace backend.Models
                 .Property(e => e.nombre)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<EJEMPLAR>()
+            /*modelBuilder.Entity<EJEMPLAR>()
                 .HasMany(e => e.AUTORxEJEMPLAR)
                 .WithRequired(e => e.EJEMPLAR)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
-            modelBuilder.Entity<EJEMPLAR>()
+            /*modelBuilder.Entity<EJEMPLAR>()
                 .HasMany(e => e.PRESTAMO)
                 .WithRequired(e => e.EJEMPLAR)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<ESTADOS>()
                 .Property(e => e.estado)
@@ -116,10 +116,10 @@ namespace backend.Models
                 .Property(e => e.formato)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<FORMATOEJEMPLAR>()
+            /*modelBuilder.Entity<FORMATOEJEMPLAR>()
                 .HasMany(e => e.EJEMPLAR)
                 .WithRequired(e => e.FORMATOEJEMPLAR)
-                .HasForeignKey(e => e.id_Formato);
+                .HasForeignKey(e => e.id_Formato);*/
 
             modelBuilder.Entity<GENEROCOLECCION>()
                 .Property(e => e.generoColeccion1)
@@ -129,10 +129,10 @@ namespace backend.Models
                 .Property(e => e.idioma)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<IDIOMAEJEMPLAR>()
+            /*modelBuilder.Entity<IDIOMAEJEMPLAR>()
                 .HasMany(e => e.EJEMPLAR)
                 .WithRequired(e => e.IDIOMAEJEMPLAR)
-                .HasForeignKey(e => e.id_Idioma);
+                .HasForeignKey(e => e.id_Idioma);*/
 
             modelBuilder.Entity<OBJETIVOSxEVENTO>()
                 .Property(e => e.Objetivo)
@@ -154,10 +154,10 @@ namespace backend.Models
                 .Property(e => e.rol)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ROLUSUARIO>()
+            /*modelBuilder.Entity<ROLUSUARIO>()
                 .HasMany(e => e.USUARIO)
                 .WithRequired(e => e.ROLUSUARIO)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<TIPOAREA>()
                 .Property(e => e.tipoArea1)
@@ -208,7 +208,7 @@ namespace backend.Models
                 .Property(e => e.institucion)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<USUARIO>()
+            /*modelBuilder.Entity<USUARIO>()
                 .HasMany(e => e.AREA)
                 .WithRequired(e => e.USUARIO)
                 .HasForeignKey(e => e.responsable)
@@ -223,7 +223,7 @@ namespace backend.Models
             modelBuilder.Entity<USUARIO>()
                 .HasMany(e => e.VISITAS)
                 .WithRequired(e => e.USUARIO)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<VISITAS>()
                 .Property(e => e.id_Usuario)

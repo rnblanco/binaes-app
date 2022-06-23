@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using backend.Models;
+using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
@@ -18,19 +19,84 @@ namespace backend.Controllers
         private BinaesFullModel db = new BinaesFullModel();
 
         // GET: api/USUARIO
-        public IQueryable<USUARIO> GetUSUARIO()
+        public IQueryable<USUARIO_rU> GetUSUARIO()
         {
-            return db.USUARIO;
+            var users = db.USUARIO.ToList();
+            List<USUARIO_rU> usersList = new List<USUARIO_rU>();
+            foreach(var user in users)
+            {
+                USUARIO_rU uSUARIO = new USUARIO_rU();
+                uSUARIO.id_Usuario = user.id_Usuario;
+                uSUARIO.nombre = user.nombre;
+                uSUARIO.email = user.email;
+                uSUARIO.telefono = user.telefono;
+                uSUARIO.ocupacion = user.ocupacion;
+                uSUARIO.direccion = user.direccion;
+                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.institucion = user.institucion;                
+                uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
+                usersList.Add(uSUARIO);
+            }
+            
+            return usersList.AsQueryable();
+        }
+
+        // GET: api/USUARIO?limit=5&page=1&search=test&sortby=col:ASC
+        public IQueryable<USUARIO_rU> GetUSUARIO(int limit, int page, string search, string SortBy)
+        {            
+            string[] sortby = SortBy.Split(':');
+            var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            var users = db.USUARIO
+                .Where(x =>
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.email, "%" + search + "%") ||
+                    DbFunctions.Like(x.telefono, "%" + search + "%") ||
+                    DbFunctions.Like(x.ocupacion, "%" + search + "%") ||
+                    DbFunctions.Like(x.direccion, "%" + search + "%") ||
+                    DbFunctions.Like(x.institucion, "%" + search + "%") ||
+                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%"))
+                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
+            List<USUARIO_rU> usersList = new List<USUARIO_rU>();
+            foreach (var user in users)
+            {
+                USUARIO_rU uSUARIO = new USUARIO_rU();
+                uSUARIO.id_Usuario = user.id_Usuario;
+                uSUARIO.nombre = user.nombre;
+                uSUARIO.email = user.email;
+                uSUARIO.telefono = user.telefono;
+                uSUARIO.ocupacion = user.ocupacion;
+                uSUARIO.direccion = user.direccion;
+                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.institucion = user.institucion;
+                uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
+                usersList.Add(uSUARIO);
+            }
+
+            return usersList.AsQueryable();
         }
 
         // GET: api/USUARIO/5
-        [ResponseType(typeof(USUARIO))]
+        [ResponseType(typeof(USUARIO_rU))]
         public async Task<IHttpActionResult> GetUSUARIO(string id)
         {
-            USUARIO uSUARIO = await db.USUARIO.FindAsync(id);
-            if (uSUARIO == null)
+            var user = await db.USUARIO.FindAsync(id);
+            USUARIO_rU uSUARIO = new USUARIO_rU();            
+
+            if (user == null)
             {
                 return NotFound();
+            }
+            else
+            {
+                uSUARIO.id_Usuario = id;
+                uSUARIO.nombre = user.nombre;
+                uSUARIO.email = user.email;
+                uSUARIO.telefono = user.telefono;
+                uSUARIO.ocupacion = user.ocupacion;
+                uSUARIO.direccion = user.direccion;
+                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.institucion = user.institucion;
+                uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
             }
 
             return Ok(uSUARIO);

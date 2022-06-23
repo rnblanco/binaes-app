@@ -18,4 +18,14 @@ namespace backend.Models
 
         public virtual PRESTAMO PRESTAMO { get; set; }
     }
+
+    public partial class RESERVA_P_E
+    {
+        [Key]
+        public int id_Reserva { get; set; }
+
+        public DateTime fh_Reserva { get; set; }
+
+        public virtual PRESTAMO_E PRESTAMO { get; set; }
+    }
 }

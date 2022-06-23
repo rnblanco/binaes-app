@@ -9,12 +9,6 @@ namespace backend.Models
     [Table("EDITORIAL")]
     public partial class EDITORIAL
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EDITORIAL()
-        {
-            EJEMPLAR = new HashSet<EJEMPLAR>();
-        }
-
         [Key]
         public int id_Editorial { get; set; }
 
@@ -22,8 +16,5 @@ namespace backend.Models
         [Required]
         [StringLength(60)]
         public string editorial1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EJEMPLAR> EJEMPLAR { get; set; }
     }
 }
