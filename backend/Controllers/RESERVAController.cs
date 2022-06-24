@@ -88,8 +88,12 @@ namespace backend.Controllers
         // GET: api/RESERVA?limit=5&page=1&search=test&sortby=col:ASC
         public IQueryable<RESERVA_P_E> GetRESERVA(int limit, int page, string search, string SortBy)
         {
-            string[] sortby = SortBy.Split(':');
-            var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            var sorted = "id_Reserva ascending";
+            if (SortBy != null)
+            {
+                string[] sortby = SortBy.Split(':');
+                sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            }
             var bookings = db.RESERVA
                 .Where(x =>
                     DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||

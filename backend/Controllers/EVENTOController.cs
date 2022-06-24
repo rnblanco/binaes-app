@@ -60,8 +60,12 @@ namespace backend.Controllers
         // GET: api/EVENTO?limit=5&page=1&search=test&sortby=col:ASC
         public IQueryable<EVENTO_A> GetEVENTO(int limit, int page, string search, string SortBy)
         {
-            string[] sortby = SortBy.Split(':');
-            var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            var sorted = "id_Evento ascending";
+            if (SortBy != null)
+            {
+                string[] sortby = SortBy.Split(':');
+                sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            }
             var events = db.EVENTO
                 .Where(x =>
                     DbFunctions.Like(x.titulo, "%" + search + "%") ||

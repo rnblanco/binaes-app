@@ -83,8 +83,12 @@ namespace backend.Controllers
         // GET: api/PRESTAMO?limit=5&page=1&search=test&sortby=col:ASC
         public IQueryable<PRESTAMO_E> GetPRESTAMO(int limit, int page, string search, string SortBy)
         {
-            string[] sortby = SortBy.Split(':');
-            var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            var sorted = "id_Prestamo ascending";
+            if (SortBy != null)
+            {
+                string[] sortby = SortBy.Split(':');
+                sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
+            }
             var borrows = db.PRESTAMO
                 .Where(x =>
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
