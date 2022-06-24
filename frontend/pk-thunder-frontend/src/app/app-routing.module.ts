@@ -1,65 +1,81 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './auth/containers/not-found-page/not-found-page.component';
-import { AppMainPageComponent } from './core/containers/app-main-page/app-main-page.component';
-import { Roles } from './auth/constants/roles';
-import { ProfilePageComponent } from './core/containers/profile-page/profile-page.component';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { ProfilePageComponent } from './core/containers/profile-page/profile-page.component';
+import { Roles } from './auth/constants/roles';
+import { PrevAuthGuard } from './auth/guards/prev-auth.guard';
+import { AppMainComponent } from './core/containers/app-main-page/app.main.component';
+import { LogOutPageComponent } from './auth/log-out-page/log-out-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: 'auth', loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
+  { path: 'auth', canActivate: [PrevAuthGuard], loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule) },
   {
     path: 'app',
-    component: AppMainPageComponent,
+    component: AppMainComponent,
     children: [
-      /* ADMINS */
+      /* ADMINS AND USERS */
       {
-        path: 'events',
-        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
+        path: '',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        loadChildren: () => import('./core/core.module').then((m) => m.CoreModule)
+      },
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'events',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
         loadChildren: () => import('./events/events.module').then((m) => m.EventsModule)
       },
       {
-        path: 'collections',
-        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
+        path: 'collections',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
         loadChildren: () => import('./collections/collections.module').then((m) => m.CollectionsModule)
       },
       {
-        path: 'users',
-        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
-        loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
+        path: 'exemplars',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        loadChildren: () => import('./exemplars/exemplars.module').then((m) => m.ExemplarsModule)
       },
-      /* USERS */
       {
-        path: 'borrow',
-        data: { permission: [Roles.USER] },
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
-        loadChildren: () => import('./borrow/borrow.module').then((m) => m.BorrowModule)
+        path: 'reservations',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        loadChildren: () => import('./reservations/reservations.module').then((m) => m.ReservationsModule)
       },
       {
-        path: 'ask',
-        data: { permission: [Roles.USER] },
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
-        loadChildren: () => import('./events-ask/events-ask.module').then((m) => m.EventsAskModule)
-      },
-      /* BOTH */
-      {
         path: 'profile',
         component: ProfilePageComponent,
         data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+      },
+      {
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
+        path: 'borrows',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        loadChildren: () => import('./borrows/borrows.module').then((m) => m.BorrowsModule)
+      },
+      /* ONLY ADMINS */
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'users',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
+        loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
       },
     ]
   },
+  { path: 'log-out', component: LogOutPageComponent},
   { path: '**', component: NotFoundPageComponent},
 ];
 

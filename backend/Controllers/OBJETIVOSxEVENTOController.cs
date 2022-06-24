@@ -1,18 +1,16 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class OBJETIVOSxEVENTOController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -22,7 +20,7 @@ namespace backend.Controllers
         {
             var objectivesEvent = db.OBJETIVOSxEVENTO.ToList();
             List<OBJETIVOSxEVENTO_E> objectivesEventList = new List<OBJETIVOSxEVENTO_E>();
-            foreach(var objectiveEvent in objectivesEvent)
+            foreach (var objectiveEvent in objectivesEvent)
             {
                 OBJETIVOSxEVENTO_E oBJETIVOSxEVENTO_E = new OBJETIVOSxEVENTO_E();
 
@@ -73,7 +71,7 @@ namespace backend.Controllers
                 return NotFound();
             }
             else
-            {                
+            {
                 oBJETIVOSxEVENTO_E.id_Objetivo = objectiveEvent.id_Objetivo;
                 oBJETIVOSxEVENTO_E.Objetivo = objectiveEvent.Objetivo;
 

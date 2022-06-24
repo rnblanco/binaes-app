@@ -1,12 +1,12 @@
 <div class="full-vh p-d-flex p-jc-center p-ai-center">
 	<div *ngIf="!loading" class="p-d-flex p-flex-column p-jc-center p-ai-center">
-		<img class="error-img" src="assets/images/ux/error-text.jpg" alt="" />
+		<img class="error-img" src="assets/images/ux/error-text.png" alt="" />
 		<h3 [style]="{textAlign: 'left'}">Lo sentimos :(</h3>
 		<p [style]="{textAlign: 'left'}">Algo anda mal. <br> La página que estabas buscando no fue encontrada.</p>
 		<p-button
 			class="p-mt-2"
 			label="Reintentar"
-			[routerLink]="routeInformation.loginPage"
+			[routerLink]="routeInformation.homePage"
 			NoDblClick
 		></p-button>
 	</div>

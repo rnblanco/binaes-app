@@ -1,10 +1,7 @@
 namespace backend.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("USUARIO")]
     public partial class USUARIO
@@ -80,7 +77,7 @@ namespace backend.Models
 
         [Required]
         [StringLength(50)]
-        public string institucion { get; set; }   
+        public string institucion { get; set; }
 
         public virtual ROLUSUARIO ROLUSUARIO { get; set; }
     }

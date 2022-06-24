@@ -8,14 +8,14 @@
 
     public class INICIAR_SESION_RESPUESTA
     {
-        public INICIAR_SESION_RESPUESTA(USUARIO usuario, string token) 
-        { 
+        public INICIAR_SESION_RESPUESTA(USUARIO usuario, string token)
+        {
             this.usuario = usuario;
             this.token = token;
         }
 
         public USUARIO usuario { get; set; }
-        public string token { get; set; } 
-       
+        public string token { get; set; }
+
     }
 }

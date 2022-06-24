@@ -1,18 +1,16 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class P_CLAVExEJEMPLARController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -23,7 +21,7 @@ namespace backend.Controllers
             var keywords = db.P_CLAVExEJEMPLAR;
             List<P_CLAVExEJEMPLAR_E> keywordsList = new List<P_CLAVExEJEMPLAR_E>();
 
-            foreach(var keyword in keywords)
+            foreach (var keyword in keywords)
             {
                 P_CLAVExEJEMPLAR_E p_CLAVEx = new P_CLAVExEJEMPLAR_E();
                 p_CLAVEx.id_p_Clave = keyword.id_p_Clave;

@@ -1,19 +1,18 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
-using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class RESERVAController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -92,7 +91,7 @@ namespace backend.Controllers
             string[] sortby = SortBy.Split(':');
             var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             var bookings = db.RESERVA
-                .Where(x =>                    
+                .Where(x =>
                     DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%"))
                 .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
@@ -153,7 +152,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.direccion = booking.PRESTAMO.USUARIO.direccion;
                 rESERVA.PRESTAMO.USUARIO.fotografia = booking.PRESTAMO.USUARIO.fotografia;
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
-                rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;                               
+                rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
 
                 bookingsList.Add(rESERVA);
             }

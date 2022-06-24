@@ -1,9 +1,9 @@
 export interface LoginReturnModel {
-	usuario: User,
+	usuario: Usuario,
 	token: string
 }
 
-export interface User {
+export interface Usuario {
 	AREA?:          any[];
 	PRESTAMO?:      any[];
 	ROLUSUARIO:    RolUsuario;

@@ -1,0 +1,183 @@
+<div class="p-col-12 animate__animated animate__fadeIn animate__fast">
+  <div [class]="customClass">
+    <p-table
+      #dt
+      dataKey="id"
+      responsiveLayout="scroll"
+      styleClass="p-table-card p-datatable-sm"
+      [rows]="rows"
+      [value]="list"
+      [columns]="cols"
+      [rowHover]="true"
+      [filterDelay]="0"
+      selectionMode="single"
+      [(selection)]="selected"
+      (onRowSelect)="onRowTableSelect($event)"
+      [scrollable]="editColumnFrozen"
+      [lazy]="true"
+      [paginator]="true"
+      [lazyLoadOnInit]="false"
+      (onLazyLoad)="lazyLoading($event)"
+      [totalRecords]="pagination?.totalItems || rows"
+      [scrollHeight]="hasData ? 'auto' : ''"
+      [rowsPerPageOptions]="[10, 25, 50, 100]"
+      [scrollDirection]="editColumnFrozen ? 'both' : 'vertical'"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-jc-between p-p-2">
+          <span
+            [formGroup]="form"
+            *ngIf="!reloading && list?.length == 0; else skeleton"
+            class="p-input-icon-left"
+          >
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Buscar..."
+              formControlName="search"
+            />
+          </span>
+          <ng-container *ngIf="headerFilterTemplate; else defaultHeaderFilter">
+            <ng-container
+              *ngTemplateOutlet="headerFilterTemplate; context: { table: dt }"
+            ></ng-container>
+          </ng-container>
+          <ng-template #defaultHeaderFilter></ng-template>
+
+          <ng-template #skeleton>
+            <p-skeleton
+              *ngIf="reloading"
+              styleClass='class="p-input-icon-left"'
+              width="15.5rem"
+              height="2rem"
+            ></p-skeleton>
+            <span
+              *ngIf="!reloading"
+              [formGroup]="form"
+              class="p-input-icon-left"
+            >
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                placeholder="Buscar..."
+                formControlName="search"
+              />
+            </span>
+          </ng-template>
+
+          <button
+            pButton
+            pRipple
+            [label]="newButtonLabel"
+            type="button"
+            *ngIf="
+              showNewButton && !reloading && list?.length === 0;
+              else buttonSkeleton
+            "
+            class="p-button-primary"
+            (click)="onNewButtonClick()"
+          ></button>
+
+          <ng-template #buttonSkeleton>
+            <ng-container *ngIf="showNewButton">
+              <p-skeleton
+                *ngIf="reloading"
+                styleClass='class="p-input-icon-left"'
+                width="15.5rem"
+                height="2rem"
+              ></p-skeleton>
+              <button
+                pButton
+                pRipple
+                [label]="newButtonLabel"
+                type="button"
+                *ngIf="!reloading"
+                class="p-button-primary"
+                (click)="onNewButtonClick()"
+              ></button>
+            </ng-container>
+          </ng-template>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th
+            *ngFor="let col of columns"
+            [pSortableColumn]="col.field"
+            [ngSwitch]="col.field"
+            style="text-align: center"
+            [style.width.px]="col.width"
+          >
+            <ng-container *ngSwitchCase="'status'">
+              {{ col.header }}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+              {{ col.header }}
+              <p-sortIcon [field]="col.field" *ngIf="col.header"></p-sortIcon>
+            </ng-container>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData" class="p-selectable-row">
+          <ng-container *ngIf="bodyTemplate; else defaultBody">
+            <ng-container
+              *ngTemplateOutlet="
+                bodyTemplate;
+                context: { table: dt, columns: columns, rowData: rowData }
+              "
+            ></ng-container>
+          </ng-container>
+          <ng-template #defaultBody>
+            <td
+              *ngFor="let col of columns"
+              class="flex justify-content-between align-items-center"
+              [ngSwitch]="col.field"
+              [style.width.px]="col.width"
+            >
+              <ng-container *ngSwitchDefault>
+                {{ rowData[col.field] }}
+              </ng-container>
+            </td>
+          </ng-template>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <!-- Mientras carga -->
+        <ng-template #isLoading>
+          <tr *ngFor="let col of listSkeleton">
+            <!-- Mostrando columnas -->
+            <td *ngFor="let col of cols">
+              <p-skeleton height="2.5rem"></p-skeleton>
+            </td>
+          </tr>
+        </ng-template>
+
+        <!-- Si la lista está vacía después de cargar -->
+        <tr
+          *ngIf="!reloading && list?.length == 0; else isLoading"
+          class="animate__animated animate__fadeIn"
+        >
+          <td
+            [attr.colspan]="cols.length + 1"
+          >
+            <alert-card
+              title="¡Oh vaya!"
+              subtitle="Parece ser que aún no se han creado {{ type }} que cumplan con los filtros."
+              image="/assets/images/ux/alert-warning.png"
+              [height]="400"
+            >
+            </alert-card>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

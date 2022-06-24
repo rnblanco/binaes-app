@@ -1,18 +1,16 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class AREAController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -22,7 +20,7 @@ namespace backend.Controllers
         {
             var areas = db.AREA.ToList();
             List<AREA_PA_U_TA> areasList = new List<AREA_PA_U_TA>();
-            foreach(var area in areas)
+            foreach (var area in areas)
             {
                 AREA_PA_U_TA aREA = new AREA_PA_U_TA();
                 aREA.id_Area = area.id_Area;

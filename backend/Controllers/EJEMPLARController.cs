@@ -1,19 +1,18 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
-using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class EJEMPLARController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -71,7 +70,7 @@ namespace backend.Controllers
             var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             var exemplars = db.EJEMPLAR
                 .Where(x =>
-                    DbFunctions.Like(x.nombre, "%"+search+"%") ||
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.EDITORIAL.editorial1, "%" + search + "%") ||
                     DbFunctions.Like(x.FORMATOEJEMPLAR.formato, "%" + search + "%") ||
                     DbFunctions.Like(x.IDIOMAEJEMPLAR.idioma, "%" + search + "%") ||

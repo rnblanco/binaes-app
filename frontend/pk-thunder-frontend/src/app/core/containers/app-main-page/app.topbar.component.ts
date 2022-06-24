@@ -1,14 +1,14 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
-import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
+import { RouteInformation } from 'src/app/shared/constants/route-information';
 
 @Component({
   selector: 'app-topbar',
   template: `
     <div class="layout-topbar">
       <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/layout/images/{{appMain?.config?.dark ? 'logo-white' : 'logo-dark'}}.svg" alt="logo">
+        <img src="assets/images/ux/binaes.jpg" alt="logo">
         <span>Binaes</span>
       </a>
     
@@ -21,7 +21,7 @@ import { MenuItem } from 'primeng/api';
       </a>
     
       <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <a href="#" class="p-link layout-topbar-button">
+        <a [routerLink]="routeInformation.profilePage" class="p-link layout-topbar-button">
           <i class="pi pi-user"></i>
           <span>Profile</span>
         </a>
@@ -31,7 +31,8 @@ import { MenuItem } from 'primeng/api';
 })
 
 export class AppTopBarComponent {
-  items: MenuItem[] | undefined;
+  items: MenuItem[];
+  routeInformation = RouteInformation;
   constructor(public appMain: AppMainComponent) { }
 }
 

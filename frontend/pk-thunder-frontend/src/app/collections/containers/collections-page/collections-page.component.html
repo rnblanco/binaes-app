@@ -1,1 +1,47 @@
-<p>collections-page works!</p>
+<div class="p-mt-4">
+	<table-card
+		[reloading]="loading"
+		[globalFilter]="globalFilter"
+		[rows]="rows"
+		(onLazyLoad)="onLazyLoad($event)"
+		(onRowSelect)="onRowSelect($event)"
+		[pagination]="pagination"
+		[loading]="loading"
+		[cols]="cols"
+		[list]="list"
+		[showNewButton]="user.id_rolUsuario !== USER"
+		(onNewClick)="onNew()"
+		newButtonLabel="Nueva colección"
+		type="colecciones"
+	>
+		<ng-template
+			pTemplate="body"
+			let-table="table"
+			let-columns="columns"
+			let-data="rowData"
+		>
+			<td
+				*ngFor="let col of columns"
+				[ngSwitch]="col.field"
+				[style.width.px]="col.width"
+				class="text-center"
+			>
+				<ng-container *ngSwitchCase="'tipoColeccion'">
+					{{ data?.TIPOCOLECCION?.tipoColeccion1 | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'generoColeccion'">
+					{{ data?.GENEROCOLECCION?.generoColeccion1 | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'areaPertenece'">
+					{{ data?.AREA?.nombre | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchDefault>
+					{{ data[col.field] }}
+				</ng-container>
+			</td>
+		</ng-template>
+	</table-card>
+</div>

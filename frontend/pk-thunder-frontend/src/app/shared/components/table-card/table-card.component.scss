@@ -1,0 +1,45 @@
+:host ::ng-deep {
+    .p-chip img {
+        margin-left: 0;
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+    }
+    .p-table-card {
+        //background-color: #F3F3F3;
+    }
+
+    .card {
+        //background-color: #F3F3F3;
+        padding: 10px;
+    }
+
+    .p-input-icon-left > .p-inputtext {
+        padding-left: 2rem;
+    }
+
+    .p-input-icon-left > i:first-of-type {
+        left: 0.5rem;
+    }
+
+    .p-datatable .p-datatable-thead > tr > th {
+        font-weight: bold;
+        color: #000;
+    }
+    .p-datatable.p-datatable-scrollable .p-datatable-thead {
+        background: unset;
+    }
+}
+
+.p-table-card {
+    background-color: #F3F3F3;
+}
+
+:host .p-datatable-frozen-tbody {
+    font-weight: bold;
+}
+:host .p-inputtext.ng-valid, .p-inputtext.ng-valid:focus, .p-inputtext.ng-valid:hover,.p-inputtext.ng-pristine, .p-inputtext.ng-pristine:focus, .p-inputtext.ng-pristine:hover, .p-inputtext.ng-invalid.ng-touched{
+    border: 0 solid white;
+}
+:host .p-inputtext.p-filled{
+    border: 1px solid green;
+}

@@ -1,10 +1,8 @@
 namespace backend.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("PRESTAMO")]
     public partial class PRESTAMO
@@ -23,9 +21,9 @@ namespace backend.Models
         public string id_usuarioPresta { get; set; }
 
         public int id_Ejemplar { get; set; }
-        
-        public virtual EJEMPLAR EJEMPLAR { get; set; }   
-        
+
+        public virtual EJEMPLAR EJEMPLAR { get; set; }
+
         public virtual ESTADOS ESTADOS { get; set; }
 
         [ForeignKey("id_usuarioPresta")]

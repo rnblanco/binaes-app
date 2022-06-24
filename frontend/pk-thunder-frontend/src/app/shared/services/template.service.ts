@@ -53,7 +53,7 @@ export class TemplateService {
 	}
 	
 	protected updateOfURL(url: string, model: any): Observable<any> {
-		return this.http.patch(`${url}`, model).pipe(
+		return this.http.put(`${url}`, model).pipe(
 			catchError(err => {
 				return throwError(err);
 			})

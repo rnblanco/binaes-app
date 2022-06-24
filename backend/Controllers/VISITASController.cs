@@ -1,18 +1,16 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class VISITASController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -23,7 +21,7 @@ namespace backend.Controllers
             var visitas = db.VISITAS.ToList();
             List<VISITAS_A_U> visitsList = new List<VISITAS_A_U>();
 
-            foreach(var visita in visitas)
+            foreach (var visita in visitas)
             {
                 VISITAS_A_U v = new VISITAS_A_U();
                 v.id_Visita = visita.id_Visita;

@@ -1,19 +1,18 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
-using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class PRESTAMOController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -23,7 +22,7 @@ namespace backend.Controllers
         {
             var borrows = db.PRESTAMO.ToList();
             List<PRESTAMO_E> borrowsList = new List<PRESTAMO_E>();
-            foreach(var borrow in borrows)
+            foreach (var borrow in borrows)
             {
                 PRESTAMO_E pRESTAMO = new PRESTAMO_E();
                 pRESTAMO.id_Prestamo = borrow.id_Prestamo;
@@ -114,7 +113,7 @@ namespace backend.Controllers
                 pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
                 pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
 
-                pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();                
+                pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 pRESTAMO.EJEMPLAR.id_Ejemplar = borrow.EJEMPLAR.id_Ejemplar;
                 pRESTAMO.EJEMPLAR.nombre = borrow.EJEMPLAR.nombre;
                 pRESTAMO.EJEMPLAR.imagen = borrow.EJEMPLAR.imagen;
@@ -165,10 +164,10 @@ namespace backend.Controllers
                 return NotFound();
             }
             else
-            {                
+            {
                 pRESTAMO.id_Prestamo = id;
                 pRESTAMO.fh_Prestamo = borrow.fh_Prestamo;
-                pRESTAMO.fh_Devolucion = borrow.fh_Devolucion;                
+                pRESTAMO.fh_Devolucion = borrow.fh_Devolucion;
                 pRESTAMO.ESTADOS = borrow.ESTADOS;
 
                 pRESTAMO.USUARIO = new USUARIO_rU();

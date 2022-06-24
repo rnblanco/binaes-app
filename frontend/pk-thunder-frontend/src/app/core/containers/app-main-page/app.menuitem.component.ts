@@ -22,7 +22,7 @@ import { MenuService } from '../../services/app.menu.service';
             </a>
             <a (click)="itemClick($event)" *ngIf="(item.routerLink && !item.items) && item.visible !== false" [ngClass]="item.class"
                [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink router-link-exact-active"
-               [routerLinkActiveOptions]="{exact: !item.preventExact}" [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
+               [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
                 <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
                 <span>{{item.label}}</span>
                 <span class="p-tag p-badge ml-auto" *ngIf="item.badge">{{item.badge}}</span>
@@ -36,6 +36,7 @@ import { MenuService } from '../../services/app.menu.service';
         </ng-container>
     `,
     host: {
+        '[class.layout-root-menuitem]': 'root',
         '[class.active-menuitem]': 'active',
     },
     animations: [
@@ -65,12 +66,15 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
     menuSourceSubscription: Subscription;
     menuResetSubscription: Subscription;
     active: boolean = false;
+    currentPath: string;
     key: string = '';
     
     constructor(public app: AppMainComponent, public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
         this.menuSourceSubscription = this.menuService.menuSource$.subscribe(key => {
             // deactivate current active menu
-            if (this.active && this.key !== key && key.indexOf(this.key) !== 0) this.active = false;
+            if (this.active && this.key !== key && key.indexOf(this.key) !== 0) {
+                this.active = false;
+            }
         });
         
         this.menuResetSubscription = this.menuService.resetSource$.subscribe(() => {
@@ -78,20 +82,26 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
         });
         
         this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(() => {
-            if (this.item.routerLink) this.updateActiveStateFromRoute();
-            else this.active = false;
+        .subscribe((e: any) => {
+            this.currentPath = e.url;
+            if (this.item.routerLink) {
+                this.updateActiveStateFromRoute();
+            } else {
+                this.active = false;
+            }
         });
     }
     
     ngOnInit() {
-        if (this.item.routerLink)
-        this.updateActiveStateFromRoute();
+        if (this.item.routerLink){
+            this.currentPath = this.router.url;
+            this.updateActiveStateFromRoute();
+        }
         this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
     }
     
     updateActiveStateFromRoute() {
-        this.active = this.router.isActive(this.item.routerLink[0], !this.item.items);
+        this.active = this.currentPath.startsWith(this.item.routerLink[0]) ? true : false;
     }
     
     itemClick(event: Event) {

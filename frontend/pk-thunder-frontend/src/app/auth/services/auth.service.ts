@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { RouteInformation } from 'src/app/shared/constants/route-information';
 import { StorageInformation } from 'src/app/shared/constants/storage-information';
-import { User } from 'src/app/shared/models/user';
-import { CatalogService } from 'src/app/shared/services/catalog.service';
+import { Usuario } from 'src/app/shared/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +12,11 @@ export class AuthService {
 
   constructor(
     private readonly router: Router,
-    private readonly catalogService: CatalogService,
     private readonly storage: LocalStorageService,
   ) {}
-  
-  get isLoggedIn(): boolean {
-    const user = this.storage.retrieve(StorageInformation.user);
-    return user !== null;
-  }
 
-  get storagedUser(): User {
+  get storagedUser(): Usuario {
     return this.storage.retrieve(StorageInformation.user);
-  }
-  
-  login(email: string, password: string) {
-    /* TODO: Login*/
   }
 
   signOut() {

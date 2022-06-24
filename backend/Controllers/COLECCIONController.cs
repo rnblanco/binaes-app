@@ -1,19 +1,18 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
-using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class COLECCIONController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -107,7 +106,7 @@ namespace backend.Controllers
                 return NotFound();
             }
             else
-            {                
+            {
                 cOLECCION.id_Coleccion = collection.id_Coleccion;
                 cOLECCION.nombre = collection.nombre;
                 cOLECCION.AREA = new AREA_PA_U_TA();

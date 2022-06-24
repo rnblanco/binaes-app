@@ -17,7 +17,8 @@ import { Params, Router } from '@angular/router';
 import packageJson from 'package.json';
 import { trigger } from '@angular/animations';
 import { definitions } from 'src/app/shared/utils/animations/animate';
-import { User } from '../models/user';
+import { Usuario } from '../models/user';
+import { md } from 'node-forge';
 const { InAndOut, InAndOutFast, InAndOutFaster } = definitions;
 
 @Component({
@@ -38,7 +39,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   env: any;
   version: any;
   router: Router;
-  user: User;
+  user: Usuario;
   authService: AuthService;
   catalogService: CatalogService;
   validatorService: ValidatorService;
@@ -52,12 +53,12 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   loading = false;
   buttonLoading = false;
   httpParams: HttpParams = new HttpParams();
-  routeParams: Params;
+  routeParams!: Params;
   // Reactive Forms
-  form: FormGroup;
+  form!: FormGroup;
   formBuilder: FormBuilder;
   // Show modal
-  formSelected: FormItem;
+  formSelected!: FormItem;
   
   protected constructor() {
     this.confirmationService = AppInjector.injector.get(ConfirmationService);
@@ -68,18 +69,16 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     this.breadcrumbService = AppInjector.injector.get(AppBreadcrumbService);
     this.router = AppInjector.injector.get(Router);
     this.authService = AppInjector.injector.get(AuthService);
-    this.user = this.authService.storagedUser as User;
+    this.user = this.authService.storagedUser;
     this.formBuilder = new FormBuilder();
     this.subscription = new Subscription();
     this.version = packageJson.version;
     this.env = environment;
   }
   
-  async encode(message: string) {
-    const msgUint8 = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  encrypt(message: string) {
+    const mt = md.sha256.create();
+    return  mt.update(message).digest().toHex();
   }
 
   capitalize(text: string): string {

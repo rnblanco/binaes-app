@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/shared/components/base.component';
 import { Validators } from '@angular/forms';
 import { StorageInformation } from '../../../shared/constants/storage-information';
-import { LoginReturnModel, User } from 'src/app/shared/models/user';
+import { LoginReturnModel } from 'src/app/shared/models/user';
 import { RouteInformation } from '../../../shared/constants/route-information';
 
 @Component({
@@ -10,7 +10,7 @@ import { RouteInformation } from '../../../shared/constants/route-information';
   templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent extends BaseComponent implements OnInit, AfterViewInit {
-  
+  loadingButton:boolean = false;
   constructor(private elementRef: ElementRef) {
     super();
   }
@@ -33,26 +33,28 @@ export class LoginPageComponent extends BaseComponent implements OnInit, AfterVi
   }
   
   async onSubmit(): Promise<void> {
-    const contrasena = await this.encode(this.form.value.contrasena);
+    if (this.form.invalid) return;
+    this.buttonLoading = true;
+    const { password } = this.form.value;
     this.subscription.add(
       this.catalogService.addOfURL('INICIAR_SESION',
-        { email: this.form.value.email, contrasena }).subscribe(
-        {
-          next: (loginReturnModel: LoginReturnModel) =>{
+        { email: this.form.value.email, contrasena: this.encrypt(password) }).subscribe({
+          next: (loginReturnModel: LoginReturnModel) => {
+            this.buttonLoading = false;
             this.storageService.store(StorageInformation.user, loginReturnModel.usuario);
             this.storageService.store(StorageInformation.token, loginReturnModel.token);
-            this.router.navigate([RouteInformation.eventsPage]);
+            this.router.navigate([RouteInformation.dashboardPage]);
+            this.buttonLoading = false;
           },
           error: (error) => {
-            console.log(error)
             this.messageService.setPayload({
               type: 'warn',
               title: 'Error',
-              body: error.Message,
+              body: error?.Message || 'Credenciales incorrectas',
             });
+            this.buttonLoading = false;
           }
-        }
-      )
+      })
     )
   }
 }

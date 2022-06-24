@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { RouteInformation } from 'src/app/shared/constants/route-information';
-import { User } from 'src/app/shared/models/user';
-import { Roles } from '../constants/roles';
 import { AuthService } from '../services/auth.service';
+import { Usuario } from '../../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthGuard implements CanActivate {
-  user: any;
+  user: Usuario;
   
   constructor(
     public router: Router,
@@ -22,18 +21,30 @@ export class AuthGuard implements CanActivate {
   }
   
   canActivateChild(route: ActivatedRouteSnapshot) {
-    this.user = this.authService.storagedUser as User;
-    const permission = route.data?.['permission'].contains(Roles[this.user?.ROLUSUARIO.id_rolUsuario]);
-    if (permission && this.authService.isLoggedIn) return true
-    this.router.navigate([RouteInformation.loginPage]);
-    return false;
+    this.user = this.authService.storagedUser;
+    if (this.user === null){
+      this.router.navigate([RouteInformation.loginPage]);
+      return false;
+    }
+    
+    const isAllowed = route.data?.permission.includes(this.user?.ROLUSUARIO.id_rolUsuario) ?? false;
+    if (!isAllowed){
+      this.router.navigate([RouteInformation.dashboardPage]);
+      return false;
+    }
+    
+    return true;
   }
 
   configNavigate() {
-    this.user = this.authService.storagedUser as User;
-    if (this.authService.isLoggedIn && this.user !== null) return true
-    this.router.navigate([RouteInformation.loginPage]);
-    return false;
+    this.user = this.authService.storagedUser;
+    
+    if (this.user === null) {
+      this.router.navigate([RouteInformation.loginPage]);
+      return false;
+    }
+    
+    return true;
   }
 
 }

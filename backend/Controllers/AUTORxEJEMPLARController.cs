@@ -1,18 +1,16 @@
-﻿using System;
+﻿using backend.Models;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class AUTORxEJEMPLARController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -22,7 +20,7 @@ namespace backend.Controllers
         {
             var autorexemplars = db.AUTORxEJEMPLAR;
             List<AUTORxEJEMPLAR_A_E> autorexemplarsList = new List<AUTORxEJEMPLAR_A_E>();
-            foreach(var autorexemplar in autorexemplars)
+            foreach (var autorexemplar in autorexemplars)
             {
                 AUTORxEJEMPLAR_A_E aUTORxEJEMPLAR_A_E = new AUTORxEJEMPLAR_A_E();
                 aUTORxEJEMPLAR_A_E.id_autorEjemplar = autorexemplar.id_autorEjemplar;
@@ -65,7 +63,7 @@ namespace backend.Controllers
 
                 autorexemplarsList.Add(aUTORxEJEMPLAR_A_E);
             }
-            return autorexemplarsList.AsQueryable(); 
+            return autorexemplarsList.AsQueryable();
         }
 
         // GET: api/AUTORxEJEMPLAR/5

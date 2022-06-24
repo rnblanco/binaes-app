@@ -19,12 +19,14 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
 import { UnauthorizedPageComponent } from './containers/unauthorized-page/unauthorized-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { PasswordModule } from 'primeng/password';
+import { LogOutPageComponent } from './log-out-page/log-out-page.component';
 
 @NgModule({
   declarations: [
     NotFoundPageComponent,
     LoginPageComponent,
     UnauthorizedPageComponent,
+    LogOutPageComponent,
   ],
 	imports: [
 		CommonModule,

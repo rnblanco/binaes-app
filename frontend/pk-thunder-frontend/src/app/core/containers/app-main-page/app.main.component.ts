@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnDestroy, Renderer2, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ConfigService } from '../../services/app.config.service';
 import { Subscription } from 'rxjs';
 import { AppConfig } from '../../models/appconfig';
 import { AppComponent } from '../../../app.component';
@@ -17,7 +16,7 @@ import { AppComponent } from '../../../app.component';
         ])
     ]
 })
-export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
+export class AppMainComponent implements AfterViewInit, OnDestroy {
     
     public menuInactiveDesktop: boolean | undefined;
     public menuActiveMobile: boolean | undefined;
@@ -35,12 +34,7 @@ export class AppMainComponent implements AfterViewInit, OnDestroy, OnInit {
     config: AppConfig | undefined;
     subscription: Subscription | undefined;
     
-    constructor(public renderer: Renderer2, public app: AppComponent, public configService: ConfigService) { }
-    
-    ngOnInit() {
-        this.config = this.configService.config;
-        this.subscription = this.configService.configUpdate$.subscribe(config => this.config = config);
-    }
+    constructor(public renderer: Renderer2, public app: AppComponent) { }
     
     ngAfterViewInit() {
         // hides the overlay menu and top menu if outside is clicked

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Type } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { BaseComponent } from './base.component';
 
@@ -6,12 +6,12 @@ import { BaseComponent } from './base.component';
   template: '',
 })
 export abstract class LazyComponent extends BaseComponent {
-  pagination: any = {};
   currentPage = 1;
   rows = 10;
   sortField: string = '';
   sortOrder: number = 0;
   globalFilter: string = '';
+  pagination: any = {};
   list: any[] = [];
   selectedList: any;
 
@@ -23,14 +23,13 @@ export abstract class LazyComponent extends BaseComponent {
     this.httpParams = new HttpParams()
       .set('limit', this.rows || 10)
       .set('page', this.currentPage || 1)
-      .set('search', this.globalFilter || '')
+      .set(this.globalFilter ? 'search' : '', this.globalFilter || '')
       .set(
-        'sortBy',
+        this.sortField ? 'sortBy' : '',
         this.sortField
           ? `${this.sortField}:${this.sortOrder === 1 ? 'ASC' : 'DESC'}`
           : ''
       )
-      .set('filter.active', '$eq:true');
   }
 
   paginate({ first, globalFilter, rows, sortField, sortOrder }: {first: number, globalFilter: string, rows: number, sortField: string, sortOrder: number}): void {

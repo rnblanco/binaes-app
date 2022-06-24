@@ -1,10 +1,8 @@
 namespace backend.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("EJEMPLAR")]
     public partial class EJEMPLAR
@@ -37,7 +35,7 @@ namespace backend.Models
 
         [ForeignKey("id_Formato")]
         public virtual FORMATOEJEMPLAR FORMATOEJEMPLAR { get; set; }
-        
+
         [ForeignKey("id_Idioma")]
         public virtual IDIOMAEJEMPLAR IDIOMAEJEMPLAR { get; set; }
     }

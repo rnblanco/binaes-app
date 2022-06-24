@@ -1,19 +1,18 @@
-using System;
+using backend.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using backend.Models;
-using System.Linq.Dynamic.Core;
 
 namespace backend.Controllers
 {
+    [Authorize]
     public class USUARIOController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
@@ -23,7 +22,7 @@ namespace backend.Controllers
         {
             var users = db.USUARIO.ToList();
             List<USUARIO_rU> usersList = new List<USUARIO_rU>();
-            foreach(var user in users)
+            foreach (var user in users)
             {
                 USUARIO_rU uSUARIO = new USUARIO_rU();
                 uSUARIO.id_Usuario = user.id_Usuario;
@@ -33,17 +32,17 @@ namespace backend.Controllers
                 uSUARIO.ocupacion = user.ocupacion;
                 uSUARIO.direccion = user.direccion;
                 uSUARIO.fotografia = user.fotografia;
-                uSUARIO.institucion = user.institucion;                
+                uSUARIO.institucion = user.institucion;
                 uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
                 usersList.Add(uSUARIO);
             }
-            
+
             return usersList.AsQueryable();
         }
 
         // GET: api/USUARIO?limit=5&page=1&search=test&sortby=col:ASC
         public IQueryable<USUARIO_rU> GetUSUARIO(int limit, int page, string search, string SortBy)
-        {            
+        {
             string[] sortby = SortBy.Split(':');
             var sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             var users = db.USUARIO
@@ -80,7 +79,7 @@ namespace backend.Controllers
         public async Task<IHttpActionResult> GetUSUARIO(string id)
         {
             var user = await db.USUARIO.FindAsync(id);
-            USUARIO_rU uSUARIO = new USUARIO_rU();            
+            USUARIO_rU uSUARIO = new USUARIO_rU();
 
             if (user == null)
             {
