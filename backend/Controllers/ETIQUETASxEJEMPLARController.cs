@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -29,7 +30,7 @@ namespace backend.Controllers
                 eTIQUETASxEJEMPLAR.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 eTIQUETASxEJEMPLAR.EJEMPLAR.id_Ejemplar = tag.EJEMPLAR.id_Ejemplar;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.nombre = tag.EJEMPLAR.nombre;
-                eTIQUETASxEJEMPLAR.EJEMPLAR.imagen = tag.EJEMPLAR.imagen;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.imagen = Encoding.UTF8.GetString(tag.EJEMPLAR.imagen);
                 eTIQUETASxEJEMPLAR.EJEMPLAR.EDITORIAL = tag.EJEMPLAR.EDITORIAL;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.FORMATOEJEMPLAR = tag.EJEMPLAR.FORMATOEJEMPLAR;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.IDIOMAEJEMPLAR = tag.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -84,7 +85,7 @@ namespace backend.Controllers
                 eTIQUETASxEJEMPLAR.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 eTIQUETASxEJEMPLAR.EJEMPLAR.id_Ejemplar = tag.EJEMPLAR.id_Ejemplar;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.nombre = tag.EJEMPLAR.nombre;
-                eTIQUETASxEJEMPLAR.EJEMPLAR.imagen = tag.EJEMPLAR.imagen;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.imagen = Encoding.UTF8.GetString(tag.EJEMPLAR.imagen);
                 eTIQUETASxEJEMPLAR.EJEMPLAR.EDITORIAL = tag.EJEMPLAR.EDITORIAL;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.FORMATOEJEMPLAR = tag.EJEMPLAR.FORMATOEJEMPLAR;
                 eTIQUETASxEJEMPLAR.EJEMPLAR.IDIOMAEJEMPLAR = tag.EJEMPLAR.IDIOMAEJEMPLAR;

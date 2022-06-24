@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -44,7 +45,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 pRESTAMO.EJEMPLAR.id_Ejemplar = borrow.EJEMPLAR.id_Ejemplar;
                 pRESTAMO.EJEMPLAR.nombre = borrow.EJEMPLAR.nombre;
-                pRESTAMO.EJEMPLAR.imagen = borrow.EJEMPLAR.imagen;
+                pRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(borrow.EJEMPLAR.imagen);
                 pRESTAMO.EJEMPLAR.EDITORIAL = borrow.EJEMPLAR.EDITORIAL;
                 pRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = borrow.EJEMPLAR.FORMATOEJEMPLAR;
                 pRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = borrow.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -120,7 +121,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 pRESTAMO.EJEMPLAR.id_Ejemplar = borrow.EJEMPLAR.id_Ejemplar;
                 pRESTAMO.EJEMPLAR.nombre = borrow.EJEMPLAR.nombre;
-                pRESTAMO.EJEMPLAR.imagen = borrow.EJEMPLAR.imagen;
+                pRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(borrow.EJEMPLAR.imagen);
                 pRESTAMO.EJEMPLAR.EDITORIAL = borrow.EJEMPLAR.EDITORIAL;
                 pRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = borrow.EJEMPLAR.FORMATOEJEMPLAR;
                 pRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = borrow.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -188,7 +189,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 pRESTAMO.EJEMPLAR.id_Ejemplar = borrow.EJEMPLAR.id_Ejemplar;
                 pRESTAMO.EJEMPLAR.nombre = borrow.EJEMPLAR.nombre;
-                pRESTAMO.EJEMPLAR.imagen = borrow.EJEMPLAR.imagen;
+                pRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(borrow.EJEMPLAR.imagen);
                 pRESTAMO.EJEMPLAR.EDITORIAL = borrow.EJEMPLAR.EDITORIAL;
                 pRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = borrow.EJEMPLAR.FORMATOEJEMPLAR;
                 pRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = borrow.EJEMPLAR.IDIOMAEJEMPLAR;

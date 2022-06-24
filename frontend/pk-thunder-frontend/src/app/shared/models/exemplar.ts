@@ -1,21 +1,27 @@
-export interface rawExemplar {
-	id_Ejemplar: number,
-	nombre: string,
-	imagen: number,
-	id_Editorial: number,
-	id_Formato: number,
-	id_Idioma: number,
-	f_publicacion: Date,
-	id_coleccionPertenece: number
-}
+import { Coleccion } from './collection';
 
 export interface Exemplar {
-	id_Ejemplar: number,
-	nombre: string,
-	imagen: number,
-	editorial: string, // editorial -> editorial
-	formato: string, // formato -> formato
-	idioma: string, // idioma -> idioma
-	f_publicacion: Date,
-	coleccion: string
+  id_Ejemplar: number;
+  nombre: string;
+  imagen: string;
+  EDITORIAL: Editorial;
+  FORMATO: Formatoejemplar;
+  IDIOMA: IdiomaEjemplar;
+  f_publicacion: Date;
+  COLECCION: Coleccion;
+}
+
+export interface Editorial {
+  id_Editorial: number;
+  editorial: string;
+}
+
+export interface Formatoejemplar {
+  id_Formato: number;
+  formato: string;
+}
+
+export interface IdiomaEjemplar {
+  id_Idioma: number;
+  idioma: string;
 }
