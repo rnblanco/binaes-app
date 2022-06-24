@@ -17,9 +17,9 @@ export class CollectionsPageComponent extends LazyComponent implements OnInit {
   
   cols = [
     { field: 'nombre', header: 'Nombre', width: 100 },
-    { field: 'tipoColeccion', header: 'Tipo', width: 100 },
-    { field: 'generoColeccion', header: 'Género', width: 150 },
-    { field: 'areaPertenece', header: 'Área', width: 175 },
+    { field: 'TIPOCOLECCION.tipoColeccion1', header: 'Tipo', width: 100 },
+    { field: 'GENEROCOLECCION.generoColeccion1', header: 'Género', width: 150 },
+    { field: 'AREA.nombre', header: 'Área', width: 175 },
   ] as any[];
   
   ngOnInit(): void {

@@ -23,9 +23,9 @@ export abstract class LazyComponent extends BaseComponent {
     this.httpParams = new HttpParams()
       .set('limit', this.rows || 10)
       .set('page', this.currentPage || 1)
-      .set(this.globalFilter ? 'search' : '', this.globalFilter || '')
+      .set('search', this.globalFilter || '')
       .set(
-        this.sortField ? 'sortBy' : '',
+        'sortBy',
         this.sortField
           ? `${this.sortField}:${this.sortOrder === 1 ? 'ASC' : 'DESC'}`
           : ''

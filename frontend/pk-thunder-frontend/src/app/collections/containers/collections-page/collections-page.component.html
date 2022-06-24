@@ -26,15 +26,15 @@
 				[style.width.px]="col.width"
 				class="text-center"
 			>
-				<ng-container *ngSwitchCase="'tipoColeccion'">
+				<ng-container *ngSwitchCase="'TIPOCOLECCION.tipoColeccion1'">
 					{{ data?.TIPOCOLECCION?.tipoColeccion1 | titlecase }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'generoColeccion'">
+				<ng-container *ngSwitchCase="'GENEROCOLECCION.generoColeccion1'">
 					{{ data?.GENEROCOLECCION?.generoColeccion1 | titlecase }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'areaPertenece'">
+				<ng-container *ngSwitchCase="'AREA.nombre'">
 					{{ data?.AREA?.nombre | titlecase }}
 				</ng-container>
 				

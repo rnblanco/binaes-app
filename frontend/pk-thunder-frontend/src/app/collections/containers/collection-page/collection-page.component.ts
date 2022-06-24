@@ -51,13 +51,13 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {
         this.loading = true;
+        this.loadTypes();
+        this.loadGenres();
+        this.loadAreas();
         if (id) {
           this.id = id;
           this.loadInfo();
         }
-        this.loadTypes();
-        this.loadGenres();
-        this.loadAreas();
       })
     );
   }
@@ -175,8 +175,14 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
           this.selectedArea.push(response.AREA.id_Area);
           this.selectedGenre.push(response.GENEROCOLECCION.id_generoColeccion);
           this.selectedType.push(response.TIPOCOLECCION.id_tipoColeccion);
+	        setTimeout(() => {
+		        this.loading = false;
+	        }, 200);
         },
-        () => (this.router.navigate([RouteInformation.collectionPage]))
+        () => {
+          this.loading = false;
+          this.router.navigate([RouteInformation.collectionPage]);
+        }
       )
     );
   }
@@ -290,9 +296,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
       .subscribe(
         (response: Area[]) => {
           this.areas = response;
-          this.loading = false;
         },
-        () => (this.loading = false)
       )
     );
   }
