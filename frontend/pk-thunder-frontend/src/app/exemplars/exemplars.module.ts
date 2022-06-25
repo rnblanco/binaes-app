@@ -13,6 +13,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { SharedModule } from '../shared/shared.module';
 import { LoadingModule } from '../../components/loading/loading.module';
 import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -33,7 +35,9 @@ import { CalendarModule } from 'primeng/calendar';
     MultiSelectModule,
     SharedModule,
     LoadingModule,
-    CalendarModule
+    CalendarModule,
+    FileUploadModule,
+    HttpClientModule
   ]
 })
 export class ExemplarsModule { }
