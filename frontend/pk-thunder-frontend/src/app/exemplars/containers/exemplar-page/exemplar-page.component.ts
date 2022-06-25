@@ -58,7 +58,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
 
   get formIsValid(): boolean {
-    return this.name !== '' && this.selectedEditorial.length > 0 && this.selectedIdioma.length > 0 && this.selectedFormato.length > 0 && this.selectedCollection.length > 0 && this.date != undefined;
+    return this.name !== '' && this.selectedEditorial.length > 0 && this.selectedIdioma.length > 0 && this.selectedFormato.length > 0 && this.selectedCollection.length > 0 && this.date != undefined && (this.uploadedFiles != undefined || this.uploadedFile.length > 0);
   }
 
   ngOnInit(): void {
@@ -86,7 +86,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     );
   }
 
-  deleteCollection(): void {
+  deleteEjemplar(): void {
     this.deleteLoading = true;
     this.subscription.add(
       this.catalogService.deleteOfURL(`EJEMPLAR/${this.id}`).subscribe(
@@ -94,10 +94,10 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
-            body: 'El ejemplar fue eliminada con éxito',
+            body: 'El ejemplar fue eliminado con éxito',
           });
           setTimeout(() => {
-            this.router.navigate([RouteInformation.collectionsPage])
+            this.router.navigate([RouteInformation.exemplarsPage])
           }, 200);
           this.deleteLoading = false;
         },
