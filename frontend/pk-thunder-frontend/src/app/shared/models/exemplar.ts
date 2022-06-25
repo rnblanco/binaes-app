@@ -5,23 +5,23 @@ export interface Exemplar {
   nombre: string;
   imagen: string;
   EDITORIAL: Editorial;
-  FORMATO: Formatoejemplar;
-  IDIOMA: IdiomaEjemplar;
-  f_publicacion: Date;
+  FORMATOEJEMPLAR: Formatoejemplar;
+  IDIOMAEJEMPLAR: IdiomaEjemplar;
+  f_publicacion: string;
   COLECCION: Coleccion;
 }
 
 export interface Editorial {
   id_Editorial: number;
-  editorial: string;
+  editorial1: string;
 }
 
 export interface Formatoejemplar {
-  id_Formato: number;
+  id_formatoEjemplar: number;
   formato: string;
 }
 
 export interface IdiomaEjemplar {
-  id_Idioma: number;
+  id_idiomaEjemplar: number;
   idioma: string;
 }

@@ -18,10 +18,10 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
   cols = [
     { field: 'nombre', header: 'Nombre', width: 100 },
     { field: 'imagen', header: 'Imagen', width: 100 },
-    { field: 'editorial', header: 'Editorial', width: 150 },
-    { field: 'formatoEjemplar', header: 'Formato', width: 175 },
-    { field: 'idiomaEjemplar', header: 'Idioma', width: 175 },
-    { field: 'coleccion', header: 'Coleccion', width: 175 },
+    { field: 'EDITORIAL.editorial', header: 'Editorial', width: 150 },
+    { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 175 },
+    { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 175 },
+    { field: 'COLECCION.nombre', header: 'Coleccion', width: 175 },
     { field: 'f_publicacion', header: 'fecha publicacion', width: 175 },    
   ] as any[];
 

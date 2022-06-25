@@ -26,23 +26,23 @@
             class="text-center">
 
           <ng-container *ngSwitchCase="'imagen'">
-            <img [src]="data?.imagen" style="height: fit-content"/>            
+            <img [src]="data?.imagen" style="height:10rem"/>            
           </ng-container>
 
           
-          <ng-container *ngSwitchCase="'editorial'">
+          <ng-container *ngSwitchCase="'EDITORIAL.editorial'">
             {{ data?.EDITORIAL?.editorial1 | titlecase }}
           </ng-container>
 
-          <ng-container *ngSwitchCase="'formatoEjemplar'">
+          <ng-container *ngSwitchCase="'FORMATOEJEMPLAR.formato'">
             {{ data?.FORMATOEJEMPLAR?.formato | titlecase }}
           </ng-container>
 
-          <ng-container *ngSwitchCase="'idiomaEjemplar'">
+          <ng-container *ngSwitchCase="'IDIOMAEJEMPLAR.idioma'">
             {{ data?.IDIOMAEJEMPLAR?.idioma | titlecase }}
           </ng-container>
 
-          <ng-container *ngSwitchCase="'coleccion'">
+          <ng-container *ngSwitchCase="'COLECCION.nombre'">
             {{ data?.COLECCION?.nombre | titlecase }}
           </ng-container>
 
