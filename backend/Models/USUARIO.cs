@@ -73,7 +73,7 @@ namespace backend.Models
         public string direccion { get; set; }
 
         [Required]
-        public byte[] fotografia { get; set; }
+        public string fotografia { get; set; }
 
         [Required]
         [StringLength(50)]

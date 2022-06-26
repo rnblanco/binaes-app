@@ -1,1 +1,92 @@
-<p>profile-page works!</p>
+<div class="card p-mt-4">
+  
+  <form autocomplete="off"
+        class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2" >
+    <div class="p-inputgroup p-mt-0">
+      <div class="p-col-6">
+        <h5 class="p-mb-1">Nombre:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-col-6 p-mt-3">
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ name }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 class="p-mb-1">Email:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-col-6 p-mt-3">
+
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ email }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 class="p-mb-1">Teléfono:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-col-6 p-mt-3">
+
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ telefono }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 class="p-mb-1">Ocupación:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-col-6 p-mt-3">
+
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ ocupacion }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 class="p-mb-1">Dirección:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-mt-3">
+
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ direccion }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h5 class="p-mb-1">Institucion:</h5>
+        <div class="p-inputgroup p-mt-0">
+          <div class="card p-col-12 p-pt-3 p-pb-3" style="background: #958FDF; ">
+            <div class="p-field p-mt-3">
+              <div class="p-input-icon-right" style="color: #ffffff;">
+                <h4>{{ institucion }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-col-6 p-d-flex p-ai-center p-jc-center">
+        <p-image src="{{ image }}" imageClass="img-perfil" alt="Image" width="500" height="500" [preview]="true"></p-image>
+      </div>
+    </div>
+    <div class="p-field p-col-12 p-mt-4">
+      <h5 class="p-mb-1">Contraseña Actual:</h5>
+      <div class="p-input-icon-right">
+        <input name="contrasenaActual" class="p-pt-4 p-pb-4" type="password" formControlName="passwordA" autocomplete="off" placeholder="●●●●●●" pInputText />
+      </div>
+      <h5 class="p-mb-1">Contraseña Nueva:</h5>
+      <div class="p-input-icon-right">
+        <input name="contrasenaNueva" class="p-pt-4 p-pb-4" type="password" formControlName="passwordN" autocomplete="off" placeholder="●●●●●●" pInputText />
+      </div>
+      <h5 class="p-mb-1">Confirmar contraseña:</h5>
+      <div class="p-input-icon-right">
+        <input name="contrasenaConfirmar" class="p-pt-4 p-pb-4" type="password" formControlName="passwordC" autocomplete="off" placeholder="●●●●●●" pInputText />
+      </div>
+    </div>
+  </form>
+</div>
+

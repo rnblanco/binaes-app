@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -35,7 +36,7 @@ namespace backend.Controllers
                 v.USUARIO.telefono = visita.USUARIO.telefono;
                 v.USUARIO.ocupacion = visita.USUARIO.ocupacion;
                 v.USUARIO.direccion = visita.USUARIO.direccion;
-                v.USUARIO.fotografia = visita.USUARIO.fotografia;
+                v.USUARIO.fotografia = Encoding.UTF8.GetString(visita.USUARIO.fotografia);
                 v.USUARIO.institucion = visita.USUARIO.institucion;
                 v.USUARIO.ROLUSUARIO = visita.USUARIO.ROLUSUARIO;
 
@@ -52,7 +53,7 @@ namespace backend.Controllers
                 v.AREA.USUARIO.telefono = visita.AREA.USUARIO.telefono;
                 v.AREA.USUARIO.ocupacion = visita.AREA.USUARIO.ocupacion;
                 v.AREA.USUARIO.direccion = visita.AREA.USUARIO.direccion;
-                v.AREA.USUARIO.fotografia = visita.AREA.USUARIO.fotografia;
+                v.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(visita.AREA.USUARIO.fotografia);
                 v.AREA.USUARIO.institucion = visita.AREA.USUARIO.institucion;
                 v.AREA.USUARIO.ROLUSUARIO = visita.AREA.USUARIO.ROLUSUARIO;
 
@@ -86,7 +87,7 @@ namespace backend.Controllers
                 v.USUARIO.telefono = visita.USUARIO.telefono;
                 v.USUARIO.ocupacion = visita.USUARIO.ocupacion;
                 v.USUARIO.direccion = visita.USUARIO.direccion;
-                v.USUARIO.fotografia = visita.USUARIO.fotografia;
+                v.USUARIO.fotografia = Encoding.UTF8.GetString(visita.USUARIO.fotografia);
                 v.USUARIO.institucion = visita.USUARIO.institucion;
                 v.USUARIO.ROLUSUARIO = visita.USUARIO.ROLUSUARIO;
 
@@ -103,7 +104,7 @@ namespace backend.Controllers
                 v.AREA.USUARIO.telefono = visita.AREA.USUARIO.telefono;
                 v.AREA.USUARIO.ocupacion = visita.AREA.USUARIO.ocupacion;
                 v.AREA.USUARIO.direccion = visita.AREA.USUARIO.direccion;
-                v.AREA.USUARIO.fotografia = visita.AREA.USUARIO.fotografia;
+                v.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(visita.AREA.USUARIO.fotografia);
                 v.AREA.USUARIO.institucion = visita.AREA.USUARIO.institucion;
                 v.AREA.USUARIO.ROLUSUARIO = visita.AREA.USUARIO.ROLUSUARIO;
 

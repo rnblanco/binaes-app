@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -31,7 +32,7 @@ namespace backend.Controllers
                 uSUARIO.telefono = user.telefono;
                 uSUARIO.ocupacion = user.ocupacion;
                 uSUARIO.direccion = user.direccion;
-                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.fotografia = Encoding.UTF8.GetString(user.fotografia);
                 uSUARIO.institucion = user.institucion;
                 uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
                 usersList.Add(uSUARIO);
@@ -69,7 +70,7 @@ namespace backend.Controllers
                 uSUARIO.telefono = user.telefono;
                 uSUARIO.ocupacion = user.ocupacion;
                 uSUARIO.direccion = user.direccion;
-                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.fotografia = Encoding.UTF8.GetString(user.fotografia);
                 uSUARIO.institucion = user.institucion;
                 uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
                 usersList.Add(uSUARIO);
@@ -97,7 +98,7 @@ namespace backend.Controllers
                 uSUARIO.telefono = user.telefono;
                 uSUARIO.ocupacion = user.ocupacion;
                 uSUARIO.direccion = user.direccion;
-                uSUARIO.fotografia = user.fotografia;
+                uSUARIO.fotografia = Encoding.UTF8.GetString(user.fotografia);
                 uSUARIO.institucion = user.institucion;
                 uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
             }

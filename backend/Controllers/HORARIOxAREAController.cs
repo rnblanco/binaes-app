@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -40,7 +41,7 @@ namespace backend.Controllers
                 hORARIOxAREA_A.AREA.USUARIO.telefono = schedule.AREA.USUARIO.telefono;
                 hORARIOxAREA_A.AREA.USUARIO.ocupacion = schedule.AREA.USUARIO.ocupacion;
                 hORARIOxAREA_A.AREA.USUARIO.direccion = schedule.AREA.USUARIO.direccion;
-                hORARIOxAREA_A.AREA.USUARIO.fotografia = schedule.AREA.USUARIO.fotografia;
+                hORARIOxAREA_A.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(schedule.AREA.USUARIO.fotografia);
                 hORARIOxAREA_A.AREA.USUARIO.institucion = schedule.AREA.USUARIO.institucion;
                 hORARIOxAREA_A.AREA.USUARIO.ROLUSUARIO = schedule.AREA.USUARIO.ROLUSUARIO;
 
@@ -74,7 +75,7 @@ namespace backend.Controllers
                 hORARIOxAREA_A.AREA.USUARIO.telefono = schedule.AREA.USUARIO.telefono;
                 hORARIOxAREA_A.AREA.USUARIO.ocupacion = schedule.AREA.USUARIO.ocupacion;
                 hORARIOxAREA_A.AREA.USUARIO.direccion = schedule.AREA.USUARIO.direccion;
-                hORARIOxAREA_A.AREA.USUARIO.fotografia = schedule.AREA.USUARIO.fotografia;
+                hORARIOxAREA_A.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(schedule.AREA.USUARIO.fotografia);
                 hORARIOxAREA_A.AREA.USUARIO.institucion = schedule.AREA.USUARIO.institucion;
                 hORARIOxAREA_A.AREA.USUARIO.ROLUSUARIO = schedule.AREA.USUARIO.ROLUSUARIO;
 

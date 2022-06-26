@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -40,7 +41,7 @@ namespace backend.Controllers
                 cOLECCION.AREA.USUARIO.telefono = collection.AREA.USUARIO.telefono;
                 cOLECCION.AREA.USUARIO.ocupacion = collection.AREA.USUARIO.ocupacion;
                 cOLECCION.AREA.USUARIO.direccion = collection.AREA.USUARIO.direccion;
-                cOLECCION.AREA.USUARIO.fotografia = collection.AREA.USUARIO.fotografia;
+                cOLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(collection.AREA.USUARIO.fotografia);
                 cOLECCION.AREA.USUARIO.institucion = collection.AREA.USUARIO.institucion;
                 cOLECCION.AREA.USUARIO.ROLUSUARIO = collection.AREA.USUARIO.ROLUSUARIO;
 
@@ -88,7 +89,7 @@ namespace backend.Controllers
                 cOLECCION.AREA.USUARIO.telefono = collection.AREA.USUARIO.telefono;
                 cOLECCION.AREA.USUARIO.ocupacion = collection.AREA.USUARIO.ocupacion;
                 cOLECCION.AREA.USUARIO.direccion = collection.AREA.USUARIO.direccion;
-                cOLECCION.AREA.USUARIO.fotografia = collection.AREA.USUARIO.fotografia;
+                cOLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(collection.AREA.USUARIO.fotografia);
                 cOLECCION.AREA.USUARIO.institucion = collection.AREA.USUARIO.institucion;
                 cOLECCION.AREA.USUARIO.ROLUSUARIO = collection.AREA.USUARIO.ROLUSUARIO;
 
@@ -127,7 +128,7 @@ namespace backend.Controllers
                 cOLECCION.AREA.USUARIO.telefono = collection.AREA.USUARIO.telefono;
                 cOLECCION.AREA.USUARIO.ocupacion = collection.AREA.USUARIO.ocupacion;
                 cOLECCION.AREA.USUARIO.direccion = collection.AREA.USUARIO.direccion;
-                cOLECCION.AREA.USUARIO.fotografia = collection.AREA.USUARIO.fotografia;
+                cOLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(collection.AREA.USUARIO.fotografia);
                 cOLECCION.AREA.USUARIO.institucion = collection.AREA.USUARIO.institucion;
                 cOLECCION.AREA.USUARIO.ROLUSUARIO = collection.AREA.USUARIO.ROLUSUARIO;
 

@@ -14,6 +14,13 @@ import { DashboardPageComponent } from './containers/dashboard-page/dashboard-pa
 // Primeng modules
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CoreRoutingModule } from './core-routing.module';
+import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ImageModule } from 'primeng/image';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -30,6 +37,13 @@ import { CoreRoutingModule } from './core-routing.module';
     CommonModule,
     BreadcrumbModule,
     CoreRoutingModule,
+    InputTextModule,
+    ListboxModule,
+    ButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    ImageModule,
+    AvatarModule,
   ]
 })
 export class CoreModule { }

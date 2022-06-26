@@ -38,7 +38,7 @@ namespace backend.Controllers
                 pRESTAMO.USUARIO.telefono = borrow.USUARIO.telefono;
                 pRESTAMO.USUARIO.ocupacion = borrow.USUARIO.ocupacion;
                 pRESTAMO.USUARIO.direccion = borrow.USUARIO.direccion;
-                pRESTAMO.USUARIO.fotografia = borrow.USUARIO.fotografia;
+                pRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.USUARIO.fotografia);
                 pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
                 pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
 
@@ -68,7 +68,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -102,7 +102,7 @@ namespace backend.Controllers
                 pRESTAMO.USUARIO.telefono = borrow.USUARIO.telefono;
                 pRESTAMO.USUARIO.ocupacion = borrow.USUARIO.ocupacion;
                 pRESTAMO.USUARIO.direccion = borrow.USUARIO.direccion;
-                pRESTAMO.USUARIO.fotografia = borrow.USUARIO.fotografia;
+                pRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.USUARIO.fotografia);
                 pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
                 pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
 
@@ -132,7 +132,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -178,7 +178,7 @@ namespace backend.Controllers
                 pRESTAMO.USUARIO.telefono = borrow.USUARIO.telefono;
                 pRESTAMO.USUARIO.ocupacion = borrow.USUARIO.ocupacion;
                 pRESTAMO.USUARIO.direccion = borrow.USUARIO.direccion;
-                pRESTAMO.USUARIO.fotografia = borrow.USUARIO.fotografia;
+                pRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.USUARIO.fotografia);
                 pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
                 pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
 
@@ -208,7 +208,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -246,7 +246,7 @@ namespace backend.Controllers
                 pRESTAMO.USUARIO.telefono = borrow.USUARIO.telefono;
                 pRESTAMO.USUARIO.ocupacion = borrow.USUARIO.ocupacion;
                 pRESTAMO.USUARIO.direccion = borrow.USUARIO.direccion;
-                pRESTAMO.USUARIO.fotografia = borrow.USUARIO.fotografia;
+                pRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.USUARIO.fotografia);
                 pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
                 pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
 
@@ -276,7 +276,7 @@ namespace backend.Controllers
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 

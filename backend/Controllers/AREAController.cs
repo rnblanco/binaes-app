@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -35,7 +36,7 @@ namespace backend.Controllers
                 aREA.USUARIO.telefono = area.USUARIO.telefono;
                 aREA.USUARIO.ocupacion = area.USUARIO.ocupacion;
                 aREA.USUARIO.direccion = area.USUARIO.direccion;
-                aREA.USUARIO.fotografia = area.USUARIO.fotografia;
+                aREA.USUARIO.fotografia = Encoding.UTF8.GetString(area.USUARIO.fotografia); 
                 aREA.USUARIO.institucion = area.USUARIO.institucion;
                 aREA.USUARIO.ROLUSUARIO = area.USUARIO.ROLUSUARIO;
 
@@ -69,7 +70,7 @@ namespace backend.Controllers
                 aREA.USUARIO.telefono = area.USUARIO.telefono;
                 aREA.USUARIO.ocupacion = area.USUARIO.ocupacion;
                 aREA.USUARIO.direccion = area.USUARIO.direccion;
-                aREA.USUARIO.fotografia = area.USUARIO.fotografia;
+                aREA.USUARIO.fotografia = Encoding.UTF8.GetString(area.USUARIO.fotografia);
                 aREA.USUARIO.institucion = area.USUARIO.institucion;
                 aREA.USUARIO.ROLUSUARIO = area.USUARIO.ROLUSUARIO;
             }
