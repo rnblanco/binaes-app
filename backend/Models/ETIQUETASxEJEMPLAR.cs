@@ -12,6 +12,9 @@ namespace backend.Models
         public int id_tipoEtiqueta { get; set; }
 
         public int id_Ejemplar { get; set; }
+
+        public string etiqueta { get; set; }
+
         public virtual TIPOETIQUETA TIPOETIQUETA { get; set; }
 
         public virtual EJEMPLAR EJEMPLAR { get; set; }
@@ -21,6 +24,8 @@ namespace backend.Models
     {
         [Key]
         public int id_etiquetaEjemplar { get; set; }
+
+        public string etiqueta { get; set; }
 
         public virtual TIPOETIQUETA TIPOETIQUETA { get; set; }
 

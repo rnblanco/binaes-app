@@ -78,7 +78,7 @@
       </div>
 
       <div *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
-        <button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="deleteCollection()"></button>
+        <button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="deleteEjemplar()"></button>
       </div>
     </div>
   </form>
