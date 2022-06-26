@@ -4,7 +4,7 @@ import { Roles } from '../../../auth/constants/roles';
 import { MultiSelect } from 'primeng/multiselect';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { Ejemplar, Estados, EstadosEnum } from '../../../shared/models/exemplar';
+import { Ejemplar, Estados, BorrowStatus } from '../../../shared/models/exemplar';
 import { Prestamo } from '../../../shared/models/borrow';
 import { Usuario } from 'src/app/shared/models/user';
 import { HttpParams } from '@angular/common/http';
@@ -260,8 +260,8 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
       return;
     }
     
-    if (this.dates[1] < this.maxDate) this.selectedStatus = [EstadosEnum.FINALIZADO];
-    else this.selectedStatus = [EstadosEnum.EN_PRESTAMO];
+    if (this.dates[1] < this.maxDate) this.selectedStatus = [BorrowStatus.FINALIZADO];
+    else this.selectedStatus = [BorrowStatus.EN_PRESTAMO];
   
     let insideDates: Date[] = [];
     const initialDate: Date = new Date(this.dates[0].getTime());

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Exemplar } from '../../../shared/models/exemplar';
+import { Ejemplar } from '../../../shared/models/exemplar';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({
@@ -39,7 +39,7 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
         .getByNameWithParams('EJEMPLAR', this.httpParams)
         .subscribe(
-          (response: Exemplar[]) => {
+          (response: Ejemplar[]) => {
             // this.pagination = _response.meta;
             // this.currentPage = this.pagination.currentPage;
             this.list = response;

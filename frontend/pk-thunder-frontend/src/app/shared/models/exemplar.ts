@@ -1,15 +1,6 @@
-export interface rawExemplar {
-	id_Ejemplar: number,
-	nombre: string,
-	imagen: number,
-	id_Editorial: number,
-	id_Formato: number,
-	id_Idioma: number,
-	f_publicacion: Date,
-	id_coleccionPertenece: number
-}
+import { Coleccion } from "./collection";
 
-export interface Exemplar {
+export interface Ejemplar {
   id_Ejemplar: number;
   nombre: string;
   imagen: string;
@@ -40,8 +31,13 @@ export interface Estados {
 	estado:    string;
 }
 
-export enum EstadosEnum {
+export enum BorrowStatus {
 	EN_PRESTAMO = 1,
 	FINALIZADO = 2,
 	RESERVADO = 3
+}
+
+export enum EventStatus {
+	FINALIZADO,
+	EN_CURSO,
 }

@@ -15,16 +15,19 @@ import { LoadingModule } from '../../components/loading/loading.module';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
     EventsPageComponent,
     EventPageComponent
   ],
-  imports: [
-    CommonModule,
-    EventsRoutingModule,
-    TableCardModule,
+	imports: [
+		CommonModule,
+		EventsRoutingModule,
+		TableCardModule,
 		FormsModule,
 		InputTextModule,
 		ListboxModule,
@@ -33,9 +36,12 @@ import { HttpClientModule } from '@angular/common/http';
 		MultiSelectModule,
 		SharedModule,
 		LoadingModule,
-    CalendarModule,
-    FileUploadModule,
-    HttpClientModule,
-  ]
+		CalendarModule,
+		FileUploadModule,
+		HttpClientModule,
+		InputNumberModule,
+		InputTextareaModule,
+		TabViewModule
+	]
 })
 export class EventsModule { }

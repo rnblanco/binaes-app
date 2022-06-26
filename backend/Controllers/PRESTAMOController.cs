@@ -295,7 +295,7 @@ namespace backend.Controllers
         [ResponseType(typeof(List<DateTime>))]
         public IQueryable<DateTime> GetFREE_EJEMPLAR(int id_Ejemplar)
         {
-            var borrows = db.PRESTAMO.Where(p => p.id_Ejemplar == id_Ejemplar).Where(p => p.id_Estado == (int)Status.RESERVADO || p.id_Estado == (int)Status.EN_PRESTAMO).ToList();
+            var borrows = db.PRESTAMO.Where(p => p.id_Ejemplar == id_Ejemplar).Where(p => p.id_Estado == (int)EstadoPrestamo.RESERVADO || p.id_Estado == (int)EstadoPrestamo.EN_PRESTAMO).ToList();
             List<DateTime> disabledDates = new List<DateTime>();
 
             foreach (var borrow in borrows) {

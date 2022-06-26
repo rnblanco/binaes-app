@@ -3,7 +3,6 @@ import { LazyComponent } from '../../../shared/components/lazy-component.compone
 import { Evento } from '../../../shared/models/event';
 import { Roles } from '../../../auth/constants/roles';
 
-
 @Component({
   selector: 'app-events-page',
   templateUrl: './events-page.component.html',
@@ -19,9 +18,10 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
   cols = [
     { field: 'titulo', header: 'Título', width: 100 },
     { field: 'imagen', header: 'Imagen', width: 100 },
-    { field: 'Objetivo', header: 'Objetivo', width: 200 },
+    // { field: 'Objetivo', header: 'Objetivo', width: 200 },
     { field: 'AREA.nombre', header: 'Área', width: 100 },
     { field: 'capacidad', header: 'Capacidad', width: 10 },
+    { field: 'aprobado', header: 'Estado', width: 10 },
     { field: 'fh_Inicio', header: 'Fecha de inicio', width: 100 },
     { field: 'fh_Finalizacion', header: 'Fecha de finalización', width: 100 },
   ] as any[];

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -14,6 +15,7 @@ namespace backend.Controllers
     public class OBJETIVOSxEVENTOController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
+
 
         // GET: api/OBJETIVOSxEVENTO
         public IQueryable<OBJETIVOSxEVENTO_E> GetOBJETIVOSxEVENTO()
@@ -30,7 +32,7 @@ namespace backend.Controllers
                 oBJETIVOSxEVENTO_E.EVENTO = new EVENTO_A();
                 oBJETIVOSxEVENTO_E.EVENTO.id_Evento = objectiveEvent.EVENTO.id_Evento;
                 oBJETIVOSxEVENTO_E.EVENTO.titulo = objectiveEvent.EVENTO.titulo;
-                oBJETIVOSxEVENTO_E.EVENTO.imagen = objectiveEvent.EVENTO.imagen;
+                oBJETIVOSxEVENTO_E.EVENTO.imagen = Encoding.UTF8.GetString(objectiveEvent.EVENTO.imagen);
                 oBJETIVOSxEVENTO_E.EVENTO.capacidad = objectiveEvent.EVENTO.capacidad;
                 oBJETIVOSxEVENTO_E.EVENTO.aprobado = objectiveEvent.EVENTO.aprobado;
                 oBJETIVOSxEVENTO_E.EVENTO.fh_Inicio = objectiveEvent.EVENTO.fh_Inicio;
@@ -61,20 +63,21 @@ namespace backend.Controllers
         }
 
         // GET: api/OBJETIVOSxEVENTO/5
-        public IQueryable GetOBJETIVOSxEVENTO(int id_Evento)
+        public IQueryable<OBJETIVOSxEVENTO_E> GetOBJETIVOSxEVENTO(int id_Evento)
         {
             var objectiveEvents = db.OBJETIVOSxEVENTO.Where(x => x.EVENTO.id_Evento == id_Evento).ToList();
             List<OBJETIVOSxEVENTO_E> objectivesEventList = new List<OBJETIVOSxEVENTO_E>();
-            OBJETIVOSxEVENTO_E oBJETIVOSxEVENTO_E = new OBJETIVOSxEVENTO_E();
             foreach (var objectiveEvent in objectiveEvents)
             {
+                OBJETIVOSxEVENTO_E oBJETIVOSxEVENTO_E = new OBJETIVOSxEVENTO_E();
+
                 oBJETIVOSxEVENTO_E.id_Objetivo = objectiveEvent.id_Objetivo;
                 oBJETIVOSxEVENTO_E.Objetivo = objectiveEvent.Objetivo;
 
                 oBJETIVOSxEVENTO_E.EVENTO = new EVENTO_A();
                 oBJETIVOSxEVENTO_E.EVENTO.id_Evento = objectiveEvent.EVENTO.id_Evento;
                 oBJETIVOSxEVENTO_E.EVENTO.titulo = objectiveEvent.EVENTO.titulo;
-                oBJETIVOSxEVENTO_E.EVENTO.imagen = objectiveEvent.EVENTO.imagen;
+                oBJETIVOSxEVENTO_E.EVENTO.imagen = Encoding.UTF8.GetString(objectiveEvent.EVENTO.imagen);
                 oBJETIVOSxEVENTO_E.EVENTO.capacidad = objectiveEvent.EVENTO.capacidad;
                 oBJETIVOSxEVENTO_E.EVENTO.aprobado = objectiveEvent.EVENTO.aprobado;
                 oBJETIVOSxEVENTO_E.EVENTO.fh_Inicio = objectiveEvent.EVENTO.fh_Inicio;

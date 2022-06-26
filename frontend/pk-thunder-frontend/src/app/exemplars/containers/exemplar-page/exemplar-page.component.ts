@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
-import { Exemplar, Editorial, Formatoejemplar, IdiomaEjemplar } from '../../../shared/models/exemplar';
+import { Ejemplar, Editorial, Formatoejemplar, IdiomaEjemplar } from '../../../shared/models/exemplar';
 import { Coleccion } from '../../../shared/models/collection';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
@@ -86,7 +86,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     );
   }
 
-  deleteEjemplar(): void {
+  delete(): void {
     this.deleteLoading = true;
     this.subscription.add(
       this.catalogService.deleteOfURL(`EJEMPLAR/${this.id}`).subscribe(
@@ -117,19 +117,18 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   onUpload(event: any): void {
     for (let file of event.files) {
       this.uploadedFile.push(file);
-      console.log(this.uploadedFile[0]);
     }
   }
 
   onSelectFile(event: { files: File[]; }) {
     this.uploadedFiles = [...<File[]>event.files];
-    this.varbinaryImage = btoa("https://localhost:44314/images/" + this.uploadedFiles[0].name);
+    this.varbinaryImage = btoa(this.uploadedFiles[0].name);
     this.selectedfiles = this.uploadedFiles;   
   }
 
-  addEjemplar(): void {
+  add(): void {
     if (!this.isNew) {
-      this.updateEjemplar();
+      this.update();
       return;
     }
     if (this.uploadedFiles !== undefined) {
@@ -171,7 +170,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     );
   }
 
-  updateEjemplar(): void {
+  update(): void {
     if (this.uploadedFiles !== undefined) {
       this.uploadFile();
     }
@@ -181,7 +180,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
       .updateOfURL(`EJEMPLAR/${this.id}`, {
         id_Ejemplar: this.id,
         nombre: this.name,
-        imagen: this.uploadedFiles ? this.varbinaryImage : btoa(this.uploadedFile[0]),
+        imagen: this.varbinaryImage === undefined ? btoa(this.uploadedFile[0]) : this.varbinaryImage,
         f_publicacion: this.date,
         id_Idioma: this.selectedIdioma[0],
         id_Formato: this.selectedFormato[0],
@@ -214,17 +213,16 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
 
   uploadFile(): void {
     const formData = new FormData();
-    var fileOfBlob = null;    
-         
+    
+    let fileOfBlob;
     fileOfBlob = new File([this.uploadedFiles[0]], this.uploadedFiles[0].name, { type: 'application/png' });
-    console.log(fileOfBlob);
     formData.append('file', fileOfBlob, fileOfBlob.name);
-    console.log(formData.get('file'));
-    this.http.post('https://localhost:44314/api/UploadImage', formData)
-      .subscribe(event => {
-        console.log(event);
-      });
-   
+    
+    this.subscription.add(
+      this.catalogService.addOfURL("UploadImage", formData).subscribe(
+        () =>{}
+      )
+    );
   }
 
   loadInfo(): void {
@@ -232,7 +230,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
       this.catalogService
       .getByNameWithParams(`EJEMPLAR/${this.id}`)
       .subscribe(
-        (response: Exemplar) => {
+        (response: Ejemplar) => {
           if (response.id_Ejemplar) {
             this.isNew = false;
           }
@@ -260,9 +258,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
 
   editorialChange(event: any): void {
-    if (event.value.length > 1) {
-      this.selectedEditorial.shift();
-    }
+    this.selectedEditorial = [event.itemValue];
   }
 
   addEditorial(): void {
@@ -304,9 +300,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
 
   idiomaChange(event: any): void {
-    if (event.value.length > 1) {
-      this.selectedIdioma.shift();
-    }
+    this.selectedIdioma = [event.itemValue];
   }
 
   addIdioma(): void {
@@ -347,9 +341,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
 
   formatoChange(event: any): void {
-    if (event.value.length > 1) {
-      this.selectedFormato.shift();
-    }
+    this.selectedFormato = [event.itemValue];
   }
 
   loadFormatos(): void {

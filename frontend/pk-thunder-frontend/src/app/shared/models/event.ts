@@ -2,7 +2,7 @@ import { Usuario } from './user';
 
 export interface Objetivo {
 	id_Objetivo?: 	number;
-	objetivo: 		string;
+	Objetivo: 		string;
 	EVENTO: 		Evento;
 }
 

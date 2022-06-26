@@ -26,7 +26,7 @@
 				class="text-center">
 
 				<ng-container *ngSwitchCase="'imagen'">
-					<img [src]="data?.imagen" style="height:10rem" />
+					<img [src]="data?.imagen | photo" style="height:10rem" />
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'titulo'">
@@ -37,11 +37,15 @@
 					{{ data?.AREA?.nombre | titlecase }}
 				</ng-container>
 
-                <ng-container *ngSwitchCase="'capacidad'">
+				<ng-container *ngSwitchCase="'capacidad'">
 					{{ data?.capacidad }}
 				</ng-container>
-
-                <ng-container *ngSwitchCase="'fh_Inicio'">
+				
+				<ng-container *ngSwitchCase="'aprobado'">
+					{{ data?.aprobado ? 'Reservado' : 'Finalizado'}}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'fh_Inicio'">
 					{{ data?.fh_Inicio | date:'dd-MM-yyyy' }}
 				</ng-container>
 

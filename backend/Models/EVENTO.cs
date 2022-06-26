@@ -41,7 +41,7 @@ namespace backend.Models
         public string titulo { get; set; }
 
         [Required]
-        public byte[] imagen { get; set; }
+        public string imagen { get; set; }
 
         public int capacidad { get; set; }
 

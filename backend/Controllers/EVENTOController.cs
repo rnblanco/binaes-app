@@ -1,4 +1,5 @@
-﻿using backend.Models;
+﻿using backend.Constants;
+using backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -28,7 +30,7 @@ namespace backend.Controllers
                 EVENTO_A eVENTO = new EVENTO_A();
                 eVENTO.id_Evento = e.id_Evento;
                 eVENTO.titulo = e.titulo;
-                eVENTO.imagen = e.imagen;
+                eVENTO.imagen = Encoding.UTF8.GetString(e.imagen);
                 eVENTO.capacidad = e.capacidad;
                 eVENTO.aprobado = e.aprobado;
                 eVENTO.fh_Inicio = e.fh_Inicio;
@@ -82,7 +84,7 @@ namespace backend.Controllers
                 EVENTO_A eVENTO = new EVENTO_A();
                 eVENTO.id_Evento = e.id_Evento;
                 eVENTO.titulo = e.titulo;
-                eVENTO.imagen = e.imagen;
+                eVENTO.imagen = Encoding.UTF8.GetString(e.imagen);
                 eVENTO.capacidad = e.capacidad;
                 eVENTO.aprobado = e.aprobado;
                 eVENTO.fh_Inicio = e.fh_Inicio;
@@ -126,7 +128,7 @@ namespace backend.Controllers
             {
                 eVENTO.id_Evento = e.id_Evento;
                 eVENTO.titulo = e.titulo;
-                eVENTO.imagen = e.imagen;
+                eVENTO.imagen = Encoding.UTF8.GetString(e.imagen);
                 eVENTO.capacidad = e.capacidad;
                 eVENTO.aprobado = e.aprobado;
                 eVENTO.fh_Inicio = e.fh_Inicio;
@@ -159,7 +161,7 @@ namespace backend.Controllers
         [ResponseType(typeof(List<DateTime>))]
         public IQueryable<DateTime> GetFREE_AREA(int id_areaRealizacion)
         {
-            var eventos = db.EVENTO.Where(p => p.id_areaRealizacion== id_areaRealizacion).ToList();
+            var eventos = db.EVENTO.Where(p => p.id_areaRealizacion== id_areaRealizacion && p.aprobado == true).ToList();
             List<DateTime> disabledDates = new List<DateTime>();
 
             foreach (var evento in eventos)
