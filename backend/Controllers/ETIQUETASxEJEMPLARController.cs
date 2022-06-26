@@ -25,6 +25,59 @@ namespace backend.Controllers
             {
                 ETIQUETASxEJEMPLAR_TE_E eTIQUETASxEJEMPLAR = new ETIQUETASxEJEMPLAR_TE_E();
                 eTIQUETASxEJEMPLAR.id_etiquetaEjemplar = tag.id_etiquetaEjemplar;
+                eTIQUETASxEJEMPLAR.etiqueta = tag.etiqueta;
+                eTIQUETASxEJEMPLAR.TIPOETIQUETA = tag.TIPOETIQUETA;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR = new EJEMPLAR_E_F_I_C();
+                eTIQUETASxEJEMPLAR.EJEMPLAR.id_Ejemplar = tag.EJEMPLAR.id_Ejemplar;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.nombre = tag.EJEMPLAR.nombre;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.imagen = Encoding.UTF8.GetString(tag.EJEMPLAR.imagen);
+                eTIQUETASxEJEMPLAR.EJEMPLAR.EDITORIAL = tag.EJEMPLAR.EDITORIAL;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.FORMATOEJEMPLAR = tag.EJEMPLAR.FORMATOEJEMPLAR;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.IDIOMAEJEMPLAR = tag.EJEMPLAR.IDIOMAEJEMPLAR;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.f_publicacion = tag.EJEMPLAR.f_publicacion;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION = new COLECCION_A_GC_TC();
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.id_Coleccion = tag.EJEMPLAR.COLECCION.id_Coleccion;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.nombre = tag.EJEMPLAR.COLECCION.nombre;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA = new AREA_PA_U_TA();
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.id_Area = tag.EJEMPLAR.COLECCION.AREA.id_Area;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.nombre = tag.EJEMPLAR.COLECCION.AREA.nombre;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.descripcion = tag.EJEMPLAR.COLECCION.AREA.descripcion;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.PISOAREA = tag.EJEMPLAR.COLECCION.AREA.PISOAREA;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = tag.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = tag.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.email = tag.EJEMPLAR.COLECCION.AREA.USUARIO.email;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = tag.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = tag.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = tag.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = tag.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = tag.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = tag.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.AREA.TIPOAREA = tag.EJEMPLAR.COLECCION.AREA.TIPOAREA;
+
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.GENEROCOLECCION = tag.EJEMPLAR.COLECCION.GENEROCOLECCION;
+                eTIQUETASxEJEMPLAR.EJEMPLAR.COLECCION.TIPOCOLECCION = tag.EJEMPLAR.COLECCION.TIPOCOLECCION;
+
+                tagsList.Add(eTIQUETASxEJEMPLAR);
+            }
+            return tagsList.AsQueryable();
+        }
+
+        // GET: api/ETIQUETASxEJEMPLAR?id_Ejemplar=1
+        public IQueryable<ETIQUETASxEJEMPLAR_TE_E> GetETIQUETASxEJEMPLAR(int id_Ejemplar)
+        {
+            var tags = db.ETIQUETASxEJEMPLAR.Where(x => x.EJEMPLAR.id_Ejemplar == id_Ejemplar).ToList();
+            List<ETIQUETASxEJEMPLAR_TE_E> tagsList = new List<ETIQUETASxEJEMPLAR_TE_E>();
+            foreach (var tag in tags)
+            {
+                ETIQUETASxEJEMPLAR_TE_E eTIQUETASxEJEMPLAR = new ETIQUETASxEJEMPLAR_TE_E();
+                eTIQUETASxEJEMPLAR.id_etiquetaEjemplar = tag.id_etiquetaEjemplar;
+                eTIQUETASxEJEMPLAR.etiqueta = tag.etiqueta;
                 eTIQUETASxEJEMPLAR.TIPOETIQUETA = tag.TIPOETIQUETA;
 
                 eTIQUETASxEJEMPLAR.EJEMPLAR = new EJEMPLAR_E_F_I_C();
@@ -68,7 +121,7 @@ namespace backend.Controllers
         }
 
         // GET: api/ETIQUETASxEJEMPLAR/5
-        [ResponseType(typeof(ETIQUETASxEJEMPLAR_TE_E))]
+        /*[ResponseType(typeof(ETIQUETASxEJEMPLAR_TE_E))]
         public async Task<IHttpActionResult> GetETIQUETASxEJEMPLAR(int id)
         {
             var tag = await db.ETIQUETASxEJEMPLAR.FindAsync(id);
@@ -119,7 +172,7 @@ namespace backend.Controllers
             }
 
             return Ok(eTIQUETASxEJEMPLAR);
-        }
+        }*/
 
         // PUT: api/ETIQUETASxEJEMPLAR/5
         [ResponseType(typeof(void))]
