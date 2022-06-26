@@ -12,6 +12,9 @@ import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SharedModule } from '../shared/shared.module';
 import { LoadingModule } from '../../components/loading/loading.module';
+import { CalendarModule } from 'primeng/calendar';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { LoadingModule } from '../../components/loading/loading.module';
 		RippleModule,
 		MultiSelectModule,
 		SharedModule,
-		LoadingModule
+		LoadingModule,
+    CalendarModule,
+    FileUploadModule,
+    HttpClientModule,
   ]
 })
 export class EventsModule { }

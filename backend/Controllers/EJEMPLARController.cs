@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -27,7 +28,7 @@ namespace backend.Controllers
                 EJEMPLAR_E_F_I_C eJEMPLAR = new EJEMPLAR_E_F_I_C();
                 eJEMPLAR.id_Ejemplar = exemplar.id_Ejemplar;
                 eJEMPLAR.nombre = exemplar.nombre;
-                eJEMPLAR.imagen = exemplar.imagen;
+                eJEMPLAR.imagen = Encoding.UTF8.GetString(exemplar.imagen);
                 eJEMPLAR.EDITORIAL = exemplar.EDITORIAL;
                 eJEMPLAR.FORMATOEJEMPLAR = exemplar.FORMATOEJEMPLAR;
                 eJEMPLAR.IDIOMAEJEMPLAR = exemplar.IDIOMAEJEMPLAR;
@@ -90,7 +91,7 @@ namespace backend.Controllers
                 EJEMPLAR_E_F_I_C eJEMPLAR = new EJEMPLAR_E_F_I_C();
                 eJEMPLAR.id_Ejemplar = exemplar.id_Ejemplar;
                 eJEMPLAR.nombre = exemplar.nombre;
-                eJEMPLAR.imagen = exemplar.imagen;
+                eJEMPLAR.imagen = Encoding.UTF8.GetString(exemplar.imagen);
                 eJEMPLAR.EDITORIAL = exemplar.EDITORIAL;
                 eJEMPLAR.FORMATOEJEMPLAR = exemplar.FORMATOEJEMPLAR;
                 eJEMPLAR.IDIOMAEJEMPLAR = exemplar.IDIOMAEJEMPLAR;
@@ -140,7 +141,7 @@ namespace backend.Controllers
             {
                 eJEMPLAR.id_Ejemplar = exemplar.id_Ejemplar;
                 eJEMPLAR.nombre = exemplar.nombre;
-                eJEMPLAR.imagen = exemplar.imagen;
+                eJEMPLAR.imagen = Encoding.UTF8.GetString(exemplar.imagen);
                 eJEMPLAR.EDITORIAL = exemplar.EDITORIAL;
                 eJEMPLAR.FORMATOEJEMPLAR = exemplar.FORMATOEJEMPLAR;
                 eJEMPLAR.IDIOMAEJEMPLAR = exemplar.IDIOMAEJEMPLAR;

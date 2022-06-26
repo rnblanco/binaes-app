@@ -282,6 +282,7 @@
     <Compile Include="Controllers\TIPOCOLECCIONController.cs" />
     <Compile Include="Controllers\TIPOETIQUETAController.cs" />
     <Compile Include="Controllers\TOKENController.cs" />
+    <Compile Include="Controllers\UploadImageController.cs" />
     <Compile Include="Controllers\USUARIOController.cs" />
     <Compile Include="Controllers\VALIDAR_TOKEN.cs" />
     <Compile Include="Controllers\VISITASController.cs" />
@@ -313,6 +314,7 @@
     <Compile Include="Models\TIPOCOLECCION.cs" />
     <Compile Include="Models\TIPOETIQUETA.cs" />
     <Compile Include="Models\TOKEN.cs" />
+    <Compile Include="Models\uploadImage.cs" />
     <Compile Include="Models\USUARIO.cs" />
     <Compile Include="Models\VISITAS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -659,6 +661,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

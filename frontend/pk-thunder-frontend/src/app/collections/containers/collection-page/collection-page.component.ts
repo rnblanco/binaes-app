@@ -57,7 +57,9 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
         if (id) {
           this.id = id;
           this.loadInfo();
-        } else this.loading = false
+        } else {
+          this.loading = false;
+        }
       })
     );
   }

@@ -18,32 +18,35 @@
 			pTemplate="body"
 			let-table="table"
 			let-columns="columns"
-			let-data="rowData"
-		>
+			let-data="rowData">
 			<td
 				*ngFor="let col of columns"
 				[ngSwitch]="col.field"
 				[style.width.px]="col.width"
-				class="text-center"
-			>
-				<ng-container *ngSwitchCase="'EVENTO.titulo'">
-					{{ data?.EVENTO?.titulo | titlecase }}
+				class="text-center">
+
+				<ng-container *ngSwitchCase="'imagen'">
+					<img [src]="data?.imagen" style="height:10rem" />
+				</ng-container>
+
+				<ng-container *ngSwitchCase="'titulo'">
+					{{ data?.titulo | titlecase }}
 				</ng-container>				
 				
-				<ng-container *ngSwitchCase="'EVENTO.AREA.nombre'">
-					{{ data?.EVENTO?.AREA?.nombre | titlecase }}
+				<ng-container *ngSwitchCase="'AREA.nombre'">
+					{{ data?.AREA?.nombre | titlecase }}
 				</ng-container>
 
-                <ng-container *ngSwitchCase="'EVENTO.capacidad'">
-					{{ data?.EVENTO?.capacidad }}
+                <ng-container *ngSwitchCase="'capacidad'">
+					{{ data?.capacidad }}
 				</ng-container>
 
-                <ng-container *ngSwitchCase="'EVENTO.fh_Inicio'">
-					{{ data?.EVENTO?.fh_Inicio | date:'dd-MM-yyyy' }}
+                <ng-container *ngSwitchCase="'fh_Inicio'">
+					{{ data?.fh_Inicio | date:'dd-MM-yyyy' }}
 				</ng-container>
 
-                <ng-container *ngSwitchCase="'EVENTO.fh_Finalizacion'">
-					{{ data?.EVENTO?.fh_Finalizacion | date:'dd-MM-yyyy' }}
+                <ng-container *ngSwitchCase="'fh_Finalizacion'">
+					{{ data?.fh_Finalizacion | date:'dd-MM-yyyy' }}
 				</ng-container>
 
 				<ng-container *ngSwitchDefault>

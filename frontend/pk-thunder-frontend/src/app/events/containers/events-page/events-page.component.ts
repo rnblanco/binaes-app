@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Objetivo } from '../../../shared/models/event';
+import { Evento } from '../../../shared/models/event';
 import { Roles } from '../../../auth/constants/roles';
 
 
@@ -17,12 +17,13 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
   }
 
   cols = [
-    { field: 'EVENTO.titulo', header: 'Título', width: 100 },
+    { field: 'titulo', header: 'Título', width: 100 },
+    { field: 'imagen', header: 'Imagen', width: 100 },
     { field: 'Objetivo', header: 'Objetivo', width: 200 },
-    { field: 'EVENTO.AREA.nombre', header: 'Área', width: 100 },
-    { field: 'EVENTO.capacidad', header: 'Capacidad', width: 10 },
-    { field: 'EVENTO.fh_Inicio', header: 'Fecha de inicio', width: 100 },
-    { field: 'EVENTO.fh_Finalizacion', header: 'Fecha de finalización', width: 100 },
+    { field: 'AREA.nombre', header: 'Área', width: 100 },
+    { field: 'capacidad', header: 'Capacidad', width: 10 },
+    { field: 'fh_Inicio', header: 'Fecha de inicio', width: 100 },
+    { field: 'fh_Finalizacion', header: 'Fecha de finalización', width: 100 },
   ] as any[];
   
   ngOnInit(): void {
@@ -37,9 +38,9 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('OBJETIVOSXEVENTO', this.httpParams)
+      .getByNameWithParams('EVENTO', this.httpParams)
       .subscribe(
-        (response: Objetivo[]) => {
+        (response: Evento[]) => {
           // this.pagination = _response.meta;
           // this.currentPage = this.pagination.currentPage;
           this.list = response;
@@ -69,7 +70,7 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
       return;
     }
     this.router.navigate([
-      `${this.routeInformation.eventPage}/${data.id_Objetivo}/`,
+      `${this.routeInformation.eventPage}/${data.id_Evento}/`,
     ]);
   }
   
