@@ -54,7 +54,7 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -102,7 +102,7 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 

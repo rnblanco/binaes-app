@@ -51,7 +51,7 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.AREA.USUARIO.telefono = exemplar.COLECCION.AREA.USUARIO.telefono;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = exemplar.COLECCION.AREA.USUARIO.ocupacion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.direccion = exemplar.COLECCION.AREA.USUARIO.direccion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = exemplar.COLECCION.AREA.USUARIO.fotografia;
+                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(exemplar.COLECCION.AREA.USUARIO.fotografia);
                 eJEMPLAR.COLECCION.AREA.USUARIO.institucion = exemplar.COLECCION.AREA.USUARIO.institucion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = exemplar.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -114,7 +114,7 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.AREA.USUARIO.telefono = exemplar.COLECCION.AREA.USUARIO.telefono;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = exemplar.COLECCION.AREA.USUARIO.ocupacion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.direccion = exemplar.COLECCION.AREA.USUARIO.direccion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = exemplar.COLECCION.AREA.USUARIO.fotografia;
+                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(exemplar.COLECCION.AREA.USUARIO.fotografia);
                 eJEMPLAR.COLECCION.AREA.USUARIO.institucion = exemplar.COLECCION.AREA.USUARIO.institucion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = exemplar.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -164,7 +164,7 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.AREA.USUARIO.telefono = exemplar.COLECCION.AREA.USUARIO.telefono;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = exemplar.COLECCION.AREA.USUARIO.ocupacion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.direccion = exemplar.COLECCION.AREA.USUARIO.direccion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = exemplar.COLECCION.AREA.USUARIO.fotografia;
+                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(exemplar.COLECCION.AREA.USUARIO.fotografia);
                 eJEMPLAR.COLECCION.AREA.USUARIO.institucion = exemplar.COLECCION.AREA.USUARIO.institucion;
                 eJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = exemplar.COLECCION.AREA.USUARIO.ROLUSUARIO;
 

@@ -10,12 +10,20 @@ import { AppFooterComponent } from './containers/app-main-page/app.footer.compon
 import { AppMainComponent } from './containers/app-main-page/app.main.component';
 import { ProfilePageComponent } from './containers/profile-page/profile-page.component';
 import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
+import { QRCodeModule } from 'angular2-qrcode';
+import { FormsModule } from '@angular/forms';
+import { LoadingModule } from '../../components/loading/loading.module';
 
 // Primeng modules
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CoreRoutingModule } from './core-routing.module';
-import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ImageModule } from 'primeng/image';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -28,12 +36,20 @@ import { FormsModule } from '@angular/forms';
     ProfilePageComponent,
     DashboardPageComponent
   ],
-	imports: [
-		CommonModule,
-		BreadcrumbModule,
-		CoreRoutingModule,
-		CalendarModule,
-		FormsModule
-	]
+  imports: [
+    CommonModule,
+    BreadcrumbModule,
+    CoreRoutingModule,
+    InputTextModule,
+    ListboxModule,
+    ButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    ImageModule,
+    AvatarModule,
+    QRCodeModule,
+    FormsModule,
+    LoadingModule
+  ]
 })
 export class CoreModule { }

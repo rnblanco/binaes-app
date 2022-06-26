@@ -49,7 +49,7 @@ namespace backend.Controllers
                 eVENTO.AREA.USUARIO.telefono = e.AREA.USUARIO.telefono;
                 eVENTO.AREA.USUARIO.ocupacion = e.AREA.USUARIO.ocupacion;
                 eVENTO.AREA.USUARIO.direccion = e.AREA.USUARIO.direccion;
-                eVENTO.AREA.USUARIO.fotografia = e.AREA.USUARIO.fotografia;
+                eVENTO.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(e.AREA.USUARIO.fotografia);
                 eVENTO.AREA.USUARIO.institucion = e.AREA.USUARIO.institucion;
                 eVENTO.AREA.USUARIO.ROLUSUARIO = e.AREA.USUARIO.ROLUSUARIO;
 
@@ -103,7 +103,7 @@ namespace backend.Controllers
                 eVENTO.AREA.USUARIO.telefono = e.AREA.USUARIO.telefono;
                 eVENTO.AREA.USUARIO.ocupacion = e.AREA.USUARIO.ocupacion;
                 eVENTO.AREA.USUARIO.direccion = e.AREA.USUARIO.direccion;
-                eVENTO.AREA.USUARIO.fotografia = e.AREA.USUARIO.fotografia;
+                eVENTO.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(e.AREA.USUARIO.fotografia);
                 eVENTO.AREA.USUARIO.institucion = e.AREA.USUARIO.institucion;
                 eVENTO.AREA.USUARIO.ROLUSUARIO = e.AREA.USUARIO.ROLUSUARIO;
 
@@ -147,7 +147,7 @@ namespace backend.Controllers
                 eVENTO.AREA.USUARIO.telefono = e.AREA.USUARIO.telefono;
                 eVENTO.AREA.USUARIO.ocupacion = e.AREA.USUARIO.ocupacion;
                 eVENTO.AREA.USUARIO.direccion = e.AREA.USUARIO.direccion;
-                eVENTO.AREA.USUARIO.fotografia = e.AREA.USUARIO.fotografia;
+                eVENTO.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(e.AREA.USUARIO.fotografia);
                 eVENTO.AREA.USUARIO.institucion = e.AREA.USUARIO.institucion;
                 eVENTO.AREA.USUARIO.ROLUSUARIO = e.AREA.USUARIO.ROLUSUARIO;
 

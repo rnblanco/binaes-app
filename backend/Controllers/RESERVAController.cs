@@ -61,7 +61,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -77,7 +77,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.telefono = booking.PRESTAMO.USUARIO.telefono;
                 rESERVA.PRESTAMO.USUARIO.ocupacion = booking.PRESTAMO.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.USUARIO.direccion = booking.PRESTAMO.USUARIO.direccion;
-                rESERVA.PRESTAMO.USUARIO.fotografia = booking.PRESTAMO.USUARIO.fotografia;
+                rESERVA.PRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.USUARIO.fotografia);
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
                 rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
 
@@ -129,7 +129,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -145,7 +145,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.telefono = booking.PRESTAMO.USUARIO.telefono;
                 rESERVA.PRESTAMO.USUARIO.ocupacion = booking.PRESTAMO.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.USUARIO.direccion = booking.PRESTAMO.USUARIO.direccion;
-                rESERVA.PRESTAMO.USUARIO.fotografia = booking.PRESTAMO.USUARIO.fotografia;
+                rESERVA.PRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.USUARIO.fotografia);
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
                 rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
 
@@ -207,7 +207,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -223,7 +223,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.telefono = booking.PRESTAMO.USUARIO.telefono;
                 rESERVA.PRESTAMO.USUARIO.ocupacion = booking.PRESTAMO.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.USUARIO.direccion = booking.PRESTAMO.USUARIO.direccion;
-                rESERVA.PRESTAMO.USUARIO.fotografia = booking.PRESTAMO.USUARIO.fotografia;
+                rESERVA.PRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.USUARIO.fotografia);
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
                 rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
 
@@ -279,7 +279,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia;
+                rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
                 rESERVA.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = booking.PRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
@@ -295,7 +295,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.telefono = booking.PRESTAMO.USUARIO.telefono;
                 rESERVA.PRESTAMO.USUARIO.ocupacion = booking.PRESTAMO.USUARIO.ocupacion;
                 rESERVA.PRESTAMO.USUARIO.direccion = booking.PRESTAMO.USUARIO.direccion;
-                rESERVA.PRESTAMO.USUARIO.fotografia = booking.PRESTAMO.USUARIO.fotografia;
+                rESERVA.PRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(booking.PRESTAMO.USUARIO.fotografia);
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
                 rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
             }

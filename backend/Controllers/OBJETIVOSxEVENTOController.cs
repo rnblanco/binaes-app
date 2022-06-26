@@ -51,7 +51,7 @@ namespace backend.Controllers
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.telefono = objectiveEvent.EVENTO.AREA.USUARIO.telefono;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.ocupacion = objectiveEvent.EVENTO.AREA.USUARIO.ocupacion;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.direccion = objectiveEvent.EVENTO.AREA.USUARIO.direccion;
-                oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.fotografia = objectiveEvent.EVENTO.AREA.USUARIO.fotografia;
+                oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(objectiveEvent.EVENTO.AREA.USUARIO.fotografia);
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.institucion = objectiveEvent.EVENTO.AREA.USUARIO.institucion;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.ROLUSUARIO = objectiveEvent.EVENTO.AREA.USUARIO.ROLUSUARIO;
 
@@ -96,7 +96,7 @@ namespace backend.Controllers
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.telefono = objectiveEvent.EVENTO.AREA.USUARIO.telefono;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.ocupacion = objectiveEvent.EVENTO.AREA.USUARIO.ocupacion;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.direccion = objectiveEvent.EVENTO.AREA.USUARIO.direccion;
-                oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.fotografia = objectiveEvent.EVENTO.AREA.USUARIO.fotografia;
+                oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(objectiveEvent.EVENTO.AREA.USUARIO.fotografia);
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.institucion = objectiveEvent.EVENTO.AREA.USUARIO.institucion;
                 oBJETIVOSxEVENTO_E.EVENTO.AREA.USUARIO.ROLUSUARIO = objectiveEvent.EVENTO.AREA.USUARIO.ROLUSUARIO;
 
