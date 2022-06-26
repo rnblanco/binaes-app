@@ -6,7 +6,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
   templateUrl: './dashboard-page.component.html',
 })
 export class DashboardPageComponent extends BaseComponent implements OnInit {
-
+  
   constructor() {
     super();
   }

@@ -18,7 +18,7 @@ export const RouteInformation = {
   exemplarPage: '/app/exemplars/exemplar',
   
   borrowsPage: '/app/borrows',
-  borrowPage: '/app/borrows/borrows',
+  borrowPage: '/app/borrows/borrow',
   
   reservationsPage: '/app/reservations',
   reservationPage: '/app/reservations/reservation',

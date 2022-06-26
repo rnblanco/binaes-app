@@ -24,7 +24,6 @@ export class CollectionsPageComponent extends LazyComponent implements OnInit {
   
   ngOnInit(): void {
     this.loadAll();
-    this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
   }
   

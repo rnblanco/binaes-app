@@ -257,6 +257,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Constants\Status.cs" />
     <Compile Include="Controllers\AREAController.cs" />
     <Compile Include="Controllers\AUTORController.cs" />
     <Compile Include="Controllers\AUTORxEJEMPLARController.cs" />

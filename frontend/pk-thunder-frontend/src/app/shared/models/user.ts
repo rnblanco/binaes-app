@@ -9,7 +9,7 @@ export interface Usuario {
 	ROLUSUARIO:    RolUsuario;
 	TOKEN:         any[];
 	VISITAS?:       any[];
-	id_Usuario:    string;
+	id_Usuario:    number;
 	nombre:        string;
 	email:         string;
 	telefono:      string;
