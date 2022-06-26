@@ -54,5 +54,17 @@ body{
 .img-perfil {
   display: block;
   padding: 10%;
-  box-shadow: 10px 10px 15px #ccc
+  box-shadow: 10px 10px 15px #ccc;
+  max-width:100%;
+  height:auto;
+}
+
+@media only screen and (max-width: 800px){
+  #form-profile{
+      display: block;
+  }
+
+  #form-profile > div{
+      width: 100%;
+  }
 }

@@ -20,9 +20,16 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   direccion: string;
   institucion: string;
   image: string;
+  contrasenaA: string;
+  contrasenaN: string;
+  contrasenaC: string;
 
   constructor(private route: ActivatedRoute) {
     super();
+  }
+
+  get formIsValid(): boolean {    
+    return this.contrasenaA !== '' && this.contrasenaA !== undefined && this.contrasenaN !== '' && this.contrasenaN !== undefined && this.contrasenaC !== ''&& this.contrasenaC !== undefined;
   }
 
   ngOnInit(): void {
@@ -36,7 +43,8 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
       this.catalogService
         .getByNameWithParams(`USUARIO/${this.id}`)
         .subscribe(
-          (response: Usuario) => {            
+          (response: Usuario) => {
+            this.loading = true;
             this.name = response.nombre;
             this.email = response.email;
             this.telefono = response.telefono;
@@ -54,6 +62,48 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
           }
         )
     );
+  }
+
+  updatePassword() {
+    this.addLoading = true;
+    if (this.contrasenaN !== this.contrasenaC) {
+      this.messageService.setPayload({
+        type: 'warn',
+        title: 'Error',
+        body: 'Verifique que la nueva contraseña sea igual a su confirmación',
+      });
+    } else {
+      this.subscription.add(
+        this.catalogService
+        .updateOfURL(`ACTUALIZARCONTRASENA/${this.id}`, {
+          id_Usuario: this.id,
+          contrasenaA: this.encrypt(this.contrasenaA),
+          contrasenaN: this.encrypt(this.contrasenaN),
+          contrasenaC: this.encrypt(this.contrasenaC)
+        })
+        .subscribe(
+          () => {
+            this.messageService.setPayload({
+              type: 'success',
+              title: '¡Exito!',
+              body: 'Contraseña actualizada correctamente',
+            });
+            setTimeout(() => {
+              this.router.navigate([RouteInformation.dashboardPage])
+            }, 200);
+            this.addLoading = false;
+          },
+          () => {
+            this.messageService.setPayload({
+              type: 'warn',
+              title: 'Error',
+              body: 'Contraseña actual incorrecta',
+            });
+            this.addLoading = false;
+          }
+        )
+      );
+    }
   }
 
   getBreadCrumbs() {

@@ -10,6 +10,9 @@ import { AppFooterComponent } from './containers/app-main-page/app.footer.compon
 import { AppMainComponent } from './containers/app-main-page/app.main.component';
 import { ProfilePageComponent } from './containers/profile-page/profile-page.component';
 import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
+import { QRCodeModule } from 'angular2-qrcode';
+import { FormsModule } from '@angular/forms';
+import { LoadingModule } from '../../components/loading/loading.module';
 
 // Primeng modules
 import { BreadcrumbModule } from 'primeng/breadcrumb';
@@ -44,6 +47,9 @@ import { AvatarModule } from 'primeng/avatar';
     MultiSelectModule,
     ImageModule,
     AvatarModule,
+    QRCodeModule,
+    FormsModule,
+    LoadingModule
   ]
 })
 export class CoreModule { }

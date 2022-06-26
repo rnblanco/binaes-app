@@ -257,6 +257,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ACTUALIZARCONTRASENAController.cs" />
     <Compile Include="Controllers\AREAController.cs" />
     <Compile Include="Controllers\AUTORController.cs" />
     <Compile Include="Controllers\AUTORxEJEMPLARController.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ACTUALIZARCONTRASENA.cs" />
     <Compile Include="Models\AREA.cs" />
     <Compile Include="Models\AUTOR.cs" />
     <Compile Include="Models\AUTORxEJEMPLAR.cs" />
