@@ -50,7 +50,7 @@ namespace backend.Models
         public string nombre { get; set; }
 
         [Required]
-        public byte[] imagen { get; set; }
+        public string imagen { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime f_publicacion { get; set; }

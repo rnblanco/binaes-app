@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -37,7 +38,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 rESERVA.PRESTAMO.EJEMPLAR.id_Ejemplar = booking.PRESTAMO.EJEMPLAR.id_Ejemplar;
                 rESERVA.PRESTAMO.EJEMPLAR.nombre = booking.PRESTAMO.EJEMPLAR.nombre;
-                rESERVA.PRESTAMO.EJEMPLAR.imagen = booking.PRESTAMO.EJEMPLAR.imagen;
+                rESERVA.PRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.imagen);
                 rESERVA.PRESTAMO.EJEMPLAR.EDITORIAL = booking.PRESTAMO.EJEMPLAR.EDITORIAL;
                 rESERVA.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = booking.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR;
                 rESERVA.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = booking.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -115,7 +116,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 rESERVA.PRESTAMO.EJEMPLAR.id_Ejemplar = booking.PRESTAMO.EJEMPLAR.id_Ejemplar;
                 rESERVA.PRESTAMO.EJEMPLAR.nombre = booking.PRESTAMO.EJEMPLAR.nombre;
-                rESERVA.PRESTAMO.EJEMPLAR.imagen = booking.PRESTAMO.EJEMPLAR.imagen;
+                rESERVA.PRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.imagen);
                 rESERVA.PRESTAMO.EJEMPLAR.EDITORIAL = booking.PRESTAMO.EJEMPLAR.EDITORIAL;
                 rESERVA.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = booking.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR;
                 rESERVA.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = booking.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -187,7 +188,7 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 rESERVA.PRESTAMO.EJEMPLAR.id_Ejemplar = booking.PRESTAMO.EJEMPLAR.id_Ejemplar;
                 rESERVA.PRESTAMO.EJEMPLAR.nombre = booking.PRESTAMO.EJEMPLAR.nombre;
-                rESERVA.PRESTAMO.EJEMPLAR.imagen = booking.PRESTAMO.EJEMPLAR.imagen;
+                rESERVA.PRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(booking.PRESTAMO.EJEMPLAR.imagen);
                 rESERVA.PRESTAMO.EJEMPLAR.EDITORIAL = booking.PRESTAMO.EJEMPLAR.EDITORIAL;
                 rESERVA.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = booking.PRESTAMO.EJEMPLAR.FORMATOEJEMPLAR;
                 rESERVA.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = booking.PRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR;

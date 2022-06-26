@@ -1,7 +1,7 @@
 import { Usuario } from './user';
 
 export interface Coleccion {
-	id_Coleccion?:    number;
+	id_Coleccion:    number;
 	nombre:          string;
 	AREA:            Area;
 	GENEROCOLECCION: Generocoleccion;

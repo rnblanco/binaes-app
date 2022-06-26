@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -29,7 +30,7 @@ namespace backend.Controllers
                 aUTORxEJEMPLAR_A_E.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.id_Ejemplar = autorexemplar.EJEMPLAR.id_Ejemplar;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.nombre = autorexemplar.EJEMPLAR.nombre;
-                aUTORxEJEMPLAR_A_E.EJEMPLAR.imagen = autorexemplar.EJEMPLAR.imagen;
+                aUTORxEJEMPLAR_A_E.EJEMPLAR.imagen = Encoding.UTF8.GetString(autorexemplar.EJEMPLAR.imagen);
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.EDITORIAL = autorexemplar.EJEMPLAR.EDITORIAL;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.FORMATOEJEMPLAR = autorexemplar.EJEMPLAR.FORMATOEJEMPLAR;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.IDIOMAEJEMPLAR = autorexemplar.EJEMPLAR.IDIOMAEJEMPLAR;
@@ -84,7 +85,7 @@ namespace backend.Controllers
                 aUTORxEJEMPLAR_A_E.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.id_Ejemplar = autorexemplar.EJEMPLAR.id_Ejemplar;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.nombre = autorexemplar.EJEMPLAR.nombre;
-                aUTORxEJEMPLAR_A_E.EJEMPLAR.imagen = autorexemplar.EJEMPLAR.imagen;
+                aUTORxEJEMPLAR_A_E.EJEMPLAR.imagen = Encoding.UTF8.GetString(autorexemplar.EJEMPLAR.imagen);
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.EDITORIAL = autorexemplar.EJEMPLAR.EDITORIAL;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.FORMATOEJEMPLAR = autorexemplar.EJEMPLAR.FORMATOEJEMPLAR;
                 aUTORxEJEMPLAR_A_E.EJEMPLAR.IDIOMAEJEMPLAR = autorexemplar.EJEMPLAR.IDIOMAEJEMPLAR;

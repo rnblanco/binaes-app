@@ -1,0 +1,86 @@
+<div class="card p-mt-4">
+  <app-loading *ngIf="loading"
+               class="p-d-flex p-ai-center p-jc-center"
+               style="height: 80%"></app-loading>
+  <form *ngIf="!loading"
+        #form="ngForm"
+        autocomplete="off"
+        class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
+    <div class="p-field p-col-12">
+      <label>Nombre:</label>
+      <div class="p-input-icon-right">
+        <input name="name" [(ngModel)]="name" placeholder="Ej. Crónicas de Narnia" pInputText />
+      </div>
+    </div>
+    <div class="p-field p-col-6 p-mt-2">
+      <label>Editorial:</label>
+      <p-multiSelect [options]="editoriales" [(ngModel)]="selectedEditorial" (onFilter)="editorialFilter($event)" (onChange)="editorialChange($event)" [showToggleAll]="false"
+                     #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige un tipo" optionLabel="editorial1" optionValue="id_Editorial"
+                     [showClear]="true" [resetFilterOnHide]="true">
+        <ng-template let-group pTemplate="emptyfilter">
+          <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{editorialText}}'" (click)="addEditorial()"></button>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="p-field p-col-3 p-mt-2">
+      <label>Idioma:</label>
+      <p-multiSelect [options]="idiomas" [(ngModel)]="selectedIdioma" (onFilter)="idiomaFilter($event)" (onChange)="idiomaChange($event)" [showToggleAll]="false"
+                     #idiomaMultiSelect name="selectedIdioma" defaultLabel="Elige un idioma" optionLabel="idioma" optionValue="id_idiomaEjemplar"
+                     [showClear]="true" [resetFilterOnHide]="true">
+        <ng-template let-group pTemplate="emptyfilter">
+          <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{idiomaText}}'" (click)="addIdioma()"></button>
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="p-field p-col-3 p-mt-2">
+      <label>Formato:</label>
+      <p-multiSelect [options]="formatos" [(ngModel)]="selectedFormato" (onFilter)="formatoFilter($event)" (onChange)="formatoChange($event)" [showToggleAll]="false"
+                     #formatoMultiSelect name="selectedFormato" defaultLabel="Elige un formato" optionLabel="formato" optionValue="id_formatoEjemplar"
+                     [showClear]="true" [resetFilterOnHide]="true">
+        <ng-template let-group pTemplate="emptyfilter">
+
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="p-field p-col-9 p-mt-2">
+      <label>Coleccion:</label>
+      <p-multiSelect [options]="collections" [(ngModel)]="selectedCollection" (onFilter)="collectionFilter($event)" (onChange)="collectionChange($event)" [showToggleAll]="false"
+                     #collectionMultiSelect name="selectedCollection" defaultLabel="Elige una colección" optionLabel="nombre" optionValue="id_Coleccion"
+                     [showClear]="true" [resetFilterOnHide]="true">
+        <ng-template let-group pTemplate="emptyfilter">
+
+        </ng-template>
+      </p-multiSelect>
+    </div>
+
+    <div class="p-field p-col-3 p-mt-2">
+      <label>Fecha de publicación:</label>
+      <div class="field col-12 md:col-4">
+        <p-calendar name="date" [(ngModel)]="date" [maxDate]="maxDate" dateFormat="yy-mm-dd"></p-calendar>
+      </div>
+    </div>
+    <div class="p-field p-col-5 p-mt-2">
+      <label>Portada:</label>
+      <p-fileUpload name="demo[]" (onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" accept="image/*" [showUploadButton]="false" [showCancelButton]="false">
+        <ng-template pTemplate="content">
+          <label>Portada actual:</label><br />
+          <img src="{{ uploadedFile }}" style="height:10em"/>
+        </ng-template>
+      </p-fileUpload> 
+    </div>
+
+    <div class="p-col-12 p-grid p-mt-2">
+      <div [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+        <button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="addEjemplar()" [disabled]="!formIsValid"></button>
+      </div>
+
+      <div *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
+        <button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="deleteCollection()"></button>
+      </div>
+    </div>
+  </form>
+</div>
+

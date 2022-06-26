@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -30,7 +31,7 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 p_CLAVEx.EJEMPLAR.id_Ejemplar = keyword.EJEMPLAR.id_Ejemplar;
                 p_CLAVEx.EJEMPLAR.nombre = keyword.EJEMPLAR.nombre;
-                p_CLAVEx.EJEMPLAR.imagen = keyword.EJEMPLAR.imagen;
+                p_CLAVEx.EJEMPLAR.imagen = Encoding.UTF8.GetString(keyword.EJEMPLAR.imagen);
                 p_CLAVEx.EJEMPLAR.EDITORIAL = keyword.EJEMPLAR.EDITORIAL;
                 p_CLAVEx.EJEMPLAR.FORMATOEJEMPLAR = keyword.EJEMPLAR.FORMATOEJEMPLAR;
                 p_CLAVEx.EJEMPLAR.IDIOMAEJEMPLAR = keyword.EJEMPLAR.IDIOMAEJEMPLAR;

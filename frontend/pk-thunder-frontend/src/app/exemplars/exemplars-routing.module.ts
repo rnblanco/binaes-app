@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExemplarsPageComponent } from './exemplars-page/exemplars-page.component';
+import { ExemplarsPageComponent } from './containers/exemplars-page/exemplars-page.component';
+import { ExemplarPageComponent } from './containers/exemplar-page/exemplar-page.component';
 
 const routes: Routes = [
-  { path: '', component: ExemplarsPageComponent, pathMatch: 'full' },
+  {
+    path: '',
+    component: ExemplarsPageComponent
+  },
+  {
+    path: 'exemplar',
+    component: ExemplarPageComponent
+  },
+  {
+    path: 'exemplar/:id',
+    component: ExemplarPageComponent
+  }
 ];
 
 @NgModule({

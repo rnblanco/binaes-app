@@ -57,6 +57,8 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
         if (id) {
           this.id = id;
           this.loadInfo();
+        } else {
+          this.loading = false;
         }
       })
     );
@@ -170,7 +172,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
         (response: Coleccion) => {
           if (response.nombre) {
             this.isNew = false;
-          }
+          } 
           this.name = response.nombre;
           this.selectedArea.push(response.AREA.id_Area);
           this.selectedGenre.push(response.GENEROCOLECCION.id_generoColeccion);
