@@ -1,4 +1,6 @@
-﻿using backend.Models;
+﻿using backend.Constants;
+using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -222,6 +224,22 @@ namespace backend.Controllers
             }
 
             return Ok(pRESTAMO);
+        }
+
+        // GET: api/PRESTAMO/5 Fechas deshabilitadas
+        [ResponseType(typeof(List<DateTime>))]
+        public IQueryable<DateTime> GetFREE_EJEMPLAR(int id_Ejemplar)
+        {
+            var borrows = db.PRESTAMO.Where(p => p.id_Ejemplar == id_Ejemplar).Where(p => p.id_Estado == (int)Status.RESERVADO || p.id_Estado == (int)Status.EN_PRESTAMO).ToList();
+            List<DateTime> disabledDates = new List<DateTime>();
+
+            foreach (var borrow in borrows) {
+                while (borrow.fh_Devolucion >= borrow.fh_Prestamo) {
+                    disabledDates.Add(borrow.fh_Prestamo);
+                    borrow.fh_Prestamo = borrow.fh_Prestamo.AddDays(1);
+                }
+            }
+            return disabledDates.AsQueryable();
         }
 
         // PUT: api/PRESTAMO/5

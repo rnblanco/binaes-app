@@ -14,6 +14,8 @@ import { DashboardPageComponent } from './containers/dashboard-page/dashboard-pa
 // Primeng modules
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { CoreRoutingModule } from './core-routing.module';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,10 +28,12 @@ import { CoreRoutingModule } from './core-routing.module';
     ProfilePageComponent,
     DashboardPageComponent
   ],
-  imports: [
-    CommonModule,
-    BreadcrumbModule,
-    CoreRoutingModule,
-  ]
+	imports: [
+		CommonModule,
+		BreadcrumbModule,
+		CoreRoutingModule,
+		CalendarModule,
+		FormsModule
+	]
 })
 export class CoreModule { }

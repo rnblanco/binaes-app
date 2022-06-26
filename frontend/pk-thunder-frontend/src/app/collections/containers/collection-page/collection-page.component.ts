@@ -11,10 +11,12 @@ import { Roles } from '../../../auth/constants/roles';
   templateUrl: './collection-page.component.html',
 })
 export class CollectionPageComponent extends BaseComponent implements OnInit {
-  isNew: boolean = true;
-  name: string;
-  id: number;
   SUPER_ADMIN = Roles.SUPER_ADMIN;
+  isNew: boolean = true;
+  
+  id: number;
+  name: string;
+  
   addLoading = false;
   deleteLoading = false;
   
@@ -58,11 +60,12 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
           this.id = id;
           this.loadInfo();
         }
+        else this.loading = false;
       })
     );
   }
   
-  deleteCollection(): void {
+  delete(): void {
     this.deleteLoading = true;
     this.subscription.add(
       this.catalogService.deleteOfURL(`COLECCION/${this.id}`).subscribe(
@@ -89,9 +92,9 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  addCollection(): void {
+  add(): void {
     if (!this.isNew) {
-      this.updateCollection();
+      this.update();
       return;
     }
     this.addLoading = true;
@@ -127,7 +130,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  updateCollection(): void {
+  update(): void {
     this.addLoading = true;
     this.subscription.add(
       this.catalogService
@@ -154,7 +157,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo añadir la colección',
+            body: 'No se pudo editar la colección',
           });
           this.addLoading = false;
         }
@@ -172,9 +175,9 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
             this.isNew = false;
           }
           this.name = response.nombre;
-          this.selectedArea.push(response.AREA.id_Area);
-          this.selectedGenre.push(response.GENEROCOLECCION.id_generoColeccion);
-          this.selectedType.push(response.TIPOCOLECCION.id_tipoColeccion);
+          this.selectedArea = [response.AREA.id_Area];
+          this.selectedGenre = [response.GENEROCOLECCION.id_generoColeccion];
+          this.selectedType = [response.TIPOCOLECCION.id_tipoColeccion];
 	        setTimeout(() => {
 		        this.loading = false;
 	        }, 200);
@@ -192,9 +195,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
   }
   
   typeChange(event: any): void {
-    if(event.value.length > 1){
-      this.selectedType.shift();
-    }
+    this.selectedType = [event.itemValue];
   }
   
   addType(): void {
@@ -205,10 +206,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
         (response: Tipocoleccion) => {
           this.loadTypes();
           this.typeMultiSelect.close(new Event('close'));
-          if(this.selectedType?.length > 1) {
-            this.selectedType.shift();
-          }
-          this.selectedType.push(response.id_tipoColeccion);
+          this.selectedType = [response.id_tipoColeccion];
         },
         () => {
           this.messageService.setPayload({
@@ -238,9 +236,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
   }
   
   genreChange(event: any): void {
-    if(event.value.length > 1){
-      this.selectedGenre.shift();
-    }
+    this.selectedGenre = [event.itemValue];
   }
   
   addGenre(): void {
@@ -251,10 +247,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
         (response: Generocoleccion) => {
           this.loadGenres();
           this.genreMultiSelect.close(new Event('close'));
-          if(this.selectedGenre?.length > 1) {
-            this.selectedGenre.shift();
-          }
-          this.selectedGenre.push(response.id_generoColeccion);
+          this.selectedGenre = [response.id_generoColeccion];
         },
         () => {
           this.messageService.setPayload({
@@ -284,9 +277,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
   }
   
   areaChange(event: any): void {
-    if(event.value.length > 1){
-      this.selectedArea.shift();
-    }
+    this.selectedArea = [event.itemValue];
   }
   
   loadAreas(): void {

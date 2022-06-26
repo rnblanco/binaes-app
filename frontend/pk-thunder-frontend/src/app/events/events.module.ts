@@ -5,7 +5,7 @@ import { EventsRoutingModule } from './events-routing.module';
 
 @NgModule({
   declarations: [
-    EventsPageComponent
+    EventsPageComponent,
   ],
   imports: [
     CommonModule,

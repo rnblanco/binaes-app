@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -152,6 +153,24 @@ namespace backend.Controllers
             }
 
             return Ok(eVENTO);
+        }
+
+        // GET: api/EVENTO/5 Fechas deshabilitadas
+        [ResponseType(typeof(List<DateTime>))]
+        public IQueryable<DateTime> GetFREE_AREA(int id_areaRealizacion)
+        {
+            var eventos = db.EVENTO.Where(p => p.id_areaRealizacion== id_areaRealizacion).ToList();
+            List<DateTime> disabledDates = new List<DateTime>();
+
+            foreach (var evento in eventos)
+            {
+                while (evento.fh_Finalizacion >= evento.fh_Inicio)
+                {
+                    disabledDates.Add(evento.fh_Inicio);
+                    evento.fh_Inicio = evento.fh_Inicio.AddDays(1);
+                }
+            }
+            return disabledDates.AsQueryable();
         }
 
         // PUT: api/EVENTO/5

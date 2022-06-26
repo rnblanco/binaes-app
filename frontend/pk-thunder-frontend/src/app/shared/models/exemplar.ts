@@ -1,21 +1,38 @@
-export interface rawExemplar {
-	id_Ejemplar: number,
-	nombre: string,
-	imagen: number,
-	id_Editorial: number,
-	id_Formato: number,
-	id_Idioma: number,
-	f_publicacion: Date,
-	id_coleccionPertenece: number
+import { Coleccion } from './collection';
+
+export interface Ejemplar {
+	id_Ejemplar:     number;
+	nombre:          string;
+	imagen:          string;
+	f_publicacion:   Date;
+	COLECCION:       Coleccion;
+	EDITORIAL:       Editorial;
+	FORMATOEJEMPLAR: Formatoejemplar;
+	IDIOMAEJEMPLAR:  Idiomaejemplar;
 }
 
-export interface Exemplar {
-	id_Ejemplar: number,
-	nombre: string,
-	imagen: number,
-	editorial: string, // editorial -> editorial
-	formato: string, // formato -> formato
-	idioma: string, // idioma -> idioma
-	f_publicacion: Date,
-	coleccion: string
+export interface Editorial {
+	id_Editorial: number;
+	editorial1:   string;
+}
+
+export interface Formatoejemplar {
+	id_formatoEjemplar: number;
+	formato:            string;
+}
+
+export interface Idiomaejemplar {
+	id_idiomaEjemplar: number;
+	idioma:            string;
+}
+
+export interface Estados {
+	id_Estado: number;
+	estado:    string;
+}
+
+export enum EstadosEnum {
+	EN_PRESTAMO = 1,
+	FINALIZADO = 2,
+	RESERVADO = 3
 }
