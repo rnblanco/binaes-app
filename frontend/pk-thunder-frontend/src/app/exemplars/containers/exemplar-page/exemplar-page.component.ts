@@ -203,7 +203,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo añadir el ejemplar',
+            body: 'No se pudo editar el ejemplar',
           });
           this.addLoading = false;
         }

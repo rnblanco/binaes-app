@@ -18,10 +18,10 @@ namespace backend.Controllers
     {
         private BinaesFullModel db = new BinaesFullModel();
 
-        // GET: api/USUARIO
+        // GET: api/USUARIO/2
         public IQueryable<USUARIO_rU> GetUSUARIO()
         {
-            var users = db.USUARIO.ToList();
+            var users = db.USUARIO.ToList();                        
             List<USUARIO_rU> usersList = new List<USUARIO_rU>();
             foreach (var user in users)
             {
@@ -41,8 +41,8 @@ namespace backend.Controllers
             return usersList.AsQueryable();
         }
 
-        // GET: api/USUARIO?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<USUARIO_rU> GetUSUARIO(int limit, int page, string search, string SortBy)
+        // GET: api/USUARIO?id_rolUsuario=2&limit=5&page=1&search=test&sortby=col:ASC
+        public IQueryable<USUARIO_rU> GetUSUARIO(int limit, int page, string search, string SortBy, int id_rolUsuario, string id_Usuario)
         {
             var sorted = "id_Usuario ascending";
             if (SortBy != null)
@@ -50,16 +50,36 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
-            var users = db.USUARIO
-                .Where(x =>
+            List<USUARIO> users;            
+            if (id_rolUsuario == 2)
+            {
+                users = db.USUARIO
+                .Where(x => 
+                    x.id_rolUsuario == 1 && (
                     DbFunctions.Like(x.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.email, "%" + search + "%") ||
                     DbFunctions.Like(x.telefono, "%" + search + "%") ||
                     DbFunctions.Like(x.ocupacion, "%" + search + "%") ||
                     DbFunctions.Like(x.direccion, "%" + search + "%") ||
                     DbFunctions.Like(x.institucion, "%" + search + "%") ||
-                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%"))
+                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
                 .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
+            }
+            else
+            {
+                users = db.USUARIO
+                .Where(x =>
+                    x.id_Usuario != id_Usuario && (
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.email, "%" + search + "%") ||
+                    DbFunctions.Like(x.telefono, "%" + search + "%") ||
+                    DbFunctions.Like(x.ocupacion, "%" + search + "%") ||
+                    DbFunctions.Like(x.direccion, "%" + search + "%") ||
+                    DbFunctions.Like(x.institucion, "%" + search + "%") ||
+                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
+                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
+            }
+            
             List<USUARIO_rU> usersList = new List<USUARIO_rU>();
             foreach (var user in users)
             {
@@ -108,19 +128,40 @@ namespace backend.Controllers
 
         // PUT: api/USUARIO/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUSUARIO(string id, USUARIO uSUARIO)
+        public async Task<IHttpActionResult> PutUSUARIO(string id, USUARIO_P uSUARIOP)
         {
+            var getUser = db.USUARIO.Where(x => x.id_Usuario == id).FirstOrDefault();            
+            //uSUARIO.id_Usuario = uSUARIOP.id_Usuario;
+            getUser.nombre = uSUARIOP.nombre;
+            getUser.email = uSUARIOP.email;
+            getUser.telefono = uSUARIOP.telefono;
+            getUser.ocupacion = uSUARIOP.ocupacion;
+            getUser.direccion = uSUARIOP.direccion;
+            getUser.fotografia = uSUARIOP.fotografia;
+            getUser.institucion = uSUARIOP.institucion;
+            getUser.id_rolUsuario = uSUARIOP.id_rolUsuario;
+
+
+            if(uSUARIOP.contrasena != "") {
+
+                getUser.contrasena = Encoding.UTF8.GetBytes(uSUARIOP.contrasena);
+            }
+            else
+            {
+                getUser.contrasena = db.USUARIO.Where(x => x.id_Usuario == id).FirstOrDefault().contrasena;
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != uSUARIO.id_Usuario)
+            if (id != getUser.id_Usuario)
             {
                 return BadRequest();
             }
 
-            db.Entry(uSUARIO).State = EntityState.Modified;
+            db.Entry(getUser).State = EntityState.Modified;
 
             try
             {
@@ -143,29 +184,55 @@ namespace backend.Controllers
 
         // POST: api/USUARIO
         [ResponseType(typeof(USUARIO))]
-        public async Task<IHttpActionResult> PostUSUARIO(USUARIO uSUARIO)
+        public async Task<IHttpActionResult> PostUSUARIO(USUARIO_P uSUARIOP)
         {
-            if (!ModelState.IsValid)
+            USUARIO uSUARIO = new USUARIO();
+            uSUARIO.id_Usuario = uSUARIOP.id_Usuario;
+            uSUARIO.nombre = uSUARIOP.nombre;
+            uSUARIO.email = uSUARIOP.email;
+            uSUARIO.telefono = uSUARIOP.telefono;
+            uSUARIO.ocupacion = uSUARIOP.ocupacion;
+            uSUARIO.direccion = uSUARIOP.direccion;
+            uSUARIO.fotografia = uSUARIOP.fotografia;
+            uSUARIO.institucion = uSUARIOP.institucion;
+            uSUARIO.id_rolUsuario = uSUARIOP.id_rolUsuario;
+
+            if (uSUARIOP.contrasena == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
 
-            db.USUARIO.Add(uSUARIO);
+            uSUARIO.contrasena = Encoding.UTF8.GetBytes(uSUARIOP.contrasena);
+            var verifyiD = db.USUARIO.Find(uSUARIO.id_Usuario);
 
-            try
-            {
-                await db.SaveChangesAsync();
+            if(verifyiD == null)
+            {               
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                db.USUARIO.Add(uSUARIO);
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    if (USUARIOExists(uSUARIO.id_Usuario))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
-            catch (DbUpdateException)
+            else
             {
-                if (USUARIOExists(uSUARIO.id_Usuario))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest();
             }
 
             return CreatedAtRoute("DefaultApi", new { id = uSUARIO.id_Usuario }, uSUARIO);

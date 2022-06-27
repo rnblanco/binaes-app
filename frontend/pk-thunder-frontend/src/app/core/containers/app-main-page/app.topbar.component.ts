@@ -25,7 +25,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
       <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
         <a [routerLink]="routeInformation.profilePage" class="p-link layout-topbar-button">          
           <i *ngif="user?.fotografia" class="pi pi-user"></i>
-          <p-avatar image="{{image}}" styleClass="mr-2" size="large" shape="circle"></p-avatar>
+          <p-avatar image="https://localhost:44314/images/{{image}}" styleClass="mr-2" size="large" shape="circle"></p-avatar>
           <span>Profile</span>
         </a>
       </div>
