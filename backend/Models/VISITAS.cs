@@ -16,7 +16,7 @@ namespace backend.Models
 
         public DateTime fh_entrada { get; set; }
 
-        public DateTime fh_salida { get; set; }
+        public DateTime? fh_salida { get; set; }
 
         public virtual AREA AREA { get; set; }
 
@@ -29,7 +29,7 @@ namespace backend.Models
 
         public DateTime fh_entrada { get; set; }
 
-        public DateTime fh_salida { get; set; }
+        public DateTime? fh_salida { get; set; }
 
         public virtual AREA_PA_U_TA AREA { get; set; }
 

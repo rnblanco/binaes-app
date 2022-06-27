@@ -59,6 +59,20 @@ namespace backend.Controllers
 
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
+
+                /*eJEMPLAR.P_CLAVExEJEMPLAR = db.P_CLAVExEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                eJEMPLAR.ETIQUETASxEJEMPLAR = db.ETIQUETASxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                foreach (var item in eJEMPLAR.ETIQUETASxEJEMPLAR)
+                {
+                    eJEMPLAR.TIPOETIQUETA = db.TIPOETIQUETA.Where(x => x.id_tipoEtiqueta == item.id_tipoEtiqueta).ToList();
+                }
+
+                eJEMPLAR.AUTORxEJEMPLAR = db.AUTORxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                foreach (var item in eJEMPLAR.AUTORxEJEMPLAR)
+                {
+                    eJEMPLAR.AUTOR = db.AUTOR.Where(x => x.id_Autor == item.id_Autor).ToList();
+                }*/
+
                 exemplarsList.Add(eJEMPLAR);
             }
             return exemplarsList.AsQueryable();
@@ -74,7 +88,42 @@ namespace backend.Controllers
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
             var exemplars = db.EJEMPLAR
-                .Where(x =>
+                /*.Join(
+                    db.AUTORxEJEMPLAR,
+                    a => a.id_Ejemplar,
+                    b => b.EJEMPLAR.id_Ejemplar,
+                    (a, b) => new
+                    {
+                        id_Ejemplar = a.id_Ejemplar,
+                        nombre = a.nombre,
+                        imagen = a.imagen,
+                        EDITORIAL = a.EDITORIAL,
+                        FORMATOEJEMPLAR = a.FORMATOEJEMPLAR,
+                        IDIOMAEJEMPLAR = a.IDIOMAEJEMPLAR,
+                        f_publicacion = a.f_publicacion,
+                        COLECCION = a.COLECCION,
+                        autor = b.AUTOR.nombre,
+                    }
+                 )
+                .Join(
+                    db.P_CLAVExEJEMPLAR,
+                    a => a.id_Ejemplar,
+                    b => b.EJEMPLAR.id_Ejemplar,
+                    (a, b) => new
+                    {
+                        id_Ejemplar = a.id_Ejemplar,
+                        nombre = a.nombre,
+                        imagen = a.imagen,
+                        EDITORIAL = a.EDITORIAL,
+                        FORMATOEJEMPLAR = a.FORMATOEJEMPLAR,
+                        IDIOMAEJEMPLAR = a.IDIOMAEJEMPLAR,
+                        f_publicacion = a.f_publicacion,
+                        COLECCION = a.COLECCION,
+                        autor = a.autor,
+                        p_clave = b.p_clave
+                    }
+                )*/            
+                .Where(x =>                    
                     DbFunctions.Like(x.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.EDITORIAL.editorial1, "%" + search + "%") ||
                     DbFunctions.Like(x.FORMATOEJEMPLAR.formato, "%" + search + "%") ||
@@ -83,7 +132,11 @@ namespace backend.Controllers
                     DbFunctions.Like(x.COLECCION.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.COLECCION.AREA.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.COLECCION.GENEROCOLECCION.generoColeccion1, "%" + search + "%") ||
-                    DbFunctions.Like(x.COLECCION.TIPOCOLECCION.tipoColeccion1, "%" + search + "%"))
+                    DbFunctions.Like(x.COLECCION.TIPOCOLECCION.tipoColeccion1, "%" + search + "%")// ||
+                    //DbFunctions.Like(x.autor, "%" + search + "%") ||
+                    //DbFunctions.Like(x.p_clave, "%" + search + "%")
+                 )
+                //.GroupBy(x => x.id_Ejemplar).Select(x => x.FirstOrDefault())
                 .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
             List<EJEMPLAR_E_F_I_C> exemplarsList = new List<EJEMPLAR_E_F_I_C>();
             foreach (var exemplar in exemplars)
@@ -122,6 +175,7 @@ namespace backend.Controllers
 
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
+
                 exemplarsList.Add(eJEMPLAR);
             }
             return exemplarsList.AsQueryable();
