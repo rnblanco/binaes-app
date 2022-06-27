@@ -1,5 +1,6 @@
 namespace backend.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -55,5 +56,11 @@ namespace backend.Models
         public virtual USUARIO_rU USUARIO { get; set; }
 
         public virtual TIPOAREA TIPOAREA { get; set; }
+    }
+
+    public partial class AURA_PAGINADOR
+    {
+        public Meta meta { get; set; }
+        public List<AREA_PA_U_TA> data { get; set; }
     }
 }

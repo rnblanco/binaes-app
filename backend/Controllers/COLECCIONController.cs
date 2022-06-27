@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -53,8 +54,9 @@ namespace backend.Controllers
             return collectionsList.AsQueryable();
         }
 
+        [ResponseType(typeof(COLECCION_A_GC_TC))]
         // GET: api/COLECCION?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<COLECCION_A_GC_TC> GetCOLECCION(int limit, int page, string search, string SortBy)
+        public async Task<IHttpActionResult> GetCOLECCION(int limit, int page, string search, string SortBy)
         {            
             var sorted = "id_Coleccion ascending";
             if (SortBy != null)
@@ -62,15 +64,32 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
-           
+
+            int total = db.COLECCION
+                .Where(x =>
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.TIPOCOLECCION.tipoColeccion1, "%" + search + "%") ||
+                    DbFunctions.Like(x.GENEROCOLECCION.generoColeccion1, "%" + search + "%") ||
+                    DbFunctions.Like(x.AREA.nombre, "%" + search + "%"))
+                .OrderBy(sorted).Count();
+
+            COLECCION_PAGINADOR PAGINADOR = new COLECCION_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.meta.totalItems = total;
+            PAGINADOR.meta.itemsPerPage = limit;
+            Double totalPages = (total + limit - 1) / limit;
+            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+            PAGINADOR.data = new List<COLECCION_A_GC_TC>();
+
             var collections = db.COLECCION
                 .Where(x =>
                     DbFunctions.Like(x.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.TIPOCOLECCION.tipoColeccion1, "%" + search + "%") ||
                     DbFunctions.Like(x.GENEROCOLECCION.generoColeccion1, "%" + search + "%") ||
                     DbFunctions.Like(x.AREA.nombre, "%" + search + "%"))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
-            List<COLECCION_A_GC_TC> collectionsList = new List<COLECCION_A_GC_TC>();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+            
             foreach (var collection in collections)
             {
                 COLECCION_A_GC_TC cOLECCION = new COLECCION_A_GC_TC();
@@ -96,9 +115,10 @@ namespace backend.Controllers
                 cOLECCION.AREA.TIPOAREA = collection.AREA.TIPOAREA;
                 cOLECCION.GENEROCOLECCION = collection.GENEROCOLECCION;
                 cOLECCION.TIPOCOLECCION = collection.TIPOCOLECCION;
-                collectionsList.Add(cOLECCION);
+                PAGINADOR.data.Add(cOLECCION);
             }
-            return collectionsList.AsQueryable();
+
+            return Ok(PAGINADOR);
         }
 
         // GET: api/COLECCION/5

@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Roles } from '../../../auth/constants/roles';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
@@ -24,8 +25,30 @@ export class BorrowsPageComponent extends LazyComponent implements OnInit {
   ] as any[];
   
   ngOnInit(): void {
-    this.loadAll();
+    if(this.user.id_rolUsuario === Roles.USER){
+      this.loadOwn();
+    }
+    else this.loadAll();
     this.breadcrumbService.setItems(this.getBreadCrumbs());
+  }
+  
+  loadOwn() {
+    this.list = [];
+    this.loading = true;
+    this.getPaginationParams();
+    this.subscription.add(
+      this.catalogService
+      .getByNameWithParams('PRESTAMO', new HttpParams().set('id_Usuario', this.user.id_Usuario))
+      .subscribe(
+        (response: Prestamo[]) => {
+          // this.pagination = _response.meta;
+          // this.currentPage = this.pagination.currentPage;
+          this.list = response;
+          this.loading = false;
+        },
+        () => (this.loading = false)
+      )
+    );
   }
   
   loadAll() {
@@ -72,7 +95,7 @@ export class BorrowsPageComponent extends LazyComponent implements OnInit {
   
   getBreadCrumbs() {
     return [
-      { label: 'Préstamos', routerLink: [this.routeInformation.borrowsPage] },
+      { label: this.user.id_rolUsuario === this.USER ? 'Mis préstamos' : 'Préstamos', routerLink: [this.routeInformation.borrowsPage] },
     ];
   }
 

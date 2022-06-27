@@ -1,5 +1,6 @@
 namespace backend.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,5 +42,12 @@ namespace backend.Models
         public virtual GENEROCOLECCION GENEROCOLECCION { get; set; }
 
         public virtual TIPOCOLECCION TIPOCOLECCION { get; set; }
+    }
+
+    public class COLECCION_PAGINADOR
+    {
+        public List<COLECCION_A_GC_TC> data { get; set; }
+
+        public Meta meta { get; set; }
     }
 }

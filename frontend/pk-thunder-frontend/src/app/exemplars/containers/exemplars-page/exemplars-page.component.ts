@@ -22,7 +22,7 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
     { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 175 },
     { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 175 },
     { field: 'COLECCION.nombre', header: 'Coleccion', width: 175 },
-    { field: 'f_publicacion', header: 'fecha publicacion', width: 175 },    
+    { field: 'f_publicacion', header: 'Fecha de publicación', width: 175 },
   ] as any[];
 
   ngOnInit(): void {

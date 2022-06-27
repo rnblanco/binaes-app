@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import { Injector, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 
@@ -16,8 +16,11 @@ import { MenuService } from './core/services/app.menu.service';
 import { AppInjector } from './app-injector.service';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { TagPipe } from './shared/pipes/tag.pipe';
+import esSV from '@angular/common/locales/es-SV';
+import { registerLocaleData } from '@angular/common';
 
 
+registerLocaleData(esSV);
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +51,7 @@ import { TagPipe } from './shared/pipes/tag.pipe';
       multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'es-SV' },
   ],
   bootstrap: [AppComponent]
 })

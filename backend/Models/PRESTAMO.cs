@@ -1,6 +1,7 @@
 namespace backend.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -43,5 +44,11 @@ namespace backend.Models
         public virtual ESTADOS ESTADOS { get; set; }
 
         public virtual USUARIO_rU USUARIO { get; set; }
+    }
+
+    public partial class PRESTAMO_PAGINADOR
+    { 
+        public Meta meta { get; set; }
+        public List<PRESTAMO_E> data { get; set; }
     }
 }

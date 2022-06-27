@@ -544,7 +544,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   
   loadTags(): void {
     this.subscription.add(
-      this.catalogService.getByNameWithParams(`ETIQUETASXEJEMPLAR/${this.id}`).subscribe(
+      this.catalogService.getByNameWithParams(`ETIQUETASXEJEMPLAR/`, new HttpParams().set('id_Ejemplar', this.id)).subscribe(
         (response: EtiquetaxEjemplar[]) => {
           this.tagsxExemplar = response;
           this.selectedTags = this.tagsxExemplar.map(tag => tag.id_etiquetaEjemplar);

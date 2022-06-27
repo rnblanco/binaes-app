@@ -147,8 +147,9 @@ namespace backend.Controllers
             return borrowsList.AsQueryable();
         }
 
+        [ResponseType(typeof(COLECCION_PAGINADOR))]
         // GET: api/PRESTAMO?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<PRESTAMO_E> GetPRESTAMO(int limit, int page, string search, string SortBy)
+        public async Task<IHttpActionResult> GetPRESTAMO(int limit, int page, string search, string SortBy)
         {
             var sorted = "id_Prestamo ascending";
             if (SortBy != null)
@@ -156,6 +157,25 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
+
+            int total = db.PRESTAMO
+               .Where(x =>
+                   DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
+                   DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
+                   DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
+                   DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
+                   DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%"))
+               .OrderBy(sorted).Count();
+
+            PRESTAMO_PAGINADOR PAGINADOR = new PRESTAMO_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.meta.totalItems = total;
+            PAGINADOR.meta.itemsPerPage = limit;
+            Double totalPages = (total + limit - 1) / limit;
+            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+            PAGINADOR.data = new List<PRESTAMO_E>();
+
             var borrows = db.PRESTAMO
                 .Where(x =>
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
@@ -163,8 +183,8 @@ namespace backend.Controllers
                     DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
                     DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%"))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
-            List<PRESTAMO_E> borrowsList = new List<PRESTAMO_E>();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+
             foreach (var borrow in borrows)
             {
                 PRESTAMO_E pRESTAMO = new PRESTAMO_E();
@@ -218,9 +238,10 @@ namespace backend.Controllers
 
                 pRESTAMO.EJEMPLAR.COLECCION.GENEROCOLECCION = borrow.EJEMPLAR.COLECCION.GENEROCOLECCION;
                 pRESTAMO.EJEMPLAR.COLECCION.TIPOCOLECCION = borrow.EJEMPLAR.COLECCION.TIPOCOLECCION;
-                borrowsList.Add(pRESTAMO);
+                PAGINADOR.data.Add(pRESTAMO);
             }
-            return borrowsList.AsQueryable();
+
+            return Ok(PAGINADOR);
         }
 
         // GET: api/PRESTAMO/5

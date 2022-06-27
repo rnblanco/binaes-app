@@ -1,5 +1,6 @@
 namespace backend.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -121,5 +122,11 @@ namespace backend.Models
         public string institucion { get; set; }
 
         public virtual ROLUSUARIO ROLUSUARIO { get; set; }
+    }
+
+    public partial class USUARIO_PAGINADOR
+    {
+        public Meta meta { get; set; }
+        public List<USUARIO_rU> data { get; set; }
     }
 }
