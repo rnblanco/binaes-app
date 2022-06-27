@@ -24,6 +24,7 @@ import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ImageModule } from 'primeng/image';
 import { AvatarModule } from 'primeng/avatar';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -36,20 +37,21 @@ import { AvatarModule } from 'primeng/avatar';
     ProfilePageComponent,
     DashboardPageComponent
   ],
-  imports: [
-    CommonModule,
-    BreadcrumbModule,
-    CoreRoutingModule,
-    InputTextModule,
-    ListboxModule,
-    ButtonModule,
-    RippleModule,
-    MultiSelectModule,
-    ImageModule,
-    AvatarModule,
-    QRCodeModule,
-    FormsModule,
-    LoadingModule
-  ]
+	imports: [
+		CommonModule,
+		BreadcrumbModule,
+		CoreRoutingModule,
+		InputTextModule,
+		ListboxModule,
+		ButtonModule,
+		RippleModule,
+		MultiSelectModule,
+		ImageModule,
+		AvatarModule,
+		QRCodeModule,
+		FormsModule,
+		LoadingModule,
+		SharedModule
+	]
 })
 export class CoreModule { }

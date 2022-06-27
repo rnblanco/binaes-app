@@ -9,3 +9,10 @@ export interface Prestamo {
 	ESTADOS:       Estados;
 	USUARIO:       Usuario;
 }
+
+export interface Reserva {
+	id_Reserva: number,
+	fh_Reserva: Date,
+	id_Prestamo: string,
+	PRESTAMO: Prestamo
+}

@@ -65,6 +65,13 @@ const routes: Routes = [
         data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
         loadChildren: () => import('./borrows/borrows.module').then((m) => m.BorrowsModule)
       },
+	    {
+		    canActivate: [AuthGuard],
+		    canActivateChild: [AuthGuard],
+		    path: 'areas',
+		    data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
+		    loadChildren: () => import('./areas/areas.module').then((m) => m.AreasModule)
+	    },
       /* ONLY ADMINS */
       {
         canActivate: [AuthGuard],

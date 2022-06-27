@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReservationsPageComponent } from './reservations-page/reservations-page.component';
+import { ReservationPageComponent } from './containers/reservation-page/reservation-page.component';
+import { ReservationsPageComponent } from './containers/reservations-page/reservations-page.component';
 
 const routes: Routes = [
-  { path: '', component: ReservationsPageComponent, pathMatch: 'full' },
+  {
+    path: '',
+    component: ReservationsPageComponent,
+  },
+  {
+    path: 'reservation',
+    component: ReservationPageComponent,
+  },
+  {
+    path: 'reservation/:id',
+    component: ReservationPageComponent
+  }
 ];
 
 @NgModule({

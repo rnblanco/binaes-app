@@ -1,0 +1,60 @@
+<div class="card p-mt-4">
+	<app-loading
+		*ngIf="loading"
+		class="p-d-flex p-ai-center p-jc-center"
+		style="height: 80%"
+	></app-loading>
+	<form
+		*ngIf="!loading"
+		#form="ngForm"
+		autocomplete="off"
+		class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2"
+	>
+		
+		<div class="p-field p-col-12 p-mt-2">
+			<label>Ejemplar:</label>
+			<p-multiSelect [options]="exemplars" [(ngModel)]="selectedExemplar" (onFilter)="exemplarFilter($event)" (onChange)="exemplarChange($event)" [showToggleAll]="false"
+										 #exemplarMultiSelect name="selectedType" defaultLabel="Elige un ejemplar" optionLabel="nombre" optionValue="id_Ejemplar"
+										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="!isNew" emptyFilterMessage="No se encontraron resultados"
+			></p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-12 p-mt-2">
+			<label>Usuario:</label>
+			<p-multiSelect [options]="users" [(ngModel)]="selectedUser" (onFilter)="userFilter($event)" (onChange)="userChange($event)" [showToggleAll]="false"
+										 #userMultiSelect name="selectedUser" defaultLabel="Elige un usuario" optionLabel="nombre" optionValue="id_Usuario"
+										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="!isNew" emptyFilterMessage="No se encontraron resultados"
+			></p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-6 p-mt-2" [ngClass]="{'p-col-12': isNew}">
+			<label>Rango de fechas:</label>
+			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu préstamo"
+									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [disabledDates]="disabledDates"
+									[disabled]="!isNew" pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top"></p-calendar>
+		</div>
+		
+		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
+			<label>Estado:</label>
+			<p-multiSelect [options]="status" [(ngModel)]="selectedStatus" [showToggleAll]="false" [resetFilterOnHide]="true" [disabled]="true"
+										 name="selectedStatus" defaultLabel="Elige un estado" optionLabel="estado" optionValue="id_Estado" emptyFilterMessage="No se encontraron resultados"
+			></p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
+			<label>Fecha de reserva:</label>
+			<p-calendar name="reservationDate" dateFormat="dd/mm/yy" [disabled]="true" [(ngModel)]="reservationDate"></p-calendar>
+		</div>
+		
+		<div class="p-col-12 p-grid p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
+			<div class="p-field" [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()"
+								pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top" [disabled]="!formIsValid || !isNew" ></button>
+			</div>
+			
+			<div class="p-field p-col" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
+				<button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
+			</div>
+		</div>
+	</form>
+</div>

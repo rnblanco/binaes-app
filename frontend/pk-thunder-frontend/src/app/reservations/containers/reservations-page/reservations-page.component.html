@@ -11,8 +11,8 @@
 		[list]="list"
 		[showNewButton]="user.id_rolUsuario !== USER"
 		(onNewClick)="onNew()"
-		newButtonLabel="Nuevo préstamo"
-		type="préstamos"
+		newButtonLabel="Nueva reserva"
+		type="reservas"
 	>
 		<ng-template
 			pTemplate="body"
@@ -26,24 +26,28 @@
 				[style.width.px]="col.width"
 				class="text-center"
 			>
-				<ng-container *ngSwitchCase="'EJEMPLAR.nombre'">
-					{{ data?.EJEMPLAR?.nombre | titlecase }}
+				<ng-container *ngSwitchCase="'PRESTAMO.EJEMPLAR.nombre'">
+					{{ data?.PRESTAMO?.EJEMPLAR?.nombre | titlecase }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'USUARIO.nombre'">
-					{{ data?.USUARIO?.nombre | titlecase }}
+				<ng-container *ngSwitchCase="'PRESTAMO.USUARIO.nombre'">
+					{{ data?.PRESTAMO?.USUARIO?.nombre | titlecase }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'ESTADOS.estado'">
-					{{ data?.ESTADOS?.estado | titlecase }}
+				<ng-container *ngSwitchCase="'PRESTAMO.ESTADOS.estado'">
+					{{ data?.PRESTAMO?.ESTADOS?.estado | titlecase }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'fh_Prestamo'">
-					{{ data.fh_Prestamo | date: "dd/MM/yyyy" }}
+				<ng-container *ngSwitchCase="'fh_Reserva'">
+					{{ data?.fh_Reserva | date: "dd/MM/yyyy" }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'fh_Devolucion'">
-					{{ data.fh_Devolucion | date: "dd/MM/yyyy" }}
+				<ng-container *ngSwitchCase="'PRESTAMO.fh_Prestamo'">
+					{{ data?.PRESTAMO?.fh_Prestamo | date: "dd/MM/yyyy" }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'PRESTAMO.fh_Devolucion'">
+					{{ data?.PRESTAMO?.fh_Devolucion | date: "dd/MM/yyyy" }}
 				</ng-container>
 				
 				<ng-container *ngSwitchDefault>

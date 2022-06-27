@@ -73,7 +73,7 @@
       </div>
       <div class="p-col-6 p-d-flex p-ai-center p-jc-center">
         <!--<p-image src="{{ image }}" imageClass="img-perfil" alt="Image" [preview]="true"></p-image>-->
-        <qr-code class="img-perfil" [value]="id" [size]="300"></qr-code>
+        <qr-code class="img-perfil" [value]="id.toString()" [size]="300"></qr-code>
       </div>
     </div>
     <div class="p-field p-col-12 p-mt-4">
@@ -90,7 +90,7 @@
         <input name="contrasenaC" class="p-pt-4 p-pb-4" [(ngModel)]="contrasenaC" type="password" autocomplete="off" placeholder="●●●●●●" pInputText />
       </div>
       <div class="p-col-12 p-mt-2">
-        <button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" label="Actualiar contraseña" (click)="updatePassword()" [disabled]="!formIsValid"></button>
+        <button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" label="Actualizar contraseña" (click)="updatePassword()" [disabled]="!formIsValid"></button>
       </div>
     </div>
   </form>

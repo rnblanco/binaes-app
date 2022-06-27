@@ -8,6 +8,9 @@ export const RouteInformation = {
   
   dashboardPage: '/app',
   
+  areasPage: '/app/areas',
+  areaPage: '/app/areas/area',
+  
   eventsPage: '/app/events',
   eventPage: '/app/events/event',
   

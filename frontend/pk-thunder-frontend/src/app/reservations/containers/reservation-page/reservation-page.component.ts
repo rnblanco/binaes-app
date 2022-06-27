@@ -5,23 +5,26 @@ import { MultiSelect } from 'primeng/multiselect';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouteInformation } from '../../../shared/constants/route-information';
 import { Ejemplar, Estados, BorrowStatus } from '../../../shared/models/exemplar';
-import { Prestamo } from '../../../shared/models/borrow';
+import { Prestamo, Reserva } from '../../../shared/models/borrow';
 import { Usuario } from 'src/app/shared/models/user';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
-  selector: 'app-borrows-page',
-  templateUrl: './borrow-page.component.html',
+  selector: 'app-reservation-page',
+  templateUrl: './reservation-page.component.html',
+  styles: [
+  ]
 })
-export class BorrowPageComponent extends BaseComponent implements OnInit {
+export class ReservationPageComponent extends BaseComponent implements OnInit {
   SUPER_ADMIN = Roles.SUPER_ADMIN;
   isNew: boolean = true;
   
   id: number;
   dates: Date[] = [];
+  disabledDates: Date[] = [];
   minDate: Date = new Date();
   maxDate: Date;
-  disabledDates: Date[] = [];
+  reservationDate: Date;
   
   addLoading = false;
   deleteLoading = false;
@@ -29,6 +32,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   status: Estados[] = [];
   selectedStatus: number[] = [];
   loadedStatus: number;
+  idBorrow: number;
   
   exemplarText: string ='';
   exemplars: Ejemplar[];
@@ -41,6 +45,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   selectedUser: number[] = [];
   @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
   
+  reservation: Reserva;
   constructor(private route: ActivatedRoute) {
     super();
   }
@@ -74,15 +79,15 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   delete(): void {
     this.deleteLoading = true;
     this.subscription.add(
-      this.catalogService.deleteOfURL(`PRESTAMO/${this.id}`).subscribe(
+      this.catalogService.deleteOfURL(`RESERVA/${this.id}`).subscribe(
         () => {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
-            body: 'El préstamo fue eliminado con éxito',
+            body: 'La reserva fue eliminada con éxito',
           });
           setTimeout(() => {
-            this.router.navigate([RouteInformation.borrowsPage])
+            this.router.navigate([RouteInformation.reservationsPage])
           }, 200);
           this.deleteLoading = false;
         },
@@ -90,7 +95,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo eliminar el préstamo',
+            body: 'No se pudo eliminar la reserva',
           });
           this.deleteLoading = false;
         }
@@ -104,24 +109,28 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
       return;
     }
     this.addLoading = true;
+    
     this.subscription.add(
       this.catalogService
-      .addOfURL(`PRESTAMO`, {
-        fh_Prestamo: this.dates[0],
-        fh_Devolucion: this.dates[1],
-        id_Estado: BorrowStatus.EN_PRESTAMO,
-        id_usuarioPresta: this.selectedUser[0],
-        id_Ejemplar: this.selectedExemplar[0],
+      .addOfURL(`RESERVA`, {
+        fh_Reserva: new Date(),
+        PRESTAMO:{
+          fh_Prestamo: this.dates[0],
+          fh_Devolucion: this.dates[1],
+          id_Estado: BorrowStatus.RESERVADO,
+          id_usuarioPresta: this.selectedUser[0],
+          id_Ejemplar: this.selectedExemplar[0],
+        }
       })
       .subscribe(
         () => {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
-            body: 'El préstamo fue añadido satifactoriamente',
+            body: 'La reserva fue añadida satifactoriamente',
           });
           setTimeout(() => {
-            this.router.navigate([RouteInformation.borrowsPage])
+            this.router.navigate([RouteInformation.reservationsPage])
           }, 200);
           this.addLoading = false;
         },
@@ -129,7 +138,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo añadir el préstamo',
+            body: 'No se pudo añadir la reserva',
           });
           this.addLoading = false;
         }
@@ -141,23 +150,27 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     this.addLoading = true;
     this.subscription.add(
       this.catalogService
-      .updateOfURL(`PRESTAMO/${this.id}`, {
-        id_Prestamo: this.id,
-        fh_Prestamo: this.dates[0],
-        fh_Devolucion: this.dates[1],
-        id_usuarioPresta: this.selectedUser[0],
-        id_Estado: this.selectedStatus[0],
-        id_Ejemplar: this.selectedExemplar[0],
+      .updateOfURL(`RESERVA/${this.id}`, {
+        id_Reserva: this.id,
+        fh_Reserva: this.reservationDate,
+        PRESTAMO:{
+          id_Prestamo: this.idBorrow,
+          fh_Prestamo: this.dates[0],
+          fh_Devolucion: this.dates[1],
+          id_Estado: this.selectedStatus[0],
+          id_usuarioPresta: this.selectedUser[0],
+          id_Ejemplar: this.selectedExemplar[0],
+        }
       })
       .subscribe(
         () => {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
-            body: 'El préstamo fue editado satifactoriamente',
+            body: 'La reserva fue editado satifactoriamente',
           });
           setTimeout(() => {
-            this.router.navigate([RouteInformation.borrowsPage])
+            this.router.navigate([RouteInformation.reservationsPage])
           }, 200);
           this.addLoading = false;
         },
@@ -165,7 +178,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo editar el préstamo',
+            body: 'No se pudo editar la reserva',
           });
           this.addLoading = false;
         }
@@ -176,27 +189,30 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   loadInfo(): void {
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams(`PRESTAMO/${this.id}`)
+      .getByNameWithParams(`RESERVA/${this.id}`)
       .subscribe(
-        (response: Prestamo) => {
+        (response: Reserva) => {
           if (response) {
             this.isNew = false;
           }
-          this.id = response.id_Prestamo;
-          this.dates = [new Date(response.fh_Prestamo), new Date(response.fh_Devolucion)];
-          this.maxDate = new Date(response.fh_Devolucion);
-          this.minDate = new Date(response.fh_Prestamo);
-          this.selectedUser = [response.USUARIO.id_Usuario];
-          this.selectedExemplar = [response.EJEMPLAR.id_Ejemplar];
-          this.selectedStatus = [response.ESTADOS.id_Estado];
-          this.loadedStatus = response.ESTADOS.id_Estado;
+          this.reservation = response;
+          this.id = response.id_Reserva;
+          this.idBorrow = response.PRESTAMO.id_Prestamo;
+          this.dates = [new Date(response.PRESTAMO.fh_Prestamo), new Date(response.PRESTAMO.fh_Devolucion)];
+          this.reservationDate = new Date(response.fh_Reserva);
+          // this.maxDate = new Date(response.PRESTAMO.fh_Devolucion);
+          this.minDate = new Date(response.PRESTAMO.fh_Prestamo) > this.minDate ? this.minDate : new Date(response.PRESTAMO.fh_Prestamo);
+          this.selectedUser = [response.PRESTAMO.USUARIO.id_Usuario];
+          this.selectedExemplar = [response.PRESTAMO.EJEMPLAR.id_Ejemplar];
+          this.selectedStatus = [response.PRESTAMO.ESTADOS.id_Estado];
+          this.loadedStatus = response.PRESTAMO.ESTADOS.id_Estado;
           setTimeout(() => {
             this.loading = false;
           }, 200);
         },
         () => {
           this.loading = false;
-          this.router.navigate([RouteInformation.borrowsPage]);
+          this.router.navigate([RouteInformation.reservationsPage]);
         }
       )
     );
@@ -263,19 +279,19 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
       return;
     }
     
-    if (!this.isNew) {
-      if (this.dates[1] < this.maxDate) this.selectedStatus = [BorrowStatus.FINALIZADO];
+    if(!this.isNew){
+      if (this.dates[1].getDate() === new Date().getDate()) this.selectedStatus = [BorrowStatus.FINALIZADO];
       else this.selectedStatus = [this.loadedStatus];
     }
-  
+    
     let insideDates: Date[] = [];
     const initialDate: Date = new Date(this.dates[0].getTime());
-
+    
     while (this.dates[1] > initialDate || this.dates[1].getDate() === initialDate.getDate()) {
       insideDates.push(new Date(initialDate.getDate()));
       initialDate.setDate(initialDate.getDate() + 1);
     }
-
+    
     insideDates.forEach((date) => {
       this.disabledDates.forEach((disabledDate) => {
         if(date.getDate() === disabledDate.getDate()){
@@ -301,8 +317,8 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   
   getBreadCrumbs() {
     return [
-      { label: 'Préstamos', routerLink: [this.routeInformation.borrowsPage] },
-      { label: 'Préstamo', routerLink: [this.routeInformation.borrowPage] }
+      { label: 'Reservas', routerLink: [this.routeInformation.reservationsPage] },
+      { label: 'Reserva', routerLink: [this.routeInformation.reservationPage] }
     ];
   }
   

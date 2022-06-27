@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EventsPageComponent } from './containers/events-page/events-page.component';
-import { EventsRoutingModule } from './events-routing.module';
-import { EventPageComponent } from './containers/event-page/event-page.component';
+import { AreasPageComponent } from './containers/areas-page/areas-page.component';
+import { AreaPageComponent } from './containers/area-page/area-page.component';
+import { AreasRoutingModule } from './areas-routing.module';
 import { TableCardModule } from '../shared/components/table-card/table-card.module';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,32 +18,30 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
-import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
-    EventsPageComponent,
-    EventPageComponent
+    AreasPageComponent,
+    AreaPageComponent
   ],
-	imports: [
-		CommonModule,
-		EventsRoutingModule,
-		TableCardModule,
-		FormsModule,
-		InputTextModule,
-		ListboxModule,
-		ButtonModule,
-		RippleModule,
-		MultiSelectModule,
-		SharedModule,
-		LoadingModule,
-		CalendarModule,
-		FileUploadModule,
-		HttpClientModule,
-		InputNumberModule,
-		InputTextareaModule,
-		TabViewModule,
-		TooltipModule
-	]
+  imports: [
+    CommonModule,
+    AreasRoutingModule,
+    TableCardModule,
+    FormsModule,
+    InputTextModule,
+    ListboxModule,
+    ButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    SharedModule,
+    LoadingModule,
+    CalendarModule,
+    FileUploadModule,
+    HttpClientModule,
+    InputNumberModule,
+    InputTextareaModule,
+    TabViewModule
+  ]
 })
-export class EventsModule { }
+export class AreasModule { }

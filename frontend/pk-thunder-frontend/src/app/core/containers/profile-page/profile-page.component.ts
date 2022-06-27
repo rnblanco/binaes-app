@@ -14,7 +14,8 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
   addLoading = false;
   name: string;
   email: string;
-  id: string;
+  // id: string;
+  id: number;
   telefono: string;
   ocupacion: string;
   direccion: string;

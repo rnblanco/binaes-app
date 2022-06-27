@@ -49,6 +49,9 @@ namespace backend.Models
                 .Property(e => e.responsable)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<AREA>()
+                .Property(e => e.id_Area);
+
             /*modelBuilder.Entity<AREA>()
                 .HasMany(e => e.COLECCION)
                 .WithRequired(e => e.AREA)

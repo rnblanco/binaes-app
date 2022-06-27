@@ -11,45 +11,41 @@
 		[list]="list"
 		[showNewButton]="user.id_rolUsuario !== USER"
 		(onNewClick)="onNew()"
-		newButtonLabel="Nuevo préstamo"
-		type="préstamos"
+		newButtonLabel="Nueva área"
+		type="áreas"
 	>
 		<ng-template
 			pTemplate="body"
 			let-table="table"
 			let-columns="columns"
-			let-data="rowData"
-		>
+			let-data="rowData">
 			<td
 				*ngFor="let col of columns"
 				[ngSwitch]="col.field"
 				[style.width.px]="col.width"
-				class="text-center"
-			>
-				<ng-container *ngSwitchCase="'EJEMPLAR.nombre'">
-					{{ data?.EJEMPLAR?.nombre | titlecase }}
+				class="text-center">
+				
+				<ng-container *ngSwitchCase="'capacidad'">
+					{{ data?.capacidad }}
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'USUARIO.nombre'">
-					{{ data?.USUARIO?.nombre | titlecase }}
+					{{ data?.USUARIO?.nombre }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'ESTADOS.estado'">
-					{{ data?.ESTADOS?.estado | titlecase }}
+				<ng-container *ngSwitchCase="'descripcion'">
+					{{ data?.descripcion }}
 				</ng-container>
 				
-				<ng-container *ngSwitchCase="'fh_Prestamo'">
-					{{ data.fh_Prestamo | date: "dd/MM/yyyy" }}
-				</ng-container>
-				
-				<ng-container *ngSwitchCase="'fh_Devolucion'">
-					{{ data.fh_Devolucion | date: "dd/MM/yyyy" }}
+				<ng-container *ngSwitchCase="'nombre'">
+					{{ data?.nombre }}
 				</ng-container>
 				
 				<ng-container *ngSwitchDefault>
-					{{ data[col.field] }}
+					{{ data[col.field] | titlecase }}
 				</ng-container>
 			</td>
 		</ng-template>
 	</table-card>
 </div>
+

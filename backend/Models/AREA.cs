@@ -25,6 +25,8 @@ namespace backend.Models
 
         public int id_pisoArea { get; set; }
 
+        public int capacidad { get; set; }
+
         public virtual PISOAREA PISOAREA { get; set; }
 
         [ForeignKey("responsable")]
@@ -45,6 +47,8 @@ namespace backend.Models
         [Column(TypeName = "text")]
         [Required]
         public string descripcion { get; set; }
+
+        public int capacidad { get; set; }
 
         public virtual PISOAREA PISOAREA { get; set; }
 
