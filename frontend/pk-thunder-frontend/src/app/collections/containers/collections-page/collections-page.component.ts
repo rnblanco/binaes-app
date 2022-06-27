@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Coleccion } from '../../../shared/models/collection';
+import { Coleccion, PaginadorColeccion } from '../../../shared/models/collection';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({
@@ -35,10 +35,10 @@ export class CollectionsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('COLECCION', this.httpParams)
       .subscribe(
-        (response: Coleccion[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorColeccion) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)

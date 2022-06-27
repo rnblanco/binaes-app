@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Usuario, RolUsuario } from '../../../shared/models/user';
+import { Usuario, RolUsuario, PaginadorUsuario } from '../../../shared/models/user';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({
@@ -40,10 +40,10 @@ export class UsersPageComponent extends LazyComponent implements OnInit {
       this.catalogService
         .getByNameWithParams('USUARIO', this.httpParams.set("id_rolUsuario", this.user.id_rolUsuario ?? 0).set("id_Usuario", this.user.id_Usuario ?? 0))
         .subscribe(
-          (response: Usuario[]) => {
-            // this.pagination = _response.meta;
-            // this.currentPage = this.pagination.currentPage;
-            this.list = response;
+          (response: PaginadorUsuario) => {
+            this.pagination = response.meta;
+            this.currentPage = this.pagination.currentPage;
+            this.list = response.data;
             this.loading = false;
           },
           () => (this.loading = false)

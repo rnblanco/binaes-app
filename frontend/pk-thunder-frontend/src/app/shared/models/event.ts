@@ -1,3 +1,4 @@
+import { Meta } from './pagination';
 import { Usuario } from './user';
 
 export interface Objetivo {
@@ -37,7 +38,14 @@ export interface Tipoarea {
 	tipoArea1:   string;
 }
 
+export interface PaginadorEvento {
+	data: Evento[];
+	meta: Meta;
+}
+
 export const EventStatus = {
 	FINALIZADO: false,
 	EN_CURSO: true
 }
+
+

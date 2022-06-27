@@ -1,5 +1,6 @@
 import { Usuario } from './user';
 import { Ejemplar, Estados } from './exemplar';
+import { Meta } from './pagination';
 
 export interface Prestamo {
 	id_Prestamo:   number;
@@ -15,4 +16,14 @@ export interface Reserva {
 	fh_Reserva: Date,
 	id_Prestamo: string,
 	PRESTAMO: Prestamo
+}
+
+export interface PaginadorPrestamo {
+	data: Prestamo[];
+	meta: Meta;
+}
+
+export interface PaginadorReserva {
+	data: Prestamo[];
+	meta: Meta;
 }

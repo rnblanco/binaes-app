@@ -1,3 +1,4 @@
+import { Meta } from './pagination';
 import { Usuario } from './user';
 
 export interface Coleccion {
@@ -37,3 +38,9 @@ export interface Tipocoleccion {
 	id_tipoColeccion: number;
 	tipoColeccion1:   string;
 }
+
+export interface PaginadorColeccion {
+	data: Coleccion[];
+	meta: Meta;
+}
+

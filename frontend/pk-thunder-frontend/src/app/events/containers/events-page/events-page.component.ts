@@ -41,8 +41,8 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
       .getByNameWithParams('EVENTO', this.httpParams)
       .subscribe(
         (response: Evento[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
+          //this.pagination = response.meta;
+          //this.currentPage = this.pagination.currentPage;
           this.list = response;
           this.loading = false;
         },
