@@ -44,7 +44,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   }
   
   get formIsValid(): boolean{
-    return this.selectedUser.length > 0 && this.selectedExemplar.length > 0 && this.dates[0] !== null && this.dates[1] !== null;
+    return this.selectedUser?.length > 0 && this.selectedExemplar?.length > 0 && this.dates[0] !== null && this.dates[1] !== null;
   }
   
   ngOnInit(): void {

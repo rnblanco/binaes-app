@@ -8,8 +8,15 @@ export class ValidatorService {
   public emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   public phonePattern = '([\\+/][0-9]{2}) ([0-9]{1,2}) ([0-9]{4}) ([0-9]{4})';
   public documentPattern = '([0-9])?([0-9].)?([0-9]{3}).([0-9]{3})-[K|k|0-9]';
-  public documentMask: RegExp = /[K|k|0-9]/;
-  public phoneMask: RegExp = /[0-9]/;
+  
+  public ISBNPattern = '(97(?:8|9)([ -]?)(?=\\d{1,5}\\2?\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}\\d)';
+  public ISSNPattern = '[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]';
+  public DOIPattern = "\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\\'<>])\\S)+)\\b";
+  
+  public ISBN: RegExp = /(97(?:8|9)([ -]?)(?=\d{1,5}\2?\d{1,7}\2?\d{1,6}\2?\d)(?:\d\2*){9}\d)/;
+  public ISSN: RegExp = /[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]/;
+  public DOI: RegExp = new RegExp("\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\\'<>])\\S)+)\\b");
+  
   public validField(form: FormGroup, field: string): boolean | null{
     return (
       form.controls[field].errors &&
@@ -41,71 +48,51 @@ export class ValidatorService {
       }
     };
   }
-
-  public validAddress(control: AbstractControl) {
-    if (!control.value) return { invalidAddress: true };
-    if (
-      (control.value?.country ||
-        control.value?.country === null ||
-        control.value?.country === '') &&
-      (control.value?.state ||
-        control.value?.state === null ||
-        control.value?.state === '') &&
-      (control.value?.city ||
-        control.value?.city === null ||
-        control.value?.city === '') &&
-      (control.value?.street ||
-        control.value?.street === null ||
-        control.value?.street === '') &&
-      (control.value?.streetNumber ||
-        control.value?.streetNumber === null ||
-        control.value?.streetNumber === '') &&
-      (control.value?.location || control.value?.location === null) &&
-      (control.value?.formattedAddress ||
-        control.value?.formattedAddress === null)
-    ) {
-      return null;
+  
+  formatISBN(tag: string): string {
+    if (!tag) return '';
+    let replaceValue = '$1$2$3';
+    if(tag.length <=3){
+      replaceValue = '$1$2$3';
     }
-    return { invalidAddress: true };
+    if(tag.length > 3 && tag.length <=5){
+      replaceValue = '$1$2$3-$4$5';
+    }
+    if(tag.length > 5 && tag.length <=10){
+      replaceValue = '$1$2$3-$4$5-$6$7$8$9$10';
+    }
+    if(tag.length > 10 && tag.length <=12){
+      replaceValue = '$1$2$3-$4$5-$6$7$8$9$10-$11$12';
+    }
+    if(tag.length > 12 && tag.length <=13) {
+      replaceValue = '$1$2$3-$4$5-$6$7$8$9$10-$11$12-$13';
+    }
+    return tag.replace(
+      /([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?/,
+      replaceValue
+    );
   }
-
-  formatDocument(document: string): string {
-    if (!document) return '';
-    if (document.length >= 9)
-      return document.replace(
-        /([0-9]{2})([0-9]{3})([0-9]{3})([k|K|0-9])/,
-        '$1.$2.$3-$4'
-      );
-    if (document.length >= 8) {
-      return document.replace(
-        /([0-9])([0-9]{3})([0-9]{3})([k|K|0-9])/,
-        '$1.$2.$3-$4'
-      );
-    } else
-      return document.replace(/([0-9]{3})([0-9]{3})([k|K|0-9])/, '$1.$2-$3');
+  
+  formatISSN(tag: string): string {
+    if (!tag) return '';
+    let replaceValue = '$1$2$3$4';
+    if(tag.length <=4){
+      replaceValue = '$1$2$3$4';
+    }
+    if(tag.length > 4 && tag.length <=8){
+      replaceValue = '$1$2$3$4-$5$6$7$8';
+    }
+    return tag.replace(
+      /([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([0-9])?([X0-9])?/,
+      replaceValue
+    );
   }
-
-  formatPhone(phone: string): string {
-    if (!phone) return '';
-    if (phone.length >= 12)
-      return phone.replace(
-        /([0-9]{2})([0-9]{2})([0-9]{4})([0-9]{4})/,
-        '+$1 $2 $3 $4'
-      );
-    if (phone.length >= 11)
-      return phone.replace(
-        /([0-9]{2})([0-9])([0-9]{4})([0-9]{4})/,
-        '+$1 $2 $3 $4'
-      );
-    return phone.replace(
-      /([0-9]{2})([0-9])?([0-9]{4})?([0-9]{4})?/,
-      phone.length <= 2
-        ? '+$1'
-        : phone.length <= 4
-        ? '+$1 $2'
-        : phone.length <= 8
-        ? '+$1 $2 $3'
-        : '+$1 $2 $3 $4'
+  
+  formatDOI(tag: string): string {
+    if (!tag) return '';
+    return tag.replace(
+      /([0-9]{3})([0-9]{2})([0-9]{6}([0-9]{2})-([0-9]))/,
+      '$1-$2-$3-$4-$5'
     );
   }
 }

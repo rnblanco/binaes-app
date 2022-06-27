@@ -31,13 +31,46 @@ export interface Estados {
 	estado:    string;
 }
 
+export interface P_Clave {
+	id_p_Clave: number,
+	p_clave: string,
+  id_Ejemplar: number,
+	 EJEMPLAR: Ejemplar
+}
+
+export interface Autor {
+	id_Autor: number,
+	nombre: string
+}
+
+export interface AutorxEjemplar{
+	id_autorEjemplar: number
+	AUTOR: Autor,
+	EJEMPLAR: Ejemplar,
+}
+
+export interface EtiquetaxEjemplar {
+	id_etiquetaEjemplar: number,
+	id_tipoEtiqueta: number
+	id_Ejemplar: number,
+	etiqueta: string,
+	TIPOETIQUETA: TipoEtiqueta,
+	EJEMPLAR: Ejemplar
+}
+
+export interface TipoEtiqueta {
+	id_tipoEtiqueta: number,
+	tipoEtiqueta1: string
+}
+
 export enum BorrowStatus {
 	EN_PRESTAMO = 1,
 	FINALIZADO = 2,
 	RESERVADO = 3
 }
 
-export enum EventStatus {
-	FINALIZADO,
-	EN_CURSO,
+export enum TagType {
+	ISBN = 1,
+	ISSN = 2,
+	DOI = 3,
 }

@@ -15,6 +15,7 @@ import { AuthService } from './auth/services/auth.service';
 import { MenuService } from './core/services/app.menu.service';
 import { AppInjector } from './app-injector.service';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { TagPipe } from './shared/pipes/tag.pipe';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { TokenInterceptor } from './auth/interceptors/token.interceptor';
     CoreModule
   ],
   providers: [
+    TagPipe,
     MenuService,
     AppBreadcrumbService,
     AuthService,
