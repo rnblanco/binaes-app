@@ -29,11 +29,16 @@
             </ng-template>
         </p-multiSelect>
     </div>
-	
-		<div class="p-field p-col-6 p-mt-2">
+		
+		<div class="p-field p-col-4 p-mt-2" [ngClass]="{'p-col-6': isNew}">
 			<label>Rango de fechas:</label>
-			<p-calendar name="dates" dateFormat="dd/mm/yy" selectionMode="range" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="disabledDates"
+			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="disabledDates"
 									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()"></p-calendar>
+		</div>
+
+		<div class="p-field p-col-2 p-mt-2" *ngIf="!isNew">
+			<label>Estado:</label>
+			<input type="text" pInputText name="eventStatus" [(ngModel)]="readableStatus" [disabled]="true">
 		</div>
 	
 		<div class="p-field p-col-12 p-mt-2">
@@ -41,7 +46,6 @@
 			<p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
 										(onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
 				<ng-template pTemplate="content">
-					<label>Logo actual:</label><br />
 					<img src="{{ uploadedFile[0] | photo }}" style="height:10em"/>
 				</ng-template>
 			</p-fileUpload>
@@ -81,7 +85,7 @@
 			</p-tabView>
 		</div>
 	
-		<div class="p-col-12 p-grid p-mt-2">
+		<div class="p-col-12 p-grid p-mt-2 p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
 			<div [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
 				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
 			</div>

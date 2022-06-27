@@ -35,3 +35,8 @@ export interface Tipoarea {
 	id_tipoArea: number;
 	tipoArea1:   string;
 }
+
+export const EventStatus = {
+	FINALIZADO: false,
+	EN_CURSO: true
+}

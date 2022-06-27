@@ -39,20 +39,14 @@
       <p-multiSelect [options]="formatos" [(ngModel)]="selectedFormato" (onFilter)="formatoFilter($event)" (onChange)="formatoChange($event)" [showToggleAll]="false"
                      #formatoMultiSelect name="selectedFormato" defaultLabel="Elige un formato" optionLabel="formato" optionValue="id_formatoEjemplar"
                      [showClear]="true" [resetFilterOnHide]="true">
-        <ng-template let-group pTemplate="emptyfilter">
-
-        </ng-template>
       </p-multiSelect>
     </div>
 
     <div class="p-field p-col-9 p-mt-2">
-      <label>Coleccion:</label>
+      <label>Colección:</label>
       <p-multiSelect [options]="collections" [(ngModel)]="selectedCollection" (onFilter)="collectionFilter($event)" (onChange)="collectionChange($event)" [showToggleAll]="false"
                      #collectionMultiSelect name="selectedCollection" defaultLabel="Elige una colección" optionLabel="nombre" optionValue="id_Coleccion"
                      [showClear]="true" [resetFilterOnHide]="true">
-        <ng-template let-group pTemplate="emptyfilter">
-
-        </ng-template>
       </p-multiSelect>
     </div>
 
@@ -62,18 +56,68 @@
         <p-calendar name="date" [(ngModel)]="date" [maxDate]="maxDate" dateFormat="dd-mm-yy"></p-calendar>
       </div>
     </div>
+		
     <div class="p-field p-col-12 p-mt-2">
       <label>Portada:</label>
       <p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
 										(onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
         <ng-template pTemplate="content">
-          <label>Portada actual:</label><br />
           <img src="{{ uploadedFile[0] | photo }}" style="height:10em"/>
         </ng-template>
       </p-fileUpload> 
     </div>
-
-    <div class="p-col-12 p-grid p-mt-2">
+	
+		<div class="p-field p-col-12 p-mt-2">
+			<label>Etiquetas:</label>
+			<p-multiSelect [options]="tagsxExemplar" [(ngModel)]="selectedTags" (onChange)="tagChange($event)" [showToggleAll]="false"
+										 #tagMultiSelect name="selectedTags" defaultLabel="Elige una etiqueta" optionLabel="etiqueta" optionValue="id_etiquetaEjemplar"
+										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron etiquetas" emptyMessage="No se encontraron etiquetas"
+										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+			>
+			</p-multiSelect>
+		</div>
+	
+		<div class="p-col-12 p-mb-2">
+			<p-tabView (onChange)="tabChange()" *ngIf="tagTypes?.length ?? 0 > 0">
+				<p-tabPanel [header]="tagType.tipoEtiqueta1 | uppercase" *ngFor="let tagType of tagTypes; let i = index" [selected]="i === 0"
+										[disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top">
+					<div class="p-inputgroup">
+						<input pInputText required placeholder="Ej. 999999999" name="tagName" tagMask [tagType]="tagType.id_tipoEtiqueta"
+									 (onMask)="onMask($event)" [(ngModel)]="tagName" [ngModelOptions]="{standalone: true}"
+									 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"/>
+						<button pButton type="button" [disabled]="tagName?.length === 0" (click)="addTag(tagType.id_tipoEtiqueta)"> Agregar </button>
+					</div>
+				</p-tabPanel>
+			</p-tabView>
+		</div>
+	
+		<div class="p-field p-col-12 p-mt-2">
+			<label>Palabras clave:</label>
+			<p-multiSelect [options]="keywords" [(ngModel)]="selectedKeywords" (onFilter)="keywordsFilter($event)" (onChange)="keywordsChange($event)" [showToggleAll]="false"
+										 #keywordMultiSelect name="selectedKeywords" defaultLabel="Elige una palabra clave" optionLabel="p_clave" optionValue="id_p_Clave"
+										 [showClear]="true" [resetFilterOnHide]="true" display="chip" emptyFilterMessage="No se encontraron palabras clave" emptyMessage="No se encontraron palabras clave"
+										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{keywordText}}'" (click)="addKeyword()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-12 p-mt-2 p-mb-4">
+			<label>Autores:</label>
+			<p-multiSelect [options]="authors" [(ngModel)]="selectedAuthors" (onFilter)="authorFilter($event)" (onChange)="authorChange($event)" [showToggleAll]="false"
+										 #authorMultiSelect name="selectedAuthors" defaultLabel="Elige un autor" optionLabel="nombre" optionValue="id_Autor"
+										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron autores" emptyMessage="No se encontraron autores"
+										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{authorText}}'" (click)="addAuthor()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+    <div class="p-col-12 p-grid p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
       <div [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
         <button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
       </div>

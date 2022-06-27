@@ -7,7 +7,7 @@ import { RouteInformation } from '../../../shared/constants/route-information';
 import { Roles } from '../../../auth/constants/roles';
 import { FileUpload } from 'primeng/fileupload'
 import { HttpParams } from '@angular/common/http';
-import { EventStatus } from '../../../shared/models/exemplar';
+
 @Component({
   selector: 'app-event-page',
   templateUrl: './event-page.component.html',
@@ -27,7 +27,8 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   uploadedFiles: File[];
   uploadedFile: any[] = [];
   selectedfiles: any[];
-  eventStatus: number;
+  eventStatus: boolean;
+  readableStatus: string;
   
   maxDate: Date;
   minDate: Date = new Date();
@@ -53,7 +54,12 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   }
 
   get formIsValid(): boolean {
-    return this.title !== '' && this.selectedArea.length > 0 && this.dates[0] != undefined && this.dates[1] != undefined && (this.uploadedFiles != undefined || this.uploadedFile.length > 0);
+    return this.title !== '' && this.selectedArea?.length > 0 && this.dates[0] !== undefined && this.dates[1] !== undefined
+      && (this.uploadedFiles !== undefined || this.uploadedFile?.length > 0);
+  }
+  
+  changeStatus(): void {
+    this.readableStatus = this.eventStatus ? 'Reservado' : 'Finalizado';
   }
 
   ngOnInit(): void {
@@ -172,7 +178,7 @@ export class EventPageComponent extends BaseComponent implements OnInit {
         id_Evento: this.id,
         titulo: this.title,
         capacidad: this.capacity,
-        aprobado: true,
+        aprobado: this.eventStatus,
         fh_Inicio: this.dates[0],
         fh_Finalizacion: this.dates[1],
         id_areaRealizacion: this.selectedArea[0],
@@ -220,9 +226,6 @@ export class EventPageComponent extends BaseComponent implements OnInit {
       return;
     }
     
-    if (this.dates[1] < this.maxDate) this.eventStatus = EventStatus.FINALIZADO;
-    else this.eventStatus = EventStatus.EN_CURSO;
-    
     let insideDates: Date[] = [];
     const initialDate: Date = new Date(this.dates[0].getTime());
     
@@ -254,10 +257,10 @@ export class EventPageComponent extends BaseComponent implements OnInit {
           this.id = response.id_Evento;
           this.selectedArea.push(response.AREA.id_Area);
           this.dates = [new Date(response.fh_Inicio), new Date(response.fh_Finalizacion)];
-          this.maxDate = new Date(response.fh_Finalizacion);
-          this.minDate = new Date(response.fh_Inicio);
           this.title = response.titulo;
           this.capacity = response.capacidad;
+          this.eventStatus = response.aprobado;
+          this.changeStatus();
           this.uploadedFile.push(response.imagen);
           setTimeout(() => {
             this.loading = false;

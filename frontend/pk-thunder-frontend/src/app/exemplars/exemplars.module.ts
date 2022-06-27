@@ -15,6 +15,9 @@ import { LoadingModule } from '../../components/loading/loading.module';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
+import { TooltipModule } from 'primeng/tooltip';
+import { TabViewModule } from 'primeng/tabview';
+import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.module';
 
 
 
@@ -23,21 +26,24 @@ import { HttpClientModule } from '@angular/common/http';
     ExemplarsPageComponent,
     ExemplarPageComponent
   ],
-  imports: [
-    CommonModule,
-    ExemplarsRoutingModule,
-    TableCardModule,
-    FormsModule,
-    InputTextModule,
-    ListboxModule,
-    ButtonModule,
-    RippleModule,
-    MultiSelectModule,
-    SharedModule,
-    LoadingModule,
-    CalendarModule,
-    FileUploadModule,
-    HttpClientModule
-  ]
+	imports: [
+		CommonModule,
+		ExemplarsRoutingModule,
+		TableCardModule,
+		FormsModule,
+		InputTextModule,
+		ListboxModule,
+		ButtonModule,
+		RippleModule,
+		MultiSelectModule,
+		SharedModule,
+		LoadingModule,
+		CalendarModule,
+		FileUploadModule,
+		HttpClientModule,
+		TooltipModule,
+		TabViewModule,
+		TagMaskModule
+	]
 })
 export class ExemplarsModule { }

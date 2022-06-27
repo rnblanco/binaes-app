@@ -40,7 +40,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit {
   }
   
   get formIsValid(): boolean{
-    return this.name !== '' && this.selectedType.length > 0 && this.selectedGenre.length > 0 && this.selectedArea.length > 0;
+    return this.name !== '' && this.selectedType?.length > 0 && this.selectedGenre?.length > 0 && this.selectedArea?.length > 0;
   }
 
   ngOnInit(): void {
