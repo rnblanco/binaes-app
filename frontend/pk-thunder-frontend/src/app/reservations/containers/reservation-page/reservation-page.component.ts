@@ -112,7 +112,16 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
     
     this.subscription.add(
       this.catalogService
-      .addOfURL(`RESERVA`, this.reservation)
+      .addOfURL(`RESERVA`, {
+        fh_Reserva: new Date(),
+        PRESTAMO:{
+          fh_Prestamo: this.dates[0],
+          fh_Devolucion: this.dates[1],
+          id_Estado: BorrowStatus.RESERVADO,
+          id_usuarioPresta: this.selectedUser[0],
+          id_Ejemplar: this.selectedExemplar[0],
+        }
+      })
       .subscribe(
         () => {
           this.messageService.setPayload({

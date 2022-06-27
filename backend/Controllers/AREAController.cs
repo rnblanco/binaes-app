@@ -27,7 +27,9 @@ namespace backend.Controllers
                 aREA.id_Area = area.id_Area;
                 aREA.nombre = area.nombre;
                 aREA.descripcion = area.descripcion;
+                aREA.capacidad = area.capacidad;
                 aREA.PISOAREA = area.PISOAREA;
+                aREA.TIPOAREA = area.TIPOAREA;
 
                 aREA.USUARIO = new USUARIO_rU();
                 aREA.USUARIO.id_Usuario = area.USUARIO.id_Usuario;
@@ -61,7 +63,9 @@ namespace backend.Controllers
                 aREA.id_Area = area.id_Area;
                 aREA.nombre = area.nombre;
                 aREA.descripcion = area.descripcion;
+                aREA.capacidad = area.capacidad;
                 aREA.PISOAREA = area.PISOAREA;
+                aREA.TIPOAREA = area.TIPOAREA;
 
                 aREA.USUARIO = new USUARIO_rU();
                 aREA.USUARIO.id_Usuario = area.USUARIO.id_Usuario;

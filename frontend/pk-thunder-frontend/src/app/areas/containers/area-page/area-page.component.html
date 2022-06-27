@@ -1,1 +1,74 @@
-<p>area-page works!</p>
+<div class="card p-mt-4">
+	<app-loading
+		*ngIf="loading"
+		class="p-d-flex p-ai-center p-jc-center"
+		style="height: 80%"
+	></app-loading>
+	<form
+		*ngIf="!loading"
+		#form="ngForm"
+		autocomplete="off"
+		class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2"
+	>
+		<div class="p-field p-col-12">
+			<label>Nombre:</label>
+			<div class="p-input-icon-right">
+				<input name="name" [(ngModel)]="name" placeholder="Ej. Área de recreación" pInputText/>
+			</div>
+		</div>
+		
+		<div class="p-field p-col-12">
+			<label>Descripción:</label>
+			<div class="p-input-icon-right">
+				<textarea name="description" [(ngModel)]="description" placeholder="Ej. Espacio para desarrollar las habilidades sociales" pInputTextarea></textarea>
+			</div>
+		</div>
+		
+		<div class="p-field p-col-8 p-mt-2">
+			<label>Encargado:</label>
+			<p-multiSelect [options]="users" [(ngModel)]="selectedUser" (onFilter)="userFilter($event)" (onChange)="userChange($event)" [showToggleAll]="false"
+										 #userMultiSelect name="selectedUser" defaultLabel="Elige un encargado" optionLabel="nombre" optionValue="id_Usuario"
+										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron resultados"
+			></p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-4 p-mt-2">
+			<label>Capacidad del área:</label>
+			<p-inputNumber name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000"></p-inputNumber>
+		</div>
+		
+		<div class="p-field p-col-6 p-mt-2">
+			<label>Tipo de área:</label>
+			<p-multiSelect [options]="areaTypes" [(ngModel)]="selectedAreaType" (onFilter)="areaTypeFilter($event)" (onChange)="areaTypeChange($event)" [showToggleAll]="false"
+										 #areaTypeMultiSelect name="selectedAreaType" defaultLabel="Elige un tipo" optionLabel="tipoArea1" optionValue="id_tipoArea"
+										 [showClear]="true" [resetFilterOnHide]="true"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaTypeText}}'" (click)="addAreaType()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-6 p-mt-2">
+			<label>Piso:</label>
+			<p-multiSelect [options]="floorAreas" [(ngModel)]="selectedFloorArea" (onFilter)="floorAreaFilter($event)" (onChange)="floorAreaChange($event)" [showToggleAll]="false"
+										 #floorAreaMultiSelect name="selectedFloorArea" defaultLabel="Elige un piso" optionLabel="pisoArea1" optionValue="id_pisoArea"
+										 [showClear]="true" [resetFilterOnHide]="true"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{floorAreaText}}'" (click)="addFloorArea()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+		<div class="p-col-12 p-grid p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
+			<div class="p-field" [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
+			</div>
+			
+			<div class="p-field" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
+				<button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
+			</div>
+		</div>
+	</form>
+</div>

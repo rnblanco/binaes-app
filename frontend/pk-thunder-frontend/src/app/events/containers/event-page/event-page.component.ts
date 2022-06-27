@@ -281,6 +281,8 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   areaChange(event: any): void {
     this.selectedArea = [event.itemValue];
     this.loadDisabledDates(event.itemValue);
+    const area = this.areas.find((area) => area.id_Area === this.selectedArea[0]);
+    this.capacity = area?.capacidad ?? 0;
   }
   
   loadDisabledDates(id: number): void {

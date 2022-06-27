@@ -21,6 +21,7 @@ export interface Area {
 	id_Area:     number;
 	nombre:      string;
 	descripcion: string;
+	capacidad: number;
 	PISOAREA:    Pisoarea;
 	USUARIO:     Usuario;
 	TIPOAREA:    Tipoarea;

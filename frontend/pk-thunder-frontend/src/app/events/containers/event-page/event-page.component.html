@@ -16,7 +16,8 @@
 	
 			<div class="p-field p-col-4">
 				<label>Capacidad del evento:</label>
-				<p-inputNumber name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000"></p-inputNumber>
+				<p-inputNumber pTooltip="La capacidad depende del área" tooltipPosition="top"
+					name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" [disabled]="true"></p-inputNumber>
 			</div>
 
       <div class="p-field p-col-6 p-mt-2">

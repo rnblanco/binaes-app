@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { TabViewModule } from 'primeng/tabview';
 		HttpClientModule,
 		InputNumberModule,
 		InputTextareaModule,
-		TabViewModule
+		TabViewModule,
+		TooltipModule
 	]
 })
 export class EventsModule { }

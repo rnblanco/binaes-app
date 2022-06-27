@@ -59,7 +59,7 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
       {
         label: 'Áreas',
         icon: 'pi pi-fw pi-th-large',
-        routerLink: this.routeInformation.eventsPage
+        routerLink: this.routeInformation.areasPage
       },
       {
         label: 'Eventos',
