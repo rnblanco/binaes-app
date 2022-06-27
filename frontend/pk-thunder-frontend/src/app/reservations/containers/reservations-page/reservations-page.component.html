@@ -1,0 +1,59 @@
+<div class="p-mt-4">
+	<table-card
+		[reloading]="loading"
+		[globalFilter]="globalFilter"
+		[rows]="rows"
+		(onLazyLoad)="onLazyLoad($event)"
+		(onRowSelect)="onRowSelect($event)"
+		[pagination]="pagination"
+		[loading]="loading"
+		[cols]="cols"
+		[list]="list"
+		[showNewButton]="user.id_rolUsuario !== USER"
+		(onNewClick)="onNew()"
+		newButtonLabel="Nueva reserva"
+		type="colecciones"
+	>
+		<ng-template
+			pTemplate="body"
+			let-table="table"
+			let-columns="columns"
+			let-data="rowData"
+		>
+			<td
+				*ngFor="let col of columns"
+				[ngSwitch]="col.field"
+				[style.width.px]="col.width"
+				class="text-center"
+			>
+				<ng-container *ngSwitchCase="'PRESTAMO.EJEMPLAR.nombre'">
+					{{ data?.PRESTAMO?.EJEMPLAR?.nombre | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'PRESTAMO.USUARIO.nombre'">
+					{{ data?.PRESTAMO?.USUARIO?.nombre | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'PRESTAMO.ESTADOS.estado'">
+					{{ data?.PRESTAMO?.ESTADOS?.estado | titlecase }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'fh_Reserva'">
+					{{ data?.fh_Reserva | date: "dd/MM/yyyy" }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'PRESTAMO.fh_Prestamo'">
+					{{ data?.PRESTAMO?.fh_Prestamo | date: "dd/MM/yyyy" }}
+				</ng-container>
+				
+				<ng-container *ngSwitchCase="'PRESTAMO.fh_Devolucion'">
+					{{ data?.PRESTAMO?.fh_Devolucion | date: "dd/MM/yyyy" }}
+				</ng-container>
+				
+				<ng-container *ngSwitchDefault>
+					{{ data[col.field] }}
+				</ng-container>
+			</td>
+		</ng-template>
+	</table-card>
+</div>
