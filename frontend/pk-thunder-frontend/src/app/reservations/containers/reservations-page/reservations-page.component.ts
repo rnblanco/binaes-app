@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Roles } from '../../../auth/constants/roles';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Reserva } from '../../../shared/models/borrow';
+import { Prestamo, Reserva } from '../../../shared/models/borrow';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-reservations-page',
@@ -25,8 +26,30 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
   ] as any[];
   
   ngOnInit(): void {
-    this.loadAll();
+    if(this.user.id_rolUsuario === Roles.USER){
+      this.loadOwn();
+    }
+    else this.loadAll();
     this.breadcrumbService.setItems(this.getBreadCrumbs());
+  }
+  
+  loadOwn() {
+    this.list = [];
+    this.loading = true;
+    this.getPaginationParams();
+    this.subscription.add(
+      this.catalogService
+      .getByNameWithParams('RESERVA', new HttpParams().set('id_Usuario', this.user.id_Usuario))
+      .subscribe(
+        (response: Reserva[]) => {
+          // this.pagination = _response.meta;
+          // this.currentPage = this.pagination.currentPage;
+          this.list = response;
+          this.loading = false;
+        },
+        () => (this.loading = false)
+      )
+    );
   }
   
   loadAll() {
@@ -73,7 +96,7 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
   
   getBreadCrumbs() {
     return [
-      { label: 'Reservas', routerLink: [this.routeInformation.reservationsPage] },
+      { label: this.user.id_rolUsuario === this.USER ? 'Mis reservas' : 'Reservas', routerLink: [this.routeInformation.reservationsPage] },
     ];
   }
 

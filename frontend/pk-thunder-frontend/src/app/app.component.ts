@@ -6,6 +6,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { StorageInformation } from './shared/constants/storage-information';
 import { GlobalMessageService } from './auth/services/global-message.service';
+import { CALENDARIO_ES } from './shared/utils/calendario_es';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +38,7 @@ export class AppComponent {
   ngOnInit() {
     this.primengConfig.ripple = true;
     document.documentElement.style.fontSize = '14px';
+    this.primengConfig.setTranslation(CALENDARIO_ES);
     this.globalMessageService.itemsHandler.subscribe((_payload) => {
       this.messageService.add({
         severity: _payload.type,
