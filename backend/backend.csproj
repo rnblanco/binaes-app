@@ -308,6 +308,7 @@
     <Compile Include="Models\IDIOMAEJEMPLAR.cs" />
     <Compile Include="Models\INICIAR_SESION.cs" />
     <Compile Include="Models\OBJETIVOSxEVENTO.cs" />
+    <Compile Include="Models\Paginador.cs" />
     <Compile Include="Models\PISOAREA.cs" />
     <Compile Include="Models\PRESTAMO.cs" />
     <Compile Include="Models\P_CLAVExEJEMPLAR.cs" />

@@ -1,4 +1,5 @@
 using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -41,8 +42,9 @@ namespace backend.Controllers
             return usersList.AsQueryable();
         }
 
+        [ResponseType(typeof(USUARIO_PAGINADOR))]
         // GET: api/USUARIO?id_rolUsuario=2&limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<USUARIO_rU> GetUSUARIO(int limit, int page, string search, string SortBy, int id_rolUsuario, string id_Usuario)
+        public async Task<IHttpActionResult> GetUSUARIO(int limit, int page, string search, string SortBy, int id_rolUsuario, string id_Usuario)
         {
             var sorted = "id_Usuario ascending";
             if (SortBy != null)
@@ -50,9 +52,33 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
-            List<USUARIO> users;            
+
+            USUARIO_PAGINADOR PAGINADOR = new USUARIO_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.data = new List<USUARIO_rU>();
+            List<USUARIO> users;
+            
             if (id_rolUsuario == 2)
             {
+                int total = db.USUARIO
+                .Where(x =>
+                    x.id_rolUsuario == 1 && (
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.email, "%" + search + "%") ||
+                    DbFunctions.Like(x.telefono, "%" + search + "%") ||
+                    DbFunctions.Like(x.ocupacion, "%" + search + "%") ||
+                    DbFunctions.Like(x.direccion, "%" + search + "%") ||
+                    DbFunctions.Like(x.institucion, "%" + search + "%") ||
+                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
+                .OrderBy(sorted).Count();
+
+                
+                PAGINADOR.meta.totalItems = total;
+                PAGINADOR.meta.itemsPerPage = limit;
+                Double totalPages = (total + limit - 1) / limit;
+                PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+                PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+
                 users = db.USUARIO
                 .Where(x => 
                     x.id_rolUsuario == 1 && (
@@ -63,10 +89,28 @@ namespace backend.Controllers
                     DbFunctions.Like(x.direccion, "%" + search + "%") ||
                     DbFunctions.Like(x.institucion, "%" + search + "%") ||
                     DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
             }
             else
             {
+                int total = db.USUARIO
+                .Where(x =>
+                    x.id_Usuario != id_Usuario && (
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.email, "%" + search + "%") ||
+                    DbFunctions.Like(x.telefono, "%" + search + "%") ||
+                    DbFunctions.Like(x.ocupacion, "%" + search + "%") ||
+                    DbFunctions.Like(x.direccion, "%" + search + "%") ||
+                    DbFunctions.Like(x.institucion, "%" + search + "%") ||
+                    DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
+                .OrderBy(sorted).Count();
+
+                PAGINADOR.meta.totalItems = total;
+                PAGINADOR.meta.itemsPerPage = limit;
+                Double totalPages = (total + limit - 1) / limit;
+                PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+                PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+
                 users = db.USUARIO
                 .Where(x =>
                     x.id_Usuario != id_Usuario && (
@@ -77,10 +121,9 @@ namespace backend.Controllers
                     DbFunctions.Like(x.direccion, "%" + search + "%") ||
                     DbFunctions.Like(x.institucion, "%" + search + "%") ||
                     DbFunctions.Like(x.ROLUSUARIO.rol, "%" + search + "%")))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
             }
             
-            List<USUARIO_rU> usersList = new List<USUARIO_rU>();
             foreach (var user in users)
             {
                 USUARIO_rU uSUARIO = new USUARIO_rU();
@@ -93,10 +136,10 @@ namespace backend.Controllers
                 uSUARIO.fotografia = Encoding.UTF8.GetString(user.fotografia);
                 uSUARIO.institucion = user.institucion;
                 uSUARIO.ROLUSUARIO = user.ROLUSUARIO;
-                usersList.Add(uSUARIO);
+                PAGINADOR.data.Add(uSUARIO);
             }
 
-            return usersList.AsQueryable();
+            return Ok(PAGINADOR);
         }
 
         // GET: api/USUARIO/5

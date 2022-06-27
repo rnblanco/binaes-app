@@ -1,6 +1,7 @@
 namespace backend.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -62,5 +63,11 @@ namespace backend.Models
         public virtual FORMATOEJEMPLAR FORMATOEJEMPLAR { get; set; }
 
         public virtual IDIOMAEJEMPLAR IDIOMAEJEMPLAR { get; set; }
+    }
+
+    public partial class EJEMPLAR_PAGINADOR
+    {
+        public Meta meta { get; set; }
+        public List<EJEMPLAR_E_F_I_C> data { get; set; }
     }
 }

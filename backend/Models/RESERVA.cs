@@ -1,6 +1,7 @@
 namespace backend.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,5 +26,11 @@ namespace backend.Models
         public DateTime fh_Reserva { get; set; }
 
         public virtual PRESTAMO_E PRESTAMO { get; set; }
+    }
+
+    public partial class RESERVA_PAGINADOR
+    {
+            public Meta meta { get; set; }
+            public List<RESERVA_P_E> data { get; set; }
     }
 }

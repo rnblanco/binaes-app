@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -154,8 +155,9 @@ namespace backend.Controllers
             return bookingsList.AsQueryable();
         }
 
+        [ResponseType(typeof(RESERVA_PAGINADOR))]
         // GET: api/RESERVA?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<RESERVA_P_E> GetRESERVA(int limit, int page, string search, string SortBy)
+        public async Task<IHttpActionResult> GetRESERVA(int limit, int page, string search, string SortBy)
         {
             var sorted = "id_Reserva ascending";
             if (SortBy != null)
@@ -163,12 +165,29 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
+
+            int total = db.RESERVA
+                .Where(x =>
+                    DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%"))
+                .OrderBy(sorted).Count();
+
+            RESERVA_PAGINADOR PAGINADOR = new RESERVA_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.meta.totalItems = total;
+            PAGINADOR.meta.itemsPerPage = limit;
+            Double totalPages = (total + limit - 1) / limit;
+            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+            PAGINADOR.data = new List<RESERVA_P_E>();
+
             var bookings = db.RESERVA
                 .Where(x =>
                     DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%"))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
-            List<RESERVA_P_E> bookingsList = new List<RESERVA_P_E>();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+
+
             foreach (var booking in bookings)
             {
                 RESERVA_P_E rESERVA = new RESERVA_P_E();
@@ -227,9 +246,9 @@ namespace backend.Controllers
                 rESERVA.PRESTAMO.USUARIO.institucion = booking.PRESTAMO.USUARIO.institucion;
                 rESERVA.PRESTAMO.USUARIO.ROLUSUARIO = booking.PRESTAMO.USUARIO.ROLUSUARIO;
 
-                bookingsList.Add(rESERVA);
+                PAGINADOR.data.Add(rESERVA);
             }
-            return bookingsList.AsQueryable();
+            return Ok(PAGINADOR);
         }
 
         // GET: api/RESERVA/5

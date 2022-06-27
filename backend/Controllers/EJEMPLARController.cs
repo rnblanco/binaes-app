@@ -1,4 +1,5 @@
 ﻿using backend.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -64,8 +65,9 @@ namespace backend.Controllers
             return exemplarsList.AsQueryable();
         }
 
+        [ResponseType(typeof(EJEMPLAR_E_F_I_C))]
         // GET: api/EJEMPLAR?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<EJEMPLAR_E_F_I_C> GetEJEMPLAR(int limit, int page, string search, string SortBy)
+        public async Task<IHttpActionResult> GetEJEMPLAR(int limit, int page, string search, string SortBy)
         {
             var sorted = "id_Ejemplar ascending";
             if (SortBy != null)
@@ -73,6 +75,29 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
+
+            int total = db.EJEMPLAR
+                .Where(x =>
+                    DbFunctions.Like(x.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.EDITORIAL.editorial1, "%" + search + "%") ||
+                    DbFunctions.Like(x.FORMATOEJEMPLAR.formato, "%" + search + "%") ||
+                    DbFunctions.Like(x.IDIOMAEJEMPLAR.idioma, "%" + search + "%") ||
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.f_publicacion).ToString(), "%" + search + "%") ||
+                    DbFunctions.Like(x.COLECCION.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.COLECCION.AREA.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.COLECCION.GENEROCOLECCION.generoColeccion1, "%" + search + "%") ||
+                    DbFunctions.Like(x.COLECCION.TIPOCOLECCION.tipoColeccion1, "%" + search + "%"))
+                .OrderBy(sorted).Count();
+
+            EJEMPLAR_PAGINADOR PAGINADOR = new EJEMPLAR_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.meta.totalItems = total;
+            PAGINADOR.meta.itemsPerPage = limit;
+            Double totalPages = (total + limit - 1) / limit;
+            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+            PAGINADOR.data = new List<EJEMPLAR_E_F_I_C>();
+
             var exemplars = db.EJEMPLAR
                 .Where(x =>
                     DbFunctions.Like(x.nombre, "%" + search + "%") ||
@@ -84,8 +109,8 @@ namespace backend.Controllers
                     DbFunctions.Like(x.COLECCION.AREA.nombre, "%" + search + "%") ||
                     DbFunctions.Like(x.COLECCION.GENEROCOLECCION.generoColeccion1, "%" + search + "%") ||
                     DbFunctions.Like(x.COLECCION.TIPOCOLECCION.tipoColeccion1, "%" + search + "%"))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
-            List<EJEMPLAR_E_F_I_C> exemplarsList = new List<EJEMPLAR_E_F_I_C>();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+
             foreach (var exemplar in exemplars)
             {
                 EJEMPLAR_E_F_I_C eJEMPLAR = new EJEMPLAR_E_F_I_C();
@@ -122,9 +147,10 @@ namespace backend.Controllers
 
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
-                exemplarsList.Add(eJEMPLAR);
+                PAGINADOR.data.Add(eJEMPLAR);
             }
-            return exemplarsList.AsQueryable();
+
+            return Ok(PAGINADOR);
         }
 
         // GET: api/EJEMPLAR/5
