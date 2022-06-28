@@ -18,30 +18,6 @@
 		</div>
 		
 		<div class="p-field p-col-12 p-mt-2">
-			<label>Tipo:</label>
-			<p-multiSelect [options]="types" [(ngModel)]="selectedType" (onFilter)="typeFilter($event)" (onChange)="typeChange($event)" [showToggleAll]="false"
-										 #typeMultiSelect name="selectedType" defaultLabel="Elige un tipo" optionLabel="tipoColeccion1" optionValue="id_tipoColeccion"
-										 [showClear]="true" [resetFilterOnHide]="true"
-			>
-				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{typeText}}'" (click)="addType()"></button>
-				</ng-template>
-			</p-multiSelect>
-		</div>
-		
-		<div class="p-field p-col-12 p-mt-2">
-			<label>Género:</label>
-			<p-multiSelect [options]="genres" [(ngModel)]="selectedGenre" (onFilter)="genreFilter($event)" (onChange)="genreChange($event)" [showToggleAll]="false"
-										 #genreMultiSelect name="selectedGenre" defaultLabel="Elige un género" optionLabel="generoColeccion1" optionValue="id_generoColeccion"
-										 [showClear]="true" [resetFilterOnHide]="true"
-			>
-				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{genreText}}'" (click)="addGenre()"></button>
-				</ng-template>
-			</p-multiSelect>
-		</div>
-		
-		<div class="p-field p-col-12 p-mt-2">
 			<label>Área:</label>
 			<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
 										 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
@@ -53,12 +29,36 @@
 			</p-multiSelect>
 		</div>
 		
-		<div class="p-col-12 p-grid p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
-			<div class="p-field" [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+		<div class="p-field p-col-6 p-mt-2">
+			<label>Tipo:</label>
+			<p-multiSelect [options]="types" [(ngModel)]="selectedType" (onFilter)="typeFilter($event)" (onChange)="typeChange($event)" [showToggleAll]="false"
+										 #typeMultiSelect name="selectedType" defaultLabel="Elige un tipo" optionLabel="tipoColeccion1" optionValue="id_tipoColeccion"
+										 [showClear]="true" [resetFilterOnHide]="true"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{typeText}}'" (click)="addType()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+		<div class="p-field p-col-6 p-mt-2">
+			<label>Género:</label>
+			<p-multiSelect [options]="genres" [(ngModel)]="selectedGenre" (onFilter)="genreFilter($event)" (onChange)="genreChange($event)" [showToggleAll]="false"
+										 #genreMultiSelect name="selectedGenre" defaultLabel="Elige un género" optionLabel="generoColeccion1" optionValue="id_generoColeccion"
+										 [showClear]="true" [resetFilterOnHide]="true"
+			>
+				<ng-template let-group pTemplate="emptyfilter">
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{genreText}}'" (click)="addGenre()"></button>
+				</ng-template>
+			</p-multiSelect>
+		</div>
+		
+		<div class="p-col-12 p-grid p-mt-4 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
+			<div class="p-field" [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
 				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
 			</div>
 			
-			<div class="p-field" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
+			<div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
 				<button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
 			</div>
 		</div>

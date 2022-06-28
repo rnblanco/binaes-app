@@ -27,7 +27,7 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   varbinaryImage: string;
   uploadedFiles: File[];
   uploadedFile: any[] = [];
-  selectedfiles: any[];
+  selectedfiles: any[] = [];
   selectedStatus: boolean;
   readableStatus: string;
   

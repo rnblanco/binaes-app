@@ -21,7 +21,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   varbinaryImage: string;
   uploadedFiles: File[];
   uploadedFile: any[] = [];
-  selectedfiles: any[];
+  selectedfiles: any[] = [];
   maxDate: Date;
   date: Date;
   SUPER_ADMIN = Roles.SUPER_ADMIN;

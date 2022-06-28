@@ -60,8 +60,9 @@ namespace backend.Controllers
             return eventsList.AsQueryable();
         }
 
+        [ResponseType(typeof(COLECCION_A_GC_TC))]
         // GET: api/EVENTO?limit=5&page=1&search=test&sortby=col:ASC
-        public IQueryable<EVENTO_A> GetEVENTO(int limit, int page, string search, string SortBy)
+        public async Task<IHttpActionResult> GetEVENTO(int limit, int page, string search, string SortBy)
         {
             var sorted = "id_Evento ascending";
             if (SortBy != null)
@@ -69,6 +70,26 @@ namespace backend.Controllers
                 string[] sortby = SortBy.Split(':');
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
+
+            int total = db.EVENTO
+                .Where(x =>
+                    DbFunctions.Like(x.titulo, "%" + search + "%") ||
+                    DbFunctions.Like(x.capacidad.ToString(), "%" + search + "%") ||
+                    DbFunctions.Like(x.AREA.nombre, "%" + search + "%") ||
+                    DbFunctions.Like(x.aprobado ? "No aprobado" : "Aprobado", "%" + search + "%") ||
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Inicio).ToString(), "%" + search + "%") ||
+                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Finalizacion).ToString(), "%" + search + "%"))
+                .OrderBy(sorted).Count();
+
+            EVENTO_PAGINADOR PAGINADOR = new EVENTO_PAGINADOR();
+            PAGINADOR.meta = new Meta();
+            PAGINADOR.meta.totalItems = total;
+            PAGINADOR.meta.itemsPerPage = limit;
+            Double totalPages = (total + limit - 1) / limit;
+            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+            PAGINADOR.data = new List<EVENTO_A>();
+
             var events = db.EVENTO
                 .Where(x =>
                     DbFunctions.Like(x.titulo, "%" + search + "%") ||
@@ -77,8 +98,8 @@ namespace backend.Controllers
                     DbFunctions.Like(x.aprobado ? "No aprobado" : "Aprobado", "%" + search + "%") ||
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Inicio).ToString(), "%" + search + "%") ||
                     DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Finalizacion).ToString(), "%" + search + "%"))
-                .OrderBy(sorted).Skip((page - 1) * limit).Take(limit).ToList();
-            List<EVENTO_A> eventsList = new List<EVENTO_A>();
+                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+
             foreach (var e in events)
             {
                 EVENTO_A eVENTO = new EVENTO_A();
@@ -109,9 +130,9 @@ namespace backend.Controllers
 
                 eVENTO.AREA.TIPOAREA = e.AREA.TIPOAREA;
 
-                eventsList.Add(eVENTO);
+                PAGINADOR.data.Add(eVENTO);
             }
-            return eventsList.AsQueryable();
+            return Ok(PAGINADOR);
         }
 
         // GET: api/EVENTO/5

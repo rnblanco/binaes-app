@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
 import { Roles } from '../../../auth/constants/roles';
-import { Area } from '../../../shared/models/event';
+import { Area, PaginadorArea } from '../../../shared/models/event';
 
 @Component({
   selector: 'app-areas-page',
@@ -38,10 +38,10 @@ export class AreasPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('AREA', this.httpParams)
       .subscribe(
-        (response: Area[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorArea) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)

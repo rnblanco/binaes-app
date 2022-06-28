@@ -47,7 +47,7 @@
 			<p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
 										(onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
 				<ng-template pTemplate="content">
-					<img src="{{ uploadedFile[0] | photo }}" style="height:10em"/>
+					<img *ngIf="uploadedFile[0] && !selectedfiles[0]" src="{{ uploadedFile[0] | photo }}" alt="{{uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
 				</ng-template>
 			</p-fileUpload>
 		</div>
@@ -87,11 +87,11 @@
 		</div>
 	
 		<div class="p-col-12 p-grid p-mt-2 p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
-			<div [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+			<div [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
 				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
 			</div>
   
-			<div *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
+			<div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
 				<button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
 			</div>
 		</div>

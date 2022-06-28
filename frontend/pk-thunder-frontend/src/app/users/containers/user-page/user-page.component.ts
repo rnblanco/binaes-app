@@ -27,7 +27,7 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   varbinaryImage: string;
   uploadedFiles: File[];
   uploadedFile: any[] = [];
-  selectedfiles: any[];
+  selectedfiles: any[] = [];
   SUPER_ADMIN = Roles.SUPER_ADMIN;
   addLoading = false;
   deleteLoading = false;
@@ -196,7 +196,7 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   onSelectFile(event: { files: File[]; }) {
     this.uploadedFiles = [...<File[]>event.files];
     this.varbinaryImage = btoa(this.uploadedFiles[0].name);
-    this.selectedfiles = this.uploadedFiles;   
+    this.selectedfiles = this.uploadedFiles;
   }
 
   uploadFile(): void {

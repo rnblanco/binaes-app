@@ -49,19 +49,19 @@
              {{ data?.COLECCION?.nombre | titlecase }}
            </ng-container>
 
-           <ng-container *ngSwitchCase="'AUTORxEJEMPLAR.AUTOR.nombre'">
+           <ng-container *ngSwitchCase="'autorE'">
              <div *ngFor="let a of data.AUTORxEJEMPLAR">
                {{ a?.AUTOR?.nombre }}
              </div>
            </ng-container>
 					 
-					 <ng-container *ngSwitchCase="'P_CLAVExEJEMPLAR'">
+					 <ng-container *ngSwitchCase="'p_clave'">
              <div *ngFor="let a of data.P_CLAVExEJEMPLAR" class="custom-chip p-mb-2">
 							 <span class="custom-chip-label">{{ a?.p_clave }}</span>
              </div>
            </ng-container>
 
-           <ng-container *ngSwitchCase="'ETIQUETASxEJEMPLAR.etiqueta'">
+           <ng-container *ngSwitchCase="'etiqueta_E'">
              <div *ngFor="let e of data.ETIQUETASxEJEMPLAR">
                <label *ngIf="e?.id_tipoEtiqueta === 1"><b>ISBN:</b> {{ e?.etiqueta }}</label>
                <label *ngIf="e?.id_tipoEtiqueta === 2"><b>ISSN:</b> {{ e?.etiqueta }}</label>

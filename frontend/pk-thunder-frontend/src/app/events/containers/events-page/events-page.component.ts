@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Evento } from '../../../shared/models/event';
+import { Evento, PaginadorEvento } from '../../../shared/models/event';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({
@@ -40,10 +40,10 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('EVENTO', this.httpParams)
       .subscribe(
-        (response: Evento[]) => {
-          //this.pagination = response.meta;
-          //this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorEvento) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)

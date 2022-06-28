@@ -51,6 +51,11 @@ export interface PaginadorEvento {
 	meta: Meta;
 }
 
+export interface PaginadorArea {
+	data: Area[];
+	meta: Meta;
+}
+
 export const EventStatus = {
 	FINALIZADO: false,
 	EN_CURSO: true
