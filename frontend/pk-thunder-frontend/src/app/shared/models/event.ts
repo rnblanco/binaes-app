@@ -28,6 +28,14 @@ export interface Area {
 	TIPOAREA:    Tipoarea;
 }
 
+export interface Visita {
+  id_Visita: number;
+  USUARIO: Usuario;
+  Area: Area;
+  fh_entrada: Date,
+  fh_salida: Date
+}
+
 export interface Pisoarea {
 	id_pisoArea: number;
 	pisoArea1:   string;

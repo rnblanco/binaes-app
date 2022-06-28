@@ -55,7 +55,17 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     this.breadcrumbService.setItems(this.getBreadCrumbs());
   }
   
-  loadAll():void {
+  loadAll(): void {
+    if (this.user.id_rolUsuario === Roles.USER) {
+      this.messageService.setPayload({
+        type: 'warn',
+        title: 'Error',
+        body: 'No tienes autorización para ver esta información',
+      });
+      setTimeout(() => {
+        this.router.navigate([RouteInformation.borrowsPage])
+      }, 50);
+    }
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {
         this.loading = true;

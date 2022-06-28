@@ -259,6 +259,19 @@ namespace backend.Controllers
 
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
+
+                eJEMPLAR.P_CLAVExEJEMPLAR = db.P_CLAVExEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                eJEMPLAR.ETIQUETASxEJEMPLAR = db.ETIQUETASxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                foreach (var item in eJEMPLAR.ETIQUETASxEJEMPLAR)
+                {
+                    eJEMPLAR.TIPOETIQUETA = db.TIPOETIQUETA.Where(x => x.id_tipoEtiqueta == item.id_tipoEtiqueta).ToList();
+                }
+
+                eJEMPLAR.AUTORxEJEMPLAR = db.AUTORxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                foreach (var item in eJEMPLAR.AUTORxEJEMPLAR)
+                {
+                    eJEMPLAR.AUTOR = db.AUTOR.Where(x => x.id_Autor == item.id_Autor).ToList();
+                }
                 PAGINADOR.data.Add(eJEMPLAR);
             }
 

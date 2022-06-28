@@ -64,7 +64,7 @@ namespace backend.Models
 
         public virtual IDIOMAEJEMPLAR IDIOMAEJEMPLAR { get; set; }
         
-        /*public virtual List<ETIQUETASxEJEMPLAR> ETIQUETASxEJEMPLAR { get; set; }
+        public virtual List<ETIQUETASxEJEMPLAR> ETIQUETASxEJEMPLAR { get; set; }
 
         public virtual List<TIPOETIQUETA> TIPOETIQUETA { get; set; }
 
@@ -72,7 +72,7 @@ namespace backend.Models
 
         public virtual List<AUTORxEJEMPLAR> AUTORxEJEMPLAR { get; set; }
 
-        public virtual List<AUTOR> AUTOR { get; set; }*/
+        public virtual List<AUTOR> AUTOR { get; set; }
     }
 
     public partial class EJEMPLAR_PAGINADOR

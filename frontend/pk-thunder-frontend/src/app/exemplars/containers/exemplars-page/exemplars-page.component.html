@@ -1,58 +1,72 @@
 <div class="p-mt-4">
-  <table-card
-      [reloading]="loading"
-      [globalFilter]="globalFilter"
-      [rows]="rows"
-      (onLazyLoad)="onLazyLoad($event)"
-      (onRowSelect)="onRowSelect($event)"
-      [pagination]="pagination"
-      [loading]="loading"
-      [cols]="cols"
-      [list]="list"
-      [showNewButton]="user.id_rolUsuario !== USER"
-      (onNewClick)="onNew()"
-      newButtonLabel="Nuevo Ejemplar"
-      type="ejemplares"
-    >
-      <ng-template
-        pTemplate="body"
-        let-table="table"
-        let-columns="columns"
-        let-data="rowData"
-      >
-        <td *ngFor="let col of columns"
-            [ngSwitch]="col.field"
-            [style.width.px]="col.width"
-            class="text-center">
+    <table-card
+       [reloading]="loading"
+       [globalFilter]="globalFilter"
+       [rows]="rows"
+       (onLazyLoad)="onLazyLoad($event)"
+       (onRowSelect)="onRowSelect($event)"
+       [pagination]="pagination"
+       [loading]="loading"
+       [cols]="cols"
+       [list]="list"
+       [showNewButton]="user.id_rolUsuario !== USER"
+       (onNewClick)="onNew()"
+       newButtonLabel="Nuevo Ejemplar"
+       type="ejemplares"
+     >
+       <ng-template
+         pTemplate="body"
+         let-table="table"
+         let-columns="columns"
+         let-data="rowData"
+       >
+         <td *ngFor="let col of columns"
+             [ngSwitch]="col.field"
+             [style.width.px]="col.width"
+             class="text-center">
 
-          <ng-container *ngSwitchCase="'imagen'">
-            <img [src]="data?.imagen | photo" style="height:10rem" />
-          </ng-container>
+           <ng-container *ngSwitchCase="'imagen'">
+             <img [src]="data?.imagen | photo" style="height:10rem" />
+           </ng-container>
 
-          <ng-container *ngSwitchCase="'f_publicacion'">
-            {{ data?.f_publicacion | date:'dd-MM-yyyy' }}
-          </ng-container>
+           <ng-container *ngSwitchCase="'f_publicacion'">
+             {{ data?.f_publicacion | date:'dd-MM-yyyy' }}
+           </ng-container>
 
-          <ng-container *ngSwitchCase="'EDITORIAL.editorial'">
-            {{ data?.EDITORIAL?.editorial1 | titlecase }}
-          </ng-container>
+           <ng-container *ngSwitchCase="'EDITORIAL.editorial'">
+             {{ data?.EDITORIAL?.editorial1 | titlecase }}
+           </ng-container>
 
-          <ng-container *ngSwitchCase="'FORMATOEJEMPLAR.formato'">
-            {{ data?.FORMATOEJEMPLAR?.formato | titlecase }}
-          </ng-container>
+           <ng-container *ngSwitchCase="'FORMATOEJEMPLAR.formato'">
+             {{ data?.FORMATOEJEMPLAR?.formato | titlecase }}
+           </ng-container>
 
-          <ng-container *ngSwitchCase="'IDIOMAEJEMPLAR.idioma'">
-            {{ data?.IDIOMAEJEMPLAR?.idioma | titlecase }}
-          </ng-container>
+           <ng-container *ngSwitchCase="'IDIOMAEJEMPLAR.idioma'">
+             {{ data?.IDIOMAEJEMPLAR?.idioma | titlecase }}
+           </ng-container>
 
-          <ng-container *ngSwitchCase="'COLECCION.nombre'">
-            {{ data?.COLECCION?.nombre | titlecase }}
-          </ng-container>
+           <ng-container *ngSwitchCase="'COLECCION.nombre'">
+             {{ data?.COLECCION?.nombre | titlecase }}
+           </ng-container>
 
-          <ng-container *ngSwitchDefault>
-            {{ data[col.field] }}
-          </ng-container>
-        </td>
-    </ng-template>
-  </table-card>
-</div>
+           <ng-container *ngSwitchCase="'AUTORxEJEMPLAR.AUTOR.nombre'">
+             <div *ngFor="let a of data.AUTORxEJEMPLAR">
+               {{ a?.AUTOR?.nombre }}
+             </div>
+           </ng-container>
+
+           <ng-container *ngSwitchCase="'ETIQUETASxEJEMPLAR.etiqueta'">
+             <div *ngFor="let e of data.ETIQUETASxEJEMPLAR">
+               <label *ngIf="e?.id_tipoEtiqueta === 1"><b>ISBN:</b> {{ e?.etiqueta }}</label>
+               <label *ngIf="e?.id_tipoEtiqueta === 2"><b>ISSN:</b> {{ e?.etiqueta }}</label>
+               <label *ngIf="e?.id_tipoEtiqueta === 3"><b>DOI:</b> {{ e?.etiqueta }}</label>
+             </div>
+           </ng-container>
+
+           <ng-container *ngSwitchDefault>
+             {{ data[col.field] }}
+           </ng-container>
+         </td>
+     </ng-template>
+   </table-card>
+  </div>

@@ -62,6 +62,11 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
         routerLink: this.routeInformation.areasPage
       },
       {
+        label: 'Visitas',
+        icon: 'pi pi-fw pi-id-card',
+        routerLink: this.routeInformation.visitsPage
+      },
+      {
         label: 'Eventos',
         icon: 'pi pi-fw pi-ticket',
         routerLink: this.routeInformation.eventsPage

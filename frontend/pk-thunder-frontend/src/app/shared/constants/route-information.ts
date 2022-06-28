@@ -13,6 +13,9 @@ export const RouteInformation = {
   
   eventsPage: '/app/events',
   eventPage: '/app/events/event',
+
+  visitsPage: '/app/visits',
+  visitPage: '/app/visits/visit',
   
   collectionsPage: '/app/collections',
   collectionPage: '/app/collections/collection',

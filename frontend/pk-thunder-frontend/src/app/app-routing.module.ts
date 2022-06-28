@@ -80,6 +80,13 @@ const routes: Routes = [
         data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
         loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
       },
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'visits',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
+        loadChildren: () => import('./visits/visits.module').then((m) => m.VisitsModule)
+      },
     ]
   },
   { path: 'log-out', component: LogOutPageComponent},

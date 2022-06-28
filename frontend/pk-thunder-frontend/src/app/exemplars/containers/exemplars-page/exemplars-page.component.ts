@@ -19,9 +19,11 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
     { field: 'nombre', header: 'Nombre', width: 100 },
     { field: 'imagen', header: 'Imagen', width: 100 },
     { field: 'EDITORIAL.editorial', header: 'Editorial', width: 150 },
-    { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 175 },
-    { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 175 },
+    { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 50 },
+    { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 50 },
     { field: 'COLECCION.nombre', header: 'Coleccion', width: 175 },
+    { field: 'AUTORxEJEMPLAR.AUTOR.nombre', header: 'Autor(es)', width: 175 },
+    { field: 'ETIQUETASxEJEMPLAR.etiqueta', header: 'Etiqueta(s)', width: 175 },
     { field: 'f_publicacion', header: 'Fecha de publicación', width: 175 },
   ] as any[];
 
@@ -42,7 +44,7 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
           (response: PaginadorEjemplar) => {
             this.pagination = response.meta;
             this.currentPage = this.pagination.currentPage;
-            this.list = response.data;
+            this.list = response.data;            
             this.loading = false;
           },
           () => (this.loading = false)

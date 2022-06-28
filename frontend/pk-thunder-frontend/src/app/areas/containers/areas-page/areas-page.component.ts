@@ -74,7 +74,7 @@ export class AreasPageComponent extends LazyComponent implements OnInit {
   
   getBreadCrumbs() {
     return [
-      { label: 'Eventos', routerLink: [this.routeInformation.areaPage] },
+      { label: 'Áreas', routerLink: [this.routeInformation.areasPage] },
     ];
   }
   
