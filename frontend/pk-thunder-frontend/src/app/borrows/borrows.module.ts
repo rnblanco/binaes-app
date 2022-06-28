@@ -11,6 +11,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
 import { LoadingModule } from '../../components/loading/loading.module';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingModule } from '../../components/loading/loading.module';
 		RippleModule,
 		SharedModule,
 		CalendarModule,
-		LoadingModule
+		LoadingModule,
+		ChipModule
 	]
 })
 export class BorrowsModule { }

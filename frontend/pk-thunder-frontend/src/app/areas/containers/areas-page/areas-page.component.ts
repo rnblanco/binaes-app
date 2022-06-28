@@ -18,8 +18,8 @@ export class AreasPageComponent extends LazyComponent implements OnInit {
   }
   
   cols = [
-    { field: 'nombre', header: 'Nombre', width: 100 },
-    { field: 'descripcion', header: 'Descripción', width: 100 },
+    { field: 'nombre', header: 'Nombre', width: 150 },
+    { field: 'descripcion', header: 'Descripción', width: 200 },
     { field: 'USUARIO.nombre', header: 'Responsable', width: 100 },
     { field: 'capacidad', header: 'Capacidad', width: 100 },
   ] as any[];

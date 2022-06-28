@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { Usuario, RolUsuario } from '../../../shared/models/user';
+import { RolUsuario, Usuario } from '../../../shared/models/user';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload'
+import { FileUpload } from 'primeng/fileupload';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

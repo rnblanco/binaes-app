@@ -42,7 +42,9 @@
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'aprobado'">
-					{{ data?.aprobado ? 'Reservado' : 'Finalizado'}}
+					<div class='text-center'>
+						<span class="'p-pt-1 p-pb-1 aprove-badge {{ data?.aprobado ? 'Reservado' : 'Finalizado'}}s">{{ data?.aprobado ? 'Reservado' : 'Finalizado'}}s</span>
+					</div>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'fh_Inicio'">

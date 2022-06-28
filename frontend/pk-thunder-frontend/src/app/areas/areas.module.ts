@@ -18,30 +18,32 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
     AreasPageComponent,
     AreaPageComponent
   ],
-  imports: [
-    CommonModule,
-    AreasRoutingModule,
-    TableCardModule,
-    FormsModule,
-    InputTextModule,
-    ListboxModule,
-    ButtonModule,
-    RippleModule,
-    MultiSelectModule,
-    SharedModule,
-    LoadingModule,
-    CalendarModule,
-    FileUploadModule,
-    HttpClientModule,
-    InputNumberModule,
-    InputTextareaModule,
-    TabViewModule
-  ]
+	imports: [
+		CommonModule,
+		AreasRoutingModule,
+		TableCardModule,
+		FormsModule,
+		InputTextModule,
+		ListboxModule,
+		ButtonModule,
+		RippleModule,
+		MultiSelectModule,
+		SharedModule,
+		LoadingModule,
+		CalendarModule,
+		FileUploadModule,
+		HttpClientModule,
+		InputNumberModule,
+		InputTextareaModule,
+		TabViewModule,
+		ChipModule
+	]
 })
 export class AreasModule { }

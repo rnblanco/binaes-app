@@ -68,3 +68,53 @@ body{
       width: 100%;
   }
 }
+
+.status-badge {
+  border-radius: 5px;
+  padding: .25em .5rem;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: .3px;
+
+  &.Reservado {
+    background: #c0defc !important;
+    color: #0084c0 !important;
+  }
+
+  &.Finalizado {
+    background: #66d09b96;
+    color: #009759;
+  }
+
+  // En Préstamo
+  &.En {
+    background: #ff7f9f61;
+    color: #fa5981;
+  }
+}
+
+.aprove-badge{
+  border-radius: 5px;
+  padding: .25em .5rem;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: .3px;
+
+  &.Reservados {
+    background: #66d09b96;
+    color: #009759;
+  }
+
+  &.Finalizados {
+    background: #ff7f9f61;
+    color: #fa5981;
+  }
+}
+
+.custom-chip {
+  padding: 0.375rem 0.75rem;
+  margin-right: 0.5rem;
+  background: #EEF2FF;
+  color: #312E81;
+  border-radius: 0.375rem;
+}

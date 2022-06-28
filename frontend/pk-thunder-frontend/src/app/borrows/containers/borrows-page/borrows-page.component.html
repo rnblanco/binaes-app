@@ -31,11 +31,16 @@
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'USUARIO.nombre'">
-					{{ data?.USUARIO?.nombre | titlecase }}
+					<p-chip styleClass='p-col-12' [image]="'assets/images/icons/user-circle.png'"
+									[label]="data?.USUARIO?.nombre | titlecase">
+					</p-chip>
 				</ng-container>
 				
+				
 				<ng-container *ngSwitchCase="'ESTADOS.estado'">
-					{{ data?.ESTADOS?.estado | titlecase }}
+					<div class='text-center'>
+						<span class="'p-pt-1 p-pb-1 status-badge {{ data?.ESTADOS?.estado}}">{{ data?.ESTADOS?.estado | titlecase }}</span>
+					</div>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'fh_Prestamo'">

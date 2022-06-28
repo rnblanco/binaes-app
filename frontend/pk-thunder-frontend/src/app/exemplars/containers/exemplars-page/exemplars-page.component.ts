@@ -21,10 +21,11 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
     { field: 'EDITORIAL.editorial', header: 'Editorial', width: 150 },
     { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 50 },
     { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 50 },
-    { field: 'COLECCION.nombre', header: 'Coleccion', width: 175 },
+    { field: 'COLECCION.nombre', header: 'Colección', width: 175 },
+    { field: 'P_CLAVExEJEMPLAR', header: 'Palabra(s)', width: 175 },
     { field: 'AUTORxEJEMPLAR.AUTOR.nombre', header: 'Autor(es)', width: 175 },
     { field: 'ETIQUETASxEJEMPLAR.etiqueta', header: 'Etiqueta(s)', width: 175 },
-    { field: 'f_publicacion', header: 'Fecha de publicación', width: 175 },
+    { field: 'f_publicacion', header: 'Publicación', width: 175 },
   ] as any[];
 
   ngOnInit(): void {

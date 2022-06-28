@@ -22,8 +22,8 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
     { field: 'AREA.nombre', header: 'Área', width: 100 },
     { field: 'capacidad', header: 'Capacidad', width: 10 },
     { field: 'aprobado', header: 'Estado', width: 10 },
-    { field: 'fh_Inicio', header: 'Fecha de inicio', width: 100 },
-    { field: 'fh_Finalizacion', header: 'Fecha de finalización', width: 100 },
+    { field: 'fh_Inicio', header: 'Inicio', width: 100 },
+    { field: 'fh_Finalizacion', header: 'Fin', width: 100 },
   ] as any[];
   
   ngOnInit(): void {

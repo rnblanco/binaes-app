@@ -12,25 +12,27 @@ import { RippleModule } from 'primeng/ripple';
 import { CalendarModule } from 'primeng/calendar';
 import { LoadingModule } from '../../components/loading/loading.module';
 import { TooltipModule } from 'primeng/tooltip';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
     ReservationsPageComponent,
     ReservationPageComponent
   ],
-  imports: [
-    CommonModule,
-    ReservationsRoutingModule,
-    TableCardModule,
-    SharedModule,
-    MultiSelectModule,
-    FormsModule,
-    ButtonModule,
-    RippleModule,
-    SharedModule,
-    CalendarModule,
-    LoadingModule,
-    TooltipModule
-  ]
+	imports: [
+		CommonModule,
+		ReservationsRoutingModule,
+		TableCardModule,
+		SharedModule,
+		MultiSelectModule,
+		FormsModule,
+		ButtonModule,
+		RippleModule,
+		SharedModule,
+		CalendarModule,
+		LoadingModule,
+		TooltipModule,
+		ChipModule
+	]
 })
 export class ReservationsModule { }

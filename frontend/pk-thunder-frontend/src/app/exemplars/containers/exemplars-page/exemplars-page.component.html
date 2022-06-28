@@ -54,6 +54,12 @@
                {{ a?.AUTOR?.nombre }}
              </div>
            </ng-container>
+					 
+					 <ng-container *ngSwitchCase="'P_CLAVExEJEMPLAR'">
+             <div *ngFor="let a of data.P_CLAVExEJEMPLAR" class="custom-chip p-mb-2">
+							 <span class="custom-chip-label">{{ a?.p_clave }}</span>
+             </div>
+           </ng-container>
 
            <ng-container *ngSwitchCase="'ETIQUETASxEJEMPLAR.etiqueta'">
              <div *ngFor="let e of data.ETIQUETASxEJEMPLAR">

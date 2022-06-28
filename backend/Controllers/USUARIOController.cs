@@ -43,7 +43,7 @@ namespace backend.Controllers
         }
 
         [ResponseType(typeof(USUARIO_PAGINADOR))]
-        // GET: api/USUARIO?id_rolUsuario=2&limit=5&page=1&search=test&sortby=col:ASC
+        // GET: api/USUARIO?limit=5&page=1&search=test&sortby=col:ASC&id_rolUsuario=2&idUsuario=00000001
         public async Task<IHttpActionResult> GetUSUARIO(int limit, int page, string search, string SortBy, int id_rolUsuario, string id_Usuario)
         {
             var sorted = "id_Usuario ascending";
