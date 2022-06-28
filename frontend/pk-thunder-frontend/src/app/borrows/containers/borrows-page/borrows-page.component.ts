@@ -57,7 +57,7 @@ export class BorrowsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('PRESTAMO', this.httpParams)
+      .getByNameWithParams('PRESTAMO', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorPrestamo) => {
           this.pagination = response.meta;

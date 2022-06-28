@@ -58,7 +58,7 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('RESERVA', this.httpParams)
+      .getByNameWithParams('RESERVA', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorReserva) => {
           this.pagination = response.meta;
