@@ -6,7 +6,7 @@ export const RouteInformation = {
   unauthorizedPage: '/auth/unauthorized',
   notFoundPage: '/auth/not-found',
   
-  dashboardPage: '/app',
+  dashboardPage: '/app/dashboard',
   
   areasPage: '/app/areas',
   areaPage: '/app/areas/area',

@@ -30,7 +30,9 @@
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'USUARIO.nombre'">
-					{{ data?.USUARIO?.nombre }}
+					<p-chip styleClass='p-col-12' [image]="'assets/images/icons/user-circle.png'"
+									[label]="data?.USUARIO?.nombre | titlecase">
+					</p-chip>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'descripcion'">

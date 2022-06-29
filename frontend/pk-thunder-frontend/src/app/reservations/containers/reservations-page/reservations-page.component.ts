@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Roles } from '../../../auth/constants/roles';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Prestamo, Reserva, PaginadorReserva } from '../../../shared/models/borrow';
+import { PaginadorReserva } from '../../../shared/models/borrow';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
@@ -20,7 +20,7 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
     { field: 'PRESTAMO.EJEMPLAR.nombre', header: 'Nombre', width: 125 },
     { field: 'PRESTAMO.USUARIO.nombre', header: 'Usuario', width: 125 },
     { field: 'PRESTAMO.ESTADOS.estado', header: 'Estado', width: 100 },
-    { field: 'fh_Reserva', header: 'Fecha de reserva', width: 100 },
+    { field: 'fh_Reserva', header: 'Reserva', width: 100 },
     { field: 'PRESTAMO.fh_Prestamo', header: 'Préstamo', width: 100 },
     { field: 'PRESTAMO.fh_Devolucion', header: 'Devolución', width: 100 },
   ] as any[];
@@ -39,7 +39,7 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('RESERVA', new HttpParams().set('id_Usuario', this.user.id_Usuario))
+      .getByNameWithParams('RESERVA', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorReserva) => {
           this.pagination = response.meta;
@@ -58,7 +58,7 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('RESERVA', this.httpParams)
+      .getByNameWithParams('RESERVA', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorReserva) => {
           this.pagination = response.meta;

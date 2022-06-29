@@ -46,8 +46,7 @@ namespace backend.Models
 
     public class COLECCION_PAGINADOR
     {
-        public List<COLECCION_A_GC_TC> data { get; set; }
-
         public Meta meta { get; set; }
+        public List<COLECCION_A_GC_TC> data { get; set; }
     }
 }

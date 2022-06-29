@@ -4,7 +4,7 @@ import { ExemplarsPageComponent } from './containers/exemplars-page/exemplars-pa
 import { ExemplarsRoutingModule } from './exemplars-routing.module';
 import { ExemplarPageComponent } from './containers/exemplar-page/exemplar-page.component';
 import { TableCardModule } from '../shared/components/table-card/table-card.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.module';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.modu
 		HttpClientModule,
 		TooltipModule,
 		TabViewModule,
-		TagMaskModule
+		TagMaskModule,
+		ReactiveFormsModule,
+		KeyFilterModule
 	]
 })
 export class ExemplarsModule { }

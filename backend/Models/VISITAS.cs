@@ -1,6 +1,7 @@
 namespace backend.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public partial class VISITAS
@@ -34,5 +35,11 @@ namespace backend.Models
         public virtual AREA_PA_U_TA AREA { get; set; }
 
         public virtual USUARIO_rU USUARIO { get; set; }
+    }
+
+    public partial class VISITA_PAGINADOR
+    {
+        public Meta meta { get; set; }
+        public List<VISITAS_A_U> data { get; set; }
     }
 }

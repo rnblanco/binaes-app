@@ -37,16 +37,6 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
         routerLink: this.routeInformation.homePage
       },
       {
-        label: 'Préstamos',
-        icon: 'pi pi-fw pi-check-square',
-        routerLink: this.routeInformation.borrowsPage
-      },
-      {
-        label: 'Reservas',
-        icon: 'pi pi-fw pi-calendar',
-        routerLink: this.routeInformation.reservationsPage
-      },
-      {
         label: 'Colecciones',
         icon: 'pi pi-fw pi-folder',
         routerLink: this.routeInformation.collectionsPage
@@ -55,6 +45,16 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
         label: 'Ejemplares',
         icon: 'pi pi-fw pi-book',
         routerLink: this.routeInformation.exemplarsPage
+      },
+      {
+        label: 'Préstamos',
+        icon: 'pi pi-fw pi-check-square',
+        routerLink: this.routeInformation.borrowsPage
+      },
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        routerLink: this.routeInformation.reservationsPage
       },
       {
         label: 'Áreas',
@@ -89,17 +89,7 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
       {
         label: 'Inicio',
         icon: 'pi pi-fw pi-home',
-        routerLink: this.routeInformation.homePage
-      },
-      {
-        label: 'Préstamos',
-        icon: 'pi pi-fw pi-check-square',
-        routerLink: this.routeInformation.borrowsPage
-      },
-      {
-        label: 'Reservas',
-        icon: 'pi pi-fw pi-calendar',
-        routerLink: this.routeInformation.reservationsPage
+        routerLink: this.routeInformation.dashboardPage
       },
       {
         label: 'Colecciones',
@@ -110,6 +100,16 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
         label: 'Ejemplares',
         icon: 'pi pi-fw pi-book',
         routerLink: this.routeInformation.exemplarsPage
+      },
+      {
+        label: 'Préstamos',
+        icon: 'pi pi-fw pi-check-square',
+        routerLink: this.routeInformation.borrowsPage
+      },
+      {
+        label: 'Reservas',
+        icon: 'pi pi-fw pi-calendar',
+        routerLink: this.routeInformation.reservationsPage
       },
       {
         label: 'Eventos',

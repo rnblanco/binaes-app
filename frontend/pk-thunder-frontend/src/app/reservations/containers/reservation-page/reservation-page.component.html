@@ -31,7 +31,7 @@
 			<label>Rango de fechas:</label>
 			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu préstamo"
 									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [disabledDates]="disabledDates"
-									[disabled]="!isNew" pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top"></p-calendar>
+									[disabled]="!isNew" pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top" [selectOtherMonths]="true"></p-calendar>
 		</div>
 		
 		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
@@ -42,17 +42,17 @@
 		</div>
 		
 		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
-			<label>Fecha de reserva:</label>
-			<p-calendar name="reservationDate" dateFormat="dd/mm/yy" [disabled]="true" [(ngModel)]="reservationDate"></p-calendar>
+			<label>Reservado:</label>
+			<p-calendar name="reservationDate" dateFormat="dd/mm/yy" [disabled]="true" [(ngModel)]="reservationDate" [selectOtherMonths]="true"></p-calendar>
 		</div>
 		
-		<div class="p-col-12 p-grid p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
-			<div class="p-field" [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+		<div class="p-col-12 p-grid p-mt-4 p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
+			<div class="p-field" [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
 				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()"
 								pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top" [disabled]="!formIsValid || !isNew" ></button>
 			</div>
 			
-			<div class="p-field p-col" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
+			<div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
 				<button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
 			</div>
 		</div>

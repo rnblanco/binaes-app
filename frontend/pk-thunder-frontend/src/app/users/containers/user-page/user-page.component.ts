@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { Usuario, RolUsuario } from '../../../shared/models/user';
+import { RolUsuario, Usuario } from '../../../shared/models/user';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload'
+import { FileUpload } from 'primeng/fileupload';
 import { HttpClient } from '@angular/common/http';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-page',
@@ -27,7 +28,7 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   varbinaryImage: string;
   uploadedFiles: File[];
   uploadedFile: any[] = [];
-  selectedfiles: any[];
+  selectedfiles: any[] = [];
   SUPER_ADMIN = Roles.SUPER_ADMIN;
   addLoading = false;
   deleteLoading = false;
@@ -46,13 +47,22 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   }
 
   get formIsValid(): boolean {
-    return this.name !== '' && this.email !== '' && this.telefono !== '' && this.ocupacion !== '' && this.institucion !== '' && this.direccion !== '' && this.selectedRol?.length > 0 && (this.uploadedFiles != undefined || this.uploadedFile.length > 0);    
+    return this.form.valid && this.name !== '' && this.email !== '' && this.telefono !== '' && this.ocupacion !== '' && this.institucion !== '' && this.direccion !== '' && this.selectedRol?.length > 0 && (this.uploadedFiles != undefined || this.uploadedFile.length > 0);
   }
 
   ngOnInit(): void {
     this.loadAll();
     this.user = this.authService.storagedUser;
-    this.breadcrumbService.setItems(this.getBreadCrumbs());    
+    this.breadcrumbService.setItems(this.getBreadCrumbs());
+    this.form = this.formBuilder.group({
+      email: [
+        undefined,
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.emailPattern),
+        ],
+      ],
+    });
   }
 
   loadAll(): void {
@@ -196,7 +206,7 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   onSelectFile(event: { files: File[]; }) {
     this.uploadedFiles = [...<File[]>event.files];
     this.varbinaryImage = btoa(this.uploadedFiles[0].name);
-    this.selectedfiles = this.uploadedFiles;   
+    this.selectedfiles = this.uploadedFiles;
   }
 
   uploadFile(): void {

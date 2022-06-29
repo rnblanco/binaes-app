@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,11 @@ export class ValidatorService {
   
   public ISBNPattern = '(97(?:8|9)([ -]?)(?=\\d{1,5}\\2?\\d{1,7}\\2?\\d{1,6}\\2?\\d)(?:\\d\\2*){9}\\d)';
   public ISSNPattern = '[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]';
-  public DOIPattern = "\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\\'<>])\\S)+)\\b";
+  public DOIPattern = "(10\\.[0-9a-zA-Z]+\\/(?:(?![\"&\\'])\\S)+)\\b";
   
   public ISBN: RegExp = /(97(?:8|9)([ -]?)(?=\d{1,5}\2?\d{1,7}\2?\d{1,6}\2?\d)(?:\d\2*){9}\d)/;
   public ISSN: RegExp = /[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]/;
-  public DOI: RegExp = new RegExp("\\b(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\\'<>])\\S)+)\\b");
+  public DOI: RegExp = /(10\.[0-9a-zA-Z]+\/(?:(?!["&\'])\S)+)\b/;
   
   public validField(form: FormGroup, field: string): boolean | null{
     return (

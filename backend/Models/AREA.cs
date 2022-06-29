@@ -14,7 +14,7 @@ namespace backend.Models
         [StringLength(30)]
         public string nombre { get; set; }
 
-        [Column(TypeName = "text")]
+        [Column(TypeName = "nvarchar")]
         [Required]
         public string descripcion { get; set; }
 
@@ -58,7 +58,7 @@ namespace backend.Models
         public virtual TIPOAREA TIPOAREA { get; set; }
     }
 
-    public partial class AURA_PAGINADOR
+    public partial class AREA_PAGINADOR
     {
         public Meta meta { get; set; }
         public List<AREA_PA_U_TA> data { get; set; }

@@ -20,7 +20,7 @@ export class UsersPageComponent extends LazyComponent implements OnInit {
     { field: 'email', header: 'Email', width: 100 },    
     { field: 'telefono', header: 'Teléfono', width: 100 },
     { field: 'ocupacion', header: 'Ocupación', width: 10 },
-    { field: 'direccion', header: 'dirección', width: 10 },
+    { field: 'direccion', header: 'Dirección', width: 10 },
     { field: 'fotografia', header: 'Fotografía', width: 100 },
     { field: 'institucion', header: 'Institución', width: 100 },
     { field: 'ROLUSUARIO.rol', header: 'Rol', width: 100 },

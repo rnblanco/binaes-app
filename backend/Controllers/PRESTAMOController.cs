@@ -83,73 +83,9 @@ namespace backend.Controllers
             return borrowsList.AsQueryable();
         }
 
-        // GET: api/PRESTAMO?id_Usuario=00000001
-        public IQueryable<PRESTAMO_E> GetPRESTAMO(string id_Usuario)
-        {
-            System.Console.WriteLine(id_Usuario);
-            var borrows = db.PRESTAMO.Where(x => x.id_usuarioPresta == id_Usuario).ToList();
-            List<PRESTAMO_E> borrowsList = new List<PRESTAMO_E>();
-            foreach (var borrow in borrows)
-            {
-                PRESTAMO_E pRESTAMO = new PRESTAMO_E();
-                pRESTAMO.id_Prestamo = borrow.id_Prestamo;
-                pRESTAMO.fh_Prestamo = borrow.fh_Prestamo;
-                pRESTAMO.fh_Devolucion = borrow.fh_Devolucion;
-                pRESTAMO.ESTADOS = borrow.ESTADOS;
-
-                pRESTAMO.USUARIO = new USUARIO_rU();
-                pRESTAMO.USUARIO.id_Usuario = borrow.USUARIO.id_Usuario;
-                pRESTAMO.USUARIO.nombre = borrow.USUARIO.nombre;
-                pRESTAMO.USUARIO.email = borrow.USUARIO.email;
-                pRESTAMO.USUARIO.telefono = borrow.USUARIO.telefono;
-                pRESTAMO.USUARIO.ocupacion = borrow.USUARIO.ocupacion;
-                pRESTAMO.USUARIO.direccion = borrow.USUARIO.direccion;
-                pRESTAMO.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.USUARIO.fotografia);
-                pRESTAMO.USUARIO.institucion = borrow.USUARIO.institucion;
-                pRESTAMO.USUARIO.ROLUSUARIO = borrow.USUARIO.ROLUSUARIO;
-
-                pRESTAMO.EJEMPLAR = new EJEMPLAR_E_F_I_C();
-                pRESTAMO.EJEMPLAR.id_Ejemplar = borrow.EJEMPLAR.id_Ejemplar;
-                pRESTAMO.EJEMPLAR.nombre = borrow.EJEMPLAR.nombre;
-                pRESTAMO.EJEMPLAR.imagen = Encoding.UTF8.GetString(borrow.EJEMPLAR.imagen);
-                pRESTAMO.EJEMPLAR.EDITORIAL = borrow.EJEMPLAR.EDITORIAL;
-                pRESTAMO.EJEMPLAR.FORMATOEJEMPLAR = borrow.EJEMPLAR.FORMATOEJEMPLAR;
-                pRESTAMO.EJEMPLAR.IDIOMAEJEMPLAR = borrow.EJEMPLAR.IDIOMAEJEMPLAR;
-                pRESTAMO.EJEMPLAR.f_publicacion = borrow.EJEMPLAR.f_publicacion;
-
-                pRESTAMO.EJEMPLAR.COLECCION = new COLECCION_A_GC_TC();
-                pRESTAMO.EJEMPLAR.COLECCION.id_Coleccion = borrow.EJEMPLAR.COLECCION.id_Coleccion;
-                pRESTAMO.EJEMPLAR.COLECCION.nombre = borrow.EJEMPLAR.COLECCION.nombre;
-
-                pRESTAMO.EJEMPLAR.COLECCION.AREA = new AREA_PA_U_TA();
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.id_Area = borrow.EJEMPLAR.COLECCION.AREA.id_Area;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.nombre = borrow.EJEMPLAR.COLECCION.AREA.nombre;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.descripcion = borrow.EJEMPLAR.COLECCION.AREA.descripcion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.PISOAREA = borrow.EJEMPLAR.COLECCION.AREA.PISOAREA;
-
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.email = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.email;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(borrow.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = borrow.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
-
-                pRESTAMO.EJEMPLAR.COLECCION.AREA.TIPOAREA = borrow.EJEMPLAR.COLECCION.AREA.TIPOAREA;
-
-                pRESTAMO.EJEMPLAR.COLECCION.GENEROCOLECCION = borrow.EJEMPLAR.COLECCION.GENEROCOLECCION;
-                pRESTAMO.EJEMPLAR.COLECCION.TIPOCOLECCION = borrow.EJEMPLAR.COLECCION.TIPOCOLECCION;
-                borrowsList.Add(pRESTAMO);
-            }
-            return borrowsList.AsQueryable();
-        }
-
         [ResponseType(typeof(COLECCION_PAGINADOR))]
-        // GET: api/PRESTAMO?limit=5&page=1&search=test&sortby=col:ASC
-        public async Task<IHttpActionResult> GetPRESTAMO(int limit, int page, string search, string SortBy)
+        // GET: api/PRESTAMO?limit=5&page=1&search=test&sortby=col:ASC&id_rolUsuario&id_Usuario
+        public async Task<IHttpActionResult> GetPRESTAMO(int limit, int page, string search, string SortBy, int id_rolUsuario, string id_Usuario)
         {
             var sorted = "id_Prestamo ascending";
             if (SortBy != null)
@@ -158,7 +94,44 @@ namespace backend.Controllers
                 sorted = sortby[0] + " " + (sortby[1].Equals("ASC") ? "ascending" : "descending");
             }
 
-            int total = db.PRESTAMO
+            List<PRESTAMO> borrows = new List<PRESTAMO>();
+            PRESTAMO_PAGINADOR PAGINADOR = new PRESTAMO_PAGINADOR();
+
+            if (id_rolUsuario == (int)TipoUsuario.USER)
+            {
+                int total = db.PRESTAMO
+               .Where(x =>
+                   (
+                       DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
+                       DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
+                       DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
+                       DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
+                       DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%")
+                   ) && x.USUARIO.id_Usuario == id_Usuario
+                ).OrderBy(sorted).Count();
+
+                PAGINADOR.meta = new Meta();
+                PAGINADOR.meta.totalItems = total;
+                PAGINADOR.meta.itemsPerPage = limit;
+                Double totalPages = (total + limit - 1) / limit;
+                PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+                PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+                PAGINADOR.data = new List<PRESTAMO_E>();
+
+                borrows = db.PRESTAMO
+                .Where(x =>
+                   (
+                       DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
+                       DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
+                       DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
+                       DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
+                       DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%")
+                   ) && x.USUARIO.id_Usuario == id_Usuario
+                ).OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+            }
+            else 
+            {
+                int total = db.PRESTAMO
                .Where(x =>
                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
@@ -167,23 +140,23 @@ namespace backend.Controllers
                    DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%"))
                .OrderBy(sorted).Count();
 
-            PRESTAMO_PAGINADOR PAGINADOR = new PRESTAMO_PAGINADOR();
-            PAGINADOR.meta = new Meta();
-            PAGINADOR.meta.totalItems = total;
-            PAGINADOR.meta.itemsPerPage = limit;
-            Double totalPages = (total + limit - 1) / limit;
-            PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
-            PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
-            PAGINADOR.data = new List<PRESTAMO_E>();
+                PAGINADOR.meta = new Meta();
+                PAGINADOR.meta.totalItems = total;
+                PAGINADOR.meta.itemsPerPage = limit;
+                Double totalPages = (total + limit - 1) / limit;
+                PAGINADOR.meta.totalPages = (int)Math.Round(totalPages);
+                PAGINADOR.meta.currentPage = page > PAGINADOR.meta.totalPages ? 1 : page;
+                PAGINADOR.data = new List<PRESTAMO_E>();
 
-            var borrows = db.PRESTAMO
-                .Where(x =>
-                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
-                    DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
-                    DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
-                    DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
-                    DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%"))
-                .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+                borrows = db.PRESTAMO
+                    .Where(x =>
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Prestamo).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Devolucion).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(x.ESTADOS.estado, "%" + search + "%") ||
+                        DbFunctions.Like(x.USUARIO.nombre, "%" + search + "%") ||
+                        DbFunctions.Like(x.EJEMPLAR.nombre, "%" + search + "%"))
+                    .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+            }
 
             foreach (var borrow in borrows)
             {

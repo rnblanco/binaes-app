@@ -26,14 +26,14 @@
              class="text-center">
 
            <ng-container *ngSwitchCase="'imagen'">
-             <img [src]="data?.imagen | photo" style="height:10rem" />
+             <img [src]="data?.imagen | photo" style="height:8rem" />
            </ng-container>
 
            <ng-container *ngSwitchCase="'f_publicacion'">
              {{ data?.f_publicacion | date:'dd-MM-yyyy' }}
            </ng-container>
 
-           <ng-container *ngSwitchCase="'EDITORIAL.editorial'">
+           <ng-container *ngSwitchCase="'EDITORIAL.editorial1'">
              {{ data?.EDITORIAL?.editorial1 | titlecase }}
            </ng-container>
 
@@ -49,13 +49,19 @@
              {{ data?.COLECCION?.nombre | titlecase }}
            </ng-container>
 
-           <ng-container *ngSwitchCase="'AUTORxEJEMPLAR.AUTOR.nombre'">
+           <ng-container *ngSwitchCase="'autorE'">
              <div *ngFor="let a of data.AUTORxEJEMPLAR">
                {{ a?.AUTOR?.nombre }}
              </div>
            </ng-container>
+					 
+					 <ng-container *ngSwitchCase="'p_clave'">
+             <div *ngFor="let a of data.P_CLAVExEJEMPLAR" class="custom-chip p-mb-2">
+							 <span class="custom-chip-label">{{ a?.p_clave }}</span>
+             </div>
+           </ng-container>
 
-           <ng-container *ngSwitchCase="'ETIQUETASxEJEMPLAR.etiqueta'">
+           <ng-container *ngSwitchCase="'etiqueta_E'">
              <div *ngFor="let e of data.ETIQUETASxEJEMPLAR">
                <label *ngIf="e?.id_tipoEtiqueta === 1"><b>ISBN:</b> {{ e?.etiqueta }}</label>
                <label *ngIf="e?.id_tipoEtiqueta === 2"><b>ISSN:</b> {{ e?.etiqueta }}</label>

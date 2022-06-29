@@ -31,11 +31,15 @@
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'PRESTAMO.USUARIO.nombre'">
-					{{ data?.PRESTAMO?.USUARIO?.nombre | titlecase }}
+					<p-chip styleClass='p-col-12' [image]="'assets/images/icons/user-circle.png'"
+									[label]="data?.PRESTAMO.USUARIO?.nombre | titlecase">
+					</p-chip>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'PRESTAMO.ESTADOS.estado'">
-					{{ data?.PRESTAMO?.ESTADOS?.estado | titlecase }}
+					<div class='text-center'>
+						<span class="'p-pt-1 p-pb-1 status-badge {{ data?.PRESTAMO?.ESTADOS?.estado}}">{{ data?.PRESTAMO?.ESTADOS?.estado | titlecase }}</span>
+					</div>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'fh_Reserva'">

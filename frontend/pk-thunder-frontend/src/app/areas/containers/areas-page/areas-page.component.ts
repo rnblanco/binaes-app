@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
 import { Roles } from '../../../auth/constants/roles';
-import { Area } from '../../../shared/models/event';
+import { Area, PaginadorArea } from '../../../shared/models/event';
 
 @Component({
   selector: 'app-areas-page',
@@ -18,8 +18,8 @@ export class AreasPageComponent extends LazyComponent implements OnInit {
   }
   
   cols = [
-    { field: 'nombre', header: 'Nombre', width: 100 },
-    { field: 'descripcion', header: 'Descripción', width: 100 },
+    { field: 'nombre', header: 'Nombre', width: 150 },
+    { field: 'descripcion', header: 'Descripción', width: 200 },
     { field: 'USUARIO.nombre', header: 'Responsable', width: 100 },
     { field: 'capacidad', header: 'Capacidad', width: 100 },
   ] as any[];
@@ -38,10 +38,10 @@ export class AreasPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('AREA', this.httpParams)
       .subscribe(
-        (response: Area[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorArea) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Evento } from '../../../shared/models/event';
+import { PaginadorEvento } from '../../../shared/models/event';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({
@@ -22,8 +22,8 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
     { field: 'AREA.nombre', header: 'Área', width: 100 },
     { field: 'capacidad', header: 'Capacidad', width: 10 },
     { field: 'aprobado', header: 'Estado', width: 10 },
-    { field: 'fh_Inicio', header: 'Fecha de inicio', width: 100 },
-    { field: 'fh_Finalizacion', header: 'Fecha de finalización', width: 100 },
+    { field: 'fh_Inicio', header: 'Inicio', width: 100 },
+    { field: 'fh_Finalizacion', header: 'Fin', width: 100 },
   ] as any[];
   
   ngOnInit(): void {
@@ -40,10 +40,10 @@ export class EventsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('EVENTO', this.httpParams)
       .subscribe(
-        (response: Evento[]) => {
-          //this.pagination = response.meta;
-          //this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorEvento) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)

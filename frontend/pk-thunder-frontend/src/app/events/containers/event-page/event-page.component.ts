@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
-import { Objetivo, Evento, Area } from '../../../shared/models/event';
+import { Area, Evento, Objetivo } from '../../../shared/models/event';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload'
+import { FileUpload } from 'primeng/fileupload';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
@@ -22,12 +22,13 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   objectives: Objetivo[] = [];
   loadingObjectives: boolean = false;
   capacity: number;
+  loadedStatus: boolean = true;
   
   varbinaryImage: string;
   uploadedFiles: File[];
   uploadedFile: any[] = [];
-  selectedfiles: any[];
-  eventStatus: boolean;
+  selectedfiles: any[] = [];
+  selectedStatus: boolean;
   readableStatus: string;
   
   maxDate: Date;
@@ -46,7 +47,7 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   areas: Area[];
   selectedArea: number[] = [];
   @ViewChild('areaMultiSelect') areaMultiSelect: MultiSelect;
-
+  
   @Output() public onUploadFinished = new EventEmitter();
 
   constructor(private route: ActivatedRoute) {
@@ -59,7 +60,7 @@ export class EventPageComponent extends BaseComponent implements OnInit {
   }
   
   changeStatus(): void {
-    this.readableStatus = this.eventStatus ? 'Reservado' : 'Finalizado';
+    this.readableStatus = this.selectedStatus ? 'Reservado' : 'Finalizado';
   }
 
   ngOnInit(): void {
@@ -188,7 +189,7 @@ export class EventPageComponent extends BaseComponent implements OnInit {
         id_Evento: this.id,
         titulo: this.title,
         capacidad: this.capacity,
-        aprobado: this.eventStatus,
+        aprobado: this.selectedStatus,
         fh_Inicio: this.dates[0],
         fh_Finalizacion: this.dates[1],
         id_areaRealizacion: this.selectedArea[0],
@@ -235,6 +236,12 @@ export class EventPageComponent extends BaseComponent implements OnInit {
     if(this.dates[0] === null || this.dates[1] === null){
       return;
     }
+  
+    if (!this.isNew) {
+      if (this.dates[1] < this.maxDate) this.selectedStatus = false;
+      else this.selectedStatus = this.loadedStatus;
+      this.readableStatus = this.selectedStatus ? 'Reservado' : 'Finalizado';
+    }
     
     let insideDates: Date[] = [];
     const initialDate: Date = new Date(this.dates[0].getTime());
@@ -267,9 +274,12 @@ export class EventPageComponent extends BaseComponent implements OnInit {
           this.id = response.id_Evento;
           this.selectedArea.push(response.AREA.id_Area);
           this.dates = [new Date(response.fh_Inicio), new Date(response.fh_Finalizacion)];
+          this.maxDate = new Date(response.fh_Finalizacion);
+          this.minDate = new Date(response.fh_Inicio);
           this.title = response.titulo;
           this.capacity = response.capacidad;
-          this.eventStatus = response.aprobado;
+          this.selectedStatus = response.aprobado;
+          this.loadedStatus = response.aprobado;
           this.changeStatus();
           this.uploadedFile.push(response.imagen);
           setTimeout(() => {

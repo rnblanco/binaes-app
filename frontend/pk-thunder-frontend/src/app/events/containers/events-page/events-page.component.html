@@ -26,7 +26,7 @@
 				class="text-center">
 
 				<ng-container *ngSwitchCase="'imagen'">
-					<img [src]="data?.imagen | photo" style="height:10rem" />
+					<img [src]="data?.imagen | photo" style="height:8rem" />
 				</ng-container>
 
 				<ng-container *ngSwitchCase="'titulo'">
@@ -42,7 +42,9 @@
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'aprobado'">
-					{{ data?.aprobado ? 'Reservado' : 'Finalizado'}}
+					<div class='text-center'>
+						<span class="'p-pt-1 p-pb-1 aprove-badge {{ data?.aprobado ? 'Reservado' : 'Finalizado'}}s">{{ data?.aprobado ? 'Reservado' : 'Finalizado'}}s</span>
+					</div>
 				</ng-container>
 				
 				<ng-container *ngSwitchCase="'fh_Inicio'">

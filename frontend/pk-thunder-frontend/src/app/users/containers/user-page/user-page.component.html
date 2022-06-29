@@ -3,74 +3,78 @@
                class="p-d-flex p-ai-center p-jc-center"
                style="height: 80%"></app-loading>
   <form *ngIf="!loading"
-        #form="ngForm"
+        #formModel="ngForm"
         autocomplete="off"
         class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
+		
     <div class="p-field p-col-6">
       <label>Nombre:</label>
       <div class="p-input-icon-right">
         <input name="name" [(ngModel)]="name" placeholder="Ej. Juan Perez" pInputText />
       </div>
     </div>
-    <div class="p-field p-col-6">
-      <label>Email:</label>
-      <div class="p-input-icon-right">
-        <input name="email" [(ngModel)]="email" placeholder="Ej. correo@gmail.com" pInputText />
-      </div>
-    </div>
-    <div class="p-field p-col-6">
-      <label>Teléfono:</label>
-      <div class="p-input-icon-right">
-        <p-inputMask name="telefono" [(ngModel)]="telefono" mask="+50399999999" placeholder="Ej. +50377777777"></p-inputMask>
-      </div>
-    </div>
-    <div class="p-field p-col-2">
-      <label>Ocupacion:</label>
+		
+		<div class="p-field p-col-3">
+			<label>Institución:</label>
+			<div class="p-input-icon-right">
+				<input name="institucion" [(ngModel)]="institucion" placeholder="Ej. Binaes" pInputText />
+			</div>
+		</div>
+    
+    <div class="p-field p-col-3">
+      <label>Ocupación:</label>
       <div class="p-input-icon-right">
         <input name="ocupacion" [(ngModel)]="ocupacion" placeholder="Ej. estudiante" pInputText />
       </div>
     </div>
-    <div class="p-field p-col-2">
-      <label>Institución:</label>
-      <div class="p-input-icon-right">
-        <input name="institucion" [(ngModel)]="institucion" placeholder="Ej. Binaes" pInputText />
-      </div>
-    </div>
-    <div class="p-field p-col-2">
+		
+		<div class="p-field p-col-6" [formGroup]='form'>
+			<label>Email:</label>
+			<input formControlName="email" pInputText/>
+			<span style='color:red' *ngIf="validatorService.validField(form,'email')"> Por favor ingresa un correo válido</span>
+		</div>
+		
+		<div class="p-field p-col-3">
+			<label>Contraseña:</label>
+			<div class="p-input-icon-right">
+				<input name="contrasena" type="password" [(ngModel)]="contrasena" placeholder="•••••" pInputText />
+			</div>
+		</div>
+    <div class="p-field p-col-3">
       <label>Rol:</label>
       <p-multiSelect [options]="roles" [(ngModel)]="selectedRol" (onFilter)="rolFilter($event)" (onChange)="rolChange($event)" [showToggleAll]="false"
                      #editorialMultiSelect name="selectedRol" defaultLabel="Elige un tipo" optionLabel="rol" optionValue="id_rolUsuario"
                      [showClear]="true" [resetFilterOnHide]="true">
       </p-multiSelect>
     </div>
-    <div class="p-field p-col-10">
+    <div class="p-field p-col-9">
       <label>Dirección:</label>
       <div class="p-input-icon-right">
         <input name="direccion" [(ngModel)]="direccion" placeholder="Ej. Carretera Francisco Javier, 697, Hab. 76" pInputText />
       </div>
     </div>
-    <div class="p-field p-col-2">
-      <label>Contraseña:</label>
-      <div class="p-input-icon-right">
-        <input name="contrasena" type="password" [(ngModel)]="contrasena" placeholder="•••••" pInputText />
-      </div>
-    </div>
+		<div class="p-field p-col-3">
+			<label>Teléfono:</label>
+			<div class="p-input-icon-right">
+				<p-inputMask name="telefono" [(ngModel)]="telefono" mask="+50399999999" placeholder="Ej. +50377777777"></p-inputMask>
+			</div>
+		</div>
+    
     <div class="p-field p-col-12 p-mt-2">
       <label>Portada:</label>
       <p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
                     (onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
         <ng-template pTemplate="content">
-          <label>Foto de perfil actual:</label><br />
-          <img src="{{ uploadedFile[0] | photo }}" style="height:10em" />
+          <img *ngIf="uploadedFile[0] && !selectedfiles[0]" src="{{ uploadedFile[0] | photo }}" alt="{{uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
         </ng-template>
       </p-fileUpload>
     </div>
     <div class="p-col-12 p-grid p-mt-2">
-      <div [ngClass]="{'p-col-10': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
+      <div [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
         <button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
       </div>
 
-      <div *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew" class="p-col">
+      <div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">
         <button [loading]="deleteLoading" pButton pRipple type="button" class="p-button-danger" label="Eliminar" icon="pi pi-trash" (click)="delete()"></button>
       </div>
     </div>

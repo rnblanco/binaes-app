@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Roles } from '../../../auth/constants/roles';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Prestamo, PaginadorPrestamo } from '../../../shared/models/borrow';
+import { PaginadorPrestamo } from '../../../shared/models/borrow';
 
 @Component({
   selector: 'app-borrows-page',
@@ -38,7 +38,7 @@ export class BorrowsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('PRESTAMO', new HttpParams().set('id_Usuario', this.user.id_Usuario))
+      .getByNameWithParams('PRESTAMO', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorPrestamo) => {
           this.pagination = response.meta;
@@ -57,7 +57,7 @@ export class BorrowsPageComponent extends LazyComponent implements OnInit {
     this.getPaginationParams();
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('PRESTAMO', this.httpParams)
+      .getByNameWithParams('PRESTAMO', this.httpParams.set('id_rolUsuario', this.user.ROLUSUARIO.id_rolUsuario).set('id_Usuario', this.user.id_Usuario))
       .subscribe(
         (response: PaginadorPrestamo) => {
           this.pagination = response.meta;
