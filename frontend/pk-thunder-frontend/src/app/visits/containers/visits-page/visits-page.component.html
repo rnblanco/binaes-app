@@ -1,0 +1,50 @@
+<div class="p-mt-4">
+  <table-card [reloading]="loading"
+              [globalFilter]="globalFilter"
+              [rows]="rows"
+              (onLazyLoad)="onLazyLoad($event)"
+              (onRowSelect)="onRowSelect($event)"
+              [pagination]="pagination"
+              [loading]="loading"
+              [cols]="cols"
+              [list]="list"
+              [showNewButton]="false"
+              (onNewClick)="onNew()"
+              newButtonLabel="Ingresar visita"
+              type="visitas">
+    
+              <ng-template pTemplate="body"
+                 let-table="table"
+                 let-columns="columns"
+                 let-data="rowData">
+                  <td *ngFor="let col of columns"
+                      [ngSwitch]="col.field"
+                      [style.width.px]="col.width"
+                      class="text-center">
+
+                    <ng-container *ngSwitchCase="'USUARIO.nombre'">
+                      {{ data?.USUARIO?.nombre | titlecase }}
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'AREA.nombre'">
+                      {{ data?.AREA?.nombre | titlecase }}
+                    </ng-container>
+
+                    <ng-container *ngSwitchCase="'fh_entrada'">
+                      {{ data?.fh_entrada | date: 'h:mm a' : '': 'en-US' }},
+                      {{ data?.fh_entrada | date:'dd-MM-yyyy' }}
+                    </ng-container>
+            
+                    <ng-container *ngSwitchCase="'fh_salida'">
+                      {{ data?.fh_entrada | date: 'h:mm a' : '': 'en-US' }},
+                      {{ data?.fh_salida | date:'dd-MM-yyyy' }}
+                    </ng-container>
+
+                    <ng-container *ngSwitchDefault>
+                      {{ data[col.field] | titlecase }}
+                    </ng-container>
+                  </td>
+    </ng-template>
+  </table-card>
+</div>
+

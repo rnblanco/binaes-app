@@ -1,4 +1,5 @@
 import { Coleccion } from "./collection";
+import { Meta } from "./pagination";
 
 export interface Ejemplar {
   id_Ejemplar: number;
@@ -61,6 +62,11 @@ export interface EtiquetaxEjemplar {
 export interface TipoEtiqueta {
 	id_tipoEtiqueta: number,
 	tipoEtiqueta1: string
+}
+
+export interface PaginadorEjemplar {
+	data: Ejemplar[];
+	meta: Meta;
 }
 
 export enum BorrowStatus {

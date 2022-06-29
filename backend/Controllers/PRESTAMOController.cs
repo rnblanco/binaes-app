@@ -325,7 +325,7 @@ namespace backend.Controllers
                     borrow.fh_Prestamo = borrow.fh_Prestamo.AddDays(1);
                 }
             }
-            return disabledDates.AsQueryable();
+            return disabledDates.AsQueryable().Distinct();
         }
 
         // PUT: api/PRESTAMO/5

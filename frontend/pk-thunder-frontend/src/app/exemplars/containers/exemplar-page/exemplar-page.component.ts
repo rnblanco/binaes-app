@@ -87,6 +87,16 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
   
   loadAll(): void {
+    if (this.user.id_rolUsuario === Roles.USER) {
+      this.messageService.setPayload({
+        type: 'warn',
+        title: 'Error',
+        body: 'No tienes autorización para ver esta información',
+      });
+      setTimeout(() => {
+        this.router.navigate([RouteInformation.exemplarsPage])
+      }, 50);      
+    }
     this.subscription.add(
       this.route.params.subscribe(({id}: Params) => {
         this.loading = true;

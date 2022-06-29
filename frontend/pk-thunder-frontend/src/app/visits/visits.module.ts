@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExemplarsPageComponent } from './containers/exemplars-page/exemplars-page.component';
-import { ExemplarsRoutingModule } from './exemplars-routing.module';
-import { ExemplarPageComponent } from './containers/exemplar-page/exemplar-page.component';
+import { VisitPageComponent } from './containers/visit-page/visit-page.component';
+import { VisitsPageComponent } from './containers/visits-page/visits-page.component';
+import { VisitsRoutingModule } from './visits-routing.module';
 import { TableCardModule } from '../shared/components/table-card/table-card.module';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,33 +15,34 @@ import { LoadingModule } from '../../components/loading/loading.module';
 import { CalendarModule } from 'primeng/calendar';
 import { FileUploadModule } from 'primeng/fileupload';
 import { HttpClientModule } from '@angular/common/http';
-import { TooltipModule } from 'primeng/tooltip';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
-import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.module';
+
 
 @NgModule({
   declarations: [
-    ExemplarsPageComponent,
-    ExemplarPageComponent
+    VisitPageComponent,
+    VisitsPageComponent
   ],
-	imports: [
-		CommonModule,
-		ExemplarsRoutingModule,
-		TableCardModule,
-		FormsModule,
-		InputTextModule,
-		ListboxModule,
-		ButtonModule,
-		RippleModule,
-		MultiSelectModule,
-		SharedModule,
-		LoadingModule,
-		CalendarModule,
-		FileUploadModule,
-		HttpClientModule,
-		TooltipModule,
-		TabViewModule,
-		TagMaskModule
-	]
+  imports: [
+    CommonModule,
+    VisitsRoutingModule,
+    TableCardModule,
+    FormsModule,
+    InputTextModule,
+    ListboxModule,
+    ButtonModule,
+    RippleModule,
+    MultiSelectModule,
+    SharedModule,
+    LoadingModule,
+    CalendarModule,
+    FileUploadModule,
+    HttpClientModule,
+    InputNumberModule,
+    InputTextareaModule,
+    TabViewModule,
+  ]
 })
-export class ExemplarsModule { }
+export class VisitsModule { }

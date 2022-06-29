@@ -1,3 +1,5 @@
+import { Meta } from "./pagination";
+
 export interface LoginReturnModel {
 	usuario: Usuario,
 	token: string
@@ -26,4 +28,9 @@ export interface Usuario {
 export interface RolUsuario {
 	id_rolUsuario: number;
 	rol:           string;
+}
+
+export interface PaginadorUsuario {
+	data: Usuario[];
+	meta: Meta;
 }

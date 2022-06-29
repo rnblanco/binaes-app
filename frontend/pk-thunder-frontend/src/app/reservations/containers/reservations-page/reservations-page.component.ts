@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Roles } from '../../../auth/constants/roles';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Prestamo, Reserva } from '../../../shared/models/borrow';
+import { Prestamo, Reserva, PaginadorReserva } from '../../../shared/models/borrow';
 import { HttpParams } from '@angular/common/http';
 
 @Component({
@@ -41,10 +41,10 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('RESERVA', new HttpParams().set('id_Usuario', this.user.id_Usuario))
       .subscribe(
-        (response: Reserva[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorReserva) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)
@@ -60,10 +60,10 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
       .getByNameWithParams('RESERVA', this.httpParams)
       .subscribe(
-        (response: Reserva[]) => {
-          // this.pagination = _response.meta;
-          // this.currentPage = this.pagination.currentPage;
-          this.list = response;
+        (response: PaginadorReserva) => {
+          this.pagination = response.meta;
+          this.currentPage = this.pagination.currentPage;
+          this.list = response.data;
           this.loading = false;
         },
         () => (this.loading = false)
