@@ -42,7 +42,7 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
   userText: string ='';
   users: Usuario[];
   // selectedUser: string[] = [];
-  selectedUser: number[] = [];
+  selectedUser: string[] = [];
   @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
   
   reservation: Reserva;

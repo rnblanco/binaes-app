@@ -31,12 +31,12 @@
                     </ng-container>
 
                     <ng-container *ngSwitchCase="'fh_entrada'">
-                      {{ data?.fh_entrada | date: 'h:mm a' : '': 'en-US' }},
+                      {{ data?.fh_entrada | date: 'h:mm a' : '': 'en-US' }}
                       {{ data?.fh_entrada | date:'dd-MM-yyyy' }}
                     </ng-container>
             
                     <ng-container *ngSwitchCase="'fh_salida'">
-                      {{ data?.fh_entrada | date: 'h:mm a' : '': 'en-US' }},
+                      {{ data?.fh_salida | date: 'h:mm a' : '': 'en-US' }}
                       {{ data?.fh_salida | date:'dd-MM-yyyy' }}
                     </ng-container>
 

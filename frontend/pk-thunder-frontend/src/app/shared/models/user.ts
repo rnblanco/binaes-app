@@ -11,7 +11,7 @@ export interface Usuario {
 	ROLUSUARIO:    RolUsuario;
 	TOKEN:         any[];
 	VISITAS?:       any[];
-	id_Usuario:    number;
+	id_Usuario:    string;
 	// id_Usuario:    string;
 	nombre:        string;
 	email:         string;

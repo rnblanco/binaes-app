@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +17,14 @@ export class ValidatorService {
   public ISSN: RegExp = /[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][X0-9]/;
   public DOI: RegExp = /(10\.[0-9a-zA-Z]+\/(?:(?!["&\'])\S)+)\b/;
   
-  public validField(form: FormGroup, field: string): boolean | null{
+  public validField(form: UntypedFormGroup, field: string): boolean | null{
     return (
       form.controls[field].errors &&
       (form.controls[field].touched || form.controls[field].dirty)
     );
   }
 
-  public validCheck(form: FormGroup, field: string): boolean {
+  public validCheck(form: UntypedFormGroup, field: string): boolean {
     return (
       form.controls[field].valid &&
       (form.controls[field].touched ||
@@ -33,8 +33,8 @@ export class ValidatorService {
     );
   }
 
-  public mustMatch(field: string, matchingField: string): (FormGroup: FormGroup) => void {
-    return (formGroup: FormGroup) => {
+  public mustMatch(field: string, matchingField: string): (FormGroup: UntypedFormGroup) => void {
+    return (formGroup: UntypedFormGroup) => {
       const control = formGroup.controls[field];
       const matchingControl = formGroup.controls[matchingField];
       if (control.value && matchingControl.value) {

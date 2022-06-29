@@ -85,7 +85,7 @@
     <div class="p-field p-col-6 p-mt-2">
       <label>Editorial:</label>
       <p-multiSelect [options]="editoriales" [(ngModel)]="selectedEditorial" (onFilter)="editorialFilter($event)" (onChange)="editorialChange($event)" [showToggleAll]="false"
-                     #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige un tipo" optionLabel="editorial1" optionValue="id_Editorial"
+                     #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige una editorail" optionLabel="editorial1" optionValue="id_Editorial"
                      [showClear]="true" [resetFilterOnHide]="true">
         <ng-template let-group pTemplate="emptyfilter">
           <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{editorialText}}'" (click)="addEditorial()"></button>

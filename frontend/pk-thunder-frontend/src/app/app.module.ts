@@ -18,6 +18,7 @@ import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { TagPipe } from './shared/pipes/tag.pipe';
 import esSV from '@angular/common/locales/es-SV';
 import { registerLocaleData } from '@angular/common';
+import { PhotoPipe } from './shared/pipes/photo.pipe';
 
 
 registerLocaleData(esSV);
@@ -39,6 +40,7 @@ registerLocaleData(esSV);
     CoreModule
   ],
   providers: [
+    PhotoPipe,
     TagPipe,
     MenuService,
     AppBreadcrumbService,

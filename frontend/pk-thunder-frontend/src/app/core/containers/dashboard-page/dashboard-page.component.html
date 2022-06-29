@@ -1,3 +1,60 @@
-<div class="p-mt-4 card">
-	<h3>Registrar una visita</h3>
-</div>
+<ng-container *ngIf="user.id_rolUsuario === USER; else QR">
+	<div class="card p-mt-4">
+		<h3>Bienvenido al sistema de gestión de BINAES 📚</h3>
+		<p>¡Elige una opción del menú!</p>
+	</div>
+</ng-container>
+
+<ng-template #QR>
+	<form
+		#form="ngForm"
+		autocomplete="off"
+		class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2 p-mt-4"
+	>
+		<div class="p-field p-col-12 p-mt-2">
+			<label>Área:</label>
+			<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
+										 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
+										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
+			>
+			</p-multiSelect>
+		</div>
+		<div class="p-field p-col-12 p-mt-2" *ngIf="camerasFound">
+			<label>Cámaras:</label>
+			<p-dropdown [options]="camerasFound" [(ngModel)]="device" name="device"></p-dropdown>
+		</div>
+	</form>
+	
+	<div class="p-grid p-jc-between p-mt-4">
+		<div class="p-col-12 p-sm-6">
+			<div class="card">
+				<h3 class="text-center">Escanear QR</h3>
+				<zxing-scanner #scanner (scanSuccess)="scanSuccessHandler($event)" *ngIf="scannerEnabled" (camerasFound)="getCameras($event)" [(device)]="device"></zxing-scanner>
+				<div class="p-d-flex p-jc-center p-ai-center" *ngIf="!scannerEnabled">
+					<img class="scan" src="assets/images/camara.png" [style]="{width: '250px', height: '250px'}" alt="Scan">
+				</div>
+				<div class="p-d-flex p-jc-center p-ai-center">
+					<button (click)="enableScanner()" *ngIf="!scannerEnabled" pButton pRipple type="button" class="p-button-primary" [disabled]="selectedArea?.length === 0"
+									pTooltip="{{selectedArea?.length === 0 ? 'Debe elegir un área' : ''}}" tooltipPosition="bottom">Escanear código QR</button>
+				</div>
+			</div>
+		</div>
+		<div class="p-col-12 p-sm-6 p-d-flex p-flex-column">
+			<div class="card" [style]="{display: 'flex', flex: 'auto', flexFlow: 'column'}">
+				<h3 class="text-center">Información de usuario</h3>
+				<app-loading *ngIf="loading"></app-loading>
+				<div class="p-d-flex p-jc-center p-ai-center" *ngIf="!selectedUser">
+					<img class="scan" src="assets/images/user.png" [style]="{width: '250px', height: '250px'}" alt="Scan">
+					<div [style]="{height: '10rem'}"></div>
+				</div>
+				<div *ngIf="selectedUser" [style]="{ display:'flex',flexFlow: 'column', flex: 1}">
+					<p class="text-center">{{selectedUser.id_Usuario}} {{selectedUser.nombre}}</p>
+					<div class="p-d-flex p-jc-center p-ai-center" [style]="{ marginBottom: '3rem', flexFlow: 'column', flex: 1}">
+						<img src="{{ selectedUser.fotografia | photo}}" class="img-visit" alt="Image">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+

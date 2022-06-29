@@ -37,10 +37,10 @@ export class VisitsPageComponent extends LazyComponent implements OnInit {
       this.catalogService
         .getByNameWithParams('VISITAS', this.httpParams)
         .subscribe(
-          (response: Visita[]) => {
-            //this.pagination = response.meta;
-            //this.currentPage = this.pagination.currentPage;
-            this.list = response;
+          (response: PaginadorVisita) => {
+            this.pagination = response.meta;
+            this.currentPage = this.pagination.currentPage;
+            this.list = response.data;
             this.loading = false;
           },
           () => (this.loading = false)

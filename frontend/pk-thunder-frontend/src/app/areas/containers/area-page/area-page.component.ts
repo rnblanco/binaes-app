@@ -28,7 +28,7 @@ export class AreaPageComponent extends BaseComponent implements OnInit {
   
   userText: string ='';
   users: Usuario[];
-  selectedUser: number[] = [];
+  selectedUser: string[] = [];
   @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
   
   areaTypeText: string ='';

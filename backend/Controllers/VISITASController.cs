@@ -240,10 +240,21 @@ namespace backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.VISITAS.Add(vISITAS);
-            await db.SaveChangesAsync();
+            VISITAS visita = db.VISITAS.Where( x =>
+                x.USUARIO.id_Usuario == vISITAS.id_Usuario &&
+                x.AREA.id_Area == vISITAS.id_Area &&
+                x.fh_salida == null
+            ).FirstOrDefault();
 
-            return CreatedAtRoute("DefaultApi", new { id = vISITAS.id_Visita }, vISITAS);
+            if (visita == null) {
+                db.VISITAS.Add(vISITAS);
+                await db.SaveChangesAsync();
+                return CreatedAtRoute("DefaultApi", new { id = vISITAS.id_Visita }, vISITAS);
+            }
+
+            visita.fh_salida = vISITAS.fh_entrada;
+
+            return await PutVISITAS(visita.id_Visita, visita);
         }
 
         // DELETE: api/VISITAS/5

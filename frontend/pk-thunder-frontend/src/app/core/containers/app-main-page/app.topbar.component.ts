@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
 import { MenuItem } from 'primeng/api';
-import { Usuario, RolUsuario } from '../../../shared/models/user';
+import { Usuario } from '../../../shared/models/user';
 import { RouteInformation } from 'src/app/shared/constants/route-information';
 import { BaseComponent } from '../../../shared/components/base.component';
 
@@ -10,7 +10,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
   template: `
     <div class="layout-topbar">
       <a class="layout-topbar-logo" routerLink="">
-        <img src="assets/images/ux/binaes.jpg" alt="logo">
+        <img src="assets/images/ux/binaesLogo.png" alt="logo">
         <span>Binaes</span>
       </a>
     
@@ -26,7 +26,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
         <div class="p-d-flex p-jc-center p-ai-center">{{ user.nombre }}</div>
         <a [routerLink]="routeInformation.profilePage" class="p-link layout-topbar-button">          
           <p-avatar image="{{ image | photo }}" styleClass="mr-2" size="large" shape="circle"></p-avatar>
-          <span>Profile</span>
+          <span class="p-ml-2">{{ user.nombre }}</span>
         </a>
       </div>
     </div>
@@ -36,7 +36,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
 export class AppTopBarComponent extends BaseComponent {
   items: MenuItem[];
   // id: string;
-  id: number;
+  id: string;
   image: string;
   routeInformation = RouteInformation;
   constructor(public appMain: AppMainComponent) {

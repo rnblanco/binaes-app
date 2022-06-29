@@ -31,7 +31,7 @@ export class VisitPageComponent extends BaseComponent implements OnInit {
 
   userText: string ='';
   users: Usuario[];
-  selectedUser: number[] = [];
+  selectedUser: string[] = [];
   @ViewChild('areaMultiSelect') userMultiSelect: MultiSelect;
 
   constructor(private route: ActivatedRoute) {

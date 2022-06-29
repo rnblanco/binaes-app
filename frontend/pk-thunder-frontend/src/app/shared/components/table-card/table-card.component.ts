@@ -11,7 +11,7 @@ import {
   OnChanges,
   ViewChild,
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { PrimeTemplate } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -52,7 +52,7 @@ export class TableCardComponent
   @ContentChildren(PrimeTemplate) templates: QueryList<any>;
   @ViewChild(Table) private dataTable: Table;
 
-  form: FormGroup;
+  form: UntypedFormGroup;
   bodyTemplate: TemplateRef<any>;
   editColumnTemplate: TemplateRef<any>;
   headerFilterTemplate: TemplateRef<any>;
@@ -66,8 +66,8 @@ export class TableCardComponent
   ngOnInit(): void {
     this.user = this.authService.storagedUser;
     this.hasData = this.pagination?.totalItems > this.rows;
-    this.form = new FormGroup({
-      search: new FormControl(''),
+    this.form = new UntypedFormGroup({
+      search: new UntypedFormControl(''),
     });
     this.form.controls.search.setValue(this.globalFilter);
     this.textDebounce();

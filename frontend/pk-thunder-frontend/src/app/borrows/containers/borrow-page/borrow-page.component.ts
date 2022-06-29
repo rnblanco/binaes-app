@@ -38,7 +38,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
   userText: string ='';
   users: Usuario[];
   // selectedUser: string[] = [];
-  selectedUser: number[] = [];
+  selectedUser: string[] = [];
   @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
   
   constructor(private route: ActivatedRoute) {

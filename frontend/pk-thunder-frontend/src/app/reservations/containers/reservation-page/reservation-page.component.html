@@ -29,7 +29,7 @@
 		
 		<div class="p-field p-col-6 p-mt-2" [ngClass]="{'p-col-12': isNew}">
 			<label>Rango de fechas:</label>
-			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu préstamo"
+			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu reserva"
 									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [disabledDates]="disabledDates"
 									[disabled]="!isNew" pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top" [selectOtherMonths]="true"></p-calendar>
 		</div>

@@ -21,14 +21,12 @@
 			</div>
 
       <div class="p-field p-col-6 p-mt-2">
-        <label>Área:</label>
-        <p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
-                                    #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
-                                    [showClear]="true" [resetFilterOnHide]="true">
-            <ng-template let-group pTemplate="emptyfilter">
-                <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaText}}'" [disabled]="true"></button>
-            </ng-template>
-        </p-multiSelect>
+				<label>Área:</label>
+				<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
+											 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
+											 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
+				>
+				</p-multiSelect>
     </div>
 		
 		<div class="p-field p-col-4 p-mt-2" [ngClass]="{'p-col-6': isNew}">

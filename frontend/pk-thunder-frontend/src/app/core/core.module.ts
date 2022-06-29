@@ -25,7 +25,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ImageModule } from 'primeng/image';
 import { AvatarModule } from 'primeng/avatar';
 import { SharedModule } from '../shared/shared.module';
-// import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { NgxKjuaModule } from 'ngx-kjua';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { SharedModule } from '../shared/shared.module';
 		FormsModule,
 		LoadingModule,
 		SharedModule,
-		// ZXingScannerModule
+		ZXingScannerModule,
+		NgxKjuaModule,
+		DropdownModule
 	]
 })
 export class CoreModule { }

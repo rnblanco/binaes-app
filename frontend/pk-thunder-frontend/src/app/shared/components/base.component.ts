@@ -7,7 +7,7 @@ import { GlobalMessageService } from 'src/app/auth/services/global-message.servi
 import { AppBreadcrumbService } from 'src/app/core/containers/app-main-page/app.breadcrumb.service';
 import { CatalogService } from '../services/catalog.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { RouteInformation } from '../constants/route-information';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -55,8 +55,8 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   httpParams: HttpParams = new HttpParams();
   routeParams!: Params;
   // Reactive Forms
-  form!: FormGroup;
-  formBuilder: FormBuilder;
+  form!: UntypedFormGroup;
+  formBuilder: UntypedFormBuilder;
   // Show modal
   formSelected!: FormItem;
   
@@ -70,7 +70,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     this.router = AppInjector.injector.get(Router);
     this.authService = AppInjector.injector.get(AuthService);
     this.user = this.authService.storagedUser;
-    this.formBuilder = new FormBuilder();
+    this.formBuilder = new UntypedFormBuilder();
     this.subscription = new Subscription();
     this.version = packageJson.version;
     this.env = environment;

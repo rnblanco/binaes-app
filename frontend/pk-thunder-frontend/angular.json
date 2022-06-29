@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "pk-thunder-frontend"
+  "cli": {
+    "analytics": "a656dc14-b3d9-491e-a990-b1b23d7324d5"
+  }
 }
