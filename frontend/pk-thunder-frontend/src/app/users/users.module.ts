@@ -4,7 +4,7 @@ import { UsersPageComponent } from './containers/users-page/users-page.component
 import { UserPageComponent } from './containers/user-page/user-page.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { TableCardModule } from '../shared/components/table-card/table-card.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonModule } from 'primeng/button';
@@ -25,25 +25,26 @@ import { InputMaskModule } from 'primeng/inputmask';
     UsersPageComponent,
     UserPageComponent
   ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    TableCardModule,
-    FormsModule,
-    InputTextModule,
-    ListboxModule,
-    ButtonModule,
-    RippleModule,
-    MultiSelectModule,
-    SharedModule,
-    LoadingModule,
-    CalendarModule,
-    FileUploadModule,
-    HttpClientModule,
-    InputNumberModule,
-    InputTextareaModule,
-    TabViewModule,
-    InputMaskModule,
-  ]
+	imports: [
+		CommonModule,
+		UsersRoutingModule,
+		TableCardModule,
+		FormsModule,
+		InputTextModule,
+		ListboxModule,
+		ButtonModule,
+		RippleModule,
+		MultiSelectModule,
+		SharedModule,
+		LoadingModule,
+		CalendarModule,
+		FileUploadModule,
+		HttpClientModule,
+		InputNumberModule,
+		InputTextareaModule,
+		TabViewModule,
+		InputMaskModule,
+		ReactiveFormsModule
+	]
 })
 export class UsersModule { }

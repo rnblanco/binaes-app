@@ -26,14 +26,14 @@
              class="text-center">
 
            <ng-container *ngSwitchCase="'imagen'">
-             <img [src]="data?.imagen | photo" style="height:10rem" />
+             <img [src]="data?.imagen | photo" style="height:8rem" />
            </ng-container>
 
            <ng-container *ngSwitchCase="'f_publicacion'">
              {{ data?.f_publicacion | date:'dd-MM-yyyy' }}
            </ng-container>
 
-           <ng-container *ngSwitchCase="'EDITORIAL.editorial'">
+           <ng-container *ngSwitchCase="'EDITORIAL.editorial1'">
              {{ data?.EDITORIAL?.editorial1 | titlecase }}
            </ng-container>
 

@@ -20,8 +20,8 @@ export class ReservationsPageComponent extends LazyComponent implements OnInit {
     { field: 'PRESTAMO.EJEMPLAR.nombre', header: 'Nombre', width: 125 },
     { field: 'PRESTAMO.USUARIO.nombre', header: 'Usuario', width: 125 },
     { field: 'PRESTAMO.ESTADOS.estado', header: 'Estado', width: 100 },
-    { field: 'fh_Reserva', header: 'Fecha de reserva', width: 100 },
-    { field: 'PRESTAMO.fh_Prestamo', header: 'Reserva', width: 100 },
+    { field: 'fh_Reserva', header: 'Reserva', width: 100 },
+    { field: 'PRESTAMO.fh_Prestamo', header: 'Préstamo', width: 100 },
     { field: 'PRESTAMO.fh_Devolucion', header: 'Devolución', width: 100 },
   ] as any[];
   

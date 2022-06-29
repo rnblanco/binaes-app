@@ -16,16 +16,16 @@ export class ExemplarsPageComponent extends LazyComponent implements OnInit {
   }
   
   cols = [
-    { field: 'nombre', header: 'Nombre', width: 100 },
-    { field: 'imagen', header: 'Imagen', width: 100 },
-    { field: 'EDITORIAL.editorial', header: 'Editorial', width: 150 },
-    { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 50 },
-    { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 50 },
-    { field: 'COLECCION.nombre', header: 'Colección', width: 175 },
-    { field: 'p_clave', header: 'Palabra(s)', width: 175 },
-    { field: 'autorE', header: 'Autor(es)', width: 175 },
-    { field: 'etiqueta_E', header: 'Etiqueta(s)', width: 175 },
-    { field: 'f_publicacion', header: 'Publicación', width: 175 },
+    { field: 'nombre', header: 'Nombre', width: 120 },
+    { field: 'imagen', header: 'Imagen', width: 80 },
+    { field: 'EDITORIAL.editorial1', header: 'Editorial', width: 100 },
+    { field: 'FORMATOEJEMPLAR.formato', header: 'Formato', width: 90 },
+    { field: 'IDIOMAEJEMPLAR.idioma', header: 'Idioma', width: 90 },
+    { field: 'COLECCION.nombre', header: 'Colección', width: 120 },
+    { field: 'p_clave', header: 'Palabra(s)', width: 120 },
+    { field: 'autorE', header: 'Autor(es)', width: 120 },
+    { field: 'etiqueta_E', header: 'Etiqueta(s)', width: 120 },
+    { field: 'f_publicacion', header: 'Publicación', width: 120 },
   ] as any[];
 
   ngOnInit(): void {

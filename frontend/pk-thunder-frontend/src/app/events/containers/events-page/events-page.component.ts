@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Evento, PaginadorEvento } from '../../../shared/models/event';
+import { PaginadorEvento } from '../../../shared/models/event';
 import { Roles } from '../../../auth/constants/roles';
 
 @Component({

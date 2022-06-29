@@ -1,20 +1,21 @@
-import { Component, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
-import { Ejemplar, Editorial, Formatoejemplar, IdiomaEjemplar, P_Clave, Autor, AutorxEjemplar, EtiquetaxEjemplar, TipoEtiqueta } from '../../../shared/models/exemplar';
-import { Coleccion, Tipocoleccion } from '../../../shared/models/collection';
+import { Autor, AutorxEjemplar, Editorial, Ejemplar, EtiquetaxEjemplar, Formatoejemplar, IdiomaEjemplar, P_Clave, TagType, TipoEtiqueta } from '../../../shared/models/exemplar';
+import { Coleccion } from '../../../shared/models/collection';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload'
+import { FileUpload } from 'primeng/fileupload';
 import { HttpParams } from '@angular/common/http';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-exemplar-page',
   templateUrl: './exemplar-page.component.html',
 })
 export class ExemplarPageComponent extends BaseComponent implements OnInit {
-  
+  DOI = TagType.DOI;
   isNew: boolean = true;
   name: string;
   id: number;
@@ -84,6 +85,15 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
     this.maxDate = new Date();
+    this.form = this.formBuilder.group({
+      DOI: [
+        undefined,
+        [
+          Validators.required,
+          Validators.pattern(this.validatorService.DOIPattern),
+        ],
+      ],
+    });
   }
   
   loadAll(): void {

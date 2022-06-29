@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { IsActiveMatchOptions, NavigationEnd, Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -12,27 +12,14 @@ import { MenuService } from '../../services/app.menu.service';
     /* tslint:enable:component-selector */
     template: `
         <ng-container>
-            <a [attr.href]="item.url" (click)="itemClick($event)" [ngClass]="item.class"
-               *ngIf="(!item.routerLink || item.items) && item.visible !== false"
-               [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
-                <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
-                <span>{{item.label}}</span>
-                <span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
-                <i class="pi pi-fw {{active ? 'pi-angle-up' : 'pi-angle-down'}} ml-auto" *ngIf="item.items"></i>
-            </a>
             <a (click)="itemClick($event)" *ngIf="(item.routerLink && !item.items) && item.visible !== false" [ngClass]="item.class"
                [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink router-link-exact-active"
-               [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
+               [routerLinkActiveOptions]="matchOptions" [attr.target]="item.target" [attr.tabindex]="0" [attr.aria-label]="item.label" role="menuitem" pRipple>
                 <i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
                 <span>{{item.label}}</span>
                 <span class="p-tag p-badge ml-auto" *ngIf="item.badge">{{item.badge}}</span>
                 <i class="pi pi-fw {{active ? 'pi-angle-up' : 'pi-angle-down'}} ml-auto" *ngIf="item.items"></i>
             </a>
-            <ul *ngIf="(item.items && active) && item.visible !== false" [@children]="(active ? 'visibleAnimated' : 'hiddenAnimated')" role="menu">
-                <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-                    <li app-menuitem [item]="child" [index]="i" [parentKey]="key" [class]="child.badgeClass" role="none"></li>
-                </ng-template>
-            </ul>
         </ng-container>
     `,
     host: {
@@ -68,6 +55,14 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
     active: boolean = false;
     currentPath: string;
     key: string = '';
+    activeRoute: boolean = false;
+    
+    matchOptions: IsActiveMatchOptions = {
+        matrixParams: 'ignored',
+        queryParams: 'ignored',
+        paths: 'subset',
+        fragment: 'ignored'
+    }
     
     constructor(public app: AppMainComponent, public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
         this.menuSourceSubscription = this.menuService.menuSource$.subscribe(key => {

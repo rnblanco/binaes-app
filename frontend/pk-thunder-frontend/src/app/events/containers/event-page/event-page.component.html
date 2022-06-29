@@ -34,7 +34,7 @@
 		<div class="p-field p-col-4 p-mt-2" [ngClass]="{'p-col-6': isNew}">
 			<label>Rango de fechas:</label>
 			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="disabledDates"
-									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()"></p-calendar>
+									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"></p-calendar>
 		</div>
 
 		<div class="p-field p-col-2 p-mt-2" *ngIf="!isNew">
@@ -53,7 +53,7 @@
 		</div>
 	
 		<div class="p-col-12 p-mb-2">
-			<p-tabView [scrollable]="objectives.length >= 6" *ngIf="!loadingObjectives">
+			<p-tabView [scrollable]="objectives.length >= 6" *ngIf="!loadingObjectives" >
 				<p-tabPanel header="Objetivo {{i+1}}" *ngFor="let objective of objectives; let i = index" [selected]="i === 0">
 					<div class="p-inputgroup">
 						<textarea pInputTextarea required placeholder="Ej. 'Con este evento se busca lograr...'" [name]="objective.Objetivo"
@@ -71,16 +71,17 @@
 						> Eliminar </button>
 					</div>
 				</p-tabPanel>
-				<p-tabPanel header="Nuevo objetivo">
+				<p-tabPanel header="Nuevo objetivo" [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top">
 					<div class="p-inputgroup">
 						<textarea pInputTextarea required placeholder="Ej. 'Con este evento se busca lograr...'" name="objective"
 							[(ngModel)]="objective" [ngModelOptions]="{standalone: true}"
 							[style]="{
 								borderTopLeftRadius: '6px',
 								borderBottomLeftRadius: '6px'
-							}"
+							}" [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top"
 						></textarea>
-						<button pButton type="button" [disabled]="objective?.length === 0" (click)="addObjective(objective)"> Agregar </button>
+						<button pButton type="button" [disabled]="objective?.length === 0" (click)="addObjective(objective)" [disabled]="isNew"
+										pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"> Agregar </button>
 					</div>
 				</p-tabPanel>
 			</p-tabView>

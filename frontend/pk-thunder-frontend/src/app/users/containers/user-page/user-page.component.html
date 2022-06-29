@@ -3,15 +3,17 @@
                class="p-d-flex p-ai-center p-jc-center"
                style="height: 80%"></app-loading>
   <form *ngIf="!loading"
-        #form="ngForm"
+        #formModel="ngForm"
         autocomplete="off"
         class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
+		
     <div class="p-field p-col-6">
       <label>Nombre:</label>
       <div class="p-input-icon-right">
         <input name="name" [(ngModel)]="name" placeholder="Ej. Juan Perez" pInputText />
       </div>
     </div>
+		
 		<div class="p-field p-col-3">
 			<label>Institución:</label>
 			<div class="p-input-icon-right">
@@ -25,12 +27,13 @@
         <input name="ocupacion" [(ngModel)]="ocupacion" placeholder="Ej. estudiante" pInputText />
       </div>
     </div>
-		<div class="p-field p-col-6">
+		
+		<div class="p-field p-col-6" [formGroup]='form'>
 			<label>Email:</label>
-			<div class="p-input-icon-right">
-				<input name="email" [(ngModel)]="email" placeholder="Ej. correo@gmail.com" pInputText />
-			</div>
+			<input formControlName="email" pInputText/>
+			<span style='color:red' *ngIf="validatorService.validField(form,'email')"> Por favor ingresa un correo válido</span>
 		</div>
+		
 		<div class="p-field p-col-3">
 			<label>Contraseña:</label>
 			<div class="p-input-icon-right">

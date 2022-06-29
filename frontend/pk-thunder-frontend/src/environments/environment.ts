@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // api_url: 'https://binaes-app.azurewebsites.net/api',
-  api_url: 'https://localhost:44314/api',
+  api_url: 'https://binaes-app.azurewebsites.net/api',
+  // api_url: 'https://localhost:44314/api',
 };
 
 /*
