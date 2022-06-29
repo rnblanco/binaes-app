@@ -214,7 +214,7 @@ export class AreaPageComponent extends BaseComponent implements OnInit {
   loadUsers(): void {
     this.subscription.add(
       this.catalogService
-      .getByNameWithParams('USUARIO')
+      .getByNameWithParams('ADMINISTRADORES')
       .subscribe(
         (response: Usuario[]) => {
           this.users = response;
@@ -278,9 +278,9 @@ export class AreaPageComponent extends BaseComponent implements OnInit {
       .addOfURL('PISOAREA', { pisoArea1: this.floorAreaText})
       .subscribe(
         (response: Pisoarea) => {
-          this.loadAreaTypes();
+          this.loadFloorAreas();
           this.floorAreaMultiSelect.close(new Event('close'));
-          this.selectedAreaType = [response.id_pisoArea];
+          this.selectedFloorArea = [response.id_pisoArea];
         },
         () => {
           this.messageService.setPayload({
