@@ -68,15 +68,3 @@ export interface PaginadorEjemplar {
 	data: Ejemplar[];
 	meta: Meta;
 }
-
-export enum BorrowStatus {
-	EN_PRESTAMO = 1,
-	FINALIZADO = 2,
-	RESERVADO = 3
-}
-
-export enum TagType {
-	ISBN = 1,
-	ISSN = 2,
-	DOI = 3,
-}

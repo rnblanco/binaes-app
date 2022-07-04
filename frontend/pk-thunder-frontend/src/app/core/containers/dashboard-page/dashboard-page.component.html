@@ -13,7 +13,7 @@
 	>
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Área:</label>
-			<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="areaSelect.areas" [(ngModel)]="areaSelect.selectedArea" (onFilter)="areaSelect.areaFilter($event)" (onChange)="areaSelect.areaChange($event)" [showToggleAll]="false"
 										 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
 										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
 			>
@@ -34,19 +34,22 @@
 					<img class="scan" src="assets/images/camara.png" [style]="{width: '250px', height: '250px'}" alt="Scan">
 				</div>
 				<div class="p-d-flex p-jc-center p-ai-center">
-					<button (click)="enableScanner()" *ngIf="!scannerEnabled" pButton pRipple type="button" class="p-button-primary" [disabled]="selectedArea?.length === 0"
-									pTooltip="{{selectedArea?.length === 0 ? 'Debe elegir un área' : ''}}" tooltipPosition="bottom">Escanear código QR</button>
+					<button (click)="enableScanner()" *ngIf="!scannerEnabled" pButton pRipple type="button" class="p-button-primary" [disabled]="areaSelect.selectedArea?.length === 0"
+									pTooltip="{{areaSelect.selectedArea?.length === 0 ? 'Debe elegir un área' : ''}}" tooltipPosition="bottom">Escanear código QR</button>
 				</div>
 			</div>
 		</div>
 		<div class="p-col-12 p-sm-6 p-d-flex p-flex-column">
 			<div class="card" [style]="{display: 'flex', flex: 'auto', flexFlow: 'column'}">
 				<h3 class="text-center">Información de usuario</h3>
-				<app-loading *ngIf="loading"></app-loading>
-				<div class="p-d-flex p-jc-center p-ai-center" *ngIf="!selectedUser">
+				
+				<app-loading *ngIf="loading" [style]="{flex: 1}"></app-loading>
+				
+				<div class="p-d-flex p-jc-center p-ai-center" *ngIf="!selectedUser && !loading">
 					<img class="scan" src="assets/images/user.png" [style]="{width: '250px', height: '250px'}" alt="Scan">
 					<div [style]="{height: '10rem'}"></div>
 				</div>
+				
 				<div *ngIf="selectedUser" [style]="{ display:'flex',flexFlow: 'column', flex: 1}">
 					<p class="text-center">{{selectedUser.id_Usuario}} {{selectedUser.nombre}}</p>
 					<div class="p-d-flex p-jc-center p-ai-center" [style]="{ marginBottom: '3rem', flexFlow: 'column', flex: 1}">

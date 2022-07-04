@@ -18,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
+import { UserSelectComponent } from '../users/component/user-select.component';
+import { AreaSelectComponent } from '../areas/components/area-select.component';
+import { ChipModule } from 'primeng/chip';
 
 
 @NgModule({
@@ -43,6 +46,11 @@ import { TabViewModule } from 'primeng/tabview';
     InputNumberModule,
     InputTextareaModule,
     TabViewModule,
+    ChipModule
+  ],
+  providers: [
+    UserSelectComponent,
+    AreaSelectComponent
   ]
 })
 export class VisitsModule { }

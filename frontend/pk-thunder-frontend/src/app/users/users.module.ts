@@ -19,11 +19,16 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { InputMaskModule } from 'primeng/inputmask';
+import { UserSelectComponent } from './component/user-select.component';
+import { UserRolesSelectComponent } from './component/user-roles-select.component';
+import { UploadFileComponent } from '../shared/components/upload-file.component';
 
 @NgModule({
   declarations: [
     UsersPageComponent,
-    UserPageComponent
+    UserPageComponent,
+	  UserSelectComponent,
+	  UserRolesSelectComponent
   ],
 	imports: [
 		CommonModule,
@@ -45,6 +50,10 @@ import { InputMaskModule } from 'primeng/inputmask';
 		TabViewModule,
 		InputMaskModule,
 		ReactiveFormsModule
+	],
+	providers:[
+		UserRolesSelectComponent,
+		UploadFileComponent
 	]
 })
 export class UsersModule { }

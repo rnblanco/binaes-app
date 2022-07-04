@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ValidatorService } from '../services/validator.service';
-import { TagType } from '../models/exemplar';
+import { TagType } from '../constants/tag-type';
 
 @Pipe({
   name: 'tag',

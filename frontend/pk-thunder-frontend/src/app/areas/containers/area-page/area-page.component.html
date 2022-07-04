@@ -24,39 +24,39 @@
 			</div>
 		</div>
 		
-		<div class="p-field p-col-8 p-mt-2">
+		<div class="p-field p-col-12 p-sm-8 p-mt-2">
 			<label>Encargado:</label>
-			<p-multiSelect [options]="users" [(ngModel)]="selectedUser" (onFilter)="userFilter($event)" (onChange)="userChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="userSelect.users" [(ngModel)]="userSelect.selectedUser" (onFilter)="userSelect.userFilter($event)" (onChange)="userSelect.userChange($event)" [showToggleAll]="false"
 										 #userMultiSelect name="selectedUser" defaultLabel="Elige un encargado" optionLabel="nombre" optionValue="id_Usuario"
 										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron resultados"
 			></p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-4 p-mt-2">
+		<div class="p-field p-col-12 p-sm-4 p-mt-2">
 			<label>Capacidad del área:</label>
-			<p-inputNumber name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000"></p-inputNumber>
+			<p-inputNumber name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" placeholder="Ej. 200 personas" suffix=" persona{{capacity !== 1 ? 's' : '' }}"></p-inputNumber>
 		</div>
 		
-		<div class="p-field p-col-6 p-mt-2">
+		<div class="p-field p-col-12 p-sm-6 p-mt-2">
 			<label>Tipo de área:</label>
-			<p-multiSelect [options]="areaTypes" [(ngModel)]="selectedAreaType" (onFilter)="areaTypeFilter($event)" (onChange)="areaTypeChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="areaTypeSelectComponent.areaTypes" [(ngModel)]="areaTypeSelectComponent.selectedAreaType" (onFilter)="areaTypeSelectComponent.areaTypeFilter($event)" (onChange)="areaTypeSelectComponent.areaTypeChange($event)" [showToggleAll]="false"
 										 #areaTypeMultiSelect name="selectedAreaType" defaultLabel="Elige un tipo" optionLabel="tipoArea1" optionValue="id_tipoArea"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaTypeText}}'" (click)="addAreaType()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaTypeSelectComponent.areaTypeText}}'" (click)="areaTypeSelectComponent.addAreaType(areaTypeMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-6 p-mt-2">
+		<div class="p-field p-col-12 p-sm-6 p-mt-2">
 			<label>Piso:</label>
-			<p-multiSelect [options]="floorAreas" [(ngModel)]="selectedFloorArea" (onFilter)="floorAreaFilter($event)" (onChange)="floorAreaChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="areaFloorSelectComponent.floorAreas" [(ngModel)]="areaFloorSelectComponent.selectedFloorArea" (onFilter)="areaFloorSelectComponent.floorAreaFilter($event)" (onChange)="areaFloorSelectComponent.floorAreaChange($event)" [showToggleAll]="false"
 										 #floorAreaMultiSelect name="selectedFloorArea" defaultLabel="Elige un piso" optionLabel="pisoArea1" optionValue="id_pisoArea"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{floorAreaText}}'" (click)="addFloorArea()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaFloorSelectComponent.floorAreaText}}'" (click)="areaFloorSelectComponent.addFloorArea(floorAreaMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>

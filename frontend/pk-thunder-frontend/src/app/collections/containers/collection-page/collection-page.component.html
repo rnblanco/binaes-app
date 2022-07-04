@@ -19,33 +19,33 @@
 		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Área:</label>
-			<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
-										 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
+			<p-multiSelect [options]="areaSelect.areas" [(ngModel)]="areaSelect.selectedArea" (onFilter)="areaSelect.areaFilter($event)" (onChange)="areaSelect.areaChange($event)" [showToggleAll]="false"
+										 name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
 										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
 			>
 			</p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-6 p-mt-2">
+		<div class="p-field p-col-12 p-sm-6 p-mt-2">
 			<label>Tipo:</label>
-			<p-multiSelect [options]="types" [(ngModel)]="selectedType" (onFilter)="typeFilter($event)" (onChange)="typeChange($event)" [showToggleAll]="false"
-										 #typeMultiSelect name="selectedType" defaultLabel="Elige un tipo" optionLabel="tipoColeccion1" optionValue="id_tipoColeccion"
+			<p-multiSelect [options]="typeCollectionSelect.types" [(ngModel)]="typeCollectionSelect.selectedType" (onFilter)="typeCollectionSelect.typeFilter($event)" (onChange)="typeCollectionSelect.typeChange($event)" [showToggleAll]="false"
+										 #typeCollectionMultiSelect name="selectedType" defaultLabel="Elige un tipo" optionLabel="tipoColeccion1" optionValue="id_tipoColeccion"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{typeText}}'" (click)="addType()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{typeCollectionSelect.typeText}}'" (click)="typeCollectionSelect.addType(typeCollectionMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-6 p-mt-2">
+		<div class="p-field p-col-12 p-sm-6 p-mt-2">
 			<label>Género:</label>
-			<p-multiSelect [options]="genres" [(ngModel)]="selectedGenre" (onFilter)="genreFilter($event)" (onChange)="genreChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="genreSelect.genres" [(ngModel)]="genreSelect.selectedGenre" (onFilter)="genreSelect.genreFilter($event)" (onChange)="genreSelect.genreChange($event)" [showToggleAll]="false"
 										 #genreMultiSelect name="selectedGenre" defaultLabel="Elige un género" optionLabel="generoColeccion1" optionValue="id_generoColeccion"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{genreText}}'" (click)="addGenre()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{genreSelect.genreText}}'" (click)="genreSelect.addGenre(genreMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>

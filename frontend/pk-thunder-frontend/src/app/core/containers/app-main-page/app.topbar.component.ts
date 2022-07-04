@@ -11,7 +11,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
     <div class="layout-topbar">
       <a class="layout-topbar-logo" routerLink="">
         <img src="assets/images/ux/binaesLogo.png" alt="logo">
-        <span>Binaes</span>
+        <span>BINAES</span>
       </a>
     
       <a class="p-link layout-menu-button layout-topbar-button" href="#" (click)="appMain.toggleMenu($event)">

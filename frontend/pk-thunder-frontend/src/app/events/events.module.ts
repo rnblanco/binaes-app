@@ -19,12 +19,16 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
+import { UploadFileComponent } from '../shared/components/upload-file.component';
+import { AreaSelectComponent } from '../areas/components/area-select.component';
+import { ObjectivesComponent } from './components/objectives/objectives.component';
 
 @NgModule({
-  declarations: [
-    EventsPageComponent,
-    EventPageComponent
-  ],
+	declarations: [
+		EventsPageComponent,
+		EventPageComponent,
+		ObjectivesComponent
+	],
 	imports: [
 		CommonModule,
 		EventsRoutingModule,
@@ -44,6 +48,10 @@ import { TooltipModule } from 'primeng/tooltip';
 		InputTextareaModule,
 		TabViewModule,
 		TooltipModule
+	],
+	providers: [
+		UploadFileComponent,
+		AreaSelectComponent,
 	]
 })
 export class EventsModule { }

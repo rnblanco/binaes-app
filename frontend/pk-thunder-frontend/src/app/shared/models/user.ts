@@ -12,7 +12,6 @@ export interface Usuario {
 	TOKEN:         any[];
 	VISITAS?:       any[];
 	id_Usuario:    string;
-	// id_Usuario:    string;
 	nombre:        string;
 	email:         string;
 	telefono:      string;

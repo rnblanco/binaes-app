@@ -1,25 +1,25 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { Roles } from '../../../auth/constants/roles';
-import { MultiSelect } from 'primeng/multiselect';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { Ejemplar, Estados, BorrowStatus } from '../../../shared/models/exemplar';
-import { Prestamo, Reserva } from '../../../shared/models/borrow';
-import { Usuario } from 'src/app/shared/models/user';
-import { HttpParams } from '@angular/common/http';
+import { Reserva } from '../../../shared/models/borrow';
+import { BorrowStatus } from '../../../shared/constants/status';
+import { DetailPage, PageComponent } from '../../../shared/models/component-interfaces';
+import { ExemplarSelectComponent } from '../../../borrows/components/exemplar-select.component';
+import { UserSelectComponent } from '../../../users/component/user-select.component';
+import { ExemplarStatusSelectComponent } from '../../../borrows/components/exemplar-status-select.component';
 
 @Component({
   selector: 'app-reservation-page',
   templateUrl: './reservation-page.component.html',
-  styles: [
-  ]
 })
-export class ReservationPageComponent extends BaseComponent implements OnInit {
+export class ReservationPageComponent extends BaseComponent implements OnInit, PageComponent, DetailPage {
   SUPER_ADMIN = Roles.SUPER_ADMIN;
   isNew: boolean = true;
   
   id: number;
+  idBorrow: number;
   dates: Date[] = [];
   disabledDates: Date[] = [];
   minDate: Date = new Date();
@@ -28,36 +28,25 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
   
   addLoading = false;
   deleteLoading = false;
-  
-  status: Estados[] = [];
-  selectedStatus: number[] = [];
-  loadedStatus: number;
-  idBorrow: number;
-  
-  exemplarText: string ='';
-  exemplars: Ejemplar[];
-  selectedExemplar: number[] = [];
-  @ViewChild('exemplarMultiSelect') exemplarMultiSelect: MultiSelect;
-  
-  userText: string ='';
-  users: Usuario[];
-  // selectedUser: string[] = [];
-  selectedUser: string[] = [];
-  @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
-  
   reservation: Reserva;
-  constructor(private route: ActivatedRoute) {
-    super();
-  }
   
-  get formIsValid(): boolean{
-    return this.selectedUser?.length > 0 && this.selectedExemplar?.length > 0 && this.dates[0] !== null && this.dates[1] !== null;
+  constructor(
+    private route: ActivatedRoute,
+    public exemplarSelect: ExemplarSelectComponent,
+    public userSelect: UserSelectComponent,
+    public exemplarStatusSelect: ExemplarStatusSelectComponent
+  ) {
+    super();
   }
   
   ngOnInit(): void {
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
+  }
+  
+  get formIsValid(): boolean{
+    return this.userSelect.selectedUser?.length > 0 && this.exemplarSelect.selectedExemplar?.length > 0 && this.dates[0] !== null && this.dates[1] !== null;
   }
   
   loadAll(): void {
@@ -74,42 +63,15 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {
         this.loading = true;
-        this.loadExemplars();
-        this.loadUsers();
-        this.loadStatus();
+        this.exemplarSelect.loadExemplars();
+        this.userSelect.loadUsers();
+        this.exemplarStatusSelect.loadStatus();
         if (id) {
           this.id = id;
           this.loadInfo();
         }
         else this.loading = false;
       })
-    );
-  }
-  
-  delete(): void {
-    this.deleteLoading = true;
-    this.subscription.add(
-      this.catalogService.deleteOfURL(`RESERVA/${this.id}`).subscribe(
-        () => {
-          this.messageService.setPayload({
-            type: 'success',
-            title: '¡Exito!',
-            body: 'La reserva fue eliminada con éxito',
-          });
-          setTimeout(() => {
-            this.router.navigate([RouteInformation.reservationsPage])
-          }, 200);
-          this.deleteLoading = false;
-        },
-        () => {
-          this.messageService.setPayload({
-            type: 'warn',
-            title: 'Error',
-            body: 'No se pudo eliminar la reserva',
-          });
-          this.deleteLoading = false;
-        }
-      )
     );
   }
   
@@ -128,8 +90,8 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
           fh_Prestamo: this.dates[0],
           fh_Devolucion: this.dates[1],
           id_Estado: BorrowStatus.RESERVADO,
-          id_usuarioPresta: this.selectedUser[0],
-          id_Ejemplar: this.selectedExemplar[0],
+          id_usuarioPresta: this.userSelect.selectedUser[0],
+          id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
         }
       })
       .subscribe(
@@ -167,9 +129,9 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
           id_Prestamo: this.idBorrow,
           fh_Prestamo: this.dates[0],
           fh_Devolucion: this.dates[1],
-          id_Estado: this.selectedStatus[0],
-          id_usuarioPresta: this.selectedUser[0],
-          id_Ejemplar: this.selectedExemplar[0],
+          id_Estado: this.exemplarStatusSelect.selectedStatus[0],
+          id_usuarioPresta: this.userSelect.selectedUser[0],
+          id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
         }
       })
       .subscribe(
@@ -196,6 +158,33 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
     );
   }
   
+  delete(): void {
+    this.deleteLoading = true;
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`RESERVA/${this.id}`).subscribe(
+        () => {
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Exito!',
+            body: 'La reserva fue eliminada con éxito',
+          });
+          setTimeout(() => {
+            this.router.navigate([RouteInformation.reservationsPage])
+          }, 200);
+          this.deleteLoading = false;
+        },
+        () => {
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar la reserva',
+          });
+          this.deleteLoading = false;
+        }
+      )
+    );
+  }
+  
   loadInfo(): void {
     this.subscription.add(
       this.catalogService
@@ -212,10 +201,10 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
           this.reservationDate = new Date(response.fh_Reserva);
           // this.maxDate = new Date(response.PRESTAMO.fh_Devolucion);
           this.minDate = new Date(response.PRESTAMO.fh_Prestamo) > this.minDate ? this.minDate : new Date(response.PRESTAMO.fh_Prestamo);
-          this.selectedUser = [response.PRESTAMO.USUARIO.id_Usuario];
-          this.selectedExemplar = [response.PRESTAMO.EJEMPLAR.id_Ejemplar];
-          this.selectedStatus = [response.PRESTAMO.ESTADOS.id_Estado];
-          this.loadedStatus = response.PRESTAMO.ESTADOS.id_Estado;
+          this.userSelect.selectedUser = [response.PRESTAMO.USUARIO.id_Usuario];
+          this.exemplarSelect.selectedExemplar = [response.PRESTAMO.EJEMPLAR.id_Ejemplar];
+          this.exemplarStatusSelect.selectedStatus = [response.PRESTAMO.ESTADOS.id_Estado];
+          this.exemplarStatusSelect.loadedStatus = response.PRESTAMO.ESTADOS.id_Estado;
           setTimeout(() => {
             this.loading = false;
           }, 200);
@@ -228,70 +217,14 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  userFilter(event: any): void {
-    this.userText = event.filter;
-  }
-  
-  userChange(event: any): void {
-    this.selectedUser = [event.itemValue];
-  }
-  
-  loadUsers(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('USUARIO')
-      .subscribe(
-        (response: Usuario[]) => {
-          this.users = response;
-        },
-      )
-    );
-  }
-  
-  exemplarFilter(event: any): void {
-    this.exemplarText = event.filter;
-  }
-  
-  exemplarChange(event: any): void {
-    this.selectedExemplar = [event.itemValue];
-    this.loadDisabledDates(event.itemValue);
-  }
-  
-  loadDisabledDates(id: number): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('PRESTAMO', new HttpParams().set('id_Ejemplar', id))
-      .subscribe(
-        (response: Date[]) => {
-          if(response){
-            this.disabledDates = response.map((date)=> new Date(date));
-          }
-          this.dates = [];
-        },
-      )
-    );
-  }
-  
-  loadExemplars(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('EJEMPLAR')
-      .subscribe(
-        (response: Ejemplar[]) => {
-          this.exemplars = response;
-        },
-      )
-    );
-  }
-  
   onDateChange(): void {
     if(this.dates[0] === null || this.dates[1] === null){
       return;
     }
     
     if(!this.isNew){
-      if (this.dates[1].getDate() === new Date().getDate()) this.selectedStatus = [BorrowStatus.FINALIZADO];
-      else this.selectedStatus = [this.loadedStatus];
+      if (this.dates[1].getDate() === new Date().getDate()) this.exemplarStatusSelect.selectedStatus = [BorrowStatus.FINALIZADO];
+      else this.exemplarStatusSelect.selectedStatus = [this.exemplarStatusSelect.loadedStatus];
     }
     
     let insideDates: Date[] = [];
@@ -311,18 +244,6 @@ export class ReservationPageComponent extends BaseComponent implements OnInit {
       });
       if (this.dates === []) return;
     });
-  }
-  
-  loadStatus(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('ESTADOS')
-      .subscribe(
-        (response: Estados[]) => {
-          this.status = response;
-        },
-      )
-    );
   }
   
   getBreadCrumbs() {

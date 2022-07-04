@@ -1,35 +1,33 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
-import { Autor, AutorxEjemplar, Editorial, Ejemplar, EtiquetaxEjemplar, Formatoejemplar, IdiomaEjemplar, P_Clave, TagType, TipoEtiqueta } from '../../../shared/models/exemplar';
+import { Autor, AutorxEjemplar, Editorial, Ejemplar, EtiquetaxEjemplar, Formatoejemplar, IdiomaEjemplar, P_Clave, TipoEtiqueta } from '../../../shared/models/exemplar';
 import { Coleccion } from '../../../shared/models/collection';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload';
 import { HttpParams } from '@angular/common/http';
 import { Validators } from '@angular/forms';
+import { TagType } from '../../../shared/constants/tag-type';
+import { DetailPage, PageComponent } from '../../../shared/models/component-interfaces';
+import { UploadFileComponent } from '../../../shared/components/upload-file.component';
 
 @Component({
   selector: 'app-exemplar-page',
   templateUrl: './exemplar-page.component.html',
 })
-export class ExemplarPageComponent extends BaseComponent implements OnInit {
+export class ExemplarPageComponent extends BaseComponent implements OnInit, PageComponent, DetailPage {
   DOI = TagType.DOI;
+  SUPER_ADMIN = Roles.SUPER_ADMIN;
   isNew: boolean = true;
-  name: string;
+  
   id: number;
-  varbinaryImage: string;
-  uploadedFiles: File[];
-  uploadedFile: any[] = [];
-  selectedfiles: any[] = [];
+  name: string;
+
   maxDate: Date;
   date: Date;
-  SUPER_ADMIN = Roles.SUPER_ADMIN;
   addLoading = false;
   deleteLoading = false;
-  
-  @ViewChild(FileUpload) fileUpload: FileUpload
   
   editorialText: string = '';
   editoriales: Editorial[];
@@ -69,15 +67,16 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   tagName: string;
   @ViewChild('tagMultiSelect') tagMultiSelect: MultiSelect;
   
-  @Output() public onUploadFinished = new EventEmitter();
-  
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    public uploadFile: UploadFileComponent
+  ) {
     super();
   }
   
   get formIsValid(): boolean {
     return this.name !== '' && this.selectedEditorial?.length > 0 && this.selectedIdioma?.length > 0 && this.selectedFormato?.length > 0
-      && this.selectedCollection?.length > 0 && this.date !== undefined && (this.uploadedFiles !== undefined || this.uploadedFile?.length > 0);
+      && this.selectedCollection?.length > 0 && this.date !== undefined && (this.uploadFile.uploadedFiles !== undefined || this.uploadFile.uploadedFile?.length > 0);
   }
   
   ngOnInit(): void {
@@ -155,32 +154,19 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  
-  onUpload(event: any): void {
-    for (let file of event.files) {
-      this.uploadedFile.push(file);
-    }
-  }
-  
-  onSelectFile(event: { files: File[]; }) {
-    this.uploadedFiles = [...<File[]>event.files];
-    this.varbinaryImage = btoa(this.uploadedFiles[0].name);
-    this.selectedfiles = this.uploadedFiles;
-  }
-  
   add(): void {
     if (!this.isNew) {
       this.update();
       return;
     }
-    if (this.uploadedFiles !== undefined) {
-      this.uploadFile();
+    if (this.uploadFile.uploadedFiles !== undefined) {
+      this.uploadFile.uploadFile();
     }
     this.addLoading = true;
     this.subscription.add(
       this.catalogService.addOfURL(`EJEMPLAR`, {
         nombre: this.name,
-        imagen: this.varbinaryImage,
+        imagen: this.uploadFile.varbinaryImage,
         f_publicacion: this.date,
         id_Idioma: this.selectedIdioma[0],
         id_Formato: this.selectedFormato[0],
@@ -211,15 +197,15 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
   }
   
   update(): void {
-    if (this.uploadedFiles !== undefined) {
-      this.uploadFile();
+    if (this.uploadFile.uploadedFiles !== undefined) {
+      this.uploadFile.uploadFile();
     }
     this.addLoading = true;
     this.subscription.add(
       this.catalogService.updateOfURL(`EJEMPLAR/${this.id}`, {
         id_Ejemplar: this.id,
         nombre: this.name,
-        imagen: this.varbinaryImage === undefined ? btoa(this.uploadedFile[0]) : this.varbinaryImage,
+        imagen: this.uploadFile.varbinaryImage === undefined ? btoa(this.uploadFile.uploadedFile[0]) : this.uploadFile.varbinaryImage,
         f_publicacion: this.date,
         id_Idioma: this.selectedIdioma[0],
         id_Formato: this.selectedFormato[0],
@@ -249,20 +235,6 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  uploadFile(): void {
-    const formData = new FormData();
-    
-    let fileOfBlob;
-    fileOfBlob = new File([this.uploadedFiles[0]], this.uploadedFiles[0].name, {type: 'application/png'});
-    formData.append('file', fileOfBlob, fileOfBlob.name);
-    
-    this.subscription.add(
-      this.catalogService.addOfURL("UploadImage", formData).subscribe(
-        () => {}
-      )
-    );
-  }
-  
   loadInfo(): void {
     this.subscription.add(
       this.catalogService.getByNameWithParams(`EJEMPLAR/${this.id}`).subscribe(
@@ -277,7 +249,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit {
           this.selectedFormato.push(response.FORMATOEJEMPLAR.id_formatoEjemplar);
           this.selectedIdioma.push(response.IDIOMAEJEMPLAR.id_idiomaEjemplar);
           this.selectedEditorial.push(response.EDITORIAL.id_Editorial);
-          this.uploadedFile.push(response.imagen);
+          this.uploadFile.uploadedFile.push(response.imagen);
           setTimeout(() => {
             this.loading = false;
           }, 200);

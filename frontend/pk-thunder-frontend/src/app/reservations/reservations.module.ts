@@ -13,6 +13,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { LoadingModule } from '../../components/loading/loading.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { ChipModule } from 'primeng/chip';
+import { ExemplarStatusSelectComponent } from '../borrows/components/exemplar-status-select.component';
+import { ExemplarSelectComponent } from '../borrows/components/exemplar-select.component';
+import { UserSelectComponent } from '../users/component/user-select.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,11 @@ import { ChipModule } from 'primeng/chip';
 		LoadingModule,
 		TooltipModule,
 		ChipModule
+	],
+	providers: [
+		UserSelectComponent,
+		ExemplarSelectComponent,
+		ExemplarStatusSelectComponent
 	]
 })
 export class ReservationsModule { }

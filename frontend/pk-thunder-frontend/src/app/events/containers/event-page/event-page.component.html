@@ -1,4 +1,22 @@
 <div class="card p-mt-4">
+	<app-loading *ngIf="loading"
+							 class="p-d-flex p-ai-center p-jc-center"
+							 style="height: 80%"></app-loading>
+	<form *ngIf="!loading"
+				#form2="ngForm"
+				autocomplete="off"
+				class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
+		<div class="p-col-12 p-mb-2">
+			<app-objectives
+				[id]="id"
+				[canDelete]="user.id_rolUsuario === SUPER_ADMIN"
+				[isDisabled]="isNew"
+			></app-objectives>
+		</div>
+	</form>
+</div>
+
+<div class="card p-mt-4">
     <app-loading *ngIf="loading"
                  class="p-d-flex p-ai-center p-jc-center"
                  style="height: 80%"></app-loading>
@@ -7,35 +25,35 @@
           autocomplete="off"
           class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
 
-      <div class="p-field p-col-8">
+      <div class="p-field p-col-12 p-sm-8">
         <label>Nombre del evento:</label>
         <div class="p-input-icon-right">
-          <input name="title" [(ngModel)]="title" placeholder="Ej. Charla 'Uso correcto aplicación BINAES' " pInputText />
+          <input name="title" [(ngModel)]="title" placeholder="Ej. Charla Uso correcto de la BINAES App" pInputText />
         </div>
       </div>
 	
-			<div class="p-field p-col-4">
+			<div class="p-field p-col-12 p-sm-4">
 				<label>Capacidad del evento:</label>
-				<p-inputNumber pTooltip="La capacidad depende del área" tooltipPosition="top"
-					name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" [disabled]="true"></p-inputNumber>
+				<p-inputNumber pTooltip="La capacidad depende del área" tooltipPosition="top" [disabled]="true"
+					name="capacity" [(ngModel)]="areaSelect.capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" placeholder="Ej. 200 personas" suffix=" persona{{areaSelect.capacity !== 1 ? 's' : '' }}"></p-inputNumber>
 			</div>
 
-      <div class="p-field p-col-6 p-mt-2">
+      <div class="p-field p-col-12 p-sm-6 p-mt-2">
 				<label>Área:</label>
-				<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
+				<p-multiSelect [options]="areaSelect.areas" [(ngModel)]="areaSelect.selectedArea" (onFilter)="areaSelect.areaFilter($event)" (onChange)="areaSelect.areaChange($event)" [showToggleAll]="false"
 											 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
 											 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
 				>
 				</p-multiSelect>
     </div>
 		
-		<div class="p-field p-col-4 p-mt-2" [ngClass]="{'p-col-6': isNew}">
+		<div class="p-field p-col-12 p-sm-4 p-mt-2" [ngClass]="{'p-sm-6': isNew}">
 			<label>Rango de fechas:</label>
-			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="disabledDates"
-									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"></p-calendar>
+			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="areaSelect.disabledDates"
+									[(ngModel)]="areaSelect.dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"></p-calendar>
 		</div>
 
-		<div class="p-field p-col-2 p-mt-2" *ngIf="!isNew">
+		<div class="p-field p-col-12 p-sm-2 p-mt-2" *ngIf="!isNew">
 			<label>Estado:</label>
 			<input type="text" pInputText name="eventStatus" [(ngModel)]="readableStatus" [disabled]="true">
 		</div>
@@ -43,46 +61,11 @@
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Logo del evento:</label>
 			<p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
-										(onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
+										(onSelect)="uploadFile.onSelectFile($event)" (onUpload)="uploadFile.onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
 				<ng-template pTemplate="content">
-					<img *ngIf="uploadedFile[0] && !selectedfiles[0]" src="{{ uploadedFile[0] | photo }}" alt="{{uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
+					<img *ngIf="uploadFile.uploadedFile[0] && !uploadFile.selectedfiles[0]" src="{{ uploadFile.uploadedFile[0] | photo }}" alt="{{uploadFile.uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
 				</ng-template>
 			</p-fileUpload>
-		</div>
-	
-		<div class="p-col-12 p-mb-2">
-			<p-tabView [scrollable]="objectives.length >= 6" *ngIf="!loadingObjectives" >
-				<p-tabPanel header="Objetivo {{i+1}}" *ngFor="let objective of objectives; let i = index" [selected]="i === 0">
-					<div class="p-inputgroup">
-						<textarea pInputTextarea required placeholder="Ej. 'Con este evento se busca lograr...'" [name]="objective.Objetivo"
-							[(ngModel)]="objective.Objetivo" [ngModelOptions]="{standalone: true}"
-							[style]="{
-								borderTopLeftRadius: '6px',
-								borderBottomLeftRadius: '6px'
-							}"
-						></textarea>
-						<button pButton type="button" [disabled]="objective?.Objetivo?.length === 0"
-										(click)="addObjective(objective?.Objetivo ?? '', objective?.id_Objetivo)"
-						> Editar </button>
-						<button *ngIf="user.id_rolUsuario === SUPER_ADMIN" pButton type="button" class="p-button-danger"
-										(click)="deleteObjective(objective?.id_Objetivo)"
-						> Eliminar </button>
-					</div>
-				</p-tabPanel>
-				<p-tabPanel header="Nuevo objetivo" [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top">
-					<div class="p-inputgroup">
-						<textarea pInputTextarea required placeholder="Ej. 'Con este evento se busca lograr...'" name="objective"
-							[(ngModel)]="objective" [ngModelOptions]="{standalone: true}"
-							[style]="{
-								borderTopLeftRadius: '6px',
-								borderBottomLeftRadius: '6px'
-							}" [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top"
-						></textarea>
-						<button pButton type="button" [disabled]="objective?.length === 0" (click)="addObjective(objective)" [disabled]="isNew"
-										pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"> Agregar </button>
-					</div>
-				</p-tabPanel>
-			</p-tabView>
 		</div>
 	
 		<div class="p-col-12 p-grid p-mt-2 p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">

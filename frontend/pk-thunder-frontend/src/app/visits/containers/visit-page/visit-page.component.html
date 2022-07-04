@@ -12,39 +12,39 @@
 
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Nombre de usuario:</label>
-			<p-multiSelect [options]="users" [(ngModel)]="selectedUser" (onFilter)="userFilter($event)" (onChange)="userChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="userSelect.users" [(ngModel)]="userSelect.selectedUser" (onFilter)="userSelect.userFilter($event)" (onChange)="userSelect.userChange($event)" [showToggleAll]="false"
 										 #areaMultiSelect name="selectedUser" defaultLabel="Elige un usuario" optionLabel="nombre" optionValue="id_Usuario"
 										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{userText}}'" [disabled]="true"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{userSelect.userText}}'" [disabled]="true"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
 		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Área seleccionada:</label>
-			<p-multiSelect [options]="areas" [(ngModel)]="selectedArea" (onFilter)="areaFilter($event)" (onChange)="areaChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="areaSelect.areas" [(ngModel)]="areaSelect.selectedArea" (onFilter)="areaSelect.areaFilter($event)" (onChange)="areaSelect.areaChange($event)" [showToggleAll]="false"
 										 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
 										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="true"
 			>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaText}}'" [disabled]="true"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaSelect.areaText}}'" [disabled]="true"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
 
-        <div class="p-field p-col-4 p-mt-2">
+        <div class="p-field p-col-12 p-sm-4 p-mt-2">
 			<label>Hora de entrada:</label>
 			<p-calendar name="fh_entrada" dateFormat="dd/mm/yy" [disabled]="true" [timeOnly]="true" hourFormat="12" [(ngModel)]="fh_entrada"></p-calendar>
 		</div>
 
-        <div class="p-field p-col-4 p-mt-2" *ngIf="!isNew">
+        <div class="p-field p-col-12 p-sm-4 p-mt-2" *ngIf="!isNew">
 			<label>Hora de salida:</label>
 			<p-calendar name="fh_salida" dateFormat="dd/mm/yy" [timeOnly]="true" hourFormat="12" [(ngModel)]="fh_salida" [disabled]="true" ></p-calendar>
 		</div>
 
-        <div class="p-field p-col-4 p-mt-2" *ngIf="!isNew">
+        <div class="p-field p-col-12 p-sm-4 p-mt-2" *ngIf="!isNew">
 			<label>Fecha de visita:</label>
 			<p-calendar name="visitDate" dateFormat="dd/mm/yy" [disabled]="true" [(ngModel)]="visitDate"></p-calendar>
 		</div>

@@ -1,0 +1,32 @@
+<p-tabView [scrollable]="objectives.length >= 6" *ngIf="!loading" >
+	<p-tabPanel header="Objetivo {{i+1}}" *ngFor="let objective of objectives; let i = index" [selected]="i === 0">
+		<div class="p-inputgroup">
+						<textarea pInputTextarea required placeholder="Ej. Con este evento se busca lograr..." [name]="objective.Objetivo"
+											[(ngModel)]="objective.Objetivo" [ngModelOptions]="{standalone: true}"
+											[style]="{
+								borderTopLeftRadius: '6px',
+								borderBottomLeftRadius: '6px'
+							}"
+						></textarea>
+			<button pButton type="button" [disabled]="objective?.Objetivo?.length === 0"
+							(click)="add(objective?.Objetivo ?? '', objective?.id_Objetivo)"
+			> Editar </button>
+			<button *ngIf="canDelete" pButton type="button" class="p-button-danger"
+							(click)="delete(objective?.id_Objetivo)"
+			> Eliminar </button>
+		</div>
+	</p-tabPanel>
+	<p-tabPanel header="Nuevo objetivo" [disabled]="isDisabled" pTooltip="{{isDisabled ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top">
+		<div class="p-inputgroup">
+						<textarea pInputTextarea required placeholder="Ej. 'Con este evento se busca lograr...'" name="objective"
+											[(ngModel)]="objective" [ngModelOptions]="{standalone: true}"
+											[style]="{
+								borderTopLeftRadius: '6px',
+								borderBottomLeftRadius: '6px'
+							}" [disabled]="isDisabled" pTooltip="{{isDisabled ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top"
+						></textarea>
+			<button pButton type="button" [disabled]="objective?.length === 0 || isDisabled" (click)="add(objective)"
+							pTooltip="{{isDisabled ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"> Agregar </button>
+		</div>
+	</p-tabPanel>
+</p-tabView>

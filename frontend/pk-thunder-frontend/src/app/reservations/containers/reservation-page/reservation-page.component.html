@@ -13,7 +13,7 @@
 		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Ejemplar:</label>
-			<p-multiSelect [options]="exemplars" [(ngModel)]="selectedExemplar" (onFilter)="exemplarFilter($event)" (onChange)="exemplarChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="exemplarSelect.exemplars" [(ngModel)]="exemplarSelect.selectedExemplar" (onFilter)="exemplarSelect.exemplarFilter($event)" (onChange)="exemplarSelect.exemplarChange($event)" [showToggleAll]="false"
 										 #exemplarMultiSelect name="selectedType" defaultLabel="Elige un ejemplar" optionLabel="nombre" optionValue="id_Ejemplar"
 										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="!isNew" emptyFilterMessage="No se encontraron resultados"
 			></p-multiSelect>
@@ -21,27 +21,27 @@
 		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Usuario:</label>
-			<p-multiSelect [options]="users" [(ngModel)]="selectedUser" (onFilter)="userFilter($event)" (onChange)="userChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="userSelect.users" [(ngModel)]="userSelect.selectedUser" (onFilter)="userSelect.userFilter($event)" (onChange)="userSelect.userChange($event)" [showToggleAll]="false"
 										 #userMultiSelect name="selectedUser" defaultLabel="Elige un usuario" optionLabel="nombre" optionValue="id_Usuario"
 										 [showClear]="true" [resetFilterOnHide]="true" [disabled]="!isNew" emptyFilterMessage="No se encontraron resultados"
 			></p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-6 p-mt-2" [ngClass]="{'p-col-12': isNew}">
+		<div class="p-field p-col-12 p-sm-6 p-mt-2" [ngClass]="{'p-sm-12': isNew}">
 			<label>Rango de fechas:</label>
 			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu reserva"
 									[(ngModel)]="dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [disabledDates]="disabledDates"
 									[disabled]="!isNew" pTooltip="{{!isNew ? 'Si desea editar debe hacerlo desde Préstamos' : ''}}" tooltipPosition="top" [selectOtherMonths]="true"></p-calendar>
 		</div>
 		
-		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
+		<div class="p-field p-col-12 p-sm-3 p-mt-2" *ngIf="!isNew">
 			<label>Estado:</label>
-			<p-multiSelect [options]="status" [(ngModel)]="selectedStatus" [showToggleAll]="false" [resetFilterOnHide]="true" [disabled]="true"
+			<p-multiSelect [options]="exemplarStatusSelect.status" [(ngModel)]="exemplarStatusSelect.selectedStatus" [showToggleAll]="false" [resetFilterOnHide]="true" [disabled]="true"
 										 name="selectedStatus" defaultLabel="Elige un estado" optionLabel="estado" optionValue="id_Estado" emptyFilterMessage="No se encontraron resultados"
 			></p-multiSelect>
 		</div>
 		
-		<div class="p-field p-col-3 p-mt-2" *ngIf="!isNew">
+		<div class="p-field p-col-12 p-sm-3 p-mt-2" *ngIf="!isNew">
 			<label>Reservado:</label>
 			<p-calendar name="reservationDate" dateFormat="dd/mm/yy" [disabled]="true" [(ngModel)]="reservationDate" [selectOtherMonths]="true"></p-calendar>
 		</div>

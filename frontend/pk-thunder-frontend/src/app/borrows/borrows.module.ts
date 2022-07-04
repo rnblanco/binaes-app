@@ -12,11 +12,16 @@ import { SharedModule } from '../shared/shared.module';
 import { CalendarModule } from 'primeng/calendar';
 import { LoadingModule } from '../../components/loading/loading.module';
 import { ChipModule } from 'primeng/chip';
+import { ExemplarSelectComponent } from './components/exemplar-select.component';
+import { ExemplarStatusSelectComponent } from './components/exemplar-status-select.component';
+import { UserSelectComponent } from '../users/component/user-select.component';
 
 @NgModule({
   declarations: [
     BorrowPageComponent,
-    BorrowsPageComponent
+    BorrowsPageComponent,
+	  ExemplarSelectComponent,
+	  ExemplarStatusSelectComponent
   ],
 	imports: [
 		CommonModule,
@@ -31,6 +36,11 @@ import { ChipModule } from 'primeng/chip';
 		CalendarModule,
 		LoadingModule,
 		ChipModule
+	],
+	providers: [
+		UserSelectComponent,
+		ExemplarSelectComponent,
+		ExemplarStatusSelectComponent,
 	]
 })
 export class BorrowsModule { }

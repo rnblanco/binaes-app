@@ -1,6 +1,6 @@
 import { Meta } from "./pagination";
-import { Area } from './event';
 import { Usuario } from "./user";
+import { Area } from './area';
 
 export interface Visita {
     id_Visita: number;
@@ -15,7 +15,6 @@ export interface HorarioXArea {
     horarioAbierto: Date,
     horarioCierre: Date,
 }
-
 
 export interface PaginadorVisita {
 	data: Visita[];

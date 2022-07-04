@@ -85,10 +85,6 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     text = text.toLowerCase();
     return `${text.charAt(0).toUpperCase()}${text.slice(1, text.length)}`;
   }
-  
-  viewFile(url: string) {
-    window.open(`${this.env.api_url}/public/file/${encodeURIComponent(url)}`);
-  }
 
   ngOnDestroy(): void {
     if (!this.subscription) return;

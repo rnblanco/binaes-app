@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { Usuario } from '../../../shared/models/user';
-import { Area } from '../../../shared/models/collection';
-import { MultiSelect } from 'primeng/multiselect';
 import { Roles } from '../../../auth/constants/roles';
+import { AreaSelectComponent } from '../../../areas/components/area-select.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -14,16 +13,11 @@ export class DashboardPageComponent extends BaseComponent implements OnInit {
   scannerEnabled: boolean = false;
   selectedUser: Usuario;
   
-  areaText: string ='';
-  areas: Area[];
-  selectedArea: number[] = [];
-  @ViewChild('areaMultiSelect') areaMultiSelect: MultiSelect;
-  
   camerasFound: any[];
   device: any;
   devices: any[] = [];
   
-  constructor() {
+  constructor(public areaSelect: AreaSelectComponent) {
     super();
   }
   
@@ -32,9 +26,8 @@ export class DashboardPageComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAreas();
+    this.areaSelect.loadAreas();
     this.breadcrumbService.setItems(this.getBreadCrumbs());
-    console.log(new Date())
   }
   
   public enableScanner() {
@@ -44,26 +37,6 @@ export class DashboardPageComponent extends BaseComponent implements OnInit {
   public scanSuccessHandler(event: any) {
     this.scannerEnabled = false;
     this.getUser(event);
-  }
-  
-  areaFilter(event: any): void {
-    this.areaText = event.filter;
-  }
-  
-  areaChange(event: any): void {
-    this.selectedArea = [event.itemValue];
-  }
-  
-  loadAreas(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('AREA')
-      .subscribe(
-        (response: Area[]) => {
-          this.areas = response;
-        },
-      )
-    );
   }
   
   getUser(id: string){
@@ -85,12 +58,11 @@ export class DashboardPageComponent extends BaseComponent implements OnInit {
   }
   
   updateVisit(id: string) {
-    console.log(new Date())
     this.subscription.add(
       this.catalogService
       .addOfURL(`VISITAS`, {
         id_Usuario: id,
-        id_Area: this.selectedArea[0],
+        id_Area: this.areaSelect.selectedArea[0],
         fh_entrada: new Date(),
         fh_salida: null
       })

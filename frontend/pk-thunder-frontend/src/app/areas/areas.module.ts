@@ -19,11 +19,18 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TabViewModule } from 'primeng/tabview';
 import { ChipModule } from 'primeng/chip';
+import { AreaSelectComponent } from './components/area-select.component';
+import { UserSelectComponent } from '../users/component/user-select.component';
+import { AreaTypeSelectComponent } from './components/area-type-select.component';
+import { AreaFloorSelectComponent } from './components/area-floor-select.component';
 
 @NgModule({
   declarations: [
     AreasPageComponent,
-    AreaPageComponent
+    AreaPageComponent,
+	  AreaSelectComponent,
+	  AreaTypeSelectComponent,
+	  AreaFloorSelectComponent
   ],
 	imports: [
 		CommonModule,
@@ -44,6 +51,11 @@ import { ChipModule } from 'primeng/chip';
 		InputTextareaModule,
 		TabViewModule,
 		ChipModule
+	],
+	providers:[
+		UserSelectComponent,
+		AreaTypeSelectComponent,
+		AreaFloorSelectComponent
 	]
 })
 export class AreasModule { }

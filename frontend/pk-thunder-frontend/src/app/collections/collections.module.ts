@@ -12,11 +12,16 @@ import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SharedModule } from '../shared/shared.module';
 import { LoadingModule } from '../../components/loading/loading.module';
+import { GenreSelectComponent } from './components/genre-select.component';
+import { TypeCollectionSelectComponent } from './components/type-collection-select.component';
+import { AreaSelectComponent } from '../areas/components/area-select.component';
 
 @NgModule({
   declarations: [
     CollectionsPageComponent,
-    CollectionPageComponent
+    CollectionPageComponent,
+	  GenreSelectComponent,
+	  TypeCollectionSelectComponent,
   ],
 	imports: [
 		CommonModule,
@@ -30,6 +35,11 @@ import { LoadingModule } from '../../components/loading/loading.module';
 		MultiSelectModule,
 		SharedModule,
 		LoadingModule
+	],
+	providers: [
+		TypeCollectionSelectComponent,
+		GenreSelectComponent,
+		AreaSelectComponent,
 	]
 })
 export class CollectionsModule { }

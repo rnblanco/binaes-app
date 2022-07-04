@@ -28,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgxKjuaModule } from 'ngx-kjua';
 import { DropdownModule } from 'primeng/dropdown';
+import { AreaSelectComponent } from '../areas/components/area-select.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,9 @@ import { DropdownModule } from 'primeng/dropdown';
 		ZXingScannerModule,
 		NgxKjuaModule,
 		DropdownModule
+	],
+	providers:[
+		AreaSelectComponent
 	]
 })
 export class CoreModule { }

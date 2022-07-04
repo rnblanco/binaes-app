@@ -20,7 +20,6 @@ import esSV from '@angular/common/locales/es-SV';
 import { registerLocaleData } from '@angular/common';
 import { PhotoPipe } from './shared/pipes/photo.pipe';
 
-
 registerLocaleData(esSV);
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ registerLocaleData(esSV);
   ],
   providers: [
     PhotoPipe,
-    TagPipe,
     MenuService,
     AppBreadcrumbService,
     AuthService,

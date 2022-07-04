@@ -22,9 +22,11 @@
                       [style.width.px]="col.width"
                       class="text-center">
 
-                    <ng-container *ngSwitchCase="'USUARIO.nombre'">
-                      {{ data?.USUARIO?.nombre | titlecase }}
-                    </ng-container>
+										<ng-container *ngSwitchCase="'USUARIO.nombre'">
+											<p-chip styleClass='p-col-12' [image]="'assets/images/icons/user-circle.png'"
+															[label]="data?.USUARIO.nombre | titlecase">
+											</p-chip>
+										</ng-container>
 
                     <ng-container *ngSwitchCase="'AREA.nombre'">
                       {{ data?.AREA?.nombre | titlecase }}

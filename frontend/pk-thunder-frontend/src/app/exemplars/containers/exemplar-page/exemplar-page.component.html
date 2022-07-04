@@ -82,10 +82,10 @@
         <input name="name" [(ngModel)]="name" placeholder="Ej. Crónicas de Narnia" pInputText />
       </div>
     </div>
-    <div class="p-field p-col-6 p-mt-2">
+    <div class="p-field p-col-12 p-sm-6 p-mt-2">
       <label>Editorial:</label>
       <p-multiSelect [options]="editoriales" [(ngModel)]="selectedEditorial" (onFilter)="editorialFilter($event)" (onChange)="editorialChange($event)" [showToggleAll]="false"
-                     #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige una editorail" optionLabel="editorial1" optionValue="id_Editorial"
+                     #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige una editorial" optionLabel="editorial1" optionValue="id_Editorial"
                      [showClear]="true" [resetFilterOnHide]="true">
         <ng-template let-group pTemplate="emptyfilter">
           <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{editorialText}}'" (click)="addEditorial()"></button>
@@ -93,7 +93,7 @@
       </p-multiSelect>
     </div>
 
-    <div class="p-field p-col-3 p-mt-2">
+    <div class="p-field p-col-12 p-sm-3 p-mt-2">
       <label>Idioma:</label>
       <p-multiSelect [options]="idiomas" [(ngModel)]="selectedIdioma" (onFilter)="idiomaFilter($event)" (onChange)="idiomaChange($event)" [showToggleAll]="false"
                      #idiomaMultiSelect name="selectedIdioma" defaultLabel="Elige un idioma" optionLabel="idioma" optionValue="id_idiomaEjemplar"
@@ -104,7 +104,7 @@
       </p-multiSelect>
     </div>
 
-    <div class="p-field p-col-3 p-mt-2">
+    <div class="p-field p-col-12 p-sm-3 p-mt-2">
       <label>Formato:</label>
       <p-multiSelect [options]="formatos" [(ngModel)]="selectedFormato" (onFilter)="formatoFilter($event)" (onChange)="formatoChange($event)" [showToggleAll]="false"
                      #formatoMultiSelect name="selectedFormato" defaultLabel="Elige un formato" optionLabel="formato" optionValue="id_formatoEjemplar"
@@ -112,7 +112,7 @@
       </p-multiSelect>
     </div>
 
-    <div class="p-field p-col-9 p-mt-2">
+    <div class="p-field p-col-12 p-sm-7 p-mt-2">
       <label>Colección:</label>
       <p-multiSelect [options]="collections" [(ngModel)]="selectedCollection" (onFilter)="collectionFilter($event)" (onChange)="collectionChange($event)" [showToggleAll]="false"
                      #collectionMultiSelect name="selectedCollection" defaultLabel="Elige una colección" optionLabel="nombre" optionValue="id_Coleccion"
@@ -120,7 +120,7 @@
       </p-multiSelect>
     </div>
 
-    <div class="p-field p-col-3 p-mt-2">
+    <div class="p-field p-col-12 p-sm-5 p-mt-2">
       <label>Fecha de publicación:</label>
       <div class="field col-12 md:col-4">
         <p-calendar name="date" [(ngModel)]="date" [maxDate]="maxDate" dateFormat="dd-mm-yy" [selectOtherMonths]="true"></p-calendar>
@@ -130,9 +130,9 @@
     <div class="p-field p-col-12 p-mt-2">
       <label>Portada:</label>
       <p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
-										(onSelect)="onSelectFile($event)" (onUpload)="onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
+										(onSelect)="uploadFile.onSelectFile($event)" (onUpload)="uploadFile.onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
 				<ng-template pTemplate="content">
-					<img *ngIf="uploadedFile[0] && !selectedfiles[0]" src="{{ uploadedFile[0] | photo }}" alt="{{uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
+					<img *ngIf="uploadFile.uploadedFile[0] && !uploadFile.selectedfiles[0]" src="{{ uploadFile.uploadedFile[0] | photo }}" alt="{{uploadFile.uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
 				</ng-template>
       </p-fileUpload>
     </div>

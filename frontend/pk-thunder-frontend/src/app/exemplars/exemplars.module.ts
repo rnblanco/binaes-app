@@ -19,11 +19,12 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TabViewModule } from 'primeng/tabview';
 import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { UploadFileComponent } from '../shared/components/upload-file.component';
 
 @NgModule({
   declarations: [
     ExemplarsPageComponent,
-    ExemplarPageComponent
+    ExemplarPageComponent,
   ],
 	imports: [
 		CommonModule,
@@ -45,6 +46,9 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 		TagMaskModule,
 		ReactiveFormsModule,
 		KeyFilterModule
+	],
+	providers: [
+		UploadFileComponent,
 	]
 })
 export class ExemplarsModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
 import { Roles } from '../../../auth/constants/roles';
-import { Area, PaginadorArea } from '../../../shared/models/event';
+import { PaginadorArea } from '../../../shared/models/event';
 
 @Component({
   selector: 'app-areas-page',

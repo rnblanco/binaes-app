@@ -1,19 +1,19 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { ActivatedRoute, Params } from '@angular/router';
-import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { RolUsuario, Usuario } from '../../../shared/models/user';
+import { Usuario } from '../../../shared/models/user';
 import { Roles } from '../../../auth/constants/roles';
-import { FileUpload } from 'primeng/fileupload';
-import { HttpClient } from '@angular/common/http';
 import { Validators } from '@angular/forms';
+import { DetailPage, PageComponent } from '../../../shared/models/component-interfaces';
+import { UserRolesSelectComponent } from '../../component/user-roles-select.component';
+import { UploadFileComponent } from '../../../shared/components/upload-file.component';
 
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
 })
-export class UserPageComponent extends BaseComponent implements OnInit {
+export class UserPageComponent extends BaseComponent implements OnInit, PageComponent, DetailPage {
 
   isNew: boolean = true;
   id: string;
@@ -25,38 +25,35 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   institucion: string;
   contrasena: string;
 
-  varbinaryImage: string;
-  uploadedFiles: File[];
-  uploadedFile: any[] = [];
-  selectedfiles: any[] = [];
   SUPER_ADMIN = Roles.SUPER_ADMIN;
+  
   addLoading = false;
   deleteLoading = false;
 
-  @ViewChild(FileUpload) fileUpload: FileUpload
-
-  rolText: string = '';
-  roles: RolUsuario[];
-  selectedRol: number[] = [];
-  @ViewChild('rolMultiSelect') rolMultiSelect: MultiSelect;
-
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(
+    private route: ActivatedRoute,
+    public userRolesSelect: UserRolesSelectComponent,
+    public uploadFile: UploadFileComponent
+  ) {
     super();
   }
 
   get formIsValid(): boolean {
-    return this.form.valid && this.name !== '' && this.email !== '' && this.telefono !== '' && this.ocupacion !== '' && this.institucion !== '' && this.direccion !== '' && this.selectedRol?.length > 0 && (this.uploadedFiles != undefined || this.uploadedFile.length > 0);
+    return this.form.valid && this.name !== '' && this.email !== '' && this.telefono !== '' && this.ocupacion !== '' && this.institucion !== '' && this.direccion !== '' && this.userRolesSelect.selectedRol?.length > 0 && (this.uploadFile.uploadedFiles != undefined || this.uploadFile.uploadedFile.length > 0);
   }
 
   ngOnInit(): void {
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
+  }
+  
+  buildForm():void {
     this.form = this.formBuilder.group({
       email: [
-        undefined,
+        this.email || undefined,
         [
           Validators.required,
           Validators.pattern(this.validatorService.emailPattern),
@@ -69,39 +66,51 @@ export class UserPageComponent extends BaseComponent implements OnInit {
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {        
         this.loading = true;
-        this.loadRoles();
+        this.userRolesSelect.loadRoles();
         if (id) {
           this.id = id;
           this.loadInfo();
         } else {
+          this.buildForm();
           this.loading = false;
-        }        
+        }
       })
     );
   }
-
-  delete(): void {
-    this.deleteLoading = true;
+  
+  loadInfo(): void {
     this.subscription.add(
-      this.catalogService.deleteOfURL(`USUARIO/${this.id}`).subscribe(
-        () => {
-          this.messageService.setPayload({
-            type: 'success',
-            title: '¡Exito!',
-            body: 'El usuario fue eliminado con éxito',
-          });
+      this.catalogService
+      .getByNameWithParams(`USUARIO/${this.id}`)
+      .subscribe(
+        (response: Usuario) => {
+          if (response.id_Usuario) {
+            this.isNew = false;
+          }
+          if (response.id_Usuario == this.user.id_Usuario || response.id_rolUsuario == this.user.id_rolUsuario || response.ROLUSUARIO.id_rolUsuario == Roles.SUPER_ADMIN) {
+            this.messageService.setPayload({
+              type: 'warn',
+              title: 'Error',
+              body: 'No puede editar a ese usuario',
+            });
+            this.router.navigate([RouteInformation.usersPage]);
+          }
+          this.name = response.nombre;
+          this.email = response.email;
+          this.telefono = response.telefono;
+          this.ocupacion = response.ocupacion;
+          this.direccion = response.direccion;
+          this.institucion = response.institucion;
+          this.uploadFile.uploadedFile.push(response.fotografia);
+          this.userRolesSelect.selectedRol.push(response.ROLUSUARIO.id_rolUsuario);
+          this.buildForm();
           setTimeout(() => {
-            this.router.navigate([RouteInformation.exemplarsPage])
+            this.loading = false;
           }, 200);
-          this.deleteLoading = false;
         },
         () => {
-          this.messageService.setPayload({
-            type: 'warn',
-            title: 'Error',
-            body: 'No se pudo eliminar el usuario',
-          });
-          this.deleteLoading = false;
+          this.loading = false;
+          this.router.navigate([RouteInformation.userPage]);
         }
       )
     );
@@ -112,8 +121,8 @@ export class UserPageComponent extends BaseComponent implements OnInit {
       this.update();
       return;
     }
-    if (this.uploadedFiles !== undefined) {
-      this.uploadFile();
+    if (this.uploadFile.uploadedFiles !== undefined) {
+      this.uploadFile.uploadFile();
     }
     this.addLoading = true;
     this.subscription.add(
@@ -125,9 +134,9 @@ export class UserPageComponent extends BaseComponent implements OnInit {
           telefono: this.telefono,
           ocupacion: this.ocupacion,
           direccion: this.direccion,
-          fotografia: this.varbinaryImage,
+          fotografia: this.uploadFile.varbinaryImage,
           institucion: this.institucion,
-          id_rolUsuario: this.selectedRol[0],
+          id_rolUsuario: this.userRolesSelect.selectedRol[0],
           contrasena: this.contrasena !== '' ? this.encrypt(this.contrasena) : ''
         })
         .subscribe(
@@ -155,8 +164,8 @@ export class UserPageComponent extends BaseComponent implements OnInit {
   }
 
   update(): void {
-    if (this.uploadedFiles !== undefined) {
-      this.uploadFile();
+    if (this.uploadFile.uploadedFiles !== undefined) {
+      this.uploadFile.uploadFile();
     }
     this.addLoading = true;
     this.subscription.add(
@@ -168,9 +177,9 @@ export class UserPageComponent extends BaseComponent implements OnInit {
           telefono: this.telefono,
           ocupacion: this.ocupacion,
           direccion: this.direccion,
-          fotografia: this.varbinaryImage === undefined ? btoa(this.uploadedFile[0]) : this.varbinaryImage,
+          fotografia: this.uploadFile.varbinaryImage === undefined ? btoa(this.uploadFile.uploadedFile[0]) : this.uploadFile.varbinaryImage,
           institucion: this.institucion,
-          id_rolUsuario: this.selectedRol[0],
+          id_rolUsuario: this.userRolesSelect.selectedRol[0],
           contrasena: this.contrasena === undefined ? '' : this.encrypt(this.contrasena)
         })
         .subscribe(
@@ -196,97 +205,30 @@ export class UserPageComponent extends BaseComponent implements OnInit {
         )
     );
   }
-
-  onUpload(event: any): void {
-    for (let file of event.files) {
-      this.uploadedFile.push(file);
-    }
-  }
-
-  onSelectFile(event: { files: File[]; }) {
-    this.uploadedFiles = [...<File[]>event.files];
-    this.varbinaryImage = btoa(this.uploadedFiles[0].name);
-    this.selectedfiles = this.uploadedFiles;
-  }
-
-  uploadFile(): void {
-    const formData = new FormData();
-    
-    let fileOfBlob;
-    fileOfBlob = new File([this.uploadedFiles[0]], this.uploadedFiles[0].name, { type: 'application/png' });
-    formData.append('file', fileOfBlob, fileOfBlob.name);
-    
+  
+  delete(): void {
+    this.deleteLoading = true;
     this.subscription.add(
-      this.catalogService.addOfURL("UploadImage", formData).subscribe(
-        () =>{}
-      )
-    );
-  }
-
-  loadInfo(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams(`USUARIO/${this.id}`)
-      .subscribe(
-        (response: Usuario) => {
-          if (response.id_Usuario) {
-            this.isNew = false;
-          }
-          if (response.id_Usuario == this.user.id_Usuario || response.id_rolUsuario == this.user.id_rolUsuario || response.ROLUSUARIO.id_rolUsuario == Roles.SUPER_ADMIN) {
-            this.messageService.setPayload({
-              type: 'warn',
-              title: 'Error',
-              body: 'No puede editar a ese usuario',
-            });
-            this.router.navigate([RouteInformation.usersPage]);
-          }
-          this.name = response.nombre;
-          this.email = response.email;
-          this.telefono = response.telefono;
-          this.ocupacion = response.ocupacion;
-          this.direccion = response.direccion;          
-          this.uploadedFile.push(response.fotografia);
-          this.institucion = response.institucion;
-          this.selectedRol.push(response.ROLUSUARIO.id_rolUsuario);          
+      this.catalogService.deleteOfURL(`USUARIO/${this.id}`).subscribe(
+        () => {
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Exito!',
+            body: 'El usuario fue eliminado con éxito',
+          });
           setTimeout(() => {
-            this.loading = false;
+            this.router.navigate([RouteInformation.exemplarsPage])
           }, 200);
+          this.deleteLoading = false;
         },
         () => {
-          this.loading = false;
-          this.router.navigate([RouteInformation.userPage]);
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar el usuario',
+          });
+          this.deleteLoading = false;
         }
-      )
-    );
-  }
-
-  rolFilter(event: any): void {
-    this.rolText = event.filter;
-  }
-
-  rolChange(event: any): void {
-    this.selectedRol = [event.itemValue];
-  }
-
-  loadRoles(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('ROLUSUARIO')
-      .subscribe(
-        (response: RolUsuario[]) => {
-          this.roles = response;
-
-          if (this.user.id_rolUsuario == Roles.ADMIN) {
-            this.roles = this.roles.filter(rol =>
-              rol.id_rolUsuario != Roles.SUPER_ADMIN && rol.id_rolUsuario != Roles.ADMIN
-            )
-          }else if (this.user.id_rolUsuario == Roles.SUPER_ADMIN) {
-            this.roles = this.roles.filter(rol =>
-              rol.id_rolUsuario != Roles.SUPER_ADMIN
-            )
-          }
-          
-        },
       )
     );
   }
@@ -307,5 +249,4 @@ export class UserPageComponent extends BaseComponent implements OnInit {
       { label: `Usuario ${this.user?.ROLUSUARIO.id_rolUsuario === Roles.SUPER_ADMIN ? 'y Administrador' : ''}`, routerLink: [this.routeInformation.userPage] },
     ];
   }
-
 }

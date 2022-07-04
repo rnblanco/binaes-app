@@ -1,52 +1,41 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
 import { Roles } from '../../../auth/constants/roles';
-import { MultiSelect } from 'primeng/multiselect';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouteInformation } from '../../../shared/constants/route-information';
-import { Ejemplar, Estados, BorrowStatus } from '../../../shared/models/exemplar';
 import { Prestamo } from '../../../shared/models/borrow';
-import { Usuario } from 'src/app/shared/models/user';
-import { HttpParams } from '@angular/common/http';
+import { ExemplarSelectComponent } from '../../components/exemplar-select.component';
+import { UserSelectComponent } from '../../../users/component/user-select.component';
+import { ExemplarStatusSelectComponent } from '../../components/exemplar-status-select.component';
+import { BorrowStatus } from '../../../shared/constants/status';
+import { DetailPage, PageComponent } from '../../../shared/models/component-interfaces';
 
 @Component({
   selector: 'app-borrows-page',
   templateUrl: './borrow-page.component.html',
 })
-export class BorrowPageComponent extends BaseComponent implements OnInit {
+export class BorrowPageComponent extends BaseComponent implements OnInit, PageComponent, DetailPage {
   SUPER_ADMIN = Roles.SUPER_ADMIN;
   isNew: boolean = true;
   
   id: number;
-  dates: Date[] = [];
   minDate: Date = new Date();
   maxDate: Date;
-  disabledDates: Date[] = [];
   
   addLoading = false;
   deleteLoading = false;
   
-  status: Estados[] = [];
-  selectedStatus: number[] = [];
-  loadedStatus: number;
-  
-  exemplarText: string ='';
-  exemplars: Ejemplar[];
-  selectedExemplar: number[] = [];
-  @ViewChild('exemplarMultiSelect') exemplarMultiSelect: MultiSelect;
-  
-  userText: string ='';
-  users: Usuario[];
-  // selectedUser: string[] = [];
-  selectedUser: string[] = [];
-  @ViewChild('userMultiSelect') userMultiSelect: MultiSelect;
-  
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    public userSelect: UserSelectComponent,
+    public exemplarSelect: ExemplarSelectComponent,
+    public exemplarStatusSelect: ExemplarStatusSelectComponent
+  ) {
     super();
   }
   
-  get formIsValid(): boolean{
-    return this.selectedUser?.length > 0 && this.selectedExemplar?.length > 0 && this.dates[0] !== null && this.dates[1] !== null;
+  get formIsValid(): boolean {
+    return this.userSelect.selectedUser?.length > 0 && this.exemplarSelect.selectedExemplar?.length > 0 && this.exemplarSelect.dates[0] !== null && this.exemplarSelect.dates[1] !== null;
   }
   
   ngOnInit(): void {
@@ -69,9 +58,9 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {
         this.loading = true;
-        this.loadExemplars();
-        this.loadUsers();
-        this.loadStatus();
+        this.exemplarSelect.loadExemplars();
+        this.userSelect.loadUsers();
+        this.exemplarStatusSelect.loadStatus();
         if (id) {
           this.id = id;
           this.loadInfo();
@@ -81,28 +70,30 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  delete(): void {
-    this.deleteLoading = true;
+  loadInfo(): void {
     this.subscription.add(
-      this.catalogService.deleteOfURL(`PRESTAMO/${this.id}`).subscribe(
-        () => {
-          this.messageService.setPayload({
-            type: 'success',
-            title: '¡Exito!',
-            body: 'El préstamo fue eliminado con éxito',
-          });
+      this.catalogService
+      .getByNameWithParams(`PRESTAMO/${this.id}`)
+      .subscribe(
+        (response: Prestamo) => {
+          if (response) {
+            this.isNew = false;
+          }
+          this.id = response.id_Prestamo;
+          this.exemplarSelect.dates = [new Date(response.fh_Prestamo), new Date(response.fh_Devolucion)];
+          this.maxDate = new Date(response.fh_Devolucion);
+          this.minDate = new Date(response.fh_Prestamo);
+          this.userSelect.selectedUser = [response.USUARIO.id_Usuario];
+          this.exemplarSelect.selectedExemplar = [response.EJEMPLAR.id_Ejemplar];
+          this.exemplarStatusSelect.selectedStatus = [response.ESTADOS.id_Estado];
+          this.exemplarStatusSelect.loadedStatus = response.ESTADOS.id_Estado;
           setTimeout(() => {
-            this.router.navigate([RouteInformation.borrowsPage])
+            this.loading = false;
           }, 200);
-          this.deleteLoading = false;
         },
         () => {
-          this.messageService.setPayload({
-            type: 'warn',
-            title: 'Error',
-            body: 'No se pudo eliminar el préstamo',
-          });
-          this.deleteLoading = false;
+          this.loading = false;
+          this.router.navigate([RouteInformation.borrowsPage]);
         }
       )
     );
@@ -117,11 +108,11 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     this.subscription.add(
       this.catalogService
       .addOfURL(`PRESTAMO`, {
-        fh_Prestamo: this.dates[0],
-        fh_Devolucion: this.dates[1],
+        fh_Prestamo: this.exemplarSelect.dates[0],
+        fh_Devolucion: this.exemplarSelect.dates[1],
         id_Estado: BorrowStatus.EN_PRESTAMO,
-        id_usuarioPresta: this.selectedUser[0],
-        id_Ejemplar: this.selectedExemplar[0],
+        id_usuarioPresta: this.userSelect.selectedUser[0],
+        id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
       })
       .subscribe(
         () => {
@@ -153,11 +144,11 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
       this.catalogService
       .updateOfURL(`PRESTAMO/${this.id}`, {
         id_Prestamo: this.id,
-        fh_Prestamo: this.dates[0],
-        fh_Devolucion: this.dates[1],
-        id_usuarioPresta: this.selectedUser[0],
-        id_Estado: this.selectedStatus[0],
-        id_Ejemplar: this.selectedExemplar[0],
+        fh_Prestamo: this.exemplarSelect.dates[0],
+        fh_Devolucion: this.exemplarSelect.dates[1],
+        id_usuarioPresta: this.userSelect.selectedUser[0],
+        id_Estado: this.exemplarStatusSelect.selectedStatus[0],
+        id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
       })
       .subscribe(
         () => {
@@ -183,130 +174,60 @@ export class BorrowPageComponent extends BaseComponent implements OnInit {
     );
   }
   
-  loadInfo(): void {
+  delete(): void {
+    this.deleteLoading = true;
     this.subscription.add(
-      this.catalogService
-      .getByNameWithParams(`PRESTAMO/${this.id}`)
-      .subscribe(
-        (response: Prestamo) => {
-          if (response) {
-            this.isNew = false;
-          }
-          this.id = response.id_Prestamo;
-          this.dates = [new Date(response.fh_Prestamo), new Date(response.fh_Devolucion)];
-          this.maxDate = new Date(response.fh_Devolucion);
-          this.minDate = new Date(response.fh_Prestamo);
-          this.selectedUser = [response.USUARIO.id_Usuario];
-          this.selectedExemplar = [response.EJEMPLAR.id_Ejemplar];
-          this.selectedStatus = [response.ESTADOS.id_Estado];
-          this.loadedStatus = response.ESTADOS.id_Estado;
+      this.catalogService.deleteOfURL(`PRESTAMO/${this.id}`).subscribe(
+        () => {
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Exito!',
+            body: 'El préstamo fue eliminado con éxito',
+          });
           setTimeout(() => {
-            this.loading = false;
+            this.router.navigate([RouteInformation.borrowsPage])
           }, 200);
+          this.deleteLoading = false;
         },
         () => {
-          this.loading = false;
-          this.router.navigate([RouteInformation.borrowsPage]);
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar el préstamo',
+          });
+          this.deleteLoading = false;
         }
-      )
-    );
-  }
-  
-  userFilter(event: any): void {
-    this.userText = event.filter;
-  }
-  
-  userChange(event: any): void {
-    this.selectedUser = [event.itemValue];
-  }
-  
-  loadUsers(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('USUARIO')
-      .subscribe(
-        (response: Usuario[]) => {
-          this.users = response;
-        },
-      )
-    );
-  }
-  
-  exemplarFilter(event: any): void {
-    this.exemplarText = event.filter;
-  }
-  
-  exemplarChange(event: any): void {
-    this.selectedExemplar = [event.itemValue];
-    this.loadDisabledDates(event.itemValue);
-  }
-  
-  loadDisabledDates(id: number): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('PRESTAMO', new HttpParams().set('id_Ejemplar', id))
-      .subscribe(
-        (response: Date[]) => {
-          if(response){
-            this.disabledDates = response.map((date)=> new Date(date));
-          }
-          this.dates = [];
-        },
-      )
-    );
-  }
-  
-  loadExemplars(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('EJEMPLAR')
-      .subscribe(
-        (response: Ejemplar[]) => {
-          this.exemplars = response;
-        },
       )
     );
   }
   
   onDateChange(): void {
-    if(this.dates[0] === null || this.dates[1] === null){
+    if(this.exemplarSelect.dates[0] === null || this.exemplarSelect.dates[1] === null){
       return;
     }
     
     if (!this.isNew) {
-      if (this.dates[1] < this.maxDate) this.selectedStatus = [BorrowStatus.FINALIZADO];
-      else this.selectedStatus = [this.loadedStatus];
+      if (this.exemplarSelect.dates[1] < this.maxDate) this.exemplarStatusSelect.selectedStatus = [BorrowStatus.FINALIZADO];
+      else this.exemplarStatusSelect.selectedStatus = [this.exemplarStatusSelect.loadedStatus];
     }
   
     let insideDates: Date[] = [];
-    const initialDate: Date = new Date(this.dates[0].getTime());
+    const initialDate: Date = new Date(this.exemplarSelect.dates[0].getTime());
 
-    while (this.dates[1] > initialDate || this.dates[1].getDate() === initialDate.getDate()) {
+    while (this.exemplarSelect.dates[1] > initialDate || this.exemplarSelect.dates[1].getDate() === initialDate.getDate()) {
       insideDates.push(new Date(initialDate.getDate()));
       initialDate.setDate(initialDate.getDate() + 1);
     }
 
     insideDates.forEach((date) => {
-      this.disabledDates.forEach((disabledDate) => {
+      this.exemplarSelect.disabledDates.forEach((disabledDate) => {
         if(date.getDate() === disabledDate.getDate()){
-          this.dates = [];
+          this.exemplarSelect.dates = [];
           return;
         }
       });
-      if (this.dates === []) return;
+      if (this.exemplarSelect.dates === []) return;
     });
-  }
-  
-  loadStatus(): void {
-    this.subscription.add(
-      this.catalogService
-      .getByNameWithParams('ESTADOS')
-      .subscribe(
-        (response: Estados[]) => {
-          this.status = response;
-        },
-      )
-    );
   }
   
   getBreadCrumbs() {
