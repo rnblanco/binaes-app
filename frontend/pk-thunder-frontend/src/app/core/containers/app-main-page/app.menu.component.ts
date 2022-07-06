@@ -77,6 +77,11 @@ export class AppMenuComponent extends BaseComponent implements OnInit {
         routerLink: this.routeInformation.usersPage
       },
       {
+        label: 'Ayuda',
+        icon: 'pi pi-fw pi-info-circle',
+        routerLink: this.routeInformation.helpPage
+      },
+      {
         label: 'Cerrar sesión',
         icon: 'pi pi-fw pi-sign-out',
         routerLink: this.routeInformation.logOutPage

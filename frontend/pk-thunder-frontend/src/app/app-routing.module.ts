@@ -7,6 +7,10 @@ import { Roles } from './auth/constants/roles';
 import { PrevAuthGuard } from './auth/guards/prev-auth.guard';
 import { AppMainComponent } from './core/containers/app-main-page/app.main.component';
 import { LogOutPageComponent } from './auth/log-out-page/log-out-page.component';
+import { QrCodeComponent } from './core/components/qr-code/qr-code.component';
+import { ProfileInfoComponent } from './core/components/profile-info/profile-info.component';
+import { PasswordChangeComponent } from './core/components/password-change/password-change.component';
+import { DocumentationPageComponent } from './core/containers/documentation-page/documentation-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -54,24 +58,37 @@ const routes: Routes = [
       {
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
-        path: 'profile',
-        component: ProfilePageComponent,
-        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
-      },
-      {
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
         path: 'borrows',
         data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
         loadChildren: () => import('./borrows/borrows.module').then((m) => m.BorrowsModule)
       },
-	    {
-		    canActivate: [AuthGuard],
-		    canActivateChild: [AuthGuard],
-		    path: 'areas',
-		    data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
-		    loadChildren: () => import('./areas/areas.module').then((m) => m.AreasModule)
-	    },
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'areas',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN] },
+        loadChildren: () => import('./areas/areas.module').then((m) => m.AreasModule)
+      },
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'profile',
+        component: ProfilePageComponent,
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        children: [
+          { path: '', redirectTo: 'qr', pathMatch: 'full', data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] } },
+          { path: 'qr', component: QrCodeComponent, data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] } },
+          { path: 'info', component: ProfileInfoComponent, data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] } },
+          { path: 'password', component: PasswordChangeComponent, data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] } }
+        ]
+      },
+      {
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
+        path: 'help',
+        data: { permission: [Roles.SUPER_ADMIN, Roles.ADMIN, Roles.USER] },
+        component: DocumentationPageComponent
+      },
       /* ONLY ADMINS */
       {
         canActivate: [AuthGuard],

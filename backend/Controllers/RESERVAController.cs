@@ -109,7 +109,11 @@ namespace backend.Controllers
                 .Where(x =>
                     ( 
                         DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") || 
-                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%") 
+                        DbFunctions.Like(x.PRESTAMO.USUARIO.nombre, "%" + search + "%") || 
+                        DbFunctions.Like(x.PRESTAMO.ESTADOS.estado, "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Prestamo).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Devolucion).ToString(), "%" + search + "%") 
                     ) && x.PRESTAMO.id_usuarioPresta == id_Usuario
                 ).OrderBy(sorted).Count();
 
@@ -123,8 +127,14 @@ namespace backend.Controllers
 
                 bookings = db.RESERVA
                     .Where(x =>
-                        (DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") || DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%")) &&
-                        x.PRESTAMO.id_usuarioPresta == id_Usuario
+                        (
+                            DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
+                        DbFunctions.Like(x.PRESTAMO.USUARIO.nombre, "%" + search + "%") ||
+                        DbFunctions.Like(x.PRESTAMO.ESTADOS.estado, "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Prestamo).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Devolucion).ToString(), "%" + search + "%")
+                        ) && x.PRESTAMO.id_usuarioPresta == id_Usuario
                     ).OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
             }
             else
@@ -132,8 +142,12 @@ namespace backend.Controllers
                 int total = db.RESERVA
                     .Where(x =>
                         DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
-                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%"))
-                    .OrderBy(sorted).Count();
+                        DbFunctions.Like(x.PRESTAMO.USUARIO.nombre, "%" + search + "%") ||
+                        DbFunctions.Like(x.PRESTAMO.ESTADOS.estado, "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Prestamo).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Devolucion).ToString(), "%" + search + "%")
+                    ).OrderBy(sorted).Count();
 
                 PAGINADOR.meta = new Meta();
                 PAGINADOR.meta.totalItems = total;
@@ -146,8 +160,12 @@ namespace backend.Controllers
                 bookings = db.RESERVA
                     .Where(x =>
                         DbFunctions.Like(x.PRESTAMO.EJEMPLAR.nombre, "%" + search + "%") ||
-                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%"))
-                    .OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
+                        DbFunctions.Like(x.PRESTAMO.USUARIO.nombre, "%" + search + "%") ||
+                        DbFunctions.Like(x.PRESTAMO.ESTADOS.estado, "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.fh_Reserva).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Prestamo).ToString(), "%" + search + "%") ||
+                        DbFunctions.Like(DbFunctions.TruncateTime(x.PRESTAMO.fh_Devolucion).ToString(), "%" + search + "%")
+                    ).OrderBy(sorted).Skip((PAGINADOR.meta.currentPage - 1) * limit).Take(limit).ToList();
             }
 
 

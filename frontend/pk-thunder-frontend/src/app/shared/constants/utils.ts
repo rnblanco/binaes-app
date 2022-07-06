@@ -1,0 +1,1 @@
+export const MANUAL_URL = 'MANUAL_DE_USUARIO.pdf';

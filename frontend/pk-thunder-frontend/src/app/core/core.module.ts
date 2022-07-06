@@ -11,7 +11,7 @@ import { AppMainComponent } from './containers/app-main-page/app.main.component'
 import { ProfilePageComponent } from './containers/profile-page/profile-page.component';
 import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
 import { QRCodeModule } from 'angular2-qrcode';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '../../components/loading/loading.module';
 
 // Primeng modules
@@ -29,6 +29,14 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgxKjuaModule } from 'ngx-kjua';
 import { DropdownModule } from 'primeng/dropdown';
 import { AreaSelectComponent } from '../areas/components/area-select.component';
+import { InputMaskModule } from 'primeng/inputmask';
+import { QrCodeComponent } from './components/qr-code/qr-code.component';
+import { ProfileInfoComponent } from './components/profile-info/profile-info.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { PasswordChangeComponent } from './components/password-change/password-change.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { UploadFileComponent } from '../shared/components/upload-file.component';
+import { DocumentationPageComponent } from './containers/documentation-page/documentation-page.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +47,11 @@ import { AreaSelectComponent } from '../areas/components/area-select.component';
     AppFooterComponent,
     AppMainComponent,
     ProfilePageComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    QrCodeComponent,
+    ProfileInfoComponent,
+    PasswordChangeComponent,
+    DocumentationPageComponent
   ],
 	imports: [
 		CommonModule,
@@ -58,10 +70,15 @@ import { AreaSelectComponent } from '../areas/components/area-select.component';
 		SharedModule,
 		ZXingScannerModule,
 		NgxKjuaModule,
-		DropdownModule
+		DropdownModule,
+		InputMaskModule,
+		ReactiveFormsModule,
+		TabMenuModule,
+		FileUploadModule
 	],
 	providers:[
-		AreaSelectComponent
+		AreaSelectComponent,
+		UploadFileComponent
 	]
 })
 export class CoreModule { }

@@ -145,8 +145,8 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
         () => {
           this.messageService.setPayload({
             type: 'warn',
-            title: 'Error',
-            body: 'No se pudo eliminar el ejemplar',
+            title: 'No se pudo eliminar',
+            body: 'El ejemplar tiene elementos relacionados',
           });
           this.deleteLoading = false;
         }

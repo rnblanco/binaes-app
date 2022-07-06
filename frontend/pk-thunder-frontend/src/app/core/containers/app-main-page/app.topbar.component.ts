@@ -23,7 +23,7 @@ import { BaseComponent } from '../../../shared/components/base.component';
       </a>
     
       <div class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active':appMain.topMenuActive}">
-        <div class="p-d-flex p-jc-center p-ai-center">{{ user.nombre }}</div>
+        <div class="p-d-flex p-jc-center p-ai-center hide-mobile">{{ user.nombre }}</div>
         <a [routerLink]="routeInformation.profilePage" class="p-link layout-topbar-button">          
           <p-avatar image="{{ image | photo }}" styleClass="mr-2" size="large" shape="circle"></p-avatar>
           <span class="p-ml-2">{{ user.nombre }}</span>

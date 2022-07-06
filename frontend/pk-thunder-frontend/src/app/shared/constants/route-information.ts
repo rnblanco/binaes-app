@@ -33,5 +33,10 @@ export const RouteInformation = {
   userPage: '/app/users/user',
   
   profilePage: '/app/profile',
+  profileQrPage: '/app/profile/qr',
+  profileInfoPage: '/app/profile/info',
+  profilePasswordPage: '/app/profile/password',
+  
+  helpPage: '/app/help',
   logOutPage: '/log-out'
 };
