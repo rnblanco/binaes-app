@@ -37,6 +37,7 @@ import { PasswordChangeComponent } from './components/password-change/password-c
 import { FileUploadModule } from 'primeng/fileupload';
 import { UploadFileComponent } from '../shared/components/upload-file.component';
 import { DocumentationPageComponent } from './containers/documentation-page/documentation-page.component';
+import { InfoPageComponent } from './info-page/info-page.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DocumentationPageComponent } from './containers/documentation-page/docu
     QrCodeComponent,
     ProfileInfoComponent,
     PasswordChangeComponent,
-    DocumentationPageComponent
+    DocumentationPageComponent,
+    InfoPageComponent
   ],
 	imports: [
 		CommonModule,

@@ -11,6 +11,7 @@ import { QrCodeComponent } from './core/components/qr-code/qr-code.component';
 import { ProfileInfoComponent } from './core/components/profile-info/profile-info.component';
 import { PasswordChangeComponent } from './core/components/password-change/password-change.component';
 import { DocumentationPageComponent } from './core/containers/documentation-page/documentation-page.component';
+import { InfoPageComponent } from './core/info-page/info-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -106,6 +107,7 @@ const routes: Routes = [
       },
     ]
   },
+  { path: 'info', component: InfoPageComponent},
   { path: 'log-out', component: LogOutPageComponent},
   { path: '**', component: NotFoundPageComponent},
 ];
