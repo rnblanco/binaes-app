@@ -5,8 +5,6 @@ import { BaseComponent } from '../../../shared/components/base.component';
 @Component({
   selector: 'app-password-change',
   templateUrl: './password-change.component.html',
-  styles: [
-  ]
 })
 export class PasswordChangeComponent extends BaseComponent implements OnInit {
   

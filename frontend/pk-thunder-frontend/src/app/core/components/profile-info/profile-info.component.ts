@@ -33,6 +33,7 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.authService.loadUser();
     this.id = this.user.id_Usuario;
     this.buildForm();
     this.loadInfo();
@@ -99,15 +100,16 @@ export class ProfileInfoComponent extends BaseComponent implements OnInit {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
-            body: 'El usuario fue editado satifactoriamente',
+            body: 'El perfil fue editado satifactoriamente',
           });
+          this.authService.loadUser();
           this.addLoading = false;
         },
         () => {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo editar el usuario',
+            body: 'No se pudo editar el perfil',
           });
           this.addLoading = false;
         }

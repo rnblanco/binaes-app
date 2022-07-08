@@ -12,7 +12,7 @@ export class ProfilePageComponent extends BaseComponent{
   items: MenuItem[] = [
     {label: 'Código QR', routerLink: this.routeInformation.profileQrPage},
     {label: 'Información personal', routerLink: this.routeInformation.profileInfoPage},
-    {label: 'Cambio de contraseña', routerLink: this.routeInformation.profilePasswordPage},
+    {label: 'Contraseña', routerLink: this.routeInformation.profilePasswordPage},
   ];
   
   constructor() {

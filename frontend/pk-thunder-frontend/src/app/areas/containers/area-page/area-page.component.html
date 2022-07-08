@@ -33,7 +33,7 @@
 		</div>
 		
 		<div class="p-field p-col-12 p-sm-4 p-mt-2">
-			<label>Capacidad del área:</label>
+			<label>Capacidad:</label>
 			<p-inputNumber name="capacity" [(ngModel)]="capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" placeholder="Ej. 200 personas" suffix=" persona{{capacity !== 1 ? 's' : '' }}"></p-inputNumber>
 		</div>
 		
@@ -43,6 +43,17 @@
 										 #areaTypeMultiSelect name="selectedAreaType" defaultLabel="Elige un tipo" optionLabel="tipoArea1" optionValue="id_tipoArea"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.tipoArea1}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="areaTypeSelectComponent.deleteArea(item.id_tipoArea)"></button>
+						</div>
+					</div>
+				</ng-template>
+				
 				<ng-template let-group pTemplate="emptyfilter">
 					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaTypeSelectComponent.areaTypeText}}'" (click)="areaTypeSelectComponent.addAreaType(areaTypeMultiSelect)"></button>
 				</ng-template>
@@ -55,6 +66,17 @@
 										 #floorAreaMultiSelect name="selectedFloorArea" defaultLabel="Elige un piso" optionLabel="pisoArea1" optionValue="id_pisoArea"
 										 [showClear]="true" [resetFilterOnHide]="true"
 			>
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.pisoArea1}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="areaFloorSelectComponent.deleteFloor(item.id_pisoArea)"></button>
+						</div>
+					</div>
+				</ng-template>
+				
 				<ng-template let-group pTemplate="emptyfilter">
 					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{areaFloorSelectComponent.floorAreaText}}'" (click)="areaFloorSelectComponent.addFloorArea(floorAreaMultiSelect)"></button>
 				</ng-template>

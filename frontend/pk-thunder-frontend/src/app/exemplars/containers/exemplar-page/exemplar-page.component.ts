@@ -270,6 +270,28 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     this.selectedEditorial = [event.itemValue];
   }
   
+  public deleteEditorial(id: number): void {
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`EDITORIAL/${id}`)
+      .subscribe(
+        ()=>{
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Éxito!',
+            body: 'Editorial eliminada correctamente',
+          });
+          this.loadEditoriales();
+        }, ()=>{
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar la editorial',
+          });
+        }
+      )
+    )
+  }
+  
   addEditorial(): void {
     this.subscription.add(
       this.catalogService.addOfURL('EDITORIAL', {editorial1: this.editorialText}).subscribe(
@@ -306,6 +328,28 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
   
   idiomaChange(event: any): void {
     this.selectedIdioma = [event.itemValue];
+  }
+  
+  public deleteIdioma(id: number): void {
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`IDIOMAEJEMPLAR/${id}`)
+      .subscribe(
+        ()=>{
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Éxito!',
+            body: 'Idioma eliminado correctamente',
+          });
+          this.loadIdioma();
+        }, ()=>{
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar el idioma',
+          });
+        }
+      )
+    )
   }
   
   addIdioma(): void {
@@ -440,12 +484,12 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     this.authorText = event.filter;
   }
   
-  authorChange(event: any): void {
+  authorChange(event: any, authorMultiSelect: MultiSelect): void {
     if (this.selectedAuthorsxExemplar.includes(event.itemValue)) {
       const deleteAuthor = this.authorsxExemplar.find((authorxExemplar) => authorxExemplar.AUTOR.id_Autor === event.itemValue);
       this.deleteAuthorToExemplar(deleteAuthor?.id_autorEjemplar || 0);
     } else {
-      this.addAuthorToExemplar(event.itemValue);
+      this.addAuthorToExemplar(event.itemValue, authorMultiSelect);
     }
   }
   
@@ -472,7 +516,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     );
   }
   
-  addAuthor(): void {
+  addAuthor(authorMultiSelect: MultiSelect): void {
     this.subscription.add(
       this.catalogService.addOfURL('AUTOR', {
         nombre: this.authorText,
@@ -484,7 +528,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
             title: '¡Exito!',
             body: 'El autor fue agregado con éxito',
           });
-          this.addAuthorToExemplar(exemplar.id_Autor);
+          this.addAuthorToExemplar(exemplar.id_Autor, authorMultiSelect);
         },
         () => {
           this.messageService.setPayload({
@@ -514,7 +558,48 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     );
   }
   
-  addAuthorToExemplar(id: number): void {
+  public deleteAuthor(event: any, id: number): void {
+    event.stopPropagation();
+    const deleteAuthor = this.authorsxExemplar.find((authorxExemplar) => authorxExemplar.AUTOR.id_Autor === id);
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`AUTORXEJEMPLAR/${deleteAuthor?.id_autorEjemplar || 0}`).subscribe(
+        () => {
+          this.realDeleteAuthor(id);
+        },
+        () => {
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar el autor del ejemplar porque tiene datos relacionados',
+          });
+        }
+      )
+    );
+  }
+  
+  realDeleteAuthor(id: number){
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`AUTOR/${id}`)
+      .subscribe(
+        ()=>{
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Éxito!',
+            body: 'Autor eliminado correctamente',
+          });
+          this.loadAuthors();
+        }, ()=>{
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar el autor porque tiene elementos relacionados',
+          });
+        }
+      )
+    )
+  }
+  
+  addAuthorToExemplar(id: number, authorMultiSelect: MultiSelect): void {
     this.subscription.add(
       this.catalogService.addOfURL('AUTORXEJEMPLAR', {
         id_Autor: id,
@@ -522,6 +607,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
       }).subscribe(
         () => {
           this.loadAuthors();
+          authorMultiSelect.hide();
         },
         () => {
           this.messageService.setPayload({

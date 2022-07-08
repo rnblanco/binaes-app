@@ -38,6 +38,10 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
     return this.userSelect.selectedUser?.length > 0 && this.exemplarSelect.selectedExemplar?.length > 0 && this.exemplarSelect.dates[0] !== null && this.exemplarSelect.dates[1] !== null;
   }
   
+  get isFinalizado(): boolean {
+    return this.exemplarStatusSelect.loadedStatus === BorrowStatus.FINALIZADO;
+  }
+  
   ngOnInit(): void {
     this.loadAll();
     this.user = this.authService.storagedUser;

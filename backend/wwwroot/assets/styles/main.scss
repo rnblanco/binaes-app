@@ -7,8 +7,12 @@
 }
 
 @media (max-width: 375px) {
-  .scan img{
-    width: 12rem;
+  .scan {
+    width: 100%;
+    img{
+      display: flex;
+      width: 100%;
+    }
   }
 }
 

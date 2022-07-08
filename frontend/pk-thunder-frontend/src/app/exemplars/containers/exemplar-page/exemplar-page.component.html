@@ -55,13 +55,24 @@
 		
 		<div class="p-field p-col-12 p-mt-2 p-mb-4">
 			<label>Autores:</label>
-			<p-multiSelect [options]="authors" [(ngModel)]="selectedAuthors" (onFilter)="authorFilter($event)" (onChange)="authorChange($event)" [showToggleAll]="false"
+			<p-multiSelect [options]="authors" [(ngModel)]="selectedAuthors" (onFilter)="authorFilter($event)" (onChange)="authorChange($event, authorMultiSelect)" [showToggleAll]="false"
 										 #authorMultiSelect name="selectedAuthors" defaultLabel="Elige un autor" optionLabel="nombre" optionValue="id_Autor"
 										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron autores" emptyMessage="No se encontraron autores"
 										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
 			>
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.nombre}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="deleteAuthor($event, item.id_Autor)"></button>
+						</div>
+					</div>
+				</ng-template>
+				
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{authorText}}'" (click)="addAuthor()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{authorText}}'" (click)="addAuthor(authorMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
@@ -87,6 +98,17 @@
       <p-multiSelect [options]="editoriales" [(ngModel)]="selectedEditorial" (onFilter)="editorialFilter($event)" (onChange)="editorialChange($event)" [showToggleAll]="false"
                      #editorialMultiSelect name="selectedEditorial" defaultLabel="Elige una editorial" optionLabel="editorial1" optionValue="id_Editorial"
                      [showClear]="true" [resetFilterOnHide]="true">
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.editorial1}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="deleteEditorial(item.id_Editorial)"></button>
+						</div>
+					</div>
+				</ng-template>
+				
         <ng-template let-group pTemplate="emptyfilter">
           <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{editorialText}}'" (click)="addEditorial()"></button>
         </ng-template>
@@ -98,6 +120,16 @@
       <p-multiSelect [options]="idiomas" [(ngModel)]="selectedIdioma" (onFilter)="idiomaFilter($event)" (onChange)="idiomaChange($event)" [showToggleAll]="false"
                      #idiomaMultiSelect name="selectedIdioma" defaultLabel="Elige un idioma" optionLabel="idioma" optionValue="id_idiomaEjemplar"
                      [showClear]="true" [resetFilterOnHide]="true">
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.idioma}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="deleteIdioma(item.id_idiomaEjemplar)"></button>
+						</div>
+					</div>
+				</ng-template>
         <ng-template let-group pTemplate="emptyfilter">
           <button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{idiomaText}}'" (click)="addIdioma()"></button>
         </ng-template>

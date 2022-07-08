@@ -50,6 +50,10 @@ export class EventPageComponent extends BaseComponent implements OnInit, PageCom
       && (this.uploadFile.uploadedFiles !== undefined || this.uploadFile.uploadedFile?.length > 0);
   }
   
+  get isFinalizado(): boolean {
+    return !this.loadedStatus;
+  }
+  
   changeStatus(): void {
     this.readableStatus = this.selectedStatus ? 'Reservado' : 'Finalizado';
   }
