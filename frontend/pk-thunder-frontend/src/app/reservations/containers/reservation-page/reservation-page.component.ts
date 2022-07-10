@@ -40,6 +40,9 @@ export class ReservationPageComponent extends BaseComponent implements OnInit, P
   }
   
   ngOnInit(): void {
+    this.userSelect = new UserSelectComponent();
+    this.exemplarSelect = new ExemplarSelectComponent();
+    this.exemplarStatusSelect = new ExemplarStatusSelectComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
@@ -50,7 +53,7 @@ export class ReservationPageComponent extends BaseComponent implements OnInit, P
   }
   
   loadAll(): void {
-    if (this.user.id_rolUsuario === Roles.USER) {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
       this.messageService.setPayload({
         type: 'warn',
         title: 'Error',

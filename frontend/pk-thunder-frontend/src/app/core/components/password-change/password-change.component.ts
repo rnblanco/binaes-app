@@ -23,7 +23,7 @@ export class PasswordChangeComponent extends BaseComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.id = this.user.id_Usuario;
+    this.id = this.user.id_Usuario;    
     this.breadcrumbService.setItems(this.getBreadCrumbs());
   }
   

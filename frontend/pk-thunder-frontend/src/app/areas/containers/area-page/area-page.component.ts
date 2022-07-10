@@ -35,6 +35,9 @@ export class AreaPageComponent extends BaseComponent implements OnInit, PageComp
   }
   
   ngOnInit(): void {
+    this.userSelect = new UserSelectComponent();
+    this.areaTypeSelectComponent = new AreaTypeSelectComponent();
+    this.areaFloorSelectComponent = new AreaFloorSelectComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());

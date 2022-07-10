@@ -23,10 +23,13 @@ export class AuthService implements OnDestroy {
     if (!user?.id_Usuario){
       return;
     }
-    
+    this.subscription = new Subscription();
     this.subscription.add(
-      this.catalogService.getOneByName(`USUARIO/${user.id_Usuario}`).subscribe(
-        (user: Usuario) => this.storage.store(StorageInformation.user, user)
+      this.catalogService
+      .getOneByName(`USUARIO/${user.id_Usuario}`).subscribe(
+        (user: Usuario) => {
+          this.storage.store(StorageInformation.user, user)
+        }
       )
     );
   }

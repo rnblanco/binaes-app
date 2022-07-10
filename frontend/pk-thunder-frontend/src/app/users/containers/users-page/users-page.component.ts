@@ -33,6 +33,16 @@ export class UsersPageComponent extends LazyComponent implements OnInit {
   }
 
   loadAll() {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
+      this.messageService.setPayload({
+        type: 'warn',
+        title: 'Error',
+        body: 'No tienes autorización para ver esta información',
+      });
+      setTimeout(() => {
+        this.router.navigate([`${this.routeInformation.dashboardPage}`])
+      }, 50);
+    }
     this.list = [];
     this.loading = true;
     this.getPaginationParams();

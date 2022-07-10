@@ -40,6 +40,8 @@ export class EventPageComponent extends BaseComponent implements OnInit, PageCom
   }
 
   ngOnInit(): void {
+    this.uploadFile = new UploadFileComponent();
+    this.areaSelect = new AreaSelectComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
@@ -59,7 +61,7 @@ export class EventPageComponent extends BaseComponent implements OnInit, PageCom
   }
 
   loadAll(): void {
-    if (this.user.id_rolUsuario === Roles.USER) {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
       this.messageService.setPayload({
         type: 'warn',
         title: 'Error',
