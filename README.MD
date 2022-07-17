@@ -53,7 +53,7 @@ Gracias a la implentación de software como Angular, se ha creado la aplicación
 * [René Blanco Pineda](https://github.com/rnblanco)
 * [Roberto Marenco Rivas](https://github.com/RAMarenco)
 * [Michelle Rivas Calderón](https://github.com/mrivasc)
-
+---
 
 # Frontend
 
