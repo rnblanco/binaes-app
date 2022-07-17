@@ -69,8 +69,7 @@ namespace backend.Controllers
             message.To.Add(new MailboxAddress(nombre, email));
             message.Subject = "Cambio de contraseña";
 
-            BodyBuilder messageBody = new BodyBuilder();
-            //messageBody.HtmlBody = "<a href=\"https://binaes-app.azurewebsites.net/ChangePassword/"+token+"\">Cambiar Contraseña"<a>"+;
+            BodyBuilder messageBody = new BodyBuilder();            
             messageBody.HtmlBody =
                 "<body style=\"margin:0;padding:0;\">"+
                     "<table role=\"presentation\" style=\"font-family: Arial, sans-serif; width: 100%; border-collapse: collapse; border: 0; border-spacing: 0; background: #ffffff;\" width=\"100%\">"+
