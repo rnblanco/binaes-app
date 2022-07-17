@@ -46,7 +46,7 @@ Gracias a la implentación de software como Angular, se ha creado la aplicación
 * [UML Casos de uso](https://binaes-app.azurewebsites.net/documents/UML-CasosDeUso.svg)
 * [UML Clases](https://binaes-app.azurewebsites.net/documents/UML-Clases.svg)
 * [UML Secuencia CRUD Ejemplares](https://binaes-app.azurewebsites.net/documents/UML-Secuencia-CRUD-Ejemplares.svg)
-* [UML Secuencia CRUD Ejemplares](https://binaes-app.azurewebsites.net/documents/UML-Secuencias-de-proceso-Login.svg)
+* [UML Secuencia CRUD Login](https://binaes-app.azurewebsites.net/documents/UML-Secuencias-de-proceso-Login.svg)
 ---
 **Miembros del equipo**
 * [Bryan Amaya Perez](https://github.com/BryanZoldyckDev)
