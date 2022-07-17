@@ -55,7 +55,7 @@ Gracias a la implentación de software como Angular, se ha creado la aplicación
 * [Michelle Rivas Calderón](https://github.com/mrivasc)
 
 
-#Frontend
+# Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
