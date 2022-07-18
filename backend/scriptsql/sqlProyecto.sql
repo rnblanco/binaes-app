@@ -135,8 +135,8 @@ CREATE TABLE AUTOR (
 );
 
 CREATE TABLE P_CLAVExEJEMPLAR (
-    id_p_Clave INT NOT NULL IDENTITY(1,1),-- pk
-    p_clave VARCHAR(30) NOT NULL,
+    id_pClaveEjemplar INT NOT NULL IDENTITY(1,1),-- pk
+    id_p_Clave INT NOT NULL,
     id_Ejemplar INT NOT NULL              -- fk
 );
 
@@ -183,6 +183,11 @@ CREATE TABLE TIPOCOLECCION (
 CREATE TABLE GENEROCOLECCION (
     id_generoColeccion INT NOT NULL IDENTITY(1,1),-- pk
     generoColeccion VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE P_CLAVE (
+    id_p_Clave INT NOT NULL IDENTITY(1,1),      -- pk
+    p_clave VARCHAR(50) NOT NULL
 );
 
 --AGREGANDO PKs y FKs TABLAS--
@@ -309,6 +314,10 @@ ALTER TABLE AUTOR ADD
     CONSTRAINT pk_Autor
         PRIMARY KEY (id_Autor);
 
+ALTER TABLE P_CLAVE ADD
+    CONSTRAINT pk_pClave
+        PRIMARY KEY (id_p_Clave);
+
 ALTER TABLE TIPOETIQUETA ADD
     CONSTRAINT pk_tipoEtiqueta
         PRIMARY KEY (id_tipoEtiqueta);
@@ -355,17 +364,22 @@ ALTER TABLE AUTORxEJEMPLAR ADD
     CONSTRAINT fk_autorxejemplar_autor
         FOREIGN KEY (id_Autor)
         REFERENCES AUTOR (id_Autor)
-            ON DELETE NO ACTION
+            ON DELETE CASCADE
             ON UPDATE CASCADE,
     CONSTRAINT fk_autorxejemplar_ejemplar
         FOREIGN KEY (id_Ejemplar)
         REFERENCES EJEMPLAR (id_Ejemplar)
-            ON DELETE NO ACTION
+            ON DELETE CASCADE
             ON UPDATE CASCADE;
 
 ALTER TABLE P_CLAVExEJEMPLAR ADD
     CONSTRAINT pk_clavexejemplar
-        PRIMARY KEY (id_p_Clave),
+        PRIMARY KEY (id_pClaveEjemplar),
+    CONSTRAINT fk_clavexejemplar_pClave
+        FOREIGN KEY (id_p_Clave)
+        REFERENCES P_CLAVE (id_p_Clave)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
     CONSTRAINT fk_clavexejemplar_ejemplar
         FOREIGN KEY (id_Ejemplar)
         REFERENCES EJEMPLAR (id_Ejemplar)
@@ -483,3 +497,19 @@ INSERT INTO PRESTAMO (fh_Prestamo, fh_Devolucion, id_Estado, id_usuarioPresta, i
 VALUES ('2022-06-21 00:00:00.000', '2022-07-06 00:00:00.000', 1, 1, 1);
 
 INSERT INTO RESERVA (fh_Reserva, id_Prestamo) VALUES ('2022-07-07 00:00:00.000', 1);
+
+INSERT INTO P_CLAVE (p_clave) VALUES ('Ficción');
+INSERT INTO P_CLAVE (p_clave) VALUES ('Magia');
+INSERT INTO P_CLAVE (p_clave) VALUES ('Fantasía');
+INSERT INTO P_CLAVE (p_clave) VALUES ('Aventura');
+INSERT INTO P_CLAVE (p_clave) VALUES ('Misterio');
+
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (1, 2);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (2, 2);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (3, 3);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (4, 3);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (2, 5);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (4, 5);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (3, 6);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (4, 6);
+INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (5, 1);
