@@ -149,7 +149,7 @@ namespace backend.Controllers
                     COLECCION = x.COLECCION,
                     autorE = x.autorE,
                     pclave = x.c.DefaultIfEmpty(),
-                    p_clave = b.p_clave
+                    p_clave = b.P_CLAVE.p_clave
                 }).GroupJoin(
                     db.ETIQUETASxEJEMPLAR,
                     a => a.id_Ejemplar,
@@ -268,7 +268,7 @@ namespace backend.Controllers
                     COLECCION = x.COLECCION,
                     autorE = x.autorE,
                     pclave = x.c.DefaultIfEmpty(),
-                    p_clave = b.p_clave
+                    p_clave = b.P_CLAVE.p_clave
                 }).GroupJoin(
                     db.ETIQUETASxEJEMPLAR,
                     a => a.id_Ejemplar,

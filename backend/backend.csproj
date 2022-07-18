@@ -295,6 +295,7 @@
     <Compile Include="Controllers\OBJETIVOSxEVENTOController.cs" />
     <Compile Include="Controllers\PISOAREAController.cs" />
     <Compile Include="Controllers\PRESTAMOController.cs" />
+    <Compile Include="Controllers\P_CLAVEController.cs" />
     <Compile Include="Controllers\P_CLAVExEJEMPLARController.cs" />
     <Compile Include="Controllers\recoverPasswordController.cs" />
     <Compile Include="Controllers\RESERVAController.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Models\Paginador.cs" />
     <Compile Include="Models\PISOAREA.cs" />
     <Compile Include="Models\PRESTAMO.cs" />
+    <Compile Include="Models\P_CLAVE.cs" />
     <Compile Include="Models\P_CLAVExEJEMPLAR.cs" />
     <Compile Include="Models\RESERVA.cs" />
     <Compile Include="Models\ROLUSUARIO.cs" />
