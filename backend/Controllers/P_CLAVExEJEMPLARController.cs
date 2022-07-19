@@ -47,17 +47,6 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.descripcion = keyword.EJEMPLAR.COLECCION.AREA.descripcion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;
 
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.email = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.email;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
-
                 keywordsList.Add(p_CLAVEx);
             }
 
@@ -93,18 +82,7 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.id_Area = keyword.EJEMPLAR.COLECCION.AREA.id_Area;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.nombre = keyword.EJEMPLAR.COLECCION.AREA.nombre;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.descripcion = keyword.EJEMPLAR.COLECCION.AREA.descripcion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;
-
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.email = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.email;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
+                p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;                
 
                 keywordsList.Add(p_CLAVEx);
             }

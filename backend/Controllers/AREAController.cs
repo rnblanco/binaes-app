@@ -41,7 +41,7 @@ namespace backend.Controllers
                 aREA.USUARIO.telefono = area.USUARIO.telefono;
                 aREA.USUARIO.ocupacion = area.USUARIO.ocupacion;
                 aREA.USUARIO.direccion = area.USUARIO.direccion;
-                aREA.USUARIO.fotografia = Encoding.UTF8.GetString(area.USUARIO.fotografia); 
+                aREA.USUARIO.fotografia = Encoding.UTF8.GetString(area.USUARIO.fotografia);
                 aREA.USUARIO.institucion = area.USUARIO.institucion;
                 aREA.USUARIO.ROLUSUARIO = area.USUARIO.ROLUSUARIO;
 

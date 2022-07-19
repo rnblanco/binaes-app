@@ -82,43 +82,7 @@ namespace backend.Controllers
                 schedulesList.Add(hORARIOxAREA_A);
             }
             return schedulesList.AsQueryable();
-        }
-
-        // GET: api/HORARIOxAREA/5
-        /*public async Task<IHttpActionResult> GetHORARIOxAREA(int id)
-        {
-            var schedule = await db.HORARIOxAREA.FindAsync(id);
-            HORARIOxAREA_A hORARIOxAREA_A = new HORARIOxAREA_A();
-            if (schedule == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                hORARIOxAREA_A.id_Horario = schedule.id_Horario;
-                hORARIOxAREA_A.horaAbierto = schedule.horaAbierto;
-                hORARIOxAREA_A.horaCierre = schedule.horaCierre;
-
-                hORARIOxAREA_A.AREA = new AREA_PA_U_TA();
-                hORARIOxAREA_A.AREA.id_Area = schedule.AREA.id_Area;
-                hORARIOxAREA_A.AREA.nombre = schedule.AREA.nombre;
-                hORARIOxAREA_A.AREA.descripcion = schedule.AREA.descripcion;
-                hORARIOxAREA_A.AREA.PISOAREA = schedule.AREA.PISOAREA;
-
-                hORARIOxAREA_A.AREA.USUARIO = new USUARIO_rU();
-                hORARIOxAREA_A.AREA.USUARIO.id_Usuario = schedule.AREA.USUARIO.id_Usuario;
-                hORARIOxAREA_A.AREA.USUARIO.nombre = schedule.AREA.USUARIO.nombre;
-                hORARIOxAREA_A.AREA.USUARIO.email = schedule.AREA.USUARIO.email;
-                hORARIOxAREA_A.AREA.USUARIO.telefono = schedule.AREA.USUARIO.telefono;
-                hORARIOxAREA_A.AREA.USUARIO.ocupacion = schedule.AREA.USUARIO.ocupacion;
-                hORARIOxAREA_A.AREA.USUARIO.direccion = schedule.AREA.USUARIO.direccion;
-                hORARIOxAREA_A.AREA.USUARIO.fotografia = schedule.AREA.USUARIO.fotografia;
-                hORARIOxAREA_A.AREA.USUARIO.institucion = schedule.AREA.USUARIO.institucion;
-                hORARIOxAREA_A.AREA.USUARIO.ROLUSUARIO = schedule.AREA.USUARIO.ROLUSUARIO;
-            }
-
-            return Ok(hORARIOxAREA_A);
-        }*/
+        }        
 
         // PUT: api/HORARIOxAREA/5
         [ResponseType(typeof(void))]
