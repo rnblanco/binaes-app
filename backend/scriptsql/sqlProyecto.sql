@@ -513,3 +513,40 @@ INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (4, 5);
 INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (3, 6);
 INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (4, 6);
 INSERT INTO P_CLAVExEJEMPLAR (id_p_Clave, id_Ejemplar) VALUES (5, 1);
+
+
+-- AGREGANDO PROCESOS ALMACENADOS --
+
+GO
+CREATE OR ALTER PROCEDURE INICIAR_PRESTAMOS_RESERVADOS 
+AS 
+BEGIN
+    BEGIN TRY
+        DECLARE @AHORA DATE;
+        SET @AHORA = CAST (GETDATE() AS DATE);
+        
+        /* 1 - En préstamo */
+        /* 3 - Reservado */ 
+        
+        UPDATE PRESTAMO SET id_Estado = 1 WHERE id_Estado = 3 AND CAST (fh_Prestamo AS DATE) = @AHORA;
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
+
+GO
+CREATE OR ALTER PROCEDURE FINALIZAR_PRESTAMOS_CADUCADOS 
+AS 
+BEGIN
+    BEGIN TRY
+        DECLARE @AHORA DATE;
+        SET @AHORA = CAST (GETDATE() AS DATE);
+
+        /* 2 - Finalizado */
+        UPDATE PRESTAMO SET id_Estado = 2 WHERE CAST (fh_Devolucion AS DATE) = @AHORA;
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH;
+END;
