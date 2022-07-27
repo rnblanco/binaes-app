@@ -25,8 +25,8 @@ namespace backend.Controllers
             foreach (var keyword in keywords)
             {
                 P_CLAVExEJEMPLAR_E p_CLAVEx = new P_CLAVExEJEMPLAR_E();
-                p_CLAVEx.id_p_Clave = keyword.id_p_Clave;
-                p_CLAVEx.p_clave = keyword.p_clave;
+                p_CLAVEx.id_pClaveEjemplar = keyword.id_pClaveEjemplar;
+                p_CLAVEx.P_CLAVE = keyword.P_CLAVE;
 
                 p_CLAVEx.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 p_CLAVEx.EJEMPLAR.id_Ejemplar = keyword.EJEMPLAR.id_Ejemplar;
@@ -46,17 +46,6 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.nombre = keyword.EJEMPLAR.COLECCION.AREA.nombre;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.descripcion = keyword.EJEMPLAR.COLECCION.AREA.descripcion;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;
-
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.email = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.email;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
                 keywordsList.Add(p_CLAVEx);
             }
@@ -73,8 +62,8 @@ namespace backend.Controllers
             foreach (var keyword in keywords)
             {
                 P_CLAVExEJEMPLAR_E p_CLAVEx = new P_CLAVExEJEMPLAR_E();
-                p_CLAVEx.id_p_Clave = keyword.id_p_Clave;
-                p_CLAVEx.p_clave = keyword.p_clave;
+                p_CLAVEx.id_pClaveEjemplar = keyword.id_pClaveEjemplar;
+                p_CLAVEx.P_CLAVE = keyword.P_CLAVE;
 
                 p_CLAVEx.EJEMPLAR = new EJEMPLAR_E_F_I_C();
                 p_CLAVEx.EJEMPLAR.id_Ejemplar = keyword.EJEMPLAR.id_Ejemplar;
@@ -93,37 +82,13 @@ namespace backend.Controllers
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.id_Area = keyword.EJEMPLAR.COLECCION.AREA.id_Area;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.nombre = keyword.EJEMPLAR.COLECCION.AREA.nombre;
                 p_CLAVEx.EJEMPLAR.COLECCION.AREA.descripcion = keyword.EJEMPLAR.COLECCION.AREA.descripcion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;
-
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.nombre = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.nombre;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.email = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.email;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.telefono = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.telefono;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ocupacion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.direccion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.direccion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(keyword.EJEMPLAR.COLECCION.AREA.USUARIO.fotografia);
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.institucion = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.institucion;
-                p_CLAVEx.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = keyword.EJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO;
+                p_CLAVEx.EJEMPLAR.COLECCION.AREA.PISOAREA = keyword.EJEMPLAR.COLECCION.AREA.PISOAREA;                
 
                 keywordsList.Add(p_CLAVEx);
             }
 
             return keywordsList.AsQueryable();
-        }
-
-        // GET: api/P_CLAVExEJEMPLAR/5
-        /*[ResponseType(typeof(P_CLAVExEJEMPLAR))]
-        public async Task<IHttpActionResult> GetP_CLAVExEJEMPLAR(int id)
-        {
-            P_CLAVExEJEMPLAR p_CLAVExEJEMPLAR = await db.P_CLAVExEJEMPLAR.FindAsync(id);
-            if (p_CLAVExEJEMPLAR == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(p_CLAVExEJEMPLAR);
-        }*/
+        }        
 
         // PUT: api/P_CLAVExEJEMPLAR/5
         [ResponseType(typeof(void))]
@@ -134,7 +99,7 @@ namespace backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != p_CLAVExEJEMPLAR.id_p_Clave)
+            if (id != p_CLAVExEJEMPLAR.id_pClaveEjemplar)
             {
                 return BadRequest();
             }
@@ -172,7 +137,7 @@ namespace backend.Controllers
             db.P_CLAVExEJEMPLAR.Add(p_CLAVExEJEMPLAR);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = p_CLAVExEJEMPLAR.id_p_Clave }, p_CLAVExEJEMPLAR);
+            return CreatedAtRoute("DefaultApi", new { id = p_CLAVExEJEMPLAR.id_pClaveEjemplar }, p_CLAVExEJEMPLAR);
         }
 
         // DELETE: api/P_CLAVExEJEMPLAR/5
@@ -202,7 +167,7 @@ namespace backend.Controllers
 
         private bool P_CLAVExEJEMPLARExists(int id)
         {
-            return db.P_CLAVExEJEMPLAR.Count(e => e.id_p_Clave == id) > 0;
+            return db.P_CLAVExEJEMPLAR.Count(e => e.id_pClaveEjemplar == id) > 0;
         }
     }
 }

@@ -39,11 +39,33 @@ export class AreaFloorSelectComponent extends BaseComponent {
 					this.messageService.setPayload({
 						type: 'warn',
 						title: 'Error',
-						body: 'No se pudo añadir el tipo de área',
+						body: 'No se pudo añadir el piso',
 					});
 				}
 			)
 		);
+	}
+	
+	public deleteFloor(id: number): void {
+		this.subscription.add(
+			this.catalogService.deleteOfURL(`PISOAREA/${id}`)
+			.subscribe(
+				()=>{
+					this.messageService.setPayload({
+						type: 'success',
+						title: '¡Éxito!',
+						body: 'Piso eliminado correctamente',
+					});
+					this.loadFloorAreas();
+				}, ()=>{
+					this.messageService.setPayload({
+						type: 'warn',
+						title: 'Error',
+						body: 'No se pudo eliminar el piso',
+					});
+				}
+			)
+		)
 	}
 	
 	loadFloorAreas(): void {

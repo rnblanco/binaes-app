@@ -1,0 +1,9 @@
+<div class="p-mt-4">
+	<app-loading *ngIf="loading"
+							 class="p-d-flex p-ai-center p-jc-center"
+							 style="height: 80%"></app-loading>
+	
+	<div class="p-col-12 p-d-flex p-ai-center p-jc-center" *ngIf="!loading">
+		<qr-code class="card scan" [value]="id.toString()" [size]="250"></qr-code>
+	</div>
+</div>

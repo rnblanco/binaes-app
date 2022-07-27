@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
     
-    const isAllowed = route.data?.permission.includes(this.user?.ROLUSUARIO.id_rolUsuario) ?? false;
+    const isAllowed = route.data?.permission?.includes(this.user?.ROLUSUARIO.id_rolUsuario) ?? false;
     if (!isAllowed){
       this.router.navigate([RouteInformation.dashboardPage]);
       return false;

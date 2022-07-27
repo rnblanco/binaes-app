@@ -28,15 +28,17 @@
           <span
             [formGroup]="form"
             *ngIf="!reloading && list?.length == 0; else skeleton"
-            class="p-input-icon-left"
           >
-            <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              placeholder="Buscar..."
-              formControlName="search"
-            />
+						<div class="p-inputgroup">
+						 <i class="pi pi-search p-inputgroup-addon" [style]="{ background: 'white', border: 'none'}"></i>
+							<input
+								pInputText
+								type="text"
+								placeholder="Buscar..."
+								formControlName="search"
+							/>
+						 <i class="pi pi-times p-inputgroup-addon pointer" [style]="{ background: 'white', border: 'none'}" (click)="resetSearch()"></i>
+						</div>
           </span>
           <ng-container *ngIf="headerFilterTemplate; else defaultHeaderFilter">
             <ng-container
@@ -55,15 +57,17 @@
             <span
               *ngIf="!reloading"
               [formGroup]="form"
-              class="p-input-icon-left"
             >
-              <i class="pi pi-search"></i>
-              <input
-                pInputText
-                type="text"
-                placeholder="Buscar..."
-                formControlName="search"
-              />
+              <div class="p-inputgroup">
+								<i class="pi pi-search p-inputgroup-addon" [style]="{ background: 'white', border: 'none'}"></i>
+								<input
+									pInputText
+									type="text"
+									placeholder="Buscar..."
+									formControlName="search"
+								/>
+							 <i class="pi pi-times p-inputgroup-addon pointer" [style]="{ background: 'white', border: 'none'}" (click)="resetSearch()"></i>
+							</div>
             </span>
           </ng-template>
 

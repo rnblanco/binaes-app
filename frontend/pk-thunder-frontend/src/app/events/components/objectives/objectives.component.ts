@@ -13,6 +13,7 @@ export class ObjectivesComponent extends BaseComponent implements OnInit {
   @Input() id: number;
   @Input() canDelete: boolean;
   @Input() isDisabled: boolean;
+  @Input() isFinalizado: boolean;
   
   constructor() {
     super();

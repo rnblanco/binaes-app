@@ -72,6 +72,10 @@ export class TableCardComponent
     this.form.controls.search.setValue(this.globalFilter);
     this.textDebounce();
   }
+  
+  resetSearch(){
+    this.form.controls.search.setValue('');
+  }
 
   ngAfterContentInit() {
     this.templates.forEach((item) => {

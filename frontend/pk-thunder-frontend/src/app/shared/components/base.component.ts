@@ -75,15 +75,19 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     this.version = packageJson.version;
     this.env = environment;
   }
+
+  capitalize(text: string): string {
+    text = text.toLowerCase();
+    return `${text.charAt(0).toUpperCase()}${text.slice(1, text.length)}`;
+  }
   
   encrypt(message: string) {
     const mt = md.sha256.create();
     return  mt.update(message).digest().toHex();
   }
-
-  capitalize(text: string): string {
-    text = text.toLowerCase();
-    return `${text.charAt(0).toUpperCase()}${text.slice(1, text.length)}`;
+  
+  loadFileUrl(fileName: string) {
+    window.open(`${this.env.api_url.replace('api', 'documents')}/${fileName}`, '_blank');
   }
 
   ngOnDestroy(): void {

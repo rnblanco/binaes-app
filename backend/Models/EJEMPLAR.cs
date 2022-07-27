@@ -64,13 +64,15 @@ namespace backend.Models
 
         public virtual IDIOMAEJEMPLAR IDIOMAEJEMPLAR { get; set; }
         
-        public virtual List<ETIQUETASxEJEMPLAR> ETIQUETASxEJEMPLAR { get; set; }
+        public virtual List<ETIQUETASxEJEMPLAR_TE_E> ETIQUETASxEJEMPLAR { get; set; }
 
         public virtual List<TIPOETIQUETA> TIPOETIQUETA { get; set; }
 
-        public virtual List<P_CLAVExEJEMPLAR> P_CLAVExEJEMPLAR { get; set; }
+        public virtual List<P_CLAVExEJEMPLAR_E> P_CLAVExEJEMPLAR { get; set; }
 
-        public virtual List<AUTORxEJEMPLAR> AUTORxEJEMPLAR { get; set; }
+        public virtual List<P_CLAVE> P_CLAVE { get; set; }
+
+        public virtual List<AUTORxEJEMPLAR_A_E> AUTORxEJEMPLAR { get; set; }
 
         public virtual List<AUTOR> AUTOR { get; set; }
     }

@@ -15,6 +15,8 @@ import { ChipModule } from 'primeng/chip';
 import { ExemplarSelectComponent } from './components/exemplar-select.component';
 import { ExemplarStatusSelectComponent } from './components/exemplar-status-select.component';
 import { UserSelectComponent } from '../users/component/user-select.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { UserSelectComponent } from '../users/component/user-select.component';
 		SharedModule,
 		CalendarModule,
 		LoadingModule,
-		ChipModule
+		ChipModule,
+		TooltipModule,
+		MessagesModule
 	],
 	providers: [
 		UserSelectComponent,

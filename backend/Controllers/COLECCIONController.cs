@@ -33,18 +33,7 @@ namespace backend.Controllers
                 cOLECCION.AREA.id_Area = collection.AREA.id_Area;
                 cOLECCION.AREA.nombre = collection.AREA.nombre;
                 cOLECCION.AREA.descripcion = collection.AREA.descripcion;
-                cOLECCION.AREA.PISOAREA = collection.AREA.PISOAREA;
-
-                cOLECCION.AREA.USUARIO = new USUARIO_rU();
-                cOLECCION.AREA.USUARIO.id_Usuario = collection.AREA.USUARIO.id_Usuario;
-                cOLECCION.AREA.USUARIO.nombre = collection.AREA.USUARIO.nombre;
-                cOLECCION.AREA.USUARIO.email = collection.AREA.USUARIO.email;
-                cOLECCION.AREA.USUARIO.telefono = collection.AREA.USUARIO.telefono;
-                cOLECCION.AREA.USUARIO.ocupacion = collection.AREA.USUARIO.ocupacion;
-                cOLECCION.AREA.USUARIO.direccion = collection.AREA.USUARIO.direccion;
-                cOLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(collection.AREA.USUARIO.fotografia);
-                cOLECCION.AREA.USUARIO.institucion = collection.AREA.USUARIO.institucion;
-                cOLECCION.AREA.USUARIO.ROLUSUARIO = collection.AREA.USUARIO.ROLUSUARIO;
+                cOLECCION.AREA.PISOAREA = collection.AREA.PISOAREA;                
 
                 cOLECCION.AREA.TIPOAREA = collection.AREA.TIPOAREA;
                 cOLECCION.GENEROCOLECCION = collection.GENEROCOLECCION;
@@ -99,18 +88,7 @@ namespace backend.Controllers
                 cOLECCION.AREA.id_Area = collection.AREA.id_Area;
                 cOLECCION.AREA.nombre = collection.AREA.nombre;
                 cOLECCION.AREA.descripcion = collection.AREA.descripcion;
-                cOLECCION.AREA.PISOAREA = collection.AREA.PISOAREA;
-
-                cOLECCION.AREA.USUARIO = new USUARIO_rU();
-                cOLECCION.AREA.USUARIO.id_Usuario = collection.AREA.USUARIO.id_Usuario;
-                cOLECCION.AREA.USUARIO.nombre = collection.AREA.USUARIO.nombre;
-                cOLECCION.AREA.USUARIO.email = collection.AREA.USUARIO.email;
-                cOLECCION.AREA.USUARIO.telefono = collection.AREA.USUARIO.telefono;
-                cOLECCION.AREA.USUARIO.ocupacion = collection.AREA.USUARIO.ocupacion;
-                cOLECCION.AREA.USUARIO.direccion = collection.AREA.USUARIO.direccion;
-                cOLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(collection.AREA.USUARIO.fotografia);
-                cOLECCION.AREA.USUARIO.institucion = collection.AREA.USUARIO.institucion;
-                cOLECCION.AREA.USUARIO.ROLUSUARIO = collection.AREA.USUARIO.ROLUSUARIO;
+                cOLECCION.AREA.PISOAREA = collection.AREA.PISOAREA;                
 
                 cOLECCION.AREA.TIPOAREA = collection.AREA.TIPOAREA;
                 cOLECCION.GENEROCOLECCION = collection.GENEROCOLECCION;

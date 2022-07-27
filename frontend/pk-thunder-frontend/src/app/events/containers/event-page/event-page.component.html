@@ -1,4 +1,10 @@
-<div class="card p-mt-4">
+<p-messages severity="warn" class="p-col-12" *ngIf="isFinalizado">
+	<ng-template pTemplate>
+		<p>Una vez finalizado el evento, ya no puede ser editado.</p>
+	</ng-template>
+</p-messages>
+
+<div class="card p-mt-0" [ngClass]="{'p-mt-4': !isFinalizado}">
 	<app-loading *ngIf="loading"
 							 class="p-d-flex p-ai-center p-jc-center"
 							 style="height: 80%"></app-loading>
@@ -10,6 +16,7 @@
 			<app-objectives
 				[id]="id"
 				[canDelete]="user.id_rolUsuario === SUPER_ADMIN"
+				[isFinalizado]="isFinalizado"
 				[isDisabled]="isNew"
 			></app-objectives>
 		</div>
@@ -24,16 +31,17 @@
           #form="ngForm"
           autocomplete="off"
           class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
-
+			
       <div class="p-field p-col-12 p-sm-8">
         <label>Nombre del evento:</label>
         <div class="p-input-icon-right">
-          <input name="title" [(ngModel)]="title" placeholder="Ej. Charla Uso correcto de la BINAES App" pInputText />
+          <input name="title" [(ngModel)]="title" placeholder="Ej. Charla Uso correcto de la BINAES App" pInputText
+					[disabled]="isFinalizado" pTooltip="{{isFinalizado ? 'No se pueden editar eventos finalizados' : ''}}" tooltipPosition="top"/>
         </div>
       </div>
 	
 			<div class="p-field p-col-12 p-sm-4">
-				<label>Capacidad del evento:</label>
+				<label>Capacidad:</label>
 				<p-inputNumber pTooltip="La capacidad depende del área" tooltipPosition="top" [disabled]="true"
 					name="capacity" [(ngModel)]="areaSelect.capacity" [showButtons]="true" inputId="minmax-buttons" [min]="0" [max]="1000" placeholder="Ej. 200 personas" suffix=" persona{{areaSelect.capacity !== 1 ? 's' : '' }}"></p-inputNumber>
 			</div>
@@ -43,6 +51,7 @@
 				<p-multiSelect [options]="areaSelect.areas" [(ngModel)]="areaSelect.selectedArea" (onFilter)="areaSelect.areaFilter($event)" (onChange)="areaSelect.areaChange($event)" [showToggleAll]="false"
 											 #areaMultiSelect name="selectedArea" defaultLabel="Elige un área" optionLabel="nombre" optionValue="id_Area"
 											 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron áreas" emptyMessage="No se encontraron áreas"
+											 [disabled]="isFinalizado" pTooltip="{{isFinalizado ? 'No se pueden editar eventos finalizados' : ''}}" tooltipPosition="top"
 				>
 				</p-multiSelect>
     </div>
@@ -50,7 +59,9 @@
 		<div class="p-field p-col-12 p-sm-4 p-mt-2" [ngClass]="{'p-sm-6': isNew}">
 			<label>Rango de fechas:</label>
 			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu evento" [disabledDates]="areaSelect.disabledDates"
-									[(ngModel)]="areaSelect.dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"></p-calendar>
+									[(ngModel)]="areaSelect.dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"
+									[disabled]="isFinalizado" pTooltip="{{isFinalizado ? 'No se pueden editar eventos finalizados' : ''}}" tooltipPosition="top">
+			</p-calendar>
 		</div>
 
 		<div class="p-field p-col-12 p-sm-2 p-mt-2" *ngIf="!isNew">
@@ -61,7 +72,8 @@
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Logo del evento:</label>
 			<p-fileUpload name="demo[]" chooseLabel="Agregar" invalidFileTypeMessageSummary="{0}: Este formato de archivo no es válido." invalidFileTypeMessageDetail="tipos válidos: {0}"
-										(onSelect)="uploadFile.onSelectFile($event)" (onUpload)="uploadFile.onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png">
+										(onSelect)="uploadFile.onSelectFile($event)" (onUpload)="uploadFile.onUpload($event)" [showUploadButton]="false" [showCancelButton]="false" accept="image/png"
+										[disabled]="isFinalizado" pTooltip="{{isFinalizado ? 'No se pueden editar eventos finalizados' : ''}}" tooltipPosition="top">
 				<ng-template pTemplate="content">
 					<img *ngIf="uploadFile.uploadedFile[0] && !uploadFile.selectedfiles[0]" src="{{ uploadFile.uploadedFile[0] | photo }}" alt="{{uploadFile.uploadedFile[0] ?? 'No disponible'}}" style="height:10em" class="p-ml-2"/>
 				</ng-template>
@@ -70,7 +82,7 @@
 	
 		<div class="p-col-12 p-grid p-mt-2 p-mt-2 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
 			<div [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
-				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
+				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid || isFinalizado"></button>
 			</div>
   
 			<div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">

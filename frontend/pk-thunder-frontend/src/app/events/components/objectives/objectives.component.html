@@ -7,11 +7,12 @@
 								borderTopLeftRadius: '6px',
 								borderBottomLeftRadius: '6px'
 							}"
+							[disabled]="isFinalizado"
 						></textarea>
-			<button pButton type="button" [disabled]="objective?.Objetivo?.length === 0"
+			<button pButton type="button" [disabled]="objective?.Objetivo?.length === 0 || isFinalizado"
 							(click)="add(objective?.Objetivo ?? '', objective?.id_Objetivo)"
 			> Editar </button>
-			<button *ngIf="canDelete" pButton type="button" class="p-button-danger"
+			<button *ngIf="canDelete" [disabled]="isFinalizado" pButton type="button" class="p-button-danger"
 							(click)="delete(objective?.id_Objetivo)"
 			> Eliminar </button>
 		</div>
@@ -23,9 +24,9 @@
 											[style]="{
 								borderTopLeftRadius: '6px',
 								borderBottomLeftRadius: '6px'
-							}" [disabled]="isDisabled" pTooltip="{{isDisabled ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top"
+							}" [disabled]="isDisabled || isFinalizado" pTooltip="{{isDisabled ? 'Se debe registrar el evento primero' : ''}}" tooltipPosition="top"
 						></textarea>
-			<button pButton type="button" [disabled]="objective?.length === 0 || isDisabled" (click)="add(objective)"
+			<button pButton type="button" [disabled]="objective?.length === 0 || isDisabled || isFinalizado" (click)="add(objective)"
 							pTooltip="{{isDisabled ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"> Agregar </button>
 		</div>
 	</p-tabPanel>

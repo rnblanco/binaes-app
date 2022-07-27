@@ -33,6 +33,9 @@ export class CollectionPageComponent extends BaseComponent implements OnInit, Pa
   }
 
   ngOnInit(): void {
+    this.areaSelect = new AreaSelectComponent();
+    this.genreSelect = new GenreSelectComponent();
+    this.typeCollectionSelect = new TypeCollectionSelectComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
@@ -43,7 +46,7 @@ export class CollectionPageComponent extends BaseComponent implements OnInit, Pa
   }
   
   loadAll(): void {
-    if (this.user.id_rolUsuario === Roles.USER) {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
       this.messageService.setPayload({
         type: 'warn',
         title: 'Error',
@@ -58,14 +61,14 @@ export class CollectionPageComponent extends BaseComponent implements OnInit, Pa
         this.loading = true;
         this.typeCollectionSelect.loadCollectionTypes();
         this.genreSelect.loadGenres();
-        this.areaSelect.loadAreas();
+        this.areaSelect.loadAreas();        
         if (id) {
           this.id = id;
           this.loadInfo();
         }
         else this.loading = false;
       })
-    );
+    );    
   }
   
   loadInfo(): void {

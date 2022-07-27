@@ -11,6 +11,12 @@
 		class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2"
 	>
 		
+		<p-messages severity="warn" class="p-col-12" *ngIf="isFinalizado">
+			<ng-template pTemplate>
+				<p>Una vez finalizado el préstamo, ya no puede ser editado.</p>
+			</ng-template>
+		</p-messages>
+		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Ejemplar:</label>
 			<p-multiSelect [options]="exemplarSelect.exemplars" [(ngModel)]="exemplarSelect.selectedExemplar" (onFilter)="exemplarSelect.exemplarFilter($event)" (onChange)="exemplarSelect.exemplarChange($event)" [showToggleAll]="false"
@@ -30,7 +36,8 @@
 		<div class="p-field p-col-12 p-sm-6 p-mt-2" [ngClass]="{'p-sm-12': isNew}">
 			<label>Rango de fechas:</label>
 			<p-calendar selectionMode="range" name="dates" dateFormat="dd/mm/yy" placeholder="Elige un rango de fechas para tu préstamo" [disabledDates]="exemplarSelect.disabledDates"
-									[(ngModel)]="exemplarSelect.dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true"></p-calendar>
+									[(ngModel)]="exemplarSelect.dates" [minDate]="minDate" [maxDate]="maxDate" (onSelect)="onDateChange()" [selectOtherMonths]="true" [disabled]="isFinalizado"
+			></p-calendar>
 		</div>
 		
 		<div class="p-field p-col-12 p-sm-6 p-mt-2" *ngIf="!isNew">
@@ -42,7 +49,8 @@
 		
 		<div class="p-col-12 p-grid p-mt-4 p-ml-0 p-mr-0 p-pl-0 p-pr-0">
 			<div class="p-field" [ngClass]="{'p-col-6 p-sm-9': user.id_rolUsuario === SUPER_ADMIN && !isNew, 'p-col-12': isNew || user.id_rolUsuario !== SUPER_ADMIN}">
-				<button [loading]="addLoading" pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" (click)="add()" [disabled]="!formIsValid"></button>
+				<button pButton pRipple type="button" class="p-button-success" [label]="isNew | addOrEdit" [loading]="addLoading" (click)="add()"
+								pTooltip="{{isFinalizado ? 'No se pueden editar préstamos finalizados' : ''}}" tooltipPosition="top" [disabled]="!formIsValid || isFinalizado"></button>
 			</div>
 			
 			<div class="p-field p-col-6 p-sm-3" *ngIf="user.id_rolUsuario === SUPER_ADMIN && !isNew">

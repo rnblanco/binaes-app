@@ -61,19 +61,6 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
 
-                /*eJEMPLAR.P_CLAVExEJEMPLAR = db.P_CLAVExEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
-                eJEMPLAR.ETIQUETASxEJEMPLAR = db.ETIQUETASxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
-                foreach (var item in eJEMPLAR.ETIQUETASxEJEMPLAR)
-                {
-                    eJEMPLAR.TIPOETIQUETA = db.TIPOETIQUETA.Where(x => x.id_tipoEtiqueta == item.id_tipoEtiqueta).ToList();
-                }
-
-                eJEMPLAR.AUTORxEJEMPLAR = db.AUTORxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
-                foreach (var item in eJEMPLAR.AUTORxEJEMPLAR)
-                {
-                    eJEMPLAR.AUTOR = db.AUTOR.Where(x => x.id_Autor == item.id_Autor).ToList();
-                }*/
-
                 exemplarsList.Add(eJEMPLAR);
             }
             return exemplarsList.AsQueryable();
@@ -149,7 +136,7 @@ namespace backend.Controllers
                     COLECCION = x.COLECCION,
                     autorE = x.autorE,
                     pclave = x.c.DefaultIfEmpty(),
-                    p_clave = b.p_clave
+                    p_clave = b.P_CLAVE.p_clave
                 }).GroupJoin(
                     db.ETIQUETASxEJEMPLAR,
                     a => a.id_Ejemplar,
@@ -268,7 +255,7 @@ namespace backend.Controllers
                     COLECCION = x.COLECCION,
                     autorE = x.autorE,
                     pclave = x.c.DefaultIfEmpty(),
-                    p_clave = b.p_clave
+                    p_clave = b.P_CLAVE.p_clave
                 }).GroupJoin(
                     db.ETIQUETASxEJEMPLAR,
                     a => a.id_Ejemplar,
@@ -340,34 +327,83 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.AREA.nombre = exemplar.COLECCION.AREA.nombre;
                 eJEMPLAR.COLECCION.AREA.descripcion = exemplar.COLECCION.AREA.descripcion;
                 eJEMPLAR.COLECCION.AREA.PISOAREA = exemplar.COLECCION.AREA.PISOAREA;
-
-                eJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                eJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = exemplar.COLECCION.AREA.USUARIO.id_Usuario;
-                eJEMPLAR.COLECCION.AREA.USUARIO.nombre = exemplar.COLECCION.AREA.USUARIO.nombre;
-                eJEMPLAR.COLECCION.AREA.USUARIO.email = exemplar.COLECCION.AREA.USUARIO.email;
-                eJEMPLAR.COLECCION.AREA.USUARIO.telefono = exemplar.COLECCION.AREA.USUARIO.telefono;
-                eJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = exemplar.COLECCION.AREA.USUARIO.ocupacion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.direccion = exemplar.COLECCION.AREA.USUARIO.direccion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(exemplar.COLECCION.AREA.USUARIO.fotografia);
-                eJEMPLAR.COLECCION.AREA.USUARIO.institucion = exemplar.COLECCION.AREA.USUARIO.institucion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = exemplar.COLECCION.AREA.USUARIO.ROLUSUARIO;
+                eJEMPLAR.COLECCION.AREA.capacidad = exemplar.COLECCION.AREA.capacidad;
 
                 eJEMPLAR.COLECCION.AREA.TIPOAREA = exemplar.COLECCION.AREA.TIPOAREA;
 
                 eJEMPLAR.COLECCION.GENEROCOLECCION = exemplar.COLECCION.GENEROCOLECCION;
                 eJEMPLAR.COLECCION.TIPOCOLECCION = exemplar.COLECCION.TIPOCOLECCION;
 
-                eJEMPLAR.P_CLAVExEJEMPLAR = db.P_CLAVExEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
-                eJEMPLAR.ETIQUETASxEJEMPLAR = db.ETIQUETASxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
-                foreach (var item in eJEMPLAR.ETIQUETASxEJEMPLAR)
+                eJEMPLAR.P_CLAVExEJEMPLAR = new List<P_CLAVExEJEMPLAR_E>();
+
+                List<P_CLAVExEJEMPLAR> p_CLAVExEJEMPLAR = db.P_CLAVExEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+
+                foreach (var item in p_CLAVExEJEMPLAR)
                 {
-                    eJEMPLAR.TIPOETIQUETA = db.TIPOETIQUETA.Where(x => x.id_tipoEtiqueta == item.id_tipoEtiqueta).ToList();
+                    P_CLAVExEJEMPLAR_E p_CLAVExEJEMPLAR_E = new P_CLAVExEJEMPLAR_E();
+                    p_CLAVExEJEMPLAR_E.id_pClaveEjemplar = item.id_pClaveEjemplar;
+
+                    p_CLAVExEJEMPLAR_E.P_CLAVE = new P_CLAVE();
+                    p_CLAVExEJEMPLAR_E.P_CLAVE.id_p_clave = item.id_p_clave;
+                    p_CLAVExEJEMPLAR_E.P_CLAVE.p_clave = item.P_CLAVE.p_clave;
+
+                    eJEMPLAR.P_CLAVExEJEMPLAR.Add(p_CLAVExEJEMPLAR_E);
                 }
 
-                eJEMPLAR.AUTORxEJEMPLAR = db.AUTORxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+                eJEMPLAR.P_CLAVE = new List<P_CLAVE>();
+
+                foreach (var item in eJEMPLAR.P_CLAVExEJEMPLAR)
+                {
+                    P_CLAVE p_Clave = db.P_CLAVE.Where(x => x.id_p_clave == item.P_CLAVE.id_p_clave).FirstOrDefault();
+                    eJEMPLAR.P_CLAVE.Add(p_Clave);
+                }
+
+                eJEMPLAR.ETIQUETASxEJEMPLAR = new List<ETIQUETASxEJEMPLAR_TE_E>();
+                List<ETIQUETASxEJEMPLAR> eTIQUETASxEJEMPLARs = db.ETIQUETASxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+
+                foreach (var item in eTIQUETASxEJEMPLARs)
+                {
+                    ETIQUETASxEJEMPLAR_TE_E eTIQUETASxEJEMPLAR_TE_ = new ETIQUETASxEJEMPLAR_TE_E();
+                    eTIQUETASxEJEMPLAR_TE_.id_etiquetaEjemplar = item.id_etiquetaEjemplar;
+
+                    eTIQUETASxEJEMPLAR_TE_.etiqueta = item.etiqueta;
+
+                    eTIQUETASxEJEMPLAR_TE_.TIPOETIQUETA = new TIPOETIQUETA();
+                    eTIQUETASxEJEMPLAR_TE_.TIPOETIQUETA.id_tipoEtiqueta = item.TIPOETIQUETA.id_tipoEtiqueta;
+                    eTIQUETASxEJEMPLAR_TE_.TIPOETIQUETA.tipoEtiqueta1 = item.TIPOETIQUETA.tipoEtiqueta1;
+
+                    eJEMPLAR.ETIQUETASxEJEMPLAR.Add(eTIQUETASxEJEMPLAR_TE_);
+                }
+
+                eJEMPLAR.TIPOETIQUETA = new List<TIPOETIQUETA>();
+
+                foreach (var item in eJEMPLAR.ETIQUETASxEJEMPLAR)
+                {
+                    TIPOETIQUETA tIPOETIQUETA = db.TIPOETIQUETA.Where(x => x.id_tipoEtiqueta == item.TIPOETIQUETA.id_tipoEtiqueta).FirstOrDefault();
+                    eJEMPLAR.TIPOETIQUETA.Add(tIPOETIQUETA);
+                }
+
+                eJEMPLAR.AUTORxEJEMPLAR = new List<AUTORxEJEMPLAR_A_E>();
+                List<AUTORxEJEMPLAR> aUTORxEJEMPLARs = db.AUTORxEJEMPLAR.Where(x => x.id_Ejemplar == eJEMPLAR.id_Ejemplar).ToList();
+
+                foreach (var item in aUTORxEJEMPLARs)
+                {
+                    AUTORxEJEMPLAR_A_E aUTORxEJEMPLAR_A_E = new AUTORxEJEMPLAR_A_E();
+                    aUTORxEJEMPLAR_A_E.id_autorEjemplar = item.id_autorEjemplar;
+
+                    aUTORxEJEMPLAR_A_E.AUTOR = new AUTOR();
+                    aUTORxEJEMPLAR_A_E.AUTOR.id_Autor = item.AUTOR.id_Autor;
+                    aUTORxEJEMPLAR_A_E.AUTOR.nombre = item.AUTOR.nombre;
+
+                    eJEMPLAR.AUTORxEJEMPLAR.Add(aUTORxEJEMPLAR_A_E);
+                }
+
+                eJEMPLAR.AUTOR = new List<AUTOR>();
+
                 foreach (var item in eJEMPLAR.AUTORxEJEMPLAR)
                 {
-                    eJEMPLAR.AUTOR = db.AUTOR.Where(x => x.id_Autor == item.id_Autor).ToList();
+                    AUTOR aUTOR = db.AUTOR.Where(x => x.id_Autor == item.AUTOR.id_Autor).FirstOrDefault();
+                    eJEMPLAR.AUTOR.Add(aUTOR);
                 }
                 PAGINADOR.data.Add(eJEMPLAR);
             }
@@ -404,17 +440,6 @@ namespace backend.Controllers
                 eJEMPLAR.COLECCION.AREA.nombre = exemplar.COLECCION.AREA.nombre;
                 eJEMPLAR.COLECCION.AREA.descripcion = exemplar.COLECCION.AREA.descripcion;
                 eJEMPLAR.COLECCION.AREA.PISOAREA = exemplar.COLECCION.AREA.PISOAREA;
-
-                eJEMPLAR.COLECCION.AREA.USUARIO = new USUARIO_rU();
-                eJEMPLAR.COLECCION.AREA.USUARIO.id_Usuario = exemplar.COLECCION.AREA.USUARIO.id_Usuario;
-                eJEMPLAR.COLECCION.AREA.USUARIO.nombre = exemplar.COLECCION.AREA.USUARIO.nombre;
-                eJEMPLAR.COLECCION.AREA.USUARIO.email = exemplar.COLECCION.AREA.USUARIO.email;
-                eJEMPLAR.COLECCION.AREA.USUARIO.telefono = exemplar.COLECCION.AREA.USUARIO.telefono;
-                eJEMPLAR.COLECCION.AREA.USUARIO.ocupacion = exemplar.COLECCION.AREA.USUARIO.ocupacion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.direccion = exemplar.COLECCION.AREA.USUARIO.direccion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.fotografia = Encoding.UTF8.GetString(exemplar.COLECCION.AREA.USUARIO.fotografia);
-                eJEMPLAR.COLECCION.AREA.USUARIO.institucion = exemplar.COLECCION.AREA.USUARIO.institucion;
-                eJEMPLAR.COLECCION.AREA.USUARIO.ROLUSUARIO = exemplar.COLECCION.AREA.USUARIO.ROLUSUARIO;
 
                 eJEMPLAR.COLECCION.AREA.TIPOAREA = exemplar.COLECCION.AREA.TIPOAREA;
 

@@ -46,6 +46,28 @@ export class AreaTypeSelectComponent extends BaseComponent {
 		);
 	}
 	
+	public deleteArea(id: number): void {
+		this.subscription.add(
+			this.catalogService.deleteOfURL(`TIPOAREA/${id}`)
+			.subscribe(
+				()=>{
+					this.messageService.setPayload({
+						type: 'success',
+						title: '¡Éxito!',
+						body: 'Área eliminada correctamente',
+					});
+					this.loadAreaTypes();
+				}, ()=>{
+					this.messageService.setPayload({
+						type: 'warn',
+						title: 'Error',
+						body: 'No se pudo eliminar el área',
+					});
+				}
+			)
+		)
+	}
+	
 	public loadAreaTypes(): void {
 		this.subscription.add(
 			this.catalogService

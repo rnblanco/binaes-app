@@ -46,11 +46,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MailKit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.3.3.0\lib\net47\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
@@ -110,12 +116,15 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="MimeKit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.3.3.0\lib\net47\MimeKit.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
@@ -128,22 +137,28 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.19.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.19.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.4.5.1\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Cors, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.9\lib\net45\System.Web.Cors.dll</HintPath>
@@ -267,6 +282,7 @@
     <Compile Include="Controllers\COLECCIONController.cs" />
     <Compile Include="Controllers\EDITORIALController.cs" />
     <Compile Include="Controllers\EJEMPLARController.cs" />
+    <Compile Include="Controllers\EMAILSENDERController.cs" />
     <Compile Include="Controllers\ESTADOSController.cs" />
     <Compile Include="Controllers\ETIQUETASxEJEMPLARController.cs" />
     <Compile Include="Controllers\EVENTOController.cs" />
@@ -279,7 +295,9 @@
     <Compile Include="Controllers\OBJETIVOSxEVENTOController.cs" />
     <Compile Include="Controllers\PISOAREAController.cs" />
     <Compile Include="Controllers\PRESTAMOController.cs" />
+    <Compile Include="Controllers\P_CLAVEController.cs" />
     <Compile Include="Controllers\P_CLAVExEJEMPLARController.cs" />
+    <Compile Include="Controllers\recoverPasswordController.cs" />
     <Compile Include="Controllers\RESERVAController.cs" />
     <Compile Include="Controllers\ROLUSUARIOController.cs" />
     <Compile Include="Controllers\TIPOAREAController.cs" />
@@ -313,6 +331,7 @@
     <Compile Include="Models\Paginador.cs" />
     <Compile Include="Models\PISOAREA.cs" />
     <Compile Include="Models\PRESTAMO.cs" />
+    <Compile Include="Models\P_CLAVE.cs" />
     <Compile Include="Models\P_CLAVExEJEMPLAR.cs" />
     <Compile Include="Models\RESERVA.cs" />
     <Compile Include="Models\ROLUSUARIO.cs" />
@@ -356,24 +375,24 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="wwwroot\109.c171fa9c2f13fb6c.js" />
-    <Content Include="wwwroot\173.0703226f90b8e5b4.js" />
-    <Content Include="wwwroot\272.d1a4e8154581f6d0.js" />
-    <Content Include="wwwroot\328.fced4455de3c9c6d.js" />
+    <Content Include="wwwroot\109.0c335de9e15c3481.js" />
+    <Content Include="wwwroot\272.247b95ad8976337c.js" />
+    <Content Include="wwwroot\328.25c74632544fa4d6.js" />
+    <Content Include="wwwroot\329.9e4d339c03a3bcc2.js" />
     <Content Include="wwwroot\3rdpartylicenses.txt" />
-    <Content Include="wwwroot\628.f1c7dab2dbb14734.js" />
-    <Content Include="wwwroot\776.3edc85e9a76c275f.js" />
+    <Content Include="wwwroot\641.a9cdfb4aa5d3876b.js" />
+    <Content Include="wwwroot\659.30ed8389f80c3cc9.js" />
+    <Content Include="wwwroot\776.fd14b636d5cd89cd.js" />
     <Content Include="wwwroot\783.5eeac854d2d99704.js" />
-    <Content Include="wwwroot\807.ecff458d97afea06.js" />
-    <Content Include="wwwroot\887.d961a028a553fa05.js" />
-    <Content Include="wwwroot\917.4eec97d51a22cf88.js" />
-    <Content Include="wwwroot\980.fc94ac9fade493f7.js" />
-    <Content Include="wwwroot\991.601ef5af94c2498f.js" />
+    <Content Include="wwwroot\807.f6745bfb06c9c357.js" />
+    <Content Include="wwwroot\875.875a0ca80dd45376.js" />
+    <Content Include="wwwroot\991.a51c6eab987783ea.js" />
     <Content Include="wwwroot\assets\demo\flags\flags.css" />
     <Content Include="wwwroot\assets\demo\flags\flags_responsive.png" />
     <Content Include="wwwroot\assets\demo\flags\flag_placeholder.png" />
     <Content Include="wwwroot\assets\demo\images\blocks\logos\hyper.svg" />
     <Content Include="wwwroot\assets\images\camara.png" />
+    <Content Include="wwwroot\assets\images\computer.jpeg" />
     <Content Include="wwwroot\assets\images\icons\user-circle.png" />
     <Content Include="wwwroot\assets\images\not-available.png" />
     <Content Include="wwwroot\assets\images\user.png" />
@@ -404,41 +423,6 @@
     <Content Include="wwwroot\assets\layout\images\screen-1.png" />
     <Content Include="wwwroot\assets\layout\images\screen.png" />
     <Content Include="wwwroot\assets\layout\images\startup.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\arya-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\arya-green.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\arya-orange.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\arya-purple.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-dark-blue.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-dark-purple.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-light-blue.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\bootstrap4-light-purple.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\fluent-light.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-indigo.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-purple.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-dark-teal.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-light-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-light-indigo.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-light-purple.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\lara-light-teal.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\luna-amber.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\luna-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\luna-green.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\luna-pink.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\md-dark-deeppurple.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\md-dark-indigo.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\md-light-deeppurple.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\md-light-indigo.svg" />
-    <Content Include="wwwroot\assets\layout\images\themes\saga-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\saga-green.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\saga-orange.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\saga-purple.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\tailwind-light.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\vela-blue.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\vela-green.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\vela-orange.png" />
-    <Content Include="wwwroot\assets\layout\images\themes\vela-purple.png" />
-    <Content Include="wwwroot\assets\layout\images\widgets\user-card.jpg" />
     <Content Include="wwwroot\assets\theme\arya-blue\theme.css" />
     <Content Include="wwwroot\assets\theme\arya-green\theme.css" />
     <Content Include="wwwroot\assets\theme\arya-orange\theme.css" />
@@ -474,7 +458,8 @@
     <Content Include="wwwroot\assets\theme\vela-orange\theme.css" />
     <Content Include="wwwroot\assets\theme\vela-purple\theme.css" />
     <Content Include="wwwroot\color.dae87a04d07ca92b.png" />
-    <Content Include="wwwroot\common.6586cd88af19f231.js" />
+    <Content Include="wwwroot\common.e7cd29f693d44af2.js" />
+    <Content Include="wwwroot\computer.148efb576fb3dda8.jpeg" />
     <Content Include="wwwroot\documents\1DiagramaER.png" />
     <Content Include="wwwroot\documents\2DiagramaR.png" />
     <Content Include="wwwroot\documents\3DiagramaRN.png" />
@@ -491,11 +476,11 @@
     <Content Include="wwwroot\images\HPCC_TheJourney_cover_UK.png" />
     <Content Include="wwwroot\images\j-r-r-tolkien-the-hobbit-11529-950x950.png" />
     <Content Include="wwwroot\index.html" />
-    <Content Include="wwwroot\main.4375d34c34000ffb.js" />
+    <Content Include="wwwroot\main.d83a758ce0c2b272.js" />
     <Content Include="wwwroot\polyfills.447b89a91fede5b6.js" />
     <Content Include="wwwroot\primeicons.76044b1c189cc4d7.svg" />
-    <Content Include="wwwroot\runtime.3331a5ec32db1b35.js" />
-    <Content Include="wwwroot\styles.813c8f2056baa30e.css" />
+    <Content Include="wwwroot\runtime.39482784d76d6750.js" />
+    <Content Include="wwwroot\styles.f1fd82655841e1e9.css" />
     <None Include="Properties\PublishProfiles\binaes-app - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\binaes-app - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

@@ -23,6 +23,7 @@ namespace backend.Models
         public virtual DbSet<IDIOMAEJEMPLAR> IDIOMAEJEMPLAR { get; set; }
         public virtual DbSet<OBJETIVOSxEVENTO> OBJETIVOSxEVENTO { get; set; }
         public virtual DbSet<P_CLAVExEJEMPLAR> P_CLAVExEJEMPLAR { get; set; }
+        public virtual DbSet<P_CLAVE> P_CLAVE { get; set; }
         public virtual DbSet<PISOAREA> PISOAREA { get; set; }
         public virtual DbSet<PRESTAMO> PRESTAMO { get; set; }
         public virtual DbSet<RESERVA> RESERVA { get; set; }
@@ -50,41 +51,15 @@ namespace backend.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<AREA>()
-                .Property(e => e.id_Area);
-
-            /*modelBuilder.Entity<AREA>()
-                .HasMany(e => e.COLECCION)
-                .WithRequired(e => e.AREA)
-                .HasForeignKey(e => e.id_areaPertenece)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<AREA>()
-                .HasMany(e => e.EVENTO)
-                .WithRequired(e => e.AREA)
-                .HasForeignKey(e => e.id_areaRealizacion);
-
-            modelBuilder.Entity<AREA>()
-                .HasMany(e => e.VISITAS)
-                .WithRequired(e => e.AREA)
-                .WillCascadeOnDelete(false);*/
+                .Property(e => e.id_Area);            
 
             modelBuilder.Entity<AUTOR>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
-
-            /*modelBuilder.Entity<AUTOR>()
-                .HasMany(e => e.AUTORxEJEMPLAR)
-                .WithRequired(e => e.AUTOR)
-                .WillCascadeOnDelete(false);*/
-
+         
             modelBuilder.Entity<COLECCION>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
-
-            /*modelBuilder.Entity<COLECCION>()
-                .HasMany(e => e.EJEMPLAR)
-                .WithRequired(e => e.COLECCION)
-                .HasForeignKey(e => e.id_coleccionPertenece);*/
 
             modelBuilder.Entity<EDITORIAL>()
                 .Property(e => e.editorial1)
@@ -93,16 +68,6 @@ namespace backend.Models
             modelBuilder.Entity<EJEMPLAR>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
-
-            /*modelBuilder.Entity<EJEMPLAR>()
-                .HasMany(e => e.AUTORxEJEMPLAR)
-                .WithRequired(e => e.EJEMPLAR)
-                .WillCascadeOnDelete(false);*/
-
-            /*modelBuilder.Entity<EJEMPLAR>()
-                .HasMany(e => e.PRESTAMO)
-                .WithRequired(e => e.EJEMPLAR)
-                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<ESTADOS>()
                 .Property(e => e.estado)
@@ -114,12 +79,7 @@ namespace backend.Models
 
             modelBuilder.Entity<FORMATOEJEMPLAR>()
                 .Property(e => e.formato)
-                .IsUnicode(false);
-
-            /*modelBuilder.Entity<FORMATOEJEMPLAR>()
-                .HasMany(e => e.EJEMPLAR)
-                .WithRequired(e => e.FORMATOEJEMPLAR)
-                .HasForeignKey(e => e.id_Formato);*/
+                .IsUnicode(false);           
 
             modelBuilder.Entity<GENEROCOLECCION>()
                 .Property(e => e.generoColeccion1)
@@ -127,18 +87,13 @@ namespace backend.Models
 
             modelBuilder.Entity<IDIOMAEJEMPLAR>()
                 .Property(e => e.idioma)
-                .IsUnicode(false);
-
-            /*modelBuilder.Entity<IDIOMAEJEMPLAR>()
-                .HasMany(e => e.EJEMPLAR)
-                .WithRequired(e => e.IDIOMAEJEMPLAR)
-                .HasForeignKey(e => e.id_Idioma);*/
+                .IsUnicode(false);            
 
             modelBuilder.Entity<OBJETIVOSxEVENTO>()
                 .Property(e => e.Objetivo)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<P_CLAVExEJEMPLAR>()
+            modelBuilder.Entity<P_CLAVE>()
                 .Property(e => e.p_clave)
                 .IsUnicode(false);
 
@@ -152,12 +107,7 @@ namespace backend.Models
 
             modelBuilder.Entity<ROLUSUARIO>()
                 .Property(e => e.rol)
-                .IsUnicode(false);
-
-            /*modelBuilder.Entity<ROLUSUARIO>()
-                .HasMany(e => e.USUARIO)
-                .WithRequired(e => e.ROLUSUARIO)
-                .WillCascadeOnDelete(false);*/
+                .IsUnicode(false);            
 
             modelBuilder.Entity<TIPOAREA>()
                 .Property(e => e.tipoArea1)
@@ -206,24 +156,7 @@ namespace backend.Models
 
             modelBuilder.Entity<USUARIO>()
                 .Property(e => e.institucion)
-                .IsUnicode(false);
-
-            /*modelBuilder.Entity<USUARIO>()
-                .HasMany(e => e.AREA)
-                .WithRequired(e => e.USUARIO)
-                .HasForeignKey(e => e.responsable)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<USUARIO>()
-                .HasMany(e => e.PRESTAMO)
-                .WithRequired(e => e.USUARIO)
-                .HasForeignKey(e => e.id_usuarioPresta)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<USUARIO>()
-                .HasMany(e => e.VISITAS)
-                .WithRequired(e => e.USUARIO)
-                .WillCascadeOnDelete(false);*/
+                .IsUnicode(false);           
 
             modelBuilder.Entity<VISITAS>()
                 .Property(e => e.id_Usuario)

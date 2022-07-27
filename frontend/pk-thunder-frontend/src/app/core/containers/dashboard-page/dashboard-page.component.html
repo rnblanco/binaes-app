@@ -1,4 +1,4 @@
-<ng-container *ngIf="user.id_rolUsuario === USER; else QR">
+<ng-container *ngIf="user.ROLUSUARIO.id_rolUsuario === USER; else QR">
 	<div class="card p-mt-4">
 		<h3>Bienvenido al sistema de gestión de BINAES 📚</h3>
 		<p>¡Elige una opción del menú!</p>
@@ -9,7 +9,7 @@
 	<form
 		#form="ngForm"
 		autocomplete="off"
-		class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2 p-mt-4"
+		class="p-fluid p-formgrid p-grid p-formgrid-sm p-mt-4"
 	>
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Área:</label>

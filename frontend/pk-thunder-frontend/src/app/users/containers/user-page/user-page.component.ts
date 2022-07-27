@@ -45,6 +45,8 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
   }
 
   ngOnInit(): void {
+    this.userRolesSelect = new UserRolesSelectComponent();
+    this.uploadFile = new UploadFileComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
@@ -63,6 +65,16 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
   }
 
   loadAll(): void {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
+      this.messageService.setPayload({
+        type: 'warn',
+        title: 'Error',
+        body: 'No tienes autorización para ver esta información',
+      });
+      setTimeout(() => {
+        this.router.navigate([RouteInformation.dashboardPage])
+      }, 50);
+    }
     this.subscription.add(
       this.route.params.subscribe(({ id }: Params) => {        
         this.loading = true;
@@ -87,7 +99,7 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
           if (response.id_Usuario) {
             this.isNew = false;
           }
-          if (response.id_Usuario == this.user.id_Usuario || response.id_rolUsuario == this.user.id_rolUsuario || response.ROLUSUARIO.id_rolUsuario == Roles.SUPER_ADMIN) {
+          if (response.id_Usuario == this.user.id_Usuario || response.ROLUSUARIO.id_rolUsuario == this.user.ROLUSUARIO.id_rolUsuario || response.ROLUSUARIO.id_rolUsuario == Roles.SUPER_ADMIN) {
             this.messageService.setPayload({
               type: 'warn',
               title: 'Error',

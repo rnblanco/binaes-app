@@ -38,14 +38,21 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
     return this.userSelect.selectedUser?.length > 0 && this.exemplarSelect.selectedExemplar?.length > 0 && this.exemplarSelect.dates[0] !== null && this.exemplarSelect.dates[1] !== null;
   }
   
+  get isFinalizado(): boolean {
+    return this.exemplarStatusSelect.loadedStatus === BorrowStatus.FINALIZADO;
+  }
+  
   ngOnInit(): void {
+    this.userSelect = new UserSelectComponent();
+    this.exemplarSelect = new ExemplarSelectComponent();
+    this.exemplarStatusSelect = new ExemplarStatusSelectComponent();
     this.loadAll();
     this.user = this.authService.storagedUser;
     this.breadcrumbService.setItems(this.getBreadCrumbs());
   }
   
   loadAll(): void {
-    if (this.user.id_rolUsuario === Roles.USER) {
+    if (this.user.ROLUSUARIO.id_rolUsuario === Roles.USER) {
       this.messageService.setPayload({
         type: 'warn',
         title: 'Error',
