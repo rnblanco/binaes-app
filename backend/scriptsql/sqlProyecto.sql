@@ -544,7 +544,7 @@ BEGIN
         SET @AHORA = CAST (GETDATE() AS DATE);
 
         /* 2 - Finalizado */
-        UPDATE PRESTAMO SET id_Estado = 2 WHERE CAST (fh_Devolucion AS DATE) = @AHORA;
+        UPDATE PRESTAMO SET id_Estado = 2 WHERE CAST (fh_Devolucion AS DATE) <= @AHORA;
     END TRY
     BEGIN CATCH
         PRINT ERROR_MESSAGE();

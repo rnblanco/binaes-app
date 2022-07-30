@@ -117,7 +117,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
       .addOfURL(`PRESTAMO`, {
         fh_Prestamo: this.exemplarSelect.dates[0],
         fh_Devolucion: this.exemplarSelect.dates[1],
-        id_Estado: BorrowStatus.EN_PRESTAMO,
+        id_Estado: this.exemplarSelect.dates[0].getDate() === new Date().getDate() ? BorrowStatus.EN_PRESTAMO : BorrowStatus.RESERVADO,
         id_usuarioPresta: this.userSelect.selectedUser[0],
         id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
       })
@@ -154,7 +154,7 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
         fh_Prestamo: this.exemplarSelect.dates[0],
         fh_Devolucion: this.exemplarSelect.dates[1],
         id_usuarioPresta: this.userSelect.selectedUser[0],
-        id_Estado: this.exemplarStatusSelect.selectedStatus[0],
+        id_Estado: this.exemplarSelect.dates[0].getDate() === new Date().getDate() ? BorrowStatus.EN_PRESTAMO : BorrowStatus.RESERVADO,
         id_Ejemplar: this.exemplarSelect.selectedExemplar[0],
       })
       .subscribe(
@@ -235,6 +235,8 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
       });
       if (this.exemplarSelect.dates === []) return;
     });
+    
+    this.exemplarStatusSelect.selectedStatus = [this.exemplarSelect.dates[0].getDate() === new Date().getDate() ? BorrowStatus.EN_PRESTAMO : BorrowStatus.RESERVADO]
   }
   
   getBreadCrumbs() {
@@ -243,5 +245,4 @@ export class BorrowPageComponent extends BaseComponent implements OnInit, PageCo
       { label: 'Préstamo', routerLink: [this.routeInformation.borrowPage] }
     ];
   }
-  
 }

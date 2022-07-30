@@ -142,7 +142,7 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
         .addOfURL(`USUARIO`, {
           id_Usuario: this.makeid(),
           nombre: this.name,
-          email: this.email,
+          email: this.form.controls.email.value,
           telefono: this.telefono,
           ocupacion: this.ocupacion,
           direccion: this.direccion,
@@ -163,7 +163,8 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
             }, 200);
             this.addLoading = false;
           },
-          () => {
+          (error) => {
+            console.log(error)
             this.messageService.setPayload({
               type: 'warn',
               title: 'Error',
@@ -185,7 +186,7 @@ export class UserPageComponent extends BaseComponent implements OnInit, PageComp
         .updateOfURL(`USUARIO/${this.id}`, {
           id_Usuario: this.id,
           nombre: this.name,
-          email: this.email,
+          email: this.form.controls.email.value,
           telefono: this.telefono,
           ocupacion: this.ocupacion,
           direccion: this.direccion,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseComponent } from '../../shared/components/base.component';
+import { BaseComponent } from '../../../shared/components/base.component';
 
 @Component({
   selector: 'app-log-out-page',

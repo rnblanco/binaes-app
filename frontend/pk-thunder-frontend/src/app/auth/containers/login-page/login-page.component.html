@@ -48,7 +48,11 @@
 							(click)="onSubmit()"
 							[disabled]="form.invalid"
 							[loading]="buttonLoading"
-							NoDblClick></button>
+							NoDblClick
+			></button>
+			<div class="p-d-flex p-jc-center p-ai-center p-mt-4">
+				<a routerLink="/auth/forgot-password">¿Has olvidado la contraseña?</a>
+			</div>
 		</div>
 	</form>
 </div>

@@ -13,17 +13,21 @@ using MailKit;
 using MimeKit;
 using System.Web.Http.Description;
 
+public class Email {
+    public string email { get; set; }
+}
+
 namespace backend.Controllers
 {
     public class EMAILSENDERController : ApiController
     {
         private BinaesFullModel db = new BinaesFullModel();
-        
+
         // POST: api/EMAILSENDER/rblanco@binaes.com.sv
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PostMail(string email)
+        public async Task<IHttpActionResult> PostMail(Email eMAIL)
         {
-            USUARIO user = db.USUARIO.Where(x => x.email == email).FirstOrDefault();
+            USUARIO user = db.USUARIO.Where(x => x.email == eMAIL.email).FirstOrDefault();
             if (user != null)
             {
                 string tokenchars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890";
@@ -47,7 +51,7 @@ namespace backend.Controllers
                     tOKEN.id_Token = tokendb.id_Token;
                     await tOKENController.PutTOKEN(tokendb.id_Token, tOKEN);
                 }
-                sendMail(user.nombre, email, user.id_Usuario, token);
+                sendMail(user.nombre, eMAIL.email, user.id_Usuario, token);
             }
             else
             {
@@ -56,7 +60,7 @@ namespace backend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        private void sendMail(string nombre,string email,string id, string token)
+        private void sendMail(string nombre, string email, string id, string token)
         {
             String Server = "smtp.mailtrap.io";
             int Port = 587;
@@ -87,7 +91,7 @@ namespace backend.Controllers
                                                 "<tr>"+
                                                     "<td style=\"font-family: Arial, sans-serif; padding: 0 0 36px 0; color: #153643;\">"+
                                                         "<h1 style=\"font-size: 24px; margin: 0 0 20px 0; font-family: Arial,sans-serif;\">Cambio de contraseña<h1>"+
-                                                        "<a style=\"font-size:14px;cursor:pointer;border-style:none;padding:15px 20px;border-radius:0.5rem;background-color:#4338CA;color:#fff; text-decoration: none;\" href=\"https://binaes-app.azurewebsites.net/app/recoverPassword?id_Usuario=" + id + "&token=" + token + "\">Cambiar contraseña</a>" +
+                                                        "<a style=\"font-size:14px;cursor:pointer;border-style:none;padding:15px 20px;border-radius:0.5rem;background-color:#4338CA;color:#fff; text-decoration: none;\" href=\"https://binaes-app.azurewebsites.net/auth/recover-password?id_Usuario=" + id + "&token=" + token + "\">Cambiar contraseña</a>" +
                                                     "</td>" +
                                                 "</tr>"+
                                             "</table>"+

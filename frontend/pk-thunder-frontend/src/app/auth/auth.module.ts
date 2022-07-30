@@ -19,7 +19,10 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
 import { UnauthorizedPageComponent } from './containers/unauthorized-page/unauthorized-page.component';
 import { LoginPageComponent } from './containers/login-page/login-page.component';
 import { PasswordModule } from 'primeng/password';
-import { LogOutPageComponent } from './log-out-page/log-out-page.component';
+import { LogOutPageComponent } from './containers/log-out-page/log-out-page.component';
+import { RecoverPasswordComponent } from './containers/recover-password/recover-password.component';
+import { RecoverCardComponent } from './components/recover-card/recover-card.component';
+import { ChangePasswordComponent } from './containers/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { LogOutPageComponent } from './log-out-page/log-out-page.component';
     LoginPageComponent,
     UnauthorizedPageComponent,
     LogOutPageComponent,
+    RecoverPasswordComponent,
+    RecoverCardComponent,
+    ChangePasswordComponent,
   ],
 	imports: [
 		CommonModule,
