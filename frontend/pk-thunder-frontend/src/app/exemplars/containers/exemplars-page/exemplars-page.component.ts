@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyComponent } from '../../../shared/components/lazy-component.component';
-import { Ejemplar, PaginadorEjemplar } from '../../../shared/models/exemplar';
+import { PaginadorEjemplar } from '../../../shared/models/exemplar';
 import { Roles } from '../../../auth/constants/roles';
+import { TagType } from 'src/app/shared/constants/tag-type';
 
 @Component({
   selector: 'app-exemplars-page',
   templateUrl: './exemplars-page.component.html',
 })
 export class ExemplarsPageComponent extends LazyComponent implements OnInit {
-
+  tagType = TagType;
   USER = Roles.USER;
 
   constructor() {

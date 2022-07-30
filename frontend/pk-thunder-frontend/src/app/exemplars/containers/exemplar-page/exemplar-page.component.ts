@@ -1,20 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '../../../shared/components/base.component';
-import { Autor, AutorxEjemplar, Editorial, Ejemplar, EtiquetaxEjemplar, Formatoejemplar, IdiomaEjemplar, P_Clave, TipoEtiqueta } from '../../../shared/models/exemplar';
+import { Autor, AutorxEjemplar, Editorial, Ejemplar, EtiquetaxEjemplar, Formatoejemplar, IdiomaEjemplar, P_Clave, P_ClavexEjemplar, TipoEtiqueta } from '../../../shared/models/exemplar';
 import { Coleccion } from '../../../shared/models/collection';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MultiSelect } from 'primeng/multiselect';
 import { RouteInformation } from '../../../shared/constants/route-information';
 import { Roles } from '../../../auth/constants/roles';
 import { HttpParams } from '@angular/common/http';
-import { Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { TagType } from '../../../shared/constants/tag-type';
 import { DetailPage, PageComponent } from '../../../shared/models/component-interfaces';
 import { UploadFileComponent } from '../../../shared/components/upload-file.component';
+import '../../../shared/extensions/ng-form.extensions';
 
 @Component({
   selector: 'app-exemplar-page',
   templateUrl: './exemplar-page.component.html',
+  styles: [
+    `
+      .p-tabview-panels{
+        padding: 0 1.25rem !important;
+      }
+
+      .p-chips .p-chips-multiple-container .p-chips-token {
+        background: #EAE0FF;
+        color: #694382;
+      }
+
+      .author-multiselect{
+        background: #FFDEE9;
+        color: #704050;
+      }
+      
+      .author-multiselect .p-multiselect.p-multiselect-chip .p-multiselect-token {
+        background: #FFDEE9;
+        color: #704050;
+      }
+    `
+  ],
+  encapsulation: ViewEncapsulation.None
 })
 export class ExemplarPageComponent extends BaseComponent implements OnInit, PageComponent, DetailPage {
   DOI = TagType.DOI;
@@ -52,6 +76,8 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
   keywordText: string = '';
   keywords: P_Clave[];
   selectedKeywords: number[] = [];
+  selectedKeywordsxExemplar: number[] = [];
+  keywordsxExemplar: P_ClavexEjemplar[] = [];
   @ViewChild('keywordMultiSelect') keywordMultiSelect: MultiSelect;
   
   authorText: string = '';
@@ -66,6 +92,8 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
   tagTypes: TipoEtiqueta[];
   tagName: string;
   @ViewChild('tagMultiSelect') tagMultiSelect: MultiSelect;
+  
+  @ViewChild('tagForm') tagForm: FormGroup;
   
   constructor(
     private route: ActivatedRoute,
@@ -422,31 +450,51 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     this.keywordText = event.filter;
   }
   
-  keywordsChange(event: any) {
-    if (this.keywords.map(keyword => keyword.id_p_Clave).includes(event.itemValue)) {
-      this.deleteKeyword(event.itemValue);
+  keywordsChange(event: any, authorMultiSelect: MultiSelect): void {
+    if (this.selectedKeywordsxExemplar.includes(event.itemValue)) {
+      const deleteKeyword = this.keywordsxExemplar.find((keywordxExemplar) => keywordxExemplar.P_CLAVE.id_p_clave === event.itemValue);
+      this.deleteKeywordToExemplar(deleteKeyword?.id_pClaveEjemplar || 0);
+    } else {
+      this.addKeywordToExemplar(event.itemValue, authorMultiSelect);
     }
   }
   
   loadKeywords(): void {
     this.subscription.add(
-      this.catalogService.getByNameWithParams('P_CLAVEXEJEMPLAR', new HttpParams().set('id_Ejemplar', this.id)).subscribe(
+      this.catalogService.getByNameWithParams('P_CLAVE').subscribe(
         (response: P_Clave[]) => {
           this.keywords = response;
-          this.selectedKeywords = response.map((keyword) => keyword.id_p_Clave);
+          this.loadSelectedKeywords();
         },
       )
     );
   }
   
-  addKeyword(): void {
+  loadSelectedKeywords(): void {
     this.subscription.add(
-      this.catalogService.addOfURL('P_CLAVEXEJEMPLAR', {
+      this.catalogService.getByNameWithParams(`P_CLAVEXEJEMPLAR`, new HttpParams().set('id_Ejemplar', this.id)).subscribe(
+        (response: P_ClavexEjemplar[]) => {
+          this.keywordsxExemplar = response;
+          this.selectedKeywords = this.keywordsxExemplar.map(keyword => keyword.P_CLAVE.id_p_clave);
+          this.selectedKeywordsxExemplar = [...this.selectedKeywords];
+        },
+      )
+    );
+  }
+  
+  addKeyword(keywordMultiSelect: MultiSelect): void {
+    this.subscription.add(
+      this.catalogService.addOfURL('P_CLAVE', {
         p_clave: this.keywordText,
-        id_Ejemplar: this.id
+        id_p_clave: this.id
       }).subscribe(
-        () => {
-          this.loadKeywords();
+        (keyword: P_Clave) => {
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Exito!',
+            body: 'La palabra clave fue agregada con éxito',
+          });
+          this.addKeywordToExemplar(keyword.id_p_clave, keywordMultiSelect);
         },
         () => {
           this.messageService.setPayload({
@@ -459,22 +507,79 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     );
   }
   
-  deleteKeyword(id: number): void {
+  deleteKeywordToExemplar(id: number): void {
     this.subscription.add(
       this.catalogService.deleteOfURL(`P_CLAVEXEJEMPLAR/${id}`).subscribe(
         () => {
-          this.messageService.setPayload({
-            type: 'success',
-            title: '¡Exito!',
-            body: 'La palabra clave fue eliminado con éxito',
-          });
           this.loadKeywords();
         },
         () => {
           this.messageService.setPayload({
             type: 'warn',
             title: 'Error',
-            body: 'No se pudo eliminar la palabra clave',
+            body: 'No se pudo eliminar la palabra clave del ejemplar',
+          });
+        }
+      )
+    );
+  }
+  
+  public deleteKeyword(event: any, id: number): void {
+    event.stopPropagation();
+    const deleteKeyword = this.keywordsxExemplar.find((keywordxExemplar) => keywordxExemplar.P_CLAVE.id_p_clave === id);
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`P_CLAVEXEJEMPLAR/${deleteKeyword?.id_pClaveEjemplar || 0}`).subscribe(
+        () => {
+          this.realDeleteKeyword(id);
+        },
+        () => {
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar la palabra clave del ejemplar porque tiene datos relacionados',
+          });
+        }
+      )
+    );
+  }
+  
+  realDeleteKeyword(id: number){
+    this.subscription.add(
+      this.catalogService.deleteOfURL(`P_CLAVE/${id}`)
+      .subscribe(
+        ()=>{
+          this.messageService.setPayload({
+            type: 'success',
+            title: '¡Éxito!',
+            body: 'Palabra clave eliminada correctamente',
+          });
+          this.loadKeywords();
+        }, ()=>{
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo eliminar la palabra clave porque tiene elementos relacionados',
+          });
+        }
+      )
+    )
+  }
+  
+  addKeywordToExemplar(id: number, authorMultiSelect: MultiSelect): void {
+    this.subscription.add(
+      this.catalogService.addOfURL('P_CLAVEXEJEMPLAR', {
+        id_p_clave: id,
+        id_Ejemplar: this.id
+      }).subscribe(
+        () => {
+          this.loadKeywords();
+          authorMultiSelect.hide();
+        },
+        () => {
+          this.messageService.setPayload({
+            type: 'warn',
+            title: 'Error',
+            body: 'No se pudo agregar la palabra clave',
           });
         }
       )
@@ -632,9 +737,9 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     );
   }
   
-  deleteTagToExemplar(id: number): void {
+  deleteTagToExemplar(event: any): void {
     this.subscription.add(
-      this.catalogService.deleteOfURL(`ETIQUETASXEJEMPLAR/${id}`).subscribe(
+      this.catalogService.deleteOfURL(`ETIQUETASXEJEMPLAR/${event.value.id_etiquetaEjemplar}`).subscribe(
         () => {
           this.messageService.setPayload({
             type: 'success',
@@ -649,6 +754,7 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
             title: 'Error',
             body: 'No se pudo eliminar correctamente la etiqueta',
           });
+          this.loadTags();
         }
       )
     );
@@ -671,14 +777,15 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
         etiqueta: this.tagName,
         id_Ejemplar: this.id
       }).subscribe(
-        (exemplar: Autor) => {
+        () => {
           this.messageService.setPayload({
             type: 'success',
             title: '¡Exito!',
             body: 'La etiqueta fue agregada correctamente',
           });
+          this.resetForm(this.tagForm);
+          this.resetForm(this.form);
           this.loadTags();
-          this.tagName = '';
         },
         () => {
           this.messageService.setPayload({
@@ -691,16 +798,8 @@ export class ExemplarPageComponent extends BaseComponent implements OnInit, Page
     );
   }
   
-  tagChange(event: any): void {
-    this.deleteTagToExemplar(event.itemValue)
-  }
-  
   onMask(event: string): void {
     this.tagName = event;
-  }
-
-  tabChange(){
-    this.tagName = '';
   }
 
   getBreadCrumbs() {

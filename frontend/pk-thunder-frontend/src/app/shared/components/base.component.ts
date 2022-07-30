@@ -7,7 +7,7 @@ import { GlobalMessageService } from 'src/app/auth/services/global-message.servi
 import { AppBreadcrumbService } from 'src/app/core/containers/app-main-page/app.breadcrumb.service';
 import { CatalogService } from '../services/catalog.service';
 import { ValidatorService } from 'src/app/shared/services/validator.service';
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { RouteInformation } from '../constants/route-information';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -84,6 +84,16 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
   encrypt(message: string) {
     const mt = md.sha256.create();
     return  mt.update(message).digest().toHex();
+  }
+  
+  resetForm(form: FormGroup): void {
+	  Object.keys(form.controls).forEach((key) => {
+		  const control = form.controls[key];
+      control.markAsPristine();
+      control.markAsUntouched();
+      control.reset();
+      control.updateValueAndValidity();
+    });
   }
   
   loadFileUrl(fileName: string) {

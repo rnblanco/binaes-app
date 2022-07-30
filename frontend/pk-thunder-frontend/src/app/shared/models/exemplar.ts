@@ -33,35 +33,39 @@ export interface Estados {
 }
 
 export interface P_Clave {
-	id_p_Clave: number,
-	p_clave: string,
-  id_Ejemplar: number,
-	 EJEMPLAR: Ejemplar
+	id_p_clave: number;
+	p_clave: string;
+}
+
+export interface P_ClavexEjemplar {
+	id_pClaveEjemplar: number;
+	EJEMPLAR: Ejemplar;
+	P_CLAVE: P_Clave;
 }
 
 export interface Autor {
-	id_Autor: number,
-	nombre: string
+	id_Autor: number;
+	nombre: string;
 }
 
 export interface AutorxEjemplar{
-	id_autorEjemplar: number
-	AUTOR: Autor,
-	EJEMPLAR: Ejemplar,
+	id_autorEjemplar: number;
+	AUTOR: Autor;
+	EJEMPLAR: Ejemplar;
 }
 
 export interface EtiquetaxEjemplar {
-	id_etiquetaEjemplar: number,
-	id_tipoEtiqueta: number
-	id_Ejemplar: number,
-	etiqueta: string,
-	TIPOETIQUETA: TipoEtiqueta,
-	EJEMPLAR: Ejemplar
+	id_etiquetaEjemplar: number;
+	id_tipoEtiqueta: number;
+	id_Ejemplar: number;
+	etiqueta: string;
+	TIPOETIQUETA: TipoEtiqueta;
+	EJEMPLAR: Ejemplar;
 }
 
 export interface TipoEtiqueta {
-	id_tipoEtiqueta: number,
-	tipoEtiqueta1: string
+	id_tipoEtiqueta: number;
+	tipoEtiqueta1: string;
 }
 
 export interface PaginadorEjemplar {
