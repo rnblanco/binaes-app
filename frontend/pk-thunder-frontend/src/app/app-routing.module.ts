@@ -6,7 +6,7 @@ import { ProfilePageComponent } from './core/containers/profile-page/profile-pag
 import { Roles } from './auth/constants/roles';
 import { PrevAuthGuard } from './auth/guards/prev-auth.guard';
 import { AppMainComponent } from './core/containers/app-main-page/app.main.component';
-import { LogOutPageComponent } from './auth/log-out-page/log-out-page.component';
+import { LogOutPageComponent } from './auth/containers/log-out-page/log-out-page.component';
 import { QrCodeComponent } from './core/components/qr-code/qr-code.component';
 import { ProfileInfoComponent } from './core/components/profile-info/profile-info.component';
 import { PasswordChangeComponent } from './core/components/password-change/password-change.component';

@@ -9,9 +9,7 @@
 		[loading]="loading"
 		[cols]="cols"
 		[list]="list"
-		[showNewButton]="user.id_rolUsuario !== USER"
-		(onNewClick)="onNew()"
-		newButtonLabel="Nueva reserva"
+		[showNewButton]="false"
 		type="reservas"
 	>
 		<ng-template

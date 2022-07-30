@@ -8,8 +8,6 @@ namespace backend.Models
     public class ACTUALIZARCONTRASENA
     {
         public string id_Usuario { get; set; }
-        public string contrasenaA { get; set; }
-        public string contrasenaN { get; set; }
-        public string contrasenaC { get; set; }
+        public string contrasena { get; set; }
     }
 }

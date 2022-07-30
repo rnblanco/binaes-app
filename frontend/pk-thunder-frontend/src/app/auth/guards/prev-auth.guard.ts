@@ -25,7 +25,6 @@ export class PrevAuthGuard implements CanActivate {
       return false;
     }
     
-    if (state.url !== RouteInformation.loginPage) this.router.navigate([RouteInformation.loginPage]);
     return true;
   }
   

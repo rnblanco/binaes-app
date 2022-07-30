@@ -37,14 +37,7 @@ namespace backend.Controllers
                 }
                 else
                 {
-                    TOKEN tOKEN = new TOKEN();
-                    tOKEN.TOKEN1 = tokendb.TOKEN1;
-                    tOKEN.id_Usuario = tokendb.id_Usuario;
-                    tOKEN.fh_Expiracion = DateTime.Now;
-                    tOKEN.id_Token = tokendb.id_Token;
-
-                    await tOKENController.PutTOKEN(tokendb.id_Token, tOKEN);
-                    return Ok(tOKEN);
+                    return Ok(new { isAllowed = true });
                 }
             }
             return NotFound();

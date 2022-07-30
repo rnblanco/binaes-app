@@ -50,22 +50,20 @@
            </ng-container>
 
            <ng-container *ngSwitchCase="'autorE'">
-             <div *ngFor="let a of data.AUTORxEJEMPLAR">
-               {{ a?.AUTOR?.nombre }}
+             <div *ngFor="let author of data.AUTORxEJEMPLAR" class="custom-chip p-mr-0 p-mb-2" [style]="{background: '#FFDEE9', color: '#704050'}">
+               <span class="custom-chip-label"> {{ author?.AUTOR?.nombre }} </span>
              </div>
            </ng-container>
 					 
 					 <ng-container *ngSwitchCase="'p_clave'">
-             <div *ngFor="let a of data.P_CLAVExEJEMPLAR" class="custom-chip p-mb-2">
-							 <span class="custom-chip-label">{{ a?.p_clave }}</span>
+             <div *ngFor="let keyword of data.P_CLAVE" class="custom-chip p-mr-0 p-mb-2">
+							 <span class="custom-chip-label">{{ keyword?.p_clave }}</span>
              </div>
            </ng-container>
 
            <ng-container *ngSwitchCase="'etiqueta_E'">
-             <div *ngFor="let e of data.ETIQUETASxEJEMPLAR">
-               <label *ngIf="e?.id_tipoEtiqueta === 1"><b>ISBN:</b> {{ e?.etiqueta }}</label>
-               <label *ngIf="e?.id_tipoEtiqueta === 2"><b>ISSN:</b> {{ e?.etiqueta }}</label>
-               <label *ngIf="e?.id_tipoEtiqueta === 3"><b>DOI:</b> {{ e?.etiqueta }}</label>
+             <div *ngFor="let e of data.ETIQUETASxEJEMPLAR" class='custom-chip p-mr-0 p-mb-2' [style]="{background: '#EAE0FF', color: '#694382'}">
+               <span class="custom-chip-label"> {{ e?.etiqueta }}</span>
              </div>
            </ng-container>
 

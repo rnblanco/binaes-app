@@ -20,6 +20,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TagMaskModule } from '../shared/directives/tag-mask-model/tag-mask.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { UploadFileComponent } from '../shared/components/upload-file.component';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,6 @@ import { UploadFileComponent } from '../shared/components/upload-file.component'
 		CommonModule,
 		ExemplarsRoutingModule,
 		TableCardModule,
-		FormsModule,
 		InputTextModule,
 		ListboxModule,
 		ButtonModule,
@@ -44,8 +44,10 @@ import { UploadFileComponent } from '../shared/components/upload-file.component'
 		TooltipModule,
 		TabViewModule,
 		TagMaskModule,
-		ReactiveFormsModule,
-		KeyFilterModule
+		KeyFilterModule,
+		ChipsModule,
+		FormsModule,
+		ReactiveFormsModule
 	],
 	providers: [
 		UploadFileComponent,

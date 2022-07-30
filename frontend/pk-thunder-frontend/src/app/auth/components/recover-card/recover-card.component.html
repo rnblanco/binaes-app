@@ -1,0 +1,208 @@
+<div *ngIf="state === 1">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div class="card p-ml-5 p-mr-5 text-center" style="margin-bottom: 125px">
+			<img
+				src="../../assets/images/ux/shield-exclamation.png"
+				class="center"
+			/>
+			<p><b>Recuperar contraseña</b></p>
+			<p>
+				Escribe el correo electrónico asociado a tu cuenta y te enviaremos un
+				correo con las instrucciones para recuperar tu contraseña
+			</p>
+			<form
+				*ngIf="form"
+				[formGroup]="form"
+				autocomplete="off"
+				class="p-fluid p-formgrid p-grid"
+				(ngSubmit)="sendEmail()"
+			>
+				<div class="p-col-12 p-field" style="text-align: left">
+					<label>E-mail</label>
+					<div class="p-input-icon-right">
+						<input
+							type="email"
+							formControlName="email"
+							autocomplete="off"
+							placeholder="Ej. micorreo@gmail.com"
+							pInputText
+						/>
+						<i
+							*ngIf="validatorService.validCheck(form, 'email')"
+							class="p-success bi bi-check2"
+						></i>
+					</div>
+					<span
+						class="p-error"
+						*ngIf="validatorService.validField(form, 'email')"
+					>
+            Debe digitar un e-mail válido
+          </span>
+				</div>
+			</form>
+			<div class="p-grid">
+				<div class="p-col-12">
+					<button
+						pButton
+						NoDblClick
+						type="button"
+						label="Recuperar"
+						class="p-button-md"
+						(click)="sendEmail()"
+						[disabled]="form.invalid"
+					></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="state === 2">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div
+			class="card p-pl-sm-5 p-pr-sm-5 p-ml-5 p-mr-5 text-center"
+			style="margin-bottom: 125px"
+		>
+			<img
+				src="../../assets/images/ux/shield-exclamation.png"
+				class="center"
+			/>
+			<p><b>Recuperar contraseña</b></p>
+			<p>
+				Hemos enviado a tu correo las instrucciones para recuperar tu
+				contraseña.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="state === 3">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div
+			class="card p-pl-sm-5 p-pr-sm-5 p-ml-5 p-mr-5 text-center"
+			style="margin-bottom: 125px"
+		>
+			<p><b>Nueva contraseña</b></p>
+			<p>Tu nueva contraseña debe ser diferente de las previamente usadas.</p>
+			<p>La contraseña debe contener al menos 8 caracteres.</p>
+			<form
+				*ngIf="!loading"
+				[formGroup]="form"
+				autocomplete="off"
+				class="p-fluid p-formgrid p-grid"
+				(ngSubmit)="sendPassword()"
+			>
+				<div class="p-col-12 p-field" style="text-align: left">
+					<label>Nueva contraseña</label>
+					<div class="p-input-icon-right">
+						<input
+							type="password"
+							formControlName="password"
+							autocomplete="off"
+							pInputText
+						/>
+						<i
+							*ngIf="validatorService.validCheck(form, 'password')"
+							class="p-success bi bi-check2"
+						></i>
+					</div>
+					<span class="p-error" *ngIf="validatorService.validField(form, 'password')">
+            Las contraseñas deben coincidir
+					</span>
+				</div>
+				<div class="p-col-12 p-field" style="text-align: left">
+					<label>Confirmar contraseña</label>
+					<div class="p-input-icon-right">
+						<input
+							type="password"
+							formControlName="newPassword"
+							autocomplete="off"
+							pInputText
+						/>
+						<i
+							*ngIf="validatorService.validCheck(form, 'newPassword')"
+							class="p-success bi bi-check2"
+						></i>
+					</div>
+					<span class="p-error" *ngIf="validatorService.validField(form, 'newPassword')">
+            Las contraseñas deben coincidir
+					</span>
+				</div>
+			</form>
+			<div class="p-grid">
+				<div class="p-col-12">
+					<button
+						class="p-button-lg"
+						type="button"
+						pButton
+						label="Cambiar contraseña"
+						[disabled]="form.invalid"
+						(click)="sendPassword()"
+						NoDblClick
+					></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="state === 4">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div
+			class="card p-pl-sm-5 p-pr-sm-5 p-ml-5 p-mr-5 text-center"
+			style="margin-bottom: 125px"
+		>
+			<img
+				src="../../assets/images/ux/shield-check.png"
+				class="center"
+			/>
+			<p><b>Contraseña reestablecida</b></p>
+			<p>
+				Tu contraseña nueva se ha establecido, ya puedes ingresar normalmente.
+			</p>
+			<button
+				class="p-button-lg"
+				type="button"
+				pButton
+				label="Re-iniciar sesión"
+				[routerLink]="[routeInformation.loginPage]"
+				NoDblClick
+			></button>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="state === 5">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div
+			class="card p-pl-sm-5 p-pr-sm-5 p-ml-5 p-mr-5 text-center"
+			style="margin-bottom: 125px"
+		>
+			<img
+				src="../../assets/images/ux/shield-exclamation.png"
+				class="center"
+			/>
+			<p><b>Intenta volver a restablecer tu contraseña</b></p>
+			<p>
+				La solicitud para restablecer tu contraseña caducó o ya se usó el
+				vínculo
+			</p>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="state === 6">
+	<div class="p-d-flex p-ai-center p-jc-center">
+		<div
+			class="card p-pl-sm-5 p-pr-sm-5 p-ml-5 p-mr-5 text-center"
+			style="margin-bottom: 125px"
+		>
+			<img
+				src="../../assets/images/ux/shield-exclamation.png"
+				class="center"
+			/>
+			<p><b>Intenta volver a restablecer tu contraseña</b></p>
+			<p>Error desconocido</p>
+		</div>
+	</div>
+</div>

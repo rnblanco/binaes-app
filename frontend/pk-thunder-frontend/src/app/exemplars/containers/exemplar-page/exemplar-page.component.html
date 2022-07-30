@@ -6,34 +6,64 @@
 				#formModele="ngForm"
 				autocomplete="off"
 				class="p-fluid p-formgrid p-grid p-formgrid-sm p-ml-2 p-mr-2">
-		<div class="p-field p-col-12 p-mt-2">
+		<div class="p-col-12 p-mt-2 p-mb-2">
 			<label>Etiquetas:</label>
-			<p-multiSelect [options]="tagsxExemplar" [(ngModel)]="selectedTags" (onChange)="tagChange($event)" [showToggleAll]="false"
-										 #tagMultiSelect name="selectedTags" defaultLabel="Elige una etiqueta" optionLabel="etiqueta" optionValue="id_etiquetaEjemplar"
-										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron etiquetas" emptyMessage="No se encontraron etiquetas"
-										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
-			>
-			</p-multiSelect>
-		</div>
-		
-		<div class="p-col-12 p-mb-2">
-			<p-tabView (onChange)="tabChange()" *ngIf="tagTypes?.length ?? 0 > 0">
+			
+			<p-tabView *ngIf="tagTypes?.length ?? 0 > 0">
 				<p-tabPanel [header]="tagType.tipoEtiqueta1 | uppercase" *ngFor="let tagType of tagTypes; let i = index" [selected]="i === 0"
 										[disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
 										class="p-ml-2"
 				>
-					<div class="p-inputgroup" [formGroup]='form' *ngIf="tagType.id_tipoEtiqueta === DOI; else ISBN_ISNN">
-						<input formControlName="DOI" [placeholder]="tagType.tipoEtiqueta1 | uppercase" pInputText/>
-						<button pButton type="button" [disabled]="!form.valid" (click)="addTag(tagType.id_tipoEtiqueta)"> Agregar </button>
-					</div>
-					<span style='color:red' *ngIf="validatorService.validField(form,'DOI')"> Por favor ingresa un DOI válido</span>
+					<p-chips
+						[(ngModel)]="tagsxExemplar"
+						[max]="tagsxExemplar?.length || 0"
+						[ngModelOptions]="{standalone: true}"
+						(onRemove)="deleteTagToExemplar($event)"
+						[disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+					>
+						<ng-template let-item pTemplate="item">
+							{{item.etiqueta}}
+						</ng-template>
+					</p-chips>
+					
+					<form *ngIf="tagType.id_tipoEtiqueta === DOI; else ISBN_ISNN" [formGroup]='form' class="animate__animated animate__fadeIn p-mt-4">
+						<div class="p-inputgroup">
+							<input
+								pInputText
+								formControlName="DOI"
+								[placeholder]="tagType.tipoEtiqueta1 | uppercase"
+								tooltipPosition="top"
+								pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}"
+							/>
+							<button pButton type="button" [disabled]="!form.valid" (click)="addTag(tagType.id_tipoEtiqueta)">
+								Agregar
+							</button>
+						</div>
+						<span style='color:red' *ngIf="validatorService.validField(form,'DOI')"> Por favor ingresa una etiqueta válida</span>
+					</form>
 					
 					<ng-template #ISBN_ISNN>
-						<div class="p-inputgroup">
-							<input pInputText required [placeholder]="tagType.tipoEtiqueta1 | uppercase" name="tagName" tagMask [tagType]="tagType.id_tipoEtiqueta"
-										 (onMask)="onMask($event)" [(ngModel)]="tagName" [ngModelOptions]="{standalone: true}" [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"/>
-							<button pButton type="button" [disabled]="tagName?.length === 0" (click)="addTag(tagType.id_tipoEtiqueta)"> Agregar </button>
-						</div>
+						<form #tagForm="ngForm" class="animate__animated animate__fadeIn p-mt-4">
+							<div class="p-inputgroup">
+								<input
+									tagMask
+									required
+									pInputText
+									name="tagName"
+									[disabled]="isNew"
+									[(ngModel)]="tagName"
+									tooltipPosition="top"
+									(onMask)="onMask($event)"
+									[tagType]="tagType.id_tipoEtiqueta"
+									[placeholder]="tagType.tipoEtiqueta1 | uppercase"
+									pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}"
+								/>
+								<button pButton type="submit" [disabled]="tagName?.length === 0" (click)="addTag(tagType.id_tipoEtiqueta)">
+									Agregar
+								</button>
+							</div>
+							<span style='color:red' *ngIf="tagForm?.controls?.tagName?.errors && (tagForm?.controls?.tagName?.touched || tagForm?.controls?.tagName?.dirty)"> Por favor ingresa una etiqueta válida</span>
+						</form>
 					</ng-template>
 
 				</p-tabPanel>
@@ -42,13 +72,23 @@
 		
 		<div class="p-field p-col-12 p-mt-2">
 			<label>Palabras clave:</label>
-			<p-multiSelect [options]="keywords" [(ngModel)]="selectedKeywords" (onFilter)="keywordsFilter($event)" (onChange)="keywordsChange($event)" [showToggleAll]="false"
-										 #keywordMultiSelect name="selectedKeywords" defaultLabel="Elige una palabra clave" optionLabel="p_clave" optionValue="id_p_Clave"
-										 [showClear]="true" [resetFilterOnHide]="true" display="chip" emptyFilterMessage="No se encontraron palabras clave" emptyMessage="No se encontraron palabras clave"
-										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+			<p-multiSelect [options]="keywords" [(ngModel)]="selectedKeywords" (onFilter)="keywordsFilter($event)" (onChange)="keywordsChange($event, authorMultiSelect)" [showToggleAll]="false"
+										 #keywordMultiSelect name="selectedKeyword" defaultLabel="Elige una palabra clave" optionLabel="p_clave" optionValue="id_p_clave"
+										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron palabras clave" emptyMessage="No se encontraron palabras clave"
+										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top" display="chip"
 			>
+				<ng-template let-item pTemplate="item">
+					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
+						<div class="p-d-flex p-ai-center p-jc-center">
+							{{item.p_clave}}
+						</div>
+						<div>
+							<button pButton pRipple type="button" class="p-button-danger p-p-2" label="Eliminar" (click)="deleteKeyword($event, item.id_p_clave)"></button>
+						</div>
+					</div>
+				</ng-template>
 				<ng-template let-group pTemplate="emptyfilter">
-					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{keywordText}}'" (click)="addKeyword()"></button>
+					<button pButton pRipple type="button" class="p-button-primary" label="Agregar '{{ keywordText }}'" (click)="addKeyword(authorMultiSelect)"></button>
 				</ng-template>
 			</p-multiSelect>
 		</div>
@@ -56,9 +96,9 @@
 		<div class="p-field p-col-12 p-mt-2 p-mb-4">
 			<label>Autores:</label>
 			<p-multiSelect [options]="authors" [(ngModel)]="selectedAuthors" (onFilter)="authorFilter($event)" (onChange)="authorChange($event, authorMultiSelect)" [showToggleAll]="false"
-										 #authorMultiSelect name="selectedAuthors" defaultLabel="Elige un autor" optionLabel="nombre" optionValue="id_Autor"
+										 #authorMultiSelect name="selectedAuthors" defaultLabel="Elige un autor" optionLabel="nombre" optionValue="id_Autor" class="author-multiselect"
 										 [showClear]="true" [resetFilterOnHide]="true" emptyFilterMessage="No se encontraron autores" emptyMessage="No se encontraron autores"
-										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top"
+										 [disabled]="isNew" pTooltip="{{isNew ? 'Se debe registrar el ejemplar primero' : ''}}" tooltipPosition="top" display="chip"
 			>
 				<ng-template let-item pTemplate="item">
 					<div class="p-d-flex p-jc-between p-ai-center" [style]="{width: '100%'}">
